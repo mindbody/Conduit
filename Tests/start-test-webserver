@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+which gunicorn >/dev/null 2>&1 || { echo -e >&2 'gunicorn must be installed in order to spin up a local webserver:\n$ pip install gunicorn'; exit 1; }
+
+# Make sure httpbin and gevent are installed
+$(pip freeze | grep httpbin >/dev/null 2>&1) && $(pip freeze | grep gevent >/dev/null 2>&1) || { echo -e >&2 'httpbin and gevent must be installed for the needed app environment:\n$ pip install httbin\n$pip install gevent'; exit 1; }
+
+# Starts a local webserver daemon using the installed httpbin app (default config) with 4 async workers
+gunicorn httpbin:app -b localhost:3333 -w 4 -D -k gevent || { echo -e >&2 'Failed to start webserver daemon'; exit 1; }
