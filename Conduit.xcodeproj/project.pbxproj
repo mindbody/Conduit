@@ -59,6 +59,7 @@
 		1BD800781F1682CF00481DC9 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
 		1BD800791F1682CF00481DC9 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
 		1BD8007A1F1682CF00481DC9 /* Info-Tests-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-tvOS.plist"; sourceTree = "<group>"; };
+		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,6 +145,7 @@
 		1BD8FFF21F167E6000481DC9 = {
 			isa = PBXGroup;
 			children = (
+				1BD800871F1684DF00481DC9 /* Package.swift */,
 				1BD8002E1F167EEE00481DC9 /* Sources */,
 				1BD800761F1682CF00481DC9 /* Tests */,
 				1BD8FFFF1F167E7800481DC9 /* Products */,
@@ -336,17 +338,21 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = MINDBODY;
 				TargetAttributes = {
 					1BD8000B1F167E8200481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 					};
 					1BD800181F167E8B00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1BD800251F167E9B00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					1BD8004C1F16820700481DC9 = {
@@ -363,6 +369,7 @@
 					};
 					1BD8FFFD1F167E7800481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Manual;
 					};
 				};
