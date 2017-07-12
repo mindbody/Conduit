@@ -11,7 +11,37 @@
 		1BD800351F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800361F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800371F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1BD800521F16820800481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD8FFFE1F167E7800481DC9 /* Conduit.framework */; };
+		1BD800611F16821400481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800191F167E8B00481DC9 /* Conduit.framework */; };
+		1BD800701F16821D00481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800261F167E9B00481DC9 /* Conduit.framework */; };
+		1BD8007B1F1682CF00481DC9 /* ConduitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800771F1682CF00481DC9 /* ConduitTests.swift */; };
+		1BD8007C1F1682CF00481DC9 /* ConduitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800771F1682CF00481DC9 /* ConduitTests.swift */; };
+		1BD8007D1F1682CF00481DC9 /* ConduitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800771F1682CF00481DC9 /* ConduitTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BD800531F16820800481DC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BD8FFFD1F167E7800481DC9;
+			remoteInfo = "Conduit-iOS";
+		};
+		1BD800621F16821400481DC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BD800181F167E8B00481DC9;
+			remoteInfo = "Conduit-tvOS";
+		};
+		1BD800711F16821D00481DC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BD800251F167E9B00481DC9;
+			remoteInfo = "Conduit-macOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1BD8000C1F167E8200481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +52,13 @@
 		1BD800311F167EEE00481DC9 /* Info-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		1BD800321F167EEE00481DC9 /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		1BD800331F167EEE00481DC9 /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-watchOS.plist"; sourceTree = "<group>"; };
+		1BD8004D1F16820700481DC9 /* ConduitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD8005C1F16821400481DC9 /* ConduitTests-tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BD800771F1682CF00481DC9 /* ConduitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConduitTests.swift; sourceTree = "<group>"; };
+		1BD800781F1682CF00481DC9 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
+		1BD800791F1682CF00481DC9 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
+		1BD8007A1F1682CF00481DC9 /* Info-Tests-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-tvOS.plist"; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -47,6 +84,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BD8004A1F16820700481DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD800521F16820800481DC9 /* Conduit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD800591F16821400481DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD800611F16821400481DC9 /* Conduit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD800681F16821D00481DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD800701F16821D00481DC9 /* Conduit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BD8FFFA1F167E7800481DC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,10 +130,22 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		1BD800761F1682CF00481DC9 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1BD800771F1682CF00481DC9 /* ConduitTests.swift */,
+				1BD800781F1682CF00481DC9 /* Info-Tests-iOS.plist */,
+				1BD800791F1682CF00481DC9 /* Info-Tests-macOS.plist */,
+				1BD8007A1F1682CF00481DC9 /* Info-Tests-tvOS.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		1BD8FFF21F167E6000481DC9 = {
 			isa = PBXGroup;
 			children = (
 				1BD8002E1F167EEE00481DC9 /* Sources */,
+				1BD800761F1682CF00481DC9 /* Tests */,
 				1BD8FFFF1F167E7800481DC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +157,9 @@
 				1BD8000C1F167E8200481DC9 /* Conduit.framework */,
 				1BD800191F167E8B00481DC9 /* Conduit.framework */,
 				1BD800261F167E9B00481DC9 /* Conduit.framework */,
+				1BD8004D1F16820700481DC9 /* ConduitTests-iOS.xctest */,
+				1BD8005C1F16821400481DC9 /* ConduitTests-tvOS.xctest */,
+				1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +256,60 @@
 			productReference = 1BD800261F167E9B00481DC9 /* Conduit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1BD8004C1F16820700481DC9 /* ConduitTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BD800551F16820800481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-iOS" */;
+			buildPhases = (
+				1BD800491F16820700481DC9 /* Sources */,
+				1BD8004A1F16820700481DC9 /* Frameworks */,
+				1BD8004B1F16820700481DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BD800541F16820800481DC9 /* PBXTargetDependency */,
+			);
+			name = "ConduitTests-iOS";
+			productName = "ConduitTests-iOS";
+			productReference = 1BD8004D1F16820700481DC9 /* ConduitTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1BD8005B1F16821400481DC9 /* ConduitTests-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BD800641F16821400481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-tvOS" */;
+			buildPhases = (
+				1BD800581F16821400481DC9 /* Sources */,
+				1BD800591F16821400481DC9 /* Frameworks */,
+				1BD8005A1F16821400481DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BD800631F16821400481DC9 /* PBXTargetDependency */,
+			);
+			name = "ConduitTests-tvOS";
+			productName = "ConduitTests-tvOS";
+			productReference = 1BD8005C1F16821400481DC9 /* ConduitTests-tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1BD8006A1F16821D00481DC9 /* ConduitTests-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BD800731F16821D00481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-macOS" */;
+			buildPhases = (
+				1BD800671F16821D00481DC9 /* Sources */,
+				1BD800681F16821D00481DC9 /* Frameworks */,
+				1BD800691F16821D00481DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BD800721F16821D00481DC9 /* PBXTargetDependency */,
+			);
+			name = "ConduitTests-macOS";
+			productName = "ConduitTests-macOS";
+			productReference = 1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1BD8FFFD1F167E7800481DC9 /* Conduit-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800061F167E7800481DC9 /* Build configuration list for PBXNativeTarget "Conduit-iOS" */;
@@ -204,6 +334,7 @@
 		1BD8FFF31F167E6000481DC9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				TargetAttributes = {
 					1BD8000B1F167E8200481DC9 = {
@@ -215,6 +346,18 @@
 						ProvisioningStyle = Automatic;
 					};
 					1BD800251F167E9B00481DC9 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					1BD8004C1F16820700481DC9 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					1BD8005B1F16821400481DC9 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					1BD8006A1F16821D00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -240,6 +383,9 @@
 				1BD8000B1F167E8200481DC9 /* Conduit-watchOS */,
 				1BD800181F167E8B00481DC9 /* Conduit-tvOS */,
 				1BD800251F167E9B00481DC9 /* Conduit-macOS */,
+				1BD8004C1F16820700481DC9 /* ConduitTests-iOS */,
+				1BD8005B1F16821400481DC9 /* ConduitTests-tvOS */,
+				1BD8006A1F16821D00481DC9 /* ConduitTests-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -260,6 +406,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1BD800241F167E9B00481DC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD8004B1F16820700481DC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD8005A1F16821400481DC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD800691F16821D00481DC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -297,6 +464,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BD800491F16820700481DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD8007B1F1682CF00481DC9 /* ConduitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD800581F16821400481DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD8007C1F1682CF00481DC9 /* ConduitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BD800671F16821D00481DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BD8007D1F1682CF00481DC9 /* ConduitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BD8FFF91F167E7800481DC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -305,6 +496,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1BD800541F16820800481DC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BD8FFFD1F167E7800481DC9 /* Conduit-iOS */;
+			targetProxy = 1BD800531F16820800481DC9 /* PBXContainerItemProxy */;
+		};
+		1BD800631F16821400481DC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BD800181F167E8B00481DC9 /* Conduit-tvOS */;
+			targetProxy = 1BD800621F16821400481DC9 /* PBXContainerItemProxy */;
+		};
+		1BD800721F16821D00481DC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BD800251F167E9B00481DC9 /* Conduit-macOS */;
+			targetProxy = 1BD800711F16821D00481DC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1BD800041F167E7800481DC9 /* Debug */ = {
@@ -816,6 +1025,324 @@
 			};
 			name = Release;
 		};
+		1BD800561F16820800481DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-iOS.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1BD800571F16820800481DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-iOS.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BD800651F16821400481DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		1BD800661F16821400481DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-tvOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1BD800741F16821D00481DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-macOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1BD800751F16821D00481DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Tests/Info-Tests-macOS.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		1BD8FFF71F167E6000481DC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -860,6 +1387,30 @@
 			buildConfigurations = (
 				1BD8002C1F167E9B00481DC9 /* Debug */,
 				1BD8002D1F167E9B00481DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1BD800551F16820800481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BD800561F16820800481DC9 /* Debug */,
+				1BD800571F16820800481DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1BD800641F16821400481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BD800651F16821400481DC9 /* Debug */,
+				1BD800661F16821400481DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1BD800731F16821D00481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BD800741F16821D00481DC9 /* Debug */,
+				1BD800751F16821D00481DC9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
