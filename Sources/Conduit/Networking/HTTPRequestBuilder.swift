@@ -66,7 +66,6 @@ public final class HTTPRequestBuilder {
 
     // MARK: Initialization
 
-    @objc(initWithURL:)
     public init(url: URL) {
         self.url = url
     }

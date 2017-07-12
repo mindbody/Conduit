@@ -10,9 +10,9 @@ import XCTest
 @testable import Conduit
 
 fileprivate class MockAuthenticationChallengeSender: NSObject, URLAuthenticationChallengeSender {
-    @objc func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {}
-    @objc func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {}
-    @objc func cancel(_ challenge: URLAuthenticationChallenge) {}
+    func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {}
+    func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {}
+    func cancel(_ challenge: URLAuthenticationChallenge) {}
 }
 
 class SSLPinningServerAuthenticationPolicyTests: XCTestCase {

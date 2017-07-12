@@ -63,7 +63,6 @@ public struct URLSessionClient: URLSessionClientType {
         private var taskResponses: [Int:TaskResponse] = [:]
         private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
 
-        @objc
         fileprivate func urlSession(_ session: URLSession,
                                     didReceive challenge: URLAuthenticationChallenge,
                                     completionHandler: @escaping SessionCompletionHandler) {
