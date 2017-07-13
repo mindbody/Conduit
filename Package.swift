@@ -10,6 +10,5 @@ import PackageDescription
 
 let package = Package(
     name: "Conduit",
-    dependencies : [],
-    exclude: ["Tests"]
+    dependencies : []
 )
