@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555421F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift */; };
 		1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD5556A1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555421F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift */; };
 		1BD5556B1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555421F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift */; };
-		1BD5556C1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555421F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift */; };
 		1BD5556D1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555431F17DC81004B1172 /* ImageDownloaderTests.swift */; };
 		1BD5556E1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555431F17DC81004B1172 /* ImageDownloaderTests.swift */; };
 		1BD5556F1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555431F17DC81004B1172 /* ImageDownloaderTests.swift */; };
@@ -887,7 +887,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
 		};
 		1BD801901F16D23C00481DC9 /* Start Local Webserver */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -901,7 +901,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
 		};
 		1BD801911F16D24600481DC9 /* Start Local Webserver */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -915,7 +915,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1084,13 +1084,13 @@
 				1BD555871F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1BD555A21F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BD5556C1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558D1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555751F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555961F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,
 				1BD555A81F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
 				1BD5559F1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BD555A51F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
+				1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
 				1BD5556F1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */,
 				1BD555931F17DC81004B1172 /* JSONResponseDeserializerTests.swift in Sources */,

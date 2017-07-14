@@ -8,6 +8,9 @@
 
 import PackageDescription
 
+/// Note that `swift test` is currently unsupported since there is currently no support for bundled resources
+/// Relevant Bug: https://bugs.swift.org/browse/SR-2866
+
 let package = Package(
     name: "Conduit",
     dependencies : []
