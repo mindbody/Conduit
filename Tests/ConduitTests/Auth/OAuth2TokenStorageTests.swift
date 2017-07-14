@@ -45,11 +45,13 @@ class OAuth2TokenStorageTests: XCTestCase {
         verifyTokenStorageOperations()
     }
 
+#if !os(tvOS)
     func testFileStorageOperations() {
         let storageURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("oauth-token")
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         verifyTokenStorageOperations()
     }
+#endif
 
     func testMemoryStorageOperations() {
         sut = OAuth2TokenMemoryStore()
