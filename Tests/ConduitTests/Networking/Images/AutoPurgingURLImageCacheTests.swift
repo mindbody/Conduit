@@ -22,7 +22,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        guard let url = URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png") else {
+        guard let url = URL(string: "http://localhost:3333/image/jpeg") else {
             XCTFail()
             return
         }
@@ -57,7 +57,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
 
     func testRemovesAllCachedImagesWhenPurged() {
         let imageRequests = (0..<10).map {
-            URLRequest(url: URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png?id=\($0)")!)
+            URLRequest(url: URL(string: "http://localhost:3333/image/jpeg?id=\($0)")!)
         }
 
         for request in imageRequests {
