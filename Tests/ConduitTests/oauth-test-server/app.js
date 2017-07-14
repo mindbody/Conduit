@@ -15,6 +15,10 @@ app.oauth = oauthserver({
 });
  
 app.all('/oauth2/issue/token', app.oauth.grant());
+
+app.get('/answers/life', app.oauth.authorise(), function(req, res) {
+  res.json({ "some_secret_thing" : 42 });
+});
  
 app.use(app.oauth.errorHandler());
  
