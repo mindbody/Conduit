@@ -6,6 +6,8 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
+#if os(iOS)
+
 import Foundation
 import SafariServices
 
@@ -76,3 +78,5 @@ extension OAuth2SafariAuthorizationStrategy: SFSafariViewControllerDelegate {
     }
 
 }
+
+#endif
