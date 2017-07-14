@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Conduit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/john.hammerlund/Library/Github/Conduit/Example/ConduitExampleIOS.xcodeproj">
+   </FileRef>
+</Workspace>
