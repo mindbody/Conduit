@@ -6,6 +6,8 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
+#if os(iOS)
+
 import UIKit
 
 /** 
@@ -102,3 +104,5 @@ public class OAuth2AuthorizationRedirectHandler: NSObject {
     }
 
 }
+
+#endif
