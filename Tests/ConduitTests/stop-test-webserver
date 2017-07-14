@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Kills all active gunicorn workers and any active local OAuth2 Node.js servers
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+pkill -f gunicorn
+
+cat $DIR/.active_pids | xargs kill
+rm $DIR/.active_pids

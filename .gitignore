@@ -74,4 +74,6 @@ Pods/
 
 Carthage/Build
 
-# End of https://www.gitignore.io/api/swift
+nohup.out
+.active_pids
+npm-debug.log
