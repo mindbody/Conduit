@@ -15,12 +15,13 @@ Simply [create a new issue][new-issue] and we'll do our best to respond quickly.
 - Need a friend
 
 When filing a new issue, make sure you include the following:
-- Xcode version
-- Platform
+- Operating System (macOS, Linux)
+- Xcode Version (if used)
+- Platform (iOS, tvOS, watchOS, macOS, Linux)
 - Your version or git SHA of Conduit
 - A full stack-trace of a crash or deadlock, if applicable
 - Steps on how to reproduce the issue, to the best of your ability
-- Dependency manager (Carthage, CocoaPods, manual installation)
+- Dependency manager (Carthage, CocoaPods, Swift Package Manager, manual installation)
 - Any additional info that might help
 
 ## Pull Requests 🏆
