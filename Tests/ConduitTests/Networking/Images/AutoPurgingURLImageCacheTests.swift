@@ -12,7 +12,7 @@ import XCTest
 class AutoPurgingURLImageCacheTests: XCTestCase {
 
     var mockImageRequest: URLRequest {
-        guard let url = URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png") else {
+        guard let url = URL(string: "http://localhost:3333/image/png") else {
             XCTFail()
             preconditionFailure()
         }
@@ -54,7 +54,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
         let sut = AutoPurgingURLImageCache()
 
         let imageRequests = try (0..<10).map {
-            URLRequest(url: try URL(absoluteString: "http://i.memecaptain.com/gend_images/fAu8Pg.png?id=\($0)"))
+            URLRequest(url: try URL(absoluteString: "http://localhost:3333/image/jpeg?id=\($0)"))
         }
 
         for request in imageRequests {

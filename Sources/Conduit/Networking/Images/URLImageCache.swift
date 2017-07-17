@@ -61,5 +61,5 @@ public protocol URLImageCache {
 
     /// Purges all images from the cache
     mutating func purge()
-    
+
 }

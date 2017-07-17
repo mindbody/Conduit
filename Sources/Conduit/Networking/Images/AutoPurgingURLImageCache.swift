@@ -40,7 +40,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     public func image(for request: URLRequest) -> NSImage? {
-    return _image(for: request)
+        return _image(for: request)
     }
     #endif
 
@@ -84,7 +84,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     public func cache(image: NSImage, for request: URLRequest) {
-    _cache(image: image, for: request)
+        _cache(image: image, for: request)
     }
     #endif
 
@@ -146,5 +146,5 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         return scaledImageArea * bytesPerPixel
     }
     #endif
-    
+
 }

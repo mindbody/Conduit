@@ -40,7 +40,6 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         image1 = Image(contentsOfFile: image1File)
         image2 = Image(contentsOfFile: image2File)
 
-
         request = URLRequest(url: url)
         request.httpMethod = "POST"
         serializer = MultipartFormRequestSerializer()
