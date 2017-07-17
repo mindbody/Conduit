@@ -174,7 +174,8 @@ internal struct QueryString {
             // Only encode reserved characters that don't conflict with query delimiters or special encoding rules
             let reservedCharacterSet = CharacterSet(charactersIn: "!*'();:@$,/?")
             percentEncodedReservedCharacterSet = percentEncodedReservedCharacterSet.intersection(reservedCharacterSet)
-            newPercentEncodedQuery = newPercentEncodedQuery.addingPercentEncoding(withAllowedCharacters: percentEncodedReservedCharacterSet.inverted) ?? newPercentEncodedQuery
+            newPercentEncodedQuery = newPercentEncodedQuery
+                .addingPercentEncoding(withAllowedCharacters: percentEncodedReservedCharacterSet.inverted) ?? newPercentEncodedQuery
         }
 
         return newPercentEncodedQuery

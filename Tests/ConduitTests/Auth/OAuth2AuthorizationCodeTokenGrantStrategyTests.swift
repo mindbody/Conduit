@@ -10,21 +10,27 @@ import XCTest
 @testable import Conduit
 
 class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
-    
+
     var mockServerEnvironment: OAuth2ServerEnvironment!
     var mockClientConfiguration: OAuth2ClientConfiguration!
     let authCode = "hunter2"
     let redirectURI = "x-oauth2-myapp://authorize"
     let authorizationCodeGrantType = "authorization_code"
     let customParameters: [String : String] = [
-        "some_id" : "123abc"
+        "some_id": "123abc"
     ]
 
     override func setUp() {
         super.setUp()
 
-        mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: URL(string: "http://localhost:3333/get")!)
-        mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        do {
+            mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
+                                                                environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        }
+        catch {
+            XCTFail()
+        }
     }
 
     private func makeStrategy() -> OAuth2AuthorizationCodeTokenGrantStrategy {
@@ -72,7 +78,7 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
             XCTAssert(OperationQueue.current == operationQueue)
             completionExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 5)
     }
 

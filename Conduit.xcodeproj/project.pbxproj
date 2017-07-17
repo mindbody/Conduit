@@ -321,6 +321,10 @@
 		1BD801281F16CC4900481DC9 /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800B61F16CC4900481DC9 /* URLSessionClient.swift */; };
 		1BD801291F16CC4900481DC9 /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800B61F16CC4900481DC9 /* URLSessionClient.swift */; };
 		1BD8012A1F16CC4900481DC9 /* URLSessionClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800B61F16CC4900481DC9 /* URLSessionClient.swift */; };
+		95B972281F1982C1008A8C96 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B972271F1982C1008A8C96 /* URL.swift */; };
+		95B972291F1982C1008A8C96 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B972271F1982C1008A8C96 /* URL.swift */; };
+		95B9722A1F1982C1008A8C96 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B972271F1982C1008A8C96 /* URL.swift */; };
+		95B9722B1F1982C1008A8C96 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B972271F1982C1008A8C96 /* URL.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -451,6 +455,7 @@
 		1BD800B51F16CC4900481DC9 /* SSLPinningServerAuthenticationPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLPinningServerAuthenticationPolicy.swift; sourceTree = "<group>"; };
 		1BD800B61F16CC4900481DC9 /* URLSessionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B972271F1982C1008A8C96 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -747,6 +752,7 @@
 				1BD800B31F16CC4900481DC9 /* ServerAuthenticationPolicy.swift */,
 				1BD800B41F16CC4900481DC9 /* SessionTaskProxy.swift */,
 				1BD800B61F16CC4900481DC9 /* URLSessionClient.swift */,
+				95B972271F1982C1008A8C96 /* URL.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -987,6 +993,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800061F167E7800481DC9 /* Build configuration list for PBXNativeTarget "Conduit-iOS" */;
 			buildPhases = (
+				95B972261F197986008A8C96 /* Swiftlint */,
 				1BD8FFF91F167E7800481DC9 /* Sources */,
 				1BD8FFFA1F167E7800481DC9 /* Frameworks */,
 				1BD8FFFB1F167E7800481DC9 /* Headers */,
@@ -1181,6 +1188,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
 		};
+		95B972261F197986008A8C96 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1199,6 +1220,7 @@
 				1BD800BC1F16CC4900481DC9 /* HTTPRequestBuilder.swift in Sources */,
 				1BD8011C1F16CC4900481DC9 /* ServerAuthenticationPolicy.swift in Sources */,
 				1BD800D01F16CC4900481DC9 /* ConduitLogger.swift in Sources */,
+				95B972291F1982C1008A8C96 /* URL.swift in Sources */,
 				1BD800C41F16CC4900481DC9 /* ImageDownloader.swift in Sources */,
 				1BD801101F16CC4900481DC9 /* XMLNodeIndex.swift in Sources */,
 				1BD800F41F16CC4900481DC9 /* JSONResponseDeserializer.swift in Sources */,
@@ -1259,6 +1281,7 @@
 				1BD800BD1F16CC4900481DC9 /* HTTPRequestBuilder.swift in Sources */,
 				1BD8011D1F16CC4900481DC9 /* ServerAuthenticationPolicy.swift in Sources */,
 				1BD800D11F16CC4900481DC9 /* ConduitLogger.swift in Sources */,
+				95B9722A1F1982C1008A8C96 /* URL.swift in Sources */,
 				1BD800C51F16CC4900481DC9 /* ImageDownloader.swift in Sources */,
 				1BD801111F16CC4900481DC9 /* XMLNodeIndex.swift in Sources */,
 				1BD800F51F16CC4900481DC9 /* JSONResponseDeserializer.swift in Sources */,
@@ -1319,6 +1342,7 @@
 				1BD800BE1F16CC4900481DC9 /* HTTPRequestBuilder.swift in Sources */,
 				1BD8011E1F16CC4900481DC9 /* ServerAuthenticationPolicy.swift in Sources */,
 				1BD800D21F16CC4900481DC9 /* ConduitLogger.swift in Sources */,
+				95B9722B1F1982C1008A8C96 /* URL.swift in Sources */,
 				1BD800C61F16CC4900481DC9 /* ImageDownloader.swift in Sources */,
 				1BD801121F16CC4900481DC9 /* XMLNodeIndex.swift in Sources */,
 				1BD800F61F16CC4900481DC9 /* JSONResponseDeserializer.swift in Sources */,
@@ -1495,6 +1519,7 @@
 				1BD800E31F16CC4900481DC9 /* Result.swift in Sources */,
 				1B279C7D1F19524700C0005E /* OAuth2TokenGrantManager.swift in Sources */,
 				1B279C791F19524700C0005E /* OAuth2RequestPipelineMiddleware.swift in Sources */,
+				95B972281F1982C1008A8C96 /* URL.swift in Sources */,
 				1B279C491F19524700C0005E /* Auth.swift in Sources */,
 				1B279CA11F19524700C0005E /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B279C4D1F19524700C0005E /* OAuth2AuthorizationRedirectHandler.swift in Sources */,

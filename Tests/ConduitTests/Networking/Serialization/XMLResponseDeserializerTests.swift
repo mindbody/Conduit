@@ -24,9 +24,10 @@ class XMLResponseDeserializerTests: XCTestCase {
             return
         }
 
-        guard let validResponse = HTTPURLResponse(url: URL(string: "http://localhost:3333")!, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
-            XCTFail()
-            return
+        guard let url = URL(string: "http://localhost:3333"),
+            let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
+                XCTFail()
+                return
         }
 
         self.validResponseData = validResponseData

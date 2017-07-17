@@ -23,8 +23,11 @@ class JSONResponseDeserializerTests: XCTestCase {
             XCTFail()
             return
         }
-
-        guard let validResponse = HTTPURLResponse(url: URL(string: "http://localhost:3333")!, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
+        guard let url = URL(string: "http://localhost:3333") else {
+            XCTFail()
+            return
+        }
+        guard let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
             XCTFail()
             return
         }
@@ -43,16 +46,19 @@ class JSONResponseDeserializerTests: XCTestCase {
         }
     }
 
-    func testThrowsErrorForUnacceptableContentTypes() {
-        func makeResponse(contentType: String? = nil) -> HTTPURLResponse {
+    func testThrowsErrorForUnacceptableContentTypes() throws {
+        func makeResponse(contentType: String? = nil) throws -> HTTPURLResponse {
             var headerFields: [String: String]? = nil
             if let contentType = contentType {
                 headerFields = ["Content-Type": contentType]
             }
-            return HTTPURLResponse(url: URL(string: "http://localhost:3333")!, statusCode: 200,
-                                   httpVersion: "1.1", headerFields: headerFields)!
+            let url = try URL(absoluteString: "http://localhost:3333")
+            guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: headerFields) else {
+                throw TestError.invalidTest
+            }
+            return response
         }
-        let invalidResponses = ["application/xml", "text/html", "text/plain", nil].map { makeResponse(contentType: $0) }
+        let invalidResponses = try ["application/xml", "text/html", "text/plain", nil].map { try makeResponse(contentType: $0) }
 
         for invalidResponse in invalidResponses {
             XCTAssertThrowsError(try deserializer.deserializedObjectFrom(response: invalidResponse, data: validResponseData), "throws .badResponse") { error in
@@ -63,7 +69,7 @@ class JSONResponseDeserializerTests: XCTestCase {
             }
         }
 
-        let validResponse = makeResponse(contentType: "application/json")
+        let validResponse = try makeResponse(contentType: "application/json")
         let deserializedObj = try? deserializer.deserializedObjectFrom(response: validResponse, data: validResponseData)
         XCTAssert(deserializedObj != nil)
     }

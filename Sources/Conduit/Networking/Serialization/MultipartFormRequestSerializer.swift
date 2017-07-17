@@ -55,8 +55,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         var mutableRequest = request
 
         if mutableRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            mutableRequest.setValue("multipart/form-data; boundary=\(self.contentBoundary)",
-                                    forHTTPHeaderField: "Content-Type")
+            mutableRequest.setValue("multipart/form-data; boundary=\(self.contentBoundary)", forHTTPHeaderField: "Content-Type")
         }
 
         let httpBody = try self.makeHTTPBody()
@@ -206,7 +205,9 @@ public struct FormPart {
         }
         return nil
     }
-    #else
+    #endif
+
+    #if os(iOS) || os(tvOS) || os(watchOS)
     private func dataFrom(image: UIImage, type: ImageFormat) -> Data? {
         if case .jpeg(let compressionQuality) = type {
             return UIImageJPEGRepresentation(image, compressionQuality)
@@ -255,7 +256,7 @@ public struct FormPart {
         #if os(OSX)
         /// An image with an associated compression format
         case image(NSImage, ImageFormat)
-        #else
+        #elseif os(iOS) || os(tvOS) || os(watchOS)
         /// An image with an associated compression format
         case image(UIImage, ImageFormat)
         #endif
@@ -263,7 +264,7 @@ public struct FormPart {
         /// A video with an associated media container format
         case video(Data, VideoFormat)
 
-        /// PDF Data 
+        /// PDF Data
         case pdf(Data)
 
         /// Arbitrary binary data
@@ -275,33 +276,41 @@ public struct FormPart {
         fileprivate func mimeType() -> String {
             switch self {
             case .image(_, let imageType):
-                switch imageType {
-                case .jpeg:
-                    return "image/jpeg"
-                case .png:
-                    return "image/png"
-                }
+                return imageMimeType(imageType: imageType)
             case .video(_, let videoType):
-                switch videoType {
-                case .avi:
-                    return "video/x-msvideo"
-                case .flv:
-                    return "video/x-flv"
-                case .m3u8:
-                    return "application/x-mpegURL"
-                case .mov:
-                    return "video/quicktime"
-                case .mp4:
-                    return "video/mp4"
-                case .wmv:
-                    return "video/x-ms-wmv"
-                }
+                return videoMimeType(videoType: videoType)
             case .pdf:
                 return "application/pdf"
             case .binary:
                 return "application/octet-stream"
             case .text:
                 return "text/plain"
+            }
+        }
+
+        fileprivate func imageMimeType(imageType: FormPart.ImageFormat) -> String {
+            switch imageType {
+            case .jpeg:
+                return "image/jpeg"
+            case .png:
+                return "image/png"
+            }
+        }
+
+        fileprivate func videoMimeType(videoType: FormPart.VideoFormat) -> String {
+            switch videoType {
+            case .avi:
+                return "video/x-msvideo"
+            case .flv:
+                return "video/x-flv"
+            case .m3u8:
+                return "application/x-mpegURL"
+            case .mov:
+                return "video/quicktime"
+            case .mp4:
+                return "video/mp4"
+            case .wmv:
+                return "video/x-ms-wmv"
             }
         }
     }

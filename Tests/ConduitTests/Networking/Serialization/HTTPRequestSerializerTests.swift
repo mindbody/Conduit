@@ -42,7 +42,11 @@ class HTTPRequestSerializerTests: XCTestCase {
             var request: URLRequest! = self.request
             request.httpMethod = method.rawValue
 
-            XCTAssertThrowsError(try serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"], queryParameters: nil), "throws bad HTTP verb error") { error in
+            do {
+                _ = try serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"], queryParameters: nil)
+                XCTFail()
+            }
+            catch let error {
                 guard case RequestSerializerError.httpVerbDoesNotAllowBodyParameters = error else {
                     XCTFail()
                     return

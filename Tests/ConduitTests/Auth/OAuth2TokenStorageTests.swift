@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Conduit
+@testable import Conduit
 
 class OAuth2TokenStorageTests: XCTestCase {
 
@@ -20,8 +20,14 @@ class OAuth2TokenStorageTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: URL(string: "http://localhost:3333/get")!)
-        mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        do {
+            mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
+                                                                environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        }
+        catch {
+            XCTFail()
+        }
     }
 
     private func verifyTokenStorageOperations() {
@@ -34,7 +40,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         sut.removeAllTokensFor(client: mockClientConfiguration)
         XCTAssert(sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) == nil)
     }
-    
+
     func testKeychainStorageOperations() {
         sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
         verifyTokenStorageOperations()

@@ -15,14 +15,20 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
     var mockClientConfiguration: OAuth2ClientConfiguration!
     let saml12GrantType = "urn:ietf:params:oauth:grant-type:sam12-bearer"
     let customParameters: [String : String] = [
-        "assertion" : "123abc"
+        "assertion": "123abc"
     ]
 
     override func setUp() {
         super.setUp()
 
-        mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: URL(string: "http://localhost:3333/get")!)
-        mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        do {
+            mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
+                                                                environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
+        }
+        catch {
+            XCTFail()
+        }
     }
 
     private func makeStrategy() -> OAuth2ExtensionTokenGrantStrategy {
@@ -33,7 +39,7 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
 
         return strategy
     }
-    
+
     func testAttemptsToIssueTokenViaExtensionGrant() {
         let sut = makeStrategy()
 
