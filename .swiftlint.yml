@@ -8,7 +8,7 @@ statement_position:
 type_name:
   min_length: 3
   max_length: 60
-variable_name:
+identifier_name:
   min_length: 3
   max_length: 60
 
