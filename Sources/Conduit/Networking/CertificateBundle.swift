@@ -33,7 +33,7 @@ public struct CertificateBundle {
         self.init(certificates: certificates)
     }
 
-    init(certificates: [SecCertificate]) {
+    public init(certificates: [SecCertificate]) {
         self.certificates = certificates
     }
 

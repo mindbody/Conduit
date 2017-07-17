@@ -19,8 +19,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
 
     let fakeProtectionSpace = URLProtectionSpace(host: "localhost", port: 3_333, protocol: "http", realm: nil, authenticationMethod: nil)
     var fakeAuthenticationChallenge: URLAuthenticationChallenge!
-    var validCertPath: String!
-    var invalidCertPath: String!
+    var validCertData: Data!
+    var invalidCertData: Data!
     var sessionClient: URLSessionClient!
 
     let succeedingEvaluationPredicate: SSLPinningServerAuthenticationPolicy.SSLPinningServerEvaluationPredicate = { _ in return true }
@@ -37,35 +37,28 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
                                                                  error: nil,
                                                                  sender: MockAuthenticationChallengeSender())
 
-        guard let validCertPath = Bundle(for: type(of: self)).path(forResource: "httpbin_cert_valid", ofType: "der") else {
-            XCTFail()
-            return
-        }
-        self.validCertPath = validCertPath
-
-        guard let invalidCertPath = Bundle(for: type(of: self)).path(forResource: "badssl", ofType: "der") else {
-            XCTFail()
-            return
-        }
-        self.invalidCertPath = invalidCertPath
-
         sessionClient = URLSessionClient()
 
-        guard let invalidCertificate = CertificateBundle(certificatePaths: [invalidCertPath]).certificates.first else {
-            XCTFail()
-            return
+        guard let validCertificateData = TestBundle.validSSLCertificate,
+            let invalidCertificateData = TestBundle.badSSLCertificate else {
+                XCTFail()
+                return
         }
-        self.invalidCertificate = invalidCertificate
 
-        guard let validCertificate = CertificateBundle(certificatePaths: [validCertPath]).certificates.first else {
-            XCTFail()
-            return
+        guard let validCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, validCertificateData as CFData),
+            let invalidCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, invalidCertificateData as CFData) else {
+                XCTFail()
+                return
         }
+
+        self.validCertData = validCertificateData
+        self.invalidCertData = invalidCertificateData
         self.validCertificate = validCertificate
+        self.invalidCertificate = invalidCertificate
     }
 
     func testAlwaysSucceedsIfInvalidCertificatesAreAllowed() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
         authenticationPolicy.allowsInvalidSSLCertificates = true
 
@@ -84,7 +77,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testFailsWithUnallowedInvalidCertificates() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
         let authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
 
         var invalidTrust: SecTrust?
@@ -99,8 +92,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testSucceedsForValidUnknownCertificatesWhenPinningSetToNone() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
-        let mockServerCertificateBundle = CertificateBundle(certificatePaths: [invalidCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
+        let mockServerCertificateBundle = CertificateBundle(certificates: [invalidCertificate])
 
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle,
                                                                         evaluationPredicate: succeedingEvaluationPredicate)
@@ -110,8 +103,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testPublicKeyPinningSucceedsIfPublicKeyFoundInTrustChain() {
-        let certificateBundle = CertificateBundle(certificatePaths: [invalidCertPath, validCertPath])
-        let mockServerCertificateBundle = CertificateBundle(certificatePaths: [validCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate, invalidCertificate])
+        let mockServerCertificateBundle = CertificateBundle(certificates: [validCertificate])
 
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
         authenticationPolicy.pinningType = .publicKey
@@ -120,8 +113,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testPublicKeyPinningFailsIfPublicKeyNotFoundInTrustChain() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
-        let mockServerCertificateBundle = CertificateBundle(certificatePaths: [invalidCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
+        let mockServerCertificateBundle = CertificateBundle(certificates: [invalidCertificate])
 
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
         authenticationPolicy.pinningType = .publicKey
@@ -130,8 +123,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testCertificateDataPinningSucceedsIfCertificateFoundInTrustChain() {
-        let certificateBundle = CertificateBundle(certificatePaths: [invalidCertPath, validCertPath])
-        let mockServerCertificateBundle = CertificateBundle(certificatePaths: [validCertPath])
+        let certificateBundle = CertificateBundle(certificates: [invalidCertificate, validCertificate])
+        let mockServerCertificateBundle = CertificateBundle(certificates: [validCertificate])
 
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
         authenticationPolicy.pinningType = .certificateData
@@ -140,8 +133,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testCertificateDataPinningFailsIfCertificateNotFoundInTrustChain() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
-        let mockServerCertificateBundle = CertificateBundle(certificatePaths: [invalidCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
+        let mockServerCertificateBundle = CertificateBundle(certificates: [invalidCertificate])
 
         var authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: succeedingEvaluationPredicate)
         authenticationPolicy.pinningType = .certificateData
@@ -150,7 +143,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     func testPassesIfServerEvaluationPredicateReturnsFalse() {
-        let certificateBundle = CertificateBundle(certificatePaths: [validCertPath])
+        let certificateBundle = CertificateBundle(certificates: [validCertificate])
 
         let authenticationPolicy = SSLPinningServerAuthenticationPolicy(certificates: certificateBundle, evaluationPredicate: { _ in return false })
 

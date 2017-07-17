@@ -29,16 +29,16 @@ class MultipartFormRequestSerializerTests: XCTestCase {
             return
         }
 
-        guard let image1File = Bundle(for: type(of: self)).path(forResource: "celltowers", ofType: "JPG") else {
+        guard let image1 = TestBundle.cellTowersImage else {
             XCTFail()
             return
         }
-        guard let image2File = Bundle(for: type(of: self)).path(forResource: "evil_spaceship", ofType: "png") else {
+        guard let image2 = TestBundle.evilSpaceshipImage else {
             XCTFail()
             return
         }
-        image1 = Image(contentsOfFile: image1File)
-        image2 = Image(contentsOfFile: image2File)
+        self.image1 = image1
+        self.image2 = image2
 
         request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -48,10 +48,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
 
-        guard let videoFileURL = Bundle(for: type(of: self)).url(forResource: "test", withExtension: "mov") else {
-            throw URLError.badURL
-        }
-        guard let videoData = try? Data(contentsOf: videoFileURL) else {
+        guard let videoData = TestBundle.sampleVideo else {
             throw URLError.badURL
         }
 
