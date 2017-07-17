@@ -8,8 +8,14 @@
 
 #if os(OSX)
     import AppKit
-#else
+#elseif os(iOS) || os(tvOS)
     import UIKit
+#endif
+
+#if os(OSX)
+    internal typealias Image = NSImage
+#elseif os(iOS) || os(tvOS)
+    internal typealias Image = UIImage
 #endif
 
 /// Represents an error that occured within an ImageDownloader
@@ -18,24 +24,19 @@ public enum ImageDownloaderError: Error {
     case invalidRequest
 }
 
-/// Utilizes Conduit to download and safely cache/retrieve 
+/// Utilizes Conduit to download and safely cache/retrieve
 /// images across multiple threads
 public final class ImageDownloader {
-#if os(OSX)
-    private typealias Image = NSImage
-#else
-    private typealias Image = UIImage
-#endif
 
     /// Represents a network or cached image response
     public struct Response {
-#if os(OSX)
+        #if os(OSX)
         /// The resulting image
         public let image: NSImage?
-#else
+        #elseif os(iOS) || os(tvOS)
         /// The resulting image
-        public let image: UIImage? // Immutable; copy-on-write implementation unnecessary
-#endif
+        public let image: UIImage?
+        #endif
         /// The error that occurred from transport or cache retrieval
         public let error: Error?
         /// The URL response, if a download occurred
@@ -99,7 +100,7 @@ public final class ImageDownloader {
                 return
             }
 
-            // Strongly capture self within the completion handler to ensure 
+            // Strongly capture self within the completion handler to ensure
             // ImageDownloader is persisted long enough to respond
             proxy = self.sessionClient.begin(request: request) { (data, response, error) in
                 var image: Image?

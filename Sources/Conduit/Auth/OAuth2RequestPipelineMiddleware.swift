@@ -65,43 +65,47 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             }
         }
         else if authorization.level == .client {
-            logger.verbose("No bearer token found, but client authorization is requested.")
-            if authorization.type == .bearer {
-                // Issue new token with client username/password and then apply bearer header
-                issueTokenForClientUser { result in
-                    switch result {
-                    case .error(let error):
-                        logger.warn("There was an error issuing the new client token")
-                        self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
-                        completion(.error(error))
-                    case .value(let newToken):
-                        logger.info("Successfully issued token")
-                        logger.debug("New token issued: \(newToken)")
-                        self.tokenStorage.store(token: newToken,
-                                                for: self.clientConfiguration,
-                                                with: self.authorization)
-                        self.makeRequestByApplyingAuthorizationHeader(to: request,
-                                                                      with: newToken,
-                                                                      completion: completion)
-                    }
-                    Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
-                                                                authorizationLevel: self.authorization.level,
-                                                                result: result)
-                }
-            }
-            else {
-                // Apply basic header
-                logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
-                let basicToken = BasicOAuth2Token(username: clientConfiguration.clientIdentifier,
-                                                  password: clientConfiguration.clientSecret)
-                makeRequestByApplyingAuthorizationHeader(to: request,
-                                                         with: basicToken,
-                                                         completion: completion)
-            }
+            prepareForTransportWithClientAuthorization(request: request, completion: completion)
         }
         else {
             logger.warn("Invalid or empty token supplied for user authorization")
             completion(.error(OAuth2Error.clientFailure(nil, nil)))
+        }
+    }
+
+    private func prepareForTransportWithClientAuthorization(request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
+        logger.verbose("No bearer token found, but client authorization is requested.")
+        if authorization.type == .bearer {
+            // Issue new token with client username/password and then apply bearer header
+            issueTokenForClientUser { result in
+                switch result {
+                case .error(let error):
+                    logger.warn("There was an error issuing the new client token")
+                    self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
+                    completion(.error(error))
+                case .value(let newToken):
+                    logger.info("Successfully issued token")
+                    logger.debug("New token issued: \(newToken)")
+                    self.tokenStorage.store(token: newToken,
+                                            for: self.clientConfiguration,
+                                            with: self.authorization)
+                    self.makeRequestByApplyingAuthorizationHeader(to: request,
+                                                                  with: newToken,
+                                                                  completion: completion)
+                }
+                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
+                                                            authorizationLevel: self.authorization.level,
+                                                            result: result)
+            }
+        }
+        else {
+            // Apply basic header
+            logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
+            let basicToken = BasicOAuth2Token(username: clientConfiguration.clientIdentifier,
+                                              password: clientConfiguration.clientSecret)
+            makeRequestByApplyingAuthorizationHeader(to: request,
+                                                     with: basicToken,
+                                                     completion: completion)
         }
     }
 

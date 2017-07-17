@@ -30,12 +30,38 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        fakeAuthenticationChallenge = URLAuthenticationChallenge(protectionSpace: fakeProtectionSpace, proposedCredential: nil, previousFailureCount: 0, failureResponse: nil, error: nil, sender: MockAuthenticationChallengeSender())
-        validCertPath = Bundle(for: type(of: self)).path(forResource: "httpbin_cert_valid", ofType: "der")!
-        invalidCertPath = Bundle(for: type(of: self)).path(forResource: "badssl", ofType: "der")!
+        fakeAuthenticationChallenge = URLAuthenticationChallenge(protectionSpace: fakeProtectionSpace,
+                                                                 proposedCredential: nil,
+                                                                 previousFailureCount: 0,
+                                                                 failureResponse: nil,
+                                                                 error: nil,
+                                                                 sender: MockAuthenticationChallengeSender())
+
+        guard let validCertPath = Bundle(for: type(of: self)).path(forResource: "httpbin_cert_valid", ofType: "der") else {
+            XCTFail()
+            return
+        }
+        self.validCertPath = validCertPath
+
+        guard let invalidCertPath = Bundle(for: type(of: self)).path(forResource: "badssl", ofType: "der") else {
+            XCTFail()
+            return
+        }
+        self.invalidCertPath = invalidCertPath
+
         sessionClient = URLSessionClient()
-        invalidCertificate = CertificateBundle(certificatePaths: [invalidCertPath]).certificates.first!
-        validCertificate = CertificateBundle(certificatePaths: [validCertPath]).certificates.first!
+
+        guard let invalidCertificate = CertificateBundle(certificatePaths: [invalidCertPath]).certificates.first else {
+            XCTFail()
+            return
+        }
+        self.invalidCertificate = invalidCertificate
+
+        guard let validCertificate = CertificateBundle(certificatePaths: [validCertPath]).certificates.first else {
+            XCTFail()
+            return
+        }
+        self.validCertificate = validCertificate
     }
 
     func testAlwaysSucceedsIfInvalidCertificatesAreAllowed() {
@@ -48,8 +74,13 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
         var validTrust: SecTrust?
         SecTrustCreateWithCertificates(validCertificate, nil, &validTrust)
 
-        XCTAssert(authenticationPolicy.evaluate(serverTrust: invalidTrust!))
-        XCTAssert(authenticationPolicy.evaluate(serverTrust: validTrust!))
+        if let invalidTrust = invalidTrust, let validTrust = validTrust {
+            XCTAssertTrue(authenticationPolicy.evaluate(serverTrust: invalidTrust))
+            XCTAssertTrue(authenticationPolicy.evaluate(serverTrust: validTrust))
+        }
+        else {
+            XCTFail()
+        }
     }
 
     func testFailsWithUnallowedInvalidCertificates() {
@@ -59,7 +90,12 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
         var invalidTrust: SecTrust?
         SecTrustCreateWithCertificates(invalidCertificate, nil, &invalidTrust)
 
-        XCTAssert(!authenticationPolicy.evaluate(serverTrust: invalidTrust!))
+        if let invalidTrust = invalidTrust {
+            XCTAssertFalse(authenticationPolicy.evaluate(serverTrust: invalidTrust))
+        }
+        else {
+            XCTFail()
+        }
     }
 
     func testSucceedsForValidUnknownCertificatesWhenPinningSetToNone() {

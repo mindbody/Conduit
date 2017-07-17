@@ -177,9 +177,9 @@ extension XML {
         }
 
         fileprivate func parser(_ parser: XMLParser, foundCharacters string: String) {
-            var activeNode = workingTree.popLast()
-            activeNode?.value = activeNode?.value?.appending(string) ?? string
-            if let activeNode = activeNode {
+            if var activeNode = workingTree.popLast() {
+                let value = activeNode.value ?? ""
+                activeNode.value = value + string
                 workingTree.append(activeNode)
             }
         }

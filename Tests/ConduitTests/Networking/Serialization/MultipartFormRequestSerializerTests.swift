@@ -9,10 +9,17 @@
 import XCTest
 @testable import Conduit
 
+enum TestError: Error {
+    case invalidTest
+}
+
 class MultipartFormRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!
     var serializer: MultipartFormRequestSerializer!
+
+    var image1: Image!
+    var image2: Image!
 
     override func setUp() {
         super.setUp()
@@ -22,32 +29,31 @@ class MultipartFormRequestSerializerTests: XCTestCase {
             return
         }
 
+        guard let image1File = Bundle(for: type(of: self)).path(forResource: "celltowers", ofType: "JPG") else {
+            XCTFail()
+            return
+        }
+        guard let image2File = Bundle(for: type(of: self)).path(forResource: "evil_spaceship", ofType: "png") else {
+            XCTFail()
+            return
+        }
+        image1 = Image(contentsOfFile: image1File)
+        image2 = Image(contentsOfFile: image2File)
+
+
         request = URLRequest(url: url)
         request.httpMethod = "POST"
         serializer = MultipartFormRequestSerializer()
     }
 
-    func testSerializesDataPerW3Spec() {
+    private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
-        #if os(OSX)
-            let image1 = NSImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "celltowers", ofType: "JPG")!)!
-            let image2 = NSImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "evil_spaceship", ofType: "png")!)!
-        #else
-            let image1 = UIImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "celltowers", ofType: "JPG")!)!
-            let image2 = UIImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "evil_spaceship", ofType: "png")!)!
-        #endif
 
         guard let videoFileURL = Bundle(for: type(of: self)).url(forResource: "test", withExtension: "mov") else {
-            XCTFail()
-            return
+            throw URLError.badURL
         }
         guard let videoData = try? Data(contentsOf: videoFileURL) else {
-            XCTFail()
-            return
+            throw URLError.badURL
         }
 
         let formPart1 = FormPart(name: "celltowers", filename: "celltowers.jpg",
@@ -56,7 +62,10 @@ class MultipartFormRequestSerializerTests: XCTestCase {
                                  content: .image(image2, .png))
         let formPart3 = FormPart(name: "someformlabel", content: .text("some form value"))
         let formPart4 = FormPart(name: "test-video", filename: "test-video.mov", content: .video(videoData, .mov))
-        let formPart5 = FormPart(name: "binary", filename: "binary.bin", content: .binary(".".data(using: .utf8)!))
+        guard let binaryData = ".".data(using: .utf8) else {
+            throw TestError.invalidTest
+        }
+        let formPart5 = FormPart(name: "binary", filename: "binary.bin", content: .binary(binaryData))
         let formPart6 = FormPart(name: "pdf", filename: "pdf.pdf", content: .pdf(Data()))
 
         serializer.append(formPart: formPart1)
@@ -66,7 +75,13 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         serializer.append(formPart: formPart5)
         serializer.append(formPart: formPart6)
 
-        var newRequest = URLRequest(url: URL(string: "http://localhost:3333/post")!)
+        return serializer
+    }
+
+    func testSerializesDataPerW3Spec() throws {
+        let serializer = try makeFormSerializer()
+
+        var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serializedRequestWith(request: newRequest, bodyParameters: nil, queryParameters: nil) else {
             XCTFail()
@@ -96,35 +111,15 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
-    func testRemovesFormPartContentTypeHeadersIfExplictlyRemoved() {
+    func testRemovesFormPartContentTypeHeadersIfExplictlyRemoved() throws {
         let serializer = MultipartFormRequestSerializer()
-        #if os(OSX)
-            let image1 = NSImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "celltowers", ofType: "JPG")!)!
-            let image2 = NSImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "evil_spaceship", ofType: "png")!)!
-        #else
-            let image1 = UIImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "celltowers", ofType: "JPG")!)!
-            let image2 = UIImage(contentsOfFile: Bundle(for: type(of: self))
-                .path(forResource: "evil_spaceship", ofType: "png")!)!
-        #endif
-
-        guard let videoFileURL = Bundle(for: type(of: self)).url(forResource: "test", withExtension: "mov") else {
-            XCTFail()
-            return
-        }
-        guard let videoData = try? Data(contentsOf: videoFileURL) else {
-            XCTFail()
-            return
-        }
 
         var formPart = FormPart(name: "celltowers", filename: "celltowers.jpg",
                                 content: .image(image1, .jpeg(compressionQuality: 0.5)))
         formPart.contentType = nil
         serializer.append(formPart: formPart)
 
-        var newRequest = URLRequest(url: URL(string: "http://localhost:3333/post")!)
+        var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serializedRequestWith(request: newRequest, bodyParameters: nil, queryParameters: nil) else {
             XCTFail()

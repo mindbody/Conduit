@@ -8,28 +8,28 @@
 
 #if os(OSX)
     import AppKit
-#else
+#elseif os(iOS) || os(tvOS)
     import UIKit
 #endif
 
 /// Caches images keyed off of URLRequests
 public protocol URLImageCache {
 
-#if os(OSX)
+    #if os(OSX)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     func image(for request: URLRequest) -> NSImage?
-#else
+    #elseif os(iOS) || os(tvOS)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     func image(for request: URLRequest) -> UIImage?
-#endif
+    #endif
 
     /// Attempts to build a cache identifier for the given request
     ///
@@ -38,21 +38,21 @@ public protocol URLImageCache {
     /// - Returns: An identifier for the cached image
     func cacheIdentifier(for request: URLRequest) -> String?
 
-#if os(OSX)
+    #if os(OSX)
     /// Attempts to cache an image for a given request
-    /// 
+    ///
     /// - Parameters:
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     mutating func cache(image: NSImage, for request: URLRequest)
-#else
+    #elseif os(iOS) || os(tvOS)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     mutating func cache(image: UIImage, for request: URLRequest)
-#endif
+    #endif
 
     /// Attempts to remove an image from the cache for a given request
     /// - Parameters:
@@ -61,5 +61,5 @@ public protocol URLImageCache {
 
     /// Purges all images from the cache
     mutating func purge()
-
+    
 }

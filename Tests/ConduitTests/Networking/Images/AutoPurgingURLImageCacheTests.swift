@@ -9,66 +9,71 @@
 import XCTest
 @testable import Conduit
 
+#if os(OSX) || os(iOS) || os(tvOS)
+
 class AutoPurgingURLImageCacheTests: XCTestCase {
 
-    var mockImageRequest: URLRequest!
-#if os(OSX)
-    var mockImage: NSImage!
-#else
-    var mockImage: UIImage!
-#endif
-    var sut: AutoPurgingURLImageCache!
-
-    override func setUp() {
-        super.setUp()
-
+    var mockImageRequest: URLRequest {
         guard let url = URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png") else {
             XCTFail()
-            return
+            preconditionFailure()
         }
+        return URLRequest(url: url)
+    }
 
-        mockImageRequest = URLRequest(url: url)
-#if os(OSX)
-        mockImage = NSImage(contentsOfFile: Bundle(for: type(of: self))
-            .path(forResource: "evil_spaceship", ofType: "png")!)!
-#else
-        mockImage = UIImage(contentsOfFile: Bundle(for: type(of: self))
-            .path(forResource: "evil_spaceship", ofType: "png")!)!
-#endif
-        sut = AutoPurgingURLImageCache()
+    var mockImage: Image {
+        let path = "Tests/ConduitTests/Networking/Resources/Images/evil_spaceship.png"
+        let file = Bundle(for: type(of: self)).path(forResource: "evil_spaceship", ofType: "png") ?? path
+        guard let image = Image(contentsOfFile: file) else {
+            XCTFail()
+            preconditionFailure()
+        }
+        return image
     }
 
     func testRetrievesCachedImages() {
-        sut.cache(image: mockImage, for: mockImageRequest)
+        let sut = AutoPurgingURLImageCache()
+        let copy = mockImage
+        sut.cache(image: copy, for: mockImageRequest)
         let image = sut.image(for: mockImageRequest)
-        XCTAssert(image == mockImage)
+        XCTAssert(image == copy)
     }
 
     func testGeneratesCacheIdentifiers() {
-        XCTAssert(sut.cacheIdentifier(for: mockImageRequest) != nil)
+        let sut = AutoPurgingURLImageCache()
+        XCTAssertNotNil(sut.cacheIdentifier(for: mockImageRequest))
     }
 
     func testRemovesCachedImages() {
+        let sut = AutoPurgingURLImageCache()
         sut.cache(image: mockImage, for: mockImageRequest)
-        XCTAssert(sut.image(for: mockImageRequest) != nil)
+        XCTAssertNotNil(sut.image(for: mockImageRequest))
         sut.removeImage(for: mockImageRequest)
-        XCTAssert(sut.image(for: mockImageRequest) == nil)
+        XCTAssertNil(sut.image(for: mockImageRequest))
     }
 
-    func testRemovesAllCachedImagesWhenPurged() {
-        let imageRequests = (0..<10).map {
-            URLRequest(url: URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png?id=\($0)")!)
+    func testRemovesAllCachedImagesWhenPurged() throws {
+        let sut = AutoPurgingURLImageCache()
+
+        let imageRequests = try (0..<10).map {
+            URLRequest(url: try URL(absoluteString: "http://i.memecaptain.com/gend_images/fAu8Pg.png?id=\($0)"))
         }
 
         for request in imageRequests {
             sut.cache(image: mockImage, for: request)
         }
 
+        for request in imageRequests {
+            XCTAssertNotNil(sut.image(for: request))
+        }
+
         sut.purge()
 
         for request in imageRequests {
-            XCTAssert(sut.image(for: request) == nil)
+            XCTAssertNil(sut.image(for: request))
         }
     }
 
 }
+
+#endif

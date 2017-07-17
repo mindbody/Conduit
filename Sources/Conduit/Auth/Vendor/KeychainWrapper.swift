@@ -25,6 +25,9 @@
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //    SOFTWARE.
 
+// swiftlint:disable file_length
+// swiftlint:disable line_length
+
 import Foundation
 
 let secMatchLimit: String! = kSecMatchLimit as String
@@ -85,15 +88,10 @@ internal class KeychainWrapper {
     /// - parameter withOptions: Optional KeychainItemOptions to use when retrieving the keychain item.
     /// - returns: True if a value exists for the key. False otherwise.
     func hasValue(forKey keyName: String, withOptions options: KeychainItemOptions? = nil) -> Bool {
-        if let _ = self.data(forKey: keyName, withOptions: options) {
-            return true
-        }
-        else {
-            return false
-        }
+        return data(forKey: keyName, withOptions: options) == nil
     }
 
-   // MARK: Getters
+    // MARK: Getters
 
     func integer(forKey keyName: String, withOptions options: KeychainItemOptions? = nil) -> Int? {
         guard let numberValue = self.object(forKey: keyName, withOptions: options) as? NSNumber else {

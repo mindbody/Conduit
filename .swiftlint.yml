@@ -1,0 +1,26 @@
+included:
+  - Sources
+  - Tests
+
+line_length: 160
+statement_position:
+  statement_mode: uncuddled_else
+type_name:
+  min_length: 3
+  max_length: 60
+variable_name:
+  min_length: 3
+  max_length: 60
+
+opt_in_rules:
+  - conditional_returns_on_newline
+  - empty_count
+  - force_unwrapping
+  - redundant_nil_coalesing
+  - switch_case_on_newline
+  - closure_spacing 
+  - operator_usage_whitespace 
+  - fileprivate_outlet
+  - redundant_nil_coalescing
+  - number_separator
+  - nimble_operator
