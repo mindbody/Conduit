@@ -207,7 +207,7 @@ public struct FormPart {
     }
     #endif
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     private func dataFrom(image: UIImage, type: ImageFormat) -> Data? {
         if case .jpeg(let compressionQuality) = type {
             return UIImageJPEGRepresentation(image, compressionQuality)
@@ -256,7 +256,7 @@ public struct FormPart {
         #if os(OSX)
         /// An image with an associated compression format
         case image(NSImage, ImageFormat)
-        #elseif os(iOS) || os(tvOS)
+        #elseif os(iOS) || os(tvOS) || os(watchOS)
         /// An image with an associated compression format
         case image(UIImage, ImageFormat)
         #endif

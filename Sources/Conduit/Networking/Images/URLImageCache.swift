@@ -8,7 +8,7 @@
 
 #if os(OSX)
     import AppKit
-#elseif os(iOS) || os(tvOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
 
@@ -22,7 +22,7 @@ public protocol URLImageCache {
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     func image(for request: URLRequest) -> NSImage?
-    #elseif os(iOS) || os(tvOS)
+    #elseif os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -45,7 +45,7 @@ public protocol URLImageCache {
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     mutating func cache(image: NSImage, for request: URLRequest)
-    #elseif os(iOS) || os(tvOS)
+    #elseif os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:

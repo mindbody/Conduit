@@ -8,7 +8,7 @@
 
 #if os(OSX)
     import AppKit
-#elseif os(iOS) || os(tvOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
 
@@ -44,7 +44,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     }
     #endif
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -88,7 +88,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     }
     #endif
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
@@ -138,7 +138,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     }
     #endif
 
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
     private func numberOfBytes(in image: Image) -> Int {
         let size = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
         let bytesPerPixel = 4

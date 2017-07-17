@@ -8,13 +8,13 @@
 
 #if os(OSX)
     import AppKit
-#elseif os(iOS) || os(tvOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
 
 #if os(OSX)
     internal typealias Image = NSImage
-#elseif os(iOS) || os(tvOS)
+#elseif os(iOS) || os(tvOS) || os(watchOS)
     internal typealias Image = UIImage
 #endif
 
@@ -33,7 +33,7 @@ public final class ImageDownloader {
         #if os(OSX)
         /// The resulting image
         public let image: NSImage?
-        #elseif os(iOS) || os(tvOS)
+        #elseif os(iOS) || os(tvOS) || os(watchOS)
         /// The resulting image
         public let image: UIImage?
         #endif

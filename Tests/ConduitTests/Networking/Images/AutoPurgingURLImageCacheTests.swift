@@ -9,8 +9,6 @@
 import XCTest
 @testable import Conduit
 
-#if os(OSX) || os(iOS) || os(tvOS)
-
 class AutoPurgingURLImageCacheTests: XCTestCase {
 
     var mockImageRequest: URLRequest {
@@ -75,5 +73,3 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
     }
 
 }
-
-#endif
