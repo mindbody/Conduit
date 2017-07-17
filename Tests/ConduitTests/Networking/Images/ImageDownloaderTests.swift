@@ -36,7 +36,7 @@ class ImageDownloaderTests: XCTestCase {
 
         sut = ImageDownloader(cache: AutoPurgingURLImageCache())
 
-        guard let url = URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png") else {
+        guard let url = URL(string: "http://localhost:3333/image/jpeg") else {
             XCTFail()
             return
         }
@@ -79,7 +79,7 @@ class ImageDownloaderTests: XCTestCase {
 
     func testHandlesSimultaneousRequestsForDifferentImages() {
         let imageURLs = (0..<10).flatMap {
-            URL(string: "http://i.memecaptain.com/gend_images/fAu8Pg.png?id=\($0)")
+            URL(string: "http://localhost:3333/image/jpeg?id=\($0)")
         }
 
         let fetchedAllImagesExpectation = expectation(description: "fetched all images")
