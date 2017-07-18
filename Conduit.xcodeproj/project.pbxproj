@@ -130,6 +130,9 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
+		1BC229A41F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
+		1BC229A51F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
+		1BC229A61F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
 		1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
@@ -144,21 +147,6 @@
 		1BD555731F17DC81004B1172 /* NetworkStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555461F17DC81004B1172 /* NetworkStatusTests.swift */; };
 		1BD555741F17DC81004B1172 /* NetworkStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555461F17DC81004B1172 /* NetworkStatusTests.swift */; };
 		1BD555751F17DC81004B1172 /* NetworkStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555461F17DC81004B1172 /* NetworkStatusTests.swift */; };
-		1BD555761F17DC81004B1172 /* badssl.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD555491F17DC81004B1172 /* badssl.der */; };
-		1BD555771F17DC81004B1172 /* badssl.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD555491F17DC81004B1172 /* badssl.der */; };
-		1BD555781F17DC81004B1172 /* badssl.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD555491F17DC81004B1172 /* badssl.der */; };
-		1BD555791F17DC81004B1172 /* httpbin_cert_valid.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554A1F17DC81004B1172 /* httpbin_cert_valid.der */; };
-		1BD5557A1F17DC81004B1172 /* httpbin_cert_valid.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554A1F17DC81004B1172 /* httpbin_cert_valid.der */; };
-		1BD5557B1F17DC81004B1172 /* httpbin_cert_valid.der in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554A1F17DC81004B1172 /* httpbin_cert_valid.der */; };
-		1BD5557C1F17DC81004B1172 /* celltowers.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554C1F17DC81004B1172 /* celltowers.JPG */; };
-		1BD5557D1F17DC81004B1172 /* celltowers.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554C1F17DC81004B1172 /* celltowers.JPG */; };
-		1BD5557E1F17DC81004B1172 /* celltowers.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554C1F17DC81004B1172 /* celltowers.JPG */; };
-		1BD5557F1F17DC81004B1172 /* evil_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554D1F17DC81004B1172 /* evil_spaceship.png */; };
-		1BD555801F17DC81004B1172 /* evil_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554D1F17DC81004B1172 /* evil_spaceship.png */; };
-		1BD555811F17DC81004B1172 /* evil_spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554D1F17DC81004B1172 /* evil_spaceship.png */; };
-		1BD555821F17DC81004B1172 /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554F1F17DC81004B1172 /* test.mov */; };
-		1BD555831F17DC81004B1172 /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554F1F17DC81004B1172 /* test.mov */; };
-		1BD555841F17DC81004B1172 /* test.mov in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5554F1F17DC81004B1172 /* test.mov */; };
 		1BD555851F17DC81004B1172 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555501F17DC81004B1172 /* ResultTests.swift */; };
 		1BD555861F17DC81004B1172 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555501F17DC81004B1172 /* ResultTests.swift */; };
 		1BD555871F17DC81004B1172 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555501F17DC81004B1172 /* ResultTests.swift */; };
@@ -387,6 +375,7 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
+		1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBundle.swift; sourceTree = "<group>"; };
 		1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
 		1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
 		1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-tvOS.plist"; sourceTree = "<group>"; };
@@ -395,11 +384,6 @@
 		1BD555431F17DC81004B1172 /* ImageDownloaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloaderTests.swift; sourceTree = "<group>"; };
 		1BD555451F17DC81004B1172 /* NetworkReachabilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityTests.swift; sourceTree = "<group>"; };
 		1BD555461F17DC81004B1172 /* NetworkStatusTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatusTests.swift; sourceTree = "<group>"; };
-		1BD555491F17DC81004B1172 /* badssl.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = badssl.der; sourceTree = "<group>"; };
-		1BD5554A1F17DC81004B1172 /* httpbin_cert_valid.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = httpbin_cert_valid.der; sourceTree = "<group>"; };
-		1BD5554C1F17DC81004B1172 /* celltowers.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = celltowers.JPG; sourceTree = "<group>"; };
-		1BD5554D1F17DC81004B1172 /* evil_spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = evil_spaceship.png; sourceTree = "<group>"; };
-		1BD5554F1F17DC81004B1172 /* test.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = test.mov; sourceTree = "<group>"; };
 		1BD555501F17DC81004B1172 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		1BD555521F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEncodedRequestSerializerTests.swift; sourceTree = "<group>"; };
 		1BD555531F17DC81004B1172 /* HTTPRequestSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestSerializerTests.swift; sourceTree = "<group>"; };
@@ -621,6 +605,7 @@
 		1BD5553B1F17DC81004B1172 /* ConduitTests */ = {
 			isa = PBXGroup;
 			children = (
+				1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */,
 				1BD5553F1F17DC81004B1172 /* Networking */,
 				1B279CB11F19558100C0005E /* Auth */,
 				1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */,
@@ -638,7 +623,6 @@
 				1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */,
 				1BD555411F17DC81004B1172 /* Images */,
 				1BD555441F17DC81004B1172 /* Reachability */,
-				1BD555471F17DC81004B1172 /* Resources */,
 				1BD555501F17DC81004B1172 /* ResultTests.swift */,
 				1BD555511F17DC81004B1172 /* Serialization */,
 				1BD5555B1F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift */,
@@ -663,42 +647,6 @@
 				1BD555461F17DC81004B1172 /* NetworkStatusTests.swift */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		1BD555471F17DC81004B1172 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				1BD555481F17DC81004B1172 /* Certs */,
-				1BD5554B1F17DC81004B1172 /* Images */,
-				1BD5554E1F17DC81004B1172 /* Videos */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		1BD555481F17DC81004B1172 /* Certs */ = {
-			isa = PBXGroup;
-			children = (
-				1BD555491F17DC81004B1172 /* badssl.der */,
-				1BD5554A1F17DC81004B1172 /* httpbin_cert_valid.der */,
-			);
-			path = Certs;
-			sourceTree = "<group>";
-		};
-		1BD5554B1F17DC81004B1172 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				1BD5554C1F17DC81004B1172 /* celltowers.JPG */,
-				1BD5554D1F17DC81004B1172 /* evil_spaceship.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		1BD5554E1F17DC81004B1172 /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				1BD5554F1F17DC81004B1172 /* test.mov */,
-			);
-			path = Videos;
 			sourceTree = "<group>";
 		};
 		1BD555511F17DC81004B1172 /* Serialization */ = {
@@ -1101,11 +1049,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555821F17DC81004B1172 /* test.mov in Resources */,
-				1BD5557F1F17DC81004B1172 /* evil_spaceship.png in Resources */,
-				1BD555791F17DC81004B1172 /* httpbin_cert_valid.der in Resources */,
-				1BD5557C1F17DC81004B1172 /* celltowers.JPG in Resources */,
-				1BD555761F17DC81004B1172 /* badssl.der in Resources */,
 				1BD555A91F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1114,11 +1057,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555831F17DC81004B1172 /* test.mov in Resources */,
-				1BD555801F17DC81004B1172 /* evil_spaceship.png in Resources */,
-				1BD5557A1F17DC81004B1172 /* httpbin_cert_valid.der in Resources */,
-				1BD5557D1F17DC81004B1172 /* celltowers.JPG in Resources */,
-				1BD555771F17DC81004B1172 /* badssl.der in Resources */,
 				1BD555AA1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1127,11 +1065,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555841F17DC81004B1172 /* test.mov in Resources */,
-				1BD555811F17DC81004B1172 /* evil_spaceship.png in Resources */,
-				1BD5557B1F17DC81004B1172 /* httpbin_cert_valid.der in Resources */,
-				1BD5557E1F17DC81004B1172 /* celltowers.JPG in Resources */,
-				1BD555781F17DC81004B1172 /* badssl.der in Resources */,
 				1BD555AB1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1399,6 +1332,7 @@
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD11F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A01F17DC81004B1172 /* XMLTests.swift in Sources */,
+				1BC229A41F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
 				1BD5556A1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558B1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555731F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
@@ -1431,6 +1365,7 @@
 				1BD5558F1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD21F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A11F17DC81004B1172 /* XMLTests.swift in Sources */,
+				1BC229A51F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
 				1BD5556B1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558C1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555741F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
@@ -1463,6 +1398,7 @@
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD31F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A21F17DC81004B1172 /* XMLTests.swift in Sources */,
+				1BC229A61F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
 				1BD5558D1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555751F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555961F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,

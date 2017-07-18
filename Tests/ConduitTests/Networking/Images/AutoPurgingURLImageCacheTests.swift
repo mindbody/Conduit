@@ -20,9 +20,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
     }
 
     var mockImage: Image {
-        let path = "Tests/ConduitTests/Networking/Resources/Images/evil_spaceship.png"
-        let file = Bundle(for: type(of: self)).path(forResource: "evil_spaceship", ofType: "png") ?? path
-        guard let image = Image(contentsOfFile: file) else {
+        guard let image = TestBundle.evilSpaceshipImage else {
             XCTFail()
             preconditionFailure()
         }
