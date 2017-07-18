@@ -18,8 +18,8 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     var request: URLRequest!
     var serializer: MultipartFormRequestSerializer!
 
-    var image1: Image!
-    var image2: Image!
+    let image1 = MockResource.cellTowersImage
+    var image2 = MockResource.evilSpaceshipImage
 
     override func setUp() {
         super.setUp()
@@ -29,17 +29,6 @@ class MultipartFormRequestSerializerTests: XCTestCase {
             return
         }
 
-        guard let image1 = TestBundle.cellTowersImage else {
-            XCTFail()
-            return
-        }
-        guard let image2 = TestBundle.evilSpaceshipImage else {
-            XCTFail()
-            return
-        }
-        self.image1 = image1
-        self.image2 = image2
-
         request = URLRequest(url: url)
         request.httpMethod = "POST"
         serializer = MultipartFormRequestSerializer()
@@ -48,9 +37,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
 
-        guard let videoData = TestBundle.sampleVideo else {
-            throw URLError.badURL
-        }
+        let videoData = MockResource.sampleVideo
 
         let formPart1 = FormPart(name: "celltowers", filename: "celltowers.jpg",
                                  content: .image(image1, .jpeg(compressionQuality: 0.5)))
