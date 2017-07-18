@@ -4,7 +4,7 @@ build_configurations = [
 		:run_tests => true,
 		:destinations => [
 			"OS=latest,name=iPhone 7 Plus",
-			"OS=9.3,name=iPhone 6"
+			"OS=9.2,name=iPhone 6"
 		]
 	},
 	{
