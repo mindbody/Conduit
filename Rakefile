@@ -38,7 +38,7 @@ task :build do
 		scheme = config[:scheme]
 		destinations = config[:destinations]
 		destinations.each do |destination|
-			system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{destination}' -configuration Debug build-for-testing | xcpretty") || exit(1)
+			system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{destination}' -configuration Debug build | xcpretty") || exit(1)
 		end
 	end
 end
@@ -52,6 +52,7 @@ task :test do
 		scheme = config[:scheme]
 		destinations = config[:destinations]
 		destinations.each do |destination|
+			system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{destination}' -configuration Debug build-for-testing | xcpretty") || exit(1)
 			system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug -destination '#{destination}' test-without-building | xcpretty") || exit(1)
 		end
 	end
