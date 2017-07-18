@@ -3,8 +3,8 @@ build_configurations = [
 		:scheme => "Conduit-iOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=9.0,name=iPhone 6",
-			"OS=10.0,name=iPhone 7 Plus"
+			"OS=latest,name=iPhone 7 Plus",
+			"OS=9.3,name=iPhone 6"
 		]
 	},
 	{
@@ -18,16 +18,16 @@ build_configurations = [
 		:scheme => "Conduit-tvOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=10.0,name=Apple TV 1080p",
-			"OS=9.0,name=Apple TV 1080p"
+			"OS=latest,name=Apple TV 1080p",
+			"OS=9.2,name=Apple TV 1080p"
 		]
 	},
 	{
 		:scheme => "Conduit-watchOS",
-		:run_tests => true,
+		:run_tests => false,
 		:destinations => [
-			"OS=10.0,name=Apple TV 1080p",
-			"OS=9.0,name=Apple TV 1080p"
+			"OS=latest,name=Apple Watch - 42mm",
+			"OS=2.2,name=Apple Watch - 42mm"
 		]
 	}
 ]
@@ -38,7 +38,7 @@ task :build do
 		scheme = config[:scheme]
 		destinations = config[:destinations]
 		destinations.each do |destination|
-			system("set -o pipefail && xcodebuild -scheme '#{scheme}'  -configuration Debug -destination '#{destination}' build | xcpretty") || exit(1)
+			system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{destination}' -configuration Debug build | xcpretty") || exit(1)
 		end
 	end
 end
@@ -47,7 +47,6 @@ desc "Run all unit tests on all platforms"
 task :test do
 	`./Tests/ConduitTests/start-test-webserver`
 	system("swift test") || exit(1)
-	`./Tests/ConduitTests/stop-test-webserver`
 	build_configurations.each do |config|
 		next if !config[:run_tests]
 		scheme = config[:scheme]
@@ -56,14 +55,16 @@ task :test do
 			system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug -destination '#{destination}' test | xcpretty") || exit(1)
 		end
 	end
+	`./Tests/ConduitTests/stop-test-webserver`
 end
 
 desc "Clean all builds"
 task :clean do
-  system("set -o pipefail && xcodebuild -scheme #{$framework}-iOS -configuration Debug clean | xcpretty") || exit(1)
-  system("set -o pipefail && xcodebuild -scheme #{$framework}-tvOS -configuration Debug clean | xcpretty") || exit(1)
-  system("set -o pipefail && xcodebuild -scheme #{$framework}-macOS -configuration Debug clean | xcpretty") || exit(1)
-  system("set -o pipefail && xcodebuild -scheme #{$framework}-watchOS -configuration Debug clean | xcpretty") || exit(1)
+	`rm -rf .build`
+	build_configurations.each do |config|
+		scheme =  config[:scheme]
+		system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug clean | xcpretty")
+	end
 end
 
 task :default => "test"

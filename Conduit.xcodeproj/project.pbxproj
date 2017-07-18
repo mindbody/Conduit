@@ -884,7 +884,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800551F16820800481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-iOS" */;
 			buildPhases = (
-				1BD8018F1F16D22D00481DC9 /* Start Local Webserver */,
+				1BB5D9781F1E8595009235DC /* Check Webservers Running */,
 				1BD800491F16820700481DC9 /* Sources */,
 				1BD8004A1F16820700481DC9 /* Frameworks */,
 				1BD8004B1F16820700481DC9 /* Resources */,
@@ -903,7 +903,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800641F16821400481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-tvOS" */;
 			buildPhases = (
-				1BD801901F16D23C00481DC9 /* Start Local Webserver */,
+				1BB5D9791F1E875C009235DC /* Check Webservers Running */,
 				1BD800581F16821400481DC9 /* Sources */,
 				1BD800591F16821400481DC9 /* Frameworks */,
 				1BD8005A1F16821400481DC9 /* Resources */,
@@ -922,7 +922,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800731F16821D00481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-macOS" */;
 			buildPhases = (
-				1BD801911F16D24600481DC9 /* Start Local Webserver */,
+				1BB5D97A1F1E877D009235DC /* Check Webservers Running */,
 				1BD800671F16821D00481DC9 /* Sources */,
 				1BD800681F16821D00481DC9 /* Frameworks */,
 				1BD800691F16821D00481DC9 /* Resources */,
@@ -1079,47 +1079,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BD8018F1F16D22D00481DC9 /* Start Local Webserver */ = {
+		1BB5D9781F1E8595009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		1BD801901F16D23C00481DC9 /* Start Local Webserver */ = {
+		1BB5D9791F1E875C009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		1BD801911F16D24600481DC9 /* Start Local Webserver */ = {
+		1BB5D97A1F1E877D009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
 		95B972261F197986008A8C96 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;

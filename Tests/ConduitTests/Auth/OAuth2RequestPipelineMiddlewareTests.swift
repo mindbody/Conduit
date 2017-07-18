@@ -14,7 +14,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     var mockServerEnvironment: OAuth2ServerEnvironment!
     var validServerEnvironment: OAuth2ServerEnvironment!
 
-    var tokenStorage = OAuth2TokenMemoryStore()
+    var tokenStorage: OAuth2TokenStore!
 
     var validClientConfiguration: OAuth2ClientConfiguration!
     var mockClientConfiguration: OAuth2ClientConfiguration!
@@ -28,6 +28,8 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
+
+        tokenStorage = OAuth2TokenMemoryStore()
 
         do {
             mockServerEnvironment = OAuth2ServerEnvironment(scope: "urn:everything", tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))

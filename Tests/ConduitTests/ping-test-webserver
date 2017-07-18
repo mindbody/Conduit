@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+curl --output /dev/null --silent --head "http://localhost:3333" || exit 1
+curl --output /dev/null --silent --head "http://localhost:5000" || exit 1
