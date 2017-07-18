@@ -1,7 +1,5 @@
 language: objective-c
 osx_image: xcode8.3
-cache:
-  bundler: true
 
 install:
   - pip install -r requirements.txt

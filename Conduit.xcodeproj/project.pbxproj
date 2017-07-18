@@ -183,9 +183,6 @@
 		1BD555A61F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
 		1BD555A71F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
 		1BD555A81F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
-		1BD555A91F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
-		1BD555AA1F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
-		1BD555AB1F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
 		1BD800341F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800351F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800361F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1049,7 +1046,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555A91F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,7 +1053,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555AA1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,7 +1060,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555AB1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
