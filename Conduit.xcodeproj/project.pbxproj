@@ -130,9 +130,9 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
-		1BC229A41F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
-		1BC229A51F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
-		1BC229A61F1D6BE4000DAF62 /* TestBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */; };
+		1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
+		1BC229A51F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
+		1BC229A61F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
 		1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
@@ -375,7 +375,7 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
-		1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBundle.swift; sourceTree = "<group>"; };
+		1BC229A31F1D6BE4000DAF62 /* MockResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockResource.swift; sourceTree = "<group>"; };
 		1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
 		1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
 		1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-tvOS.plist"; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 		1BD5553B1F17DC81004B1172 /* ConduitTests */ = {
 			isa = PBXGroup;
 			children = (
-				1BC229A31F1D6BE4000DAF62 /* TestBundle.swift */,
+				1BC229A31F1D6BE4000DAF62 /* MockResource.swift */,
 				1BD5553F1F17DC81004B1172 /* Networking */,
 				1B279CB11F19558100C0005E /* Auth */,
 				1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */,
@@ -1332,7 +1332,7 @@
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD11F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A01F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A41F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
+				1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5556A1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558B1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555731F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
@@ -1365,7 +1365,7 @@
 				1BD5558F1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD21F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A11F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A51F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
+				1BC229A51F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5556B1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558C1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555741F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
@@ -1398,7 +1398,7 @@
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD31F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A21F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A61F1D6BE4000DAF62 /* TestBundle.swift in Sources */,
+				1BC229A61F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5558D1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555751F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555961F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,
