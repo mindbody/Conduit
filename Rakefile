@@ -51,9 +51,12 @@ task :test do
 		scheme = config[:scheme]
 		destinations = config[:destinations]
 		first_destination = destinations[0]
+		if !config[:run_tests]
+			system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{first_destination}' -configuration Debug build | xcpretty") || exit(1)
+			next
+		end
 		# Binaries don't need to be recompiled for per version of each OS
 		system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{first_destination}' -configuration Debug build-for-testing | xcpretty") || exit(1)
-		next if !config[:run_tests]
 		destinations.each do |destination|
 			system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug -destination '#{destination}' test-without-building | xcpretty") || exit(1)
 		end
