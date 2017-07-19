@@ -219,15 +219,12 @@
 		1BD800D11F16CC4900481DC9 /* ConduitLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009D1F16CC4900481DC9 /* ConduitLogger.swift */; };
 		1BD800D21F16CC4900481DC9 /* ConduitLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009D1F16CC4900481DC9 /* ConduitLogger.swift */; };
 		1BD800D31F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
-		1BD800D41F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D51F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D61F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D71F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
-		1BD800D81F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800D91F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800DA1F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800DB1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
-		1BD800DC1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DD1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DE1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DF1F16CC4900481DC9 /* RequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A21F16CC4900481DC9 /* RequestPipelineMiddleware.swift */; };
@@ -1158,7 +1155,6 @@
 				1BD801041F16CC4900481DC9 /* ResponseDeserializer.swift in Sources */,
 				1B279CA61F19524700C0005E /* OAuth2TokenStore.swift in Sources */,
 				1BD801141F16CC4900481DC9 /* XMLRequestSerializer.swift in Sources */,
-				1BD800D81F16CC4900481DC9 /* NetworkReachability.swift in Sources */,
 				1B279C9A1F19524700C0005E /* OAuth2TokenDiskStore.swift in Sources */,
 				1B279C721F19524700C0005E /* OAuth2Token.swift in Sources */,
 				1BD8010C1F16CC4900481DC9 /* XML.swift in Sources */,
@@ -1174,14 +1170,12 @@
 				1BD800E01F16CC4900481DC9 /* RequestPipelineMiddleware.swift in Sources */,
 				1B279C8A1F19524700C0005E /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
 				1BD800C01F16CC4900481DC9 /* AutoPurgingURLImageCache.swift in Sources */,
-				1BD800D41F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
 				1BD801081F16CC4900481DC9 /* SOAPEnvelopeFactory.swift in Sources */,
 				1BD801181F16CC4900481DC9 /* XMLResponseDeserializer.swift in Sources */,
 				1BD800FC1F16CC4900481DC9 /* QueryString.swift in Sources */,
 				1B279C6A1F19524700C0005E /* OAuth2ServerEnvironment.swift in Sources */,
 				1B279C821F19524700C0005E /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B279C921F19524700C0005E /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
-				1BD800DC1F16CC4900481DC9 /* NetworkStatus.swift in Sources */,
 				1B279C621F19524700C0005E /* OAuth2AuthorizationStrategy.swift in Sources */,
 				1BD800EC1F16CC4900481DC9 /* HTTPRequestSerializer.swift in Sources */,
 				1B279C9E1F19524700C0005E /* OAuth2TokenKeychainStore.swift in Sources */,
