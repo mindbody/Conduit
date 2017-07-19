@@ -14,7 +14,7 @@ import UIKit
  Handles authorization redirects via custom URL schemes.
  ### Usage:
  ```
- /// AppDelegate.m
+ /// AppDelegate.swift
 
  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     OAuth2AuthorizationRedirectHandler.default.authorizationURLScheme = "x-my-custom-scheme"
