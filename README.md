@@ -297,6 +297,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 	if OAuth2AuthorizationRedirectHandler.default.handleOpen(url) {
 		return true
 	}
+	...
 }
 ```
 
