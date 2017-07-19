@@ -12,7 +12,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 - [Installation](#installation)
 - [Core Networking](#core-networking)
 	- [URLSessionClient](#urlsessionclient)
-	- [HTTP Requests / Responses](#http-requests-responses)
+	- [HTTP Requests / Responses](#http-requests--responses)
 	- [Middleware](#middleware)
 	- [SSL Pinning](#ssl-pinning)
 - [Auth](#auth)
