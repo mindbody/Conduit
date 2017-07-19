@@ -48,12 +48,12 @@ task :test do
 	`./Tests/ConduitTests/start-test-webserver`
 	system("swift test") || exit(1)
 	build_configurations.each do |config|
-		next if !config[:run_tests]
 		scheme = config[:scheme]
 		destinations = config[:destinations]
 		first_destination = destinations[0]
 		# Binaries don't need to be recompiled for per version of each OS
 		system("set -o pipefail && xcodebuild -scheme '#{scheme}' -destination '#{first_destination}' -configuration Debug build-for-testing | xcpretty") || exit(1)
+		next if !config[:run_tests]
 		destinations.each do |destination|
 			system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug -destination '#{destination}' test-without-building | xcpretty") || exit(1)
 		end
