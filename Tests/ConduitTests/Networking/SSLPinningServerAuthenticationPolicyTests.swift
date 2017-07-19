@@ -19,8 +19,6 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
 
     let fakeProtectionSpace = URLProtectionSpace(host: "localhost", port: 3_333, protocol: "http", realm: nil, authenticationMethod: nil)
     var fakeAuthenticationChallenge: URLAuthenticationChallenge!
-    var validCertData: Data!
-    var invalidCertData: Data!
     var sessionClient: URLSessionClient!
 
     let succeedingEvaluationPredicate: SSLPinningServerAuthenticationPolicy.SSLPinningServerEvaluationPredicate = { _ in return true }
@@ -39,20 +37,12 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
 
         sessionClient = URLSessionClient()
 
-        guard let validCertificateData = TestBundle.validSSLCertificate,
-            let invalidCertificateData = TestBundle.badSSLCertificate else {
+        guard let validCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, MockResource.validSSLCertificate as CFData),
+            let invalidCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, MockResource.badSSLCertificate as CFData) else {
                 XCTFail()
                 return
         }
 
-        guard let validCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, validCertificateData as CFData),
-            let invalidCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, invalidCertificateData as CFData) else {
-                XCTFail()
-                return
-        }
-
-        self.validCertData = validCertificateData
-        self.invalidCertData = invalidCertificateData
         self.validCertificate = validCertificate
         self.invalidCertificate = invalidCertificate
     }

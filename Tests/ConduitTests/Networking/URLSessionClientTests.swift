@@ -148,10 +148,7 @@ class URLSessionClientTests: XCTestCase {
         let serializer = MultipartFormRequestSerializer()
         let client: URLSessionClient = URLSessionClient()
 
-        guard let videoData = TestBundle.sampleVideo else {
-            XCTFail()
-            return
-        }
+        let videoData = MockResource.sampleVideo
 
         let formPart = FormPart(name: "test-video", filename: "test-video.mov", content: .video(videoData, .mov))
         serializer.append(formPart: formPart)
