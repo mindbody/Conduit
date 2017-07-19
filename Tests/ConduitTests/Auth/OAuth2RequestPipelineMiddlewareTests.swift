@@ -232,6 +232,6 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
         sut.prepareForTransport(request: request, completion: { _ in })
 
-        waitForExpectations(timeout: 0.1)
+        waitForExpectations(timeout: 1)
     }
 }

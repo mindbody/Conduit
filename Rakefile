@@ -3,7 +3,7 @@ build_configurations = [
 		:scheme => "Conduit-iOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=9.2,name=iPhone 6S",
+			"OS=9.3,name=iPhone 6S",
 			"OS=latest,name=iPhone 7 Plus"
 		]
 	},
