@@ -267,7 +267,9 @@ tokenGrantStrategy.issueToken { result in
 	Auth.defaultTokenStore.store(token: token, for: Auth.defaultClientConfiguration, with: userBearerAuthorization)
 	// Handle success
 }
+```
 
+```swift
 // This token grant is issued on behalf of a client, so the authorization level is "client"
 let tokenGrantStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: Auth.defaultClientConfiguration)
 tokenGrantStrategy.issueToken { result in
@@ -283,7 +285,7 @@ tokenGrantStrategy.issueToken { result in
 
 For the Authorization Code flow, there exists `OAuth2AuthorizationStrategy`. Currently, implementation only exists for iOS Safari.
 
-```
+```swift
 // AppDelegate.swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 	OAuth2AuthorizationRedirectHandler.default.authorizationURLScheme = "x-my-custom-scheme"
@@ -296,7 +298,9 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 		return true
 	}
 }
+```
 
+```swift
 // SampleAuthManager.swift
 
 guard let authorizationBaseURL = URL(string: "https://api.example.com/oauth2/authorize"),
