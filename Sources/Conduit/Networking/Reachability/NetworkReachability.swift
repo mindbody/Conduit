@@ -137,6 +137,7 @@ public class NetworkReachability {
 
 }
 
+/// Responds to network reachability changes based on a reachability configuration
 public class NetworkReachabilityObserver {
 
     let handler: NetworkReachabilityChangeHandler

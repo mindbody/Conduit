@@ -45,6 +45,7 @@ public final class ImageDownloader {
         public let isFromCache: Bool
     }
 
+    /// A closure that fires upon image fetch success/failure
     public typealias CompletionHandler = (Response) -> Void
 
     private var cache: URLImageCache

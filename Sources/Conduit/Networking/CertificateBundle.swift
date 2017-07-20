@@ -21,11 +21,19 @@ public struct CertificateBundle {
 
     // MARK: Public interface
 
+    /// Creates a new CertificateBundle
+    ///
+    /// - Parameters:
+    ///   - certificatePaths: A list of paths to DER certificates
     public init(certificatePaths: [String]) {
         let certificates = CertificateBundle.certificatesFrom(paths: certificatePaths)
         self.init(certificates: certificates)
     }
 
+    /// Creates a new CertificateBundle
+    ///
+    /// - Parameters:
+    ///   - serverTrust: A server trust, which contains a certificate chain
     public init(serverTrust: SecTrust) {
         let certificateCount = SecTrustGetCertificateCount(serverTrust)
         let certificates = (0..<certificateCount).flatMap { SecTrustGetCertificateAtIndex(serverTrust, $0) }
@@ -33,12 +41,17 @@ public struct CertificateBundle {
         self.init(certificates: certificates)
     }
 
+    /// Creates a new CertificateBundle
+    ///
+    /// - Parameters:
+    ///   - serverTrust: A list of certificates
     public init(certificates: [SecCertificate]) {
         self.certificates = certificates
     }
 
     // MARK: Static functions
 
+    /// Searches the main bundle (if running within a bundled application) for DER certificates
     public static func bundleWithCertificatesWithinMainBundle() -> CertificateBundle {
         return CertificateBundle(certificates: self.certificatesInBundle)
     }

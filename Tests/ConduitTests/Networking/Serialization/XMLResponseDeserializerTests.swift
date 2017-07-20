@@ -36,7 +36,7 @@ class XMLResponseDeserializerTests: XCTestCase {
     }
 
     func testThrowsErrorForEmptyResponse() {
-        XCTAssertThrowsError(try deserializer.deserializedObjectFrom(response: nil, data: validResponseData), "throws .noResponse") { error in
+        XCTAssertThrowsError(try deserializer.deserialize(response: nil, data: validResponseData), "throws .noResponse") { error in
             guard case ResponseDeserializerError.noResponse = error else {
                 XCTFail()
                 return
@@ -45,7 +45,7 @@ class XMLResponseDeserializerTests: XCTestCase {
     }
 
     func testDeserializesToXML() {
-        guard let obj = try? deserializer.deserializedObjectFrom(response: validResponse, data: validResponseData),
+        guard let obj = try? deserializer.deserialize(response: validResponse, data: validResponseData),
             let xml = obj as? XML else {
                 XCTFail()
                 return

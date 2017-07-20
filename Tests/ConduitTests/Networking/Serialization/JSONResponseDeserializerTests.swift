@@ -38,7 +38,7 @@ class JSONResponseDeserializerTests: XCTestCase {
     }
 
     func testThrowsErrorForEmptyResponse() {
-        XCTAssertThrowsError(try deserializer.deserializedObjectFrom(response: nil, data: validResponseData), "throws .noResponse") { error in
+        XCTAssertThrowsError(try deserializer.deserialize(response: nil, data: validResponseData), "throws .noResponse") { error in
             guard case ResponseDeserializerError.noResponse = error else {
                 XCTFail()
                 return
@@ -61,7 +61,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         let invalidResponses = try ["application/xml", "text/html", "text/plain", nil].map { try makeResponse(contentType: $0) }
 
         for invalidResponse in invalidResponses {
-            XCTAssertThrowsError(try deserializer.deserializedObjectFrom(response: invalidResponse, data: validResponseData), "throws .badResponse") { error in
+            XCTAssertThrowsError(try deserializer.deserialize(response: invalidResponse, data: validResponseData), "throws .badResponse") { error in
                 guard case ResponseDeserializerError.badResponse(_) = error else {
                     XCTFail()
                     return
@@ -70,12 +70,12 @@ class JSONResponseDeserializerTests: XCTestCase {
         }
 
         let validResponse = try makeResponse(contentType: "application/json")
-        let deserializedObj = try? deserializer.deserializedObjectFrom(response: validResponse, data: validResponseData)
+        let deserializedObj = try? deserializer.deserialize(response: validResponse, data: validResponseData)
         XCTAssert(deserializedObj != nil)
     }
 
     func testDeserializesToJSON() {
-        guard let obj = try? deserializer.deserializedObjectFrom(response: validResponse, data: validResponseData),
+        guard let obj = try? deserializer.deserialize(response: validResponse, data: validResponseData),
             let json = obj as? [String: String] else {
             XCTFail()
             return
@@ -93,7 +93,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         }
 
         func validateThrowsFor(_ data: Data) {
-            XCTAssertThrowsError(try deserializer.deserializedObjectFrom(response: validResponse, data: data), "throws .deserializationFailure") { error in
+            XCTAssertThrowsError(try deserializer.deserialize(response: validResponse, data: data), "throws .deserializationFailure") { error in
                 guard case ResponseDeserializerError.deserializationFailure = error else {
                     XCTFail()
                     return
@@ -102,7 +102,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         }
 
         func validatePassesFor(_ data: Data) {
-            let json = try? deserializer.deserializedObjectFrom(response: validResponse, data: data)
+            let json = try? deserializer.deserialize(response: validResponse, data: data)
             XCTAssert(json != nil)
         }
 

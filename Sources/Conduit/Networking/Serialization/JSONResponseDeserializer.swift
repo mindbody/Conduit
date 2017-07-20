@@ -15,21 +15,19 @@ public final class JSONResponseDeserializer: HTTPResponseDeserializer {
     public var acceptableStatusCodes: IndexSet = IndexSet(integersIn: 200..<300)
     public var acceptableContentTypes: [String]? = ["application/json"]
 
+    /// Creates a new JSONResponseDeserializer
+    /// - Parameters:
+    ///   - readingOptions: (Optional) A list of reading options for JSON deserialization
     public init(readingOptions: JSONSerialization.ReadingOptions = []) {
         self.readingOptions = readingOptions
     }
 
-    public func deserializedObjectFrom(response: URLResponse?, data: Data?) throws -> Any {
-
+    public func deserialize(data: Data?) throws -> Any {
         guard let data = data, data.isEmpty == false else {
             throw ResponseDeserializerError.noData
         }
 
-        let responseObject = try deserializeObjectFrom(data: data)
-
-        try self.validate(response: response, responseObject: responseObject)
-
-        return responseObject
+        return try deserializeObjectFrom(data: data)
     }
 
     private func deserializeObjectFrom(data: Data) throws -> Any {

@@ -49,7 +49,9 @@ public struct QueryStringFormattingOptions {
         case replacedWithDecodedPlus
     }
 
+    /// The format in which arrays should be serialized within a query string
     public var arrayFormat: ArrayFormat = .indexed
+    /// The format in which dictionaries should be serialized within a query string
     public var dictionaryFormat: DictionaryFormat = .subscripted
 
     /// Includes any reserved delimiter characters that should be URL-encoded

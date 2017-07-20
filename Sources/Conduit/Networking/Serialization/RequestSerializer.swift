@@ -22,7 +22,6 @@ public protocol RequestSerializer {
 }
 
 /// Errors that signify failures within a `RequestSerializer`
-/// - SerializationFailure: The provided parameters could not be serialized
 public enum RequestSerializerError: Error {
     /// Serialization could not be completed due to an unexpected error
     case unknown

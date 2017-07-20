@@ -10,17 +10,32 @@ import Foundation
 
 /// Defines the 'severity' of a log message
 public enum LogLevel: Int {
+    /// Verbose debug logs
     case verbose
+    /// Nonverbose debug logs
     case debug
+    /// Informational progress logs
     case info
+    /// Warning / potential harm logs
     case warn
+    /// Error logs
     case error
+    /// Ignores all logs
     case none
 }
 
+/// Handles incoming log messages from all of Conduit
 public protocol ConduitLoggerType {
+    /// The severity of log messages received
     var level: LogLevel { get set }
-    func log(_ block: @autoclosure () -> Any, level: LogLevel, function: String, filePath: String, line: Int)
+
+    /// Handles an incoming log message
+    /// - Parameters:
+    ///   - block: The log generator
+    ///   - function: The name of the function from which the log originates
+    ///   - filePath: The name of the source file from which the log originates
+    ///   - line: The line number in which the log originates
+    func log(_ block: @autoclosure () -> Any, function: String, filePath: String, line: Int)
 }
 
 extension ConduitLoggerType {
@@ -43,12 +58,18 @@ extension ConduitLoggerType {
     func error(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
         log(block, level: .error, function: function, filePath: filePath, line: line)
     }
+
+    func log(_ block: @autoclosure () -> Any, level: LogLevel, function: String, filePath: String, line: Int) {
+        if self.level.rawValue <= level.rawValue {
+            log(block, function: function, filePath: filePath, line: line)
+        }
+    }
 }
 
 class ConduitLogger: ConduitLoggerType {
     var level: LogLevel = .error
 
-    func log(_ block: @autoclosure () -> Any, level: LogLevel, function: String, filePath: String, line: Int) {
+    func log(_ block: @autoclosure () -> Any, function: String, filePath: String, line: Int) {
         if self.level.rawValue <= level.rawValue {
             print("[Conduit] \(block())")
         }

@@ -23,6 +23,9 @@ public struct OAuth2ClientCredentialsTokenGrantStrategy: OAuth2TokenGrantStrateg
     /// The deserializer used for token grant responses. Defaults to a JSONResponseDeserializer.
     public var responseDeserializer: ResponseDeserializer = JSONResponseDeserializer()
 
+    /// Creates a new OAuth2ClientCredentialsTokenGrantStrategy
+    /// - Parameters:
+    ///   - clientConfiguration: The OAuth2 client configuration to authenticate with
     public init(clientConfiguration: OAuth2ClientConfiguration) {
         self.clientConfiguration = clientConfiguration
     }

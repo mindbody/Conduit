@@ -13,6 +13,9 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
 
     let writingOptions: JSONSerialization.WritingOptions
 
+    /// Creates a new JSONRequestSerializer
+    /// - Parameters:
+    ///   - writingOptions: (Optional) A list of writing options for JSON serialization
     public init(writingOptions: JSONSerialization.WritingOptions = []) {
         self.writingOptions = writingOptions
         super.init()
