@@ -180,7 +180,7 @@ This could be used for logging, proxying, authorization, and implementing strict
 /// Simple middelware example that logs each outbound request
 struct LoggingRequestPipelineMiddleware: RequestPipelineMiddleware {
 	
-	public func prepareForTransport(request: URLRequest: completion: @escaping Result<Void>.Block) {
+	public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
 		print("Outbound request: \(request)")
 	}
 
