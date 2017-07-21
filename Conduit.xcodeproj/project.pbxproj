@@ -130,6 +130,10 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
+		1B72217B1F22B5D200C06016 /* LinuxBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7221791F22B2A900C06016 /* LinuxBridging.swift */; };
+		1B72217C1F22B5D300C06016 /* LinuxBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7221791F22B2A900C06016 /* LinuxBridging.swift */; };
+		1B72217D1F22B5D300C06016 /* LinuxBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7221791F22B2A900C06016 /* LinuxBridging.swift */; };
+		1B72217E1F22B5D400C06016 /* LinuxBridging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B7221791F22B2A900C06016 /* LinuxBridging.swift */; };
 		1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
 		1BC229A51F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
 		1BC229A61F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
@@ -1171,6 +1175,7 @@
 				1B279C661F19524700C0005E /* OAuth2ClientConfiguration.swift in Sources */,
 				1BD800E01F16CC4900481DC9 /* RequestPipelineMiddleware.swift in Sources */,
 				1B279C8A1F19524700C0005E /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
+				1B72217C1F22B5D300C06016 /* LinuxBridging.swift in Sources */,
 				1BD800C01F16CC4900481DC9 /* AutoPurgingURLImageCache.swift in Sources */,
 				1BD801081F16CC4900481DC9 /* SOAPEnvelopeFactory.swift in Sources */,
 				1BD801181F16CC4900481DC9 /* XMLResponseDeserializer.swift in Sources */,
@@ -1244,6 +1249,7 @@
 				1B279C9F1F19524700C0005E /* OAuth2TokenKeychainStore.swift in Sources */,
 				1BD801011F16CC4900481DC9 /* RequestSerializer.swift in Sources */,
 				1B279C5B1F19524700C0005E /* OAuth2AuthorizationRequest.swift in Sources */,
+				1B72217D1F22B5D300C06016 /* LinuxBridging.swift in Sources */,
 				1BD800CD1F16CC4900481DC9 /* Conduit.swift in Sources */,
 				1BD800E91F16CC4900481DC9 /* FormEncodedRequestSerializer.swift in Sources */,
 				1BD801211F16CC4900481DC9 /* SessionTaskProxy.swift in Sources */,
@@ -1305,6 +1311,7 @@
 				1B279CA01F19524700C0005E /* OAuth2TokenKeychainStore.swift in Sources */,
 				1BD801021F16CC4900481DC9 /* RequestSerializer.swift in Sources */,
 				1B279C5C1F19524700C0005E /* OAuth2AuthorizationRequest.swift in Sources */,
+				1B72217E1F22B5D400C06016 /* LinuxBridging.swift in Sources */,
 				1BD800CE1F16CC4900481DC9 /* Conduit.swift in Sources */,
 				1BD800EA1F16CC4900481DC9 /* FormEncodedRequestSerializer.swift in Sources */,
 				1BD801221F16CC4900481DC9 /* SessionTaskProxy.swift in Sources */,
@@ -1434,6 +1441,7 @@
 				1B279CA91F19524700C0005E /* KeychainOptions.swift in Sources */,
 				1BD801031F16CC4900481DC9 /* ResponseDeserializer.swift in Sources */,
 				1B279CA51F19524700C0005E /* OAuth2TokenStore.swift in Sources */,
+				1B72217B1F22B5D200C06016 /* LinuxBridging.swift in Sources */,
 				1BD801131F16CC4900481DC9 /* XMLRequestSerializer.swift in Sources */,
 				1BD800D71F16CC4900481DC9 /* NetworkReachability.swift in Sources */,
 				1B279C991F19524700C0005E /* OAuth2TokenDiskStore.swift in Sources */,

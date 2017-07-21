@@ -148,7 +148,12 @@ public struct URLSessionClient: URLSessionClientType {
                 taskUploadProgresses[task.taskIdentifier] = nil
             }
 
-            completionHandler?(taskResponse.data, taskResponse.response, taskResponse.error as NSError?)
+            var nsError: NSError?
+            if let error = taskResponse.error {
+                nsError = makeNSError(error)
+            }
+
+            completionHandler?(taskResponse.data, taskResponse.response, nsError)
         }
 
         func registerCompletionHandler(taskIdentifier: Int,
@@ -287,7 +292,7 @@ public struct URLSessionClient: URLSessionClientType {
             switch middlewareProcessingResult {
             case .error(let error):
                 self.urlSession.delegateQueue.addOperation {
-                    completion(nil, nil, error as NSError)
+                    completion(nil, nil, makeNSError(error))
                 }
                 return
             case .value(let request):
@@ -369,7 +374,12 @@ public struct URLSessionClient: URLSessionClientType {
             // If for some reason the client isn't retained elsewhere, it will at least stay alive
             // while active tasks are running
             self.activeTaskQueueDispatchGroup.leave()
-            completion(data, response, error as NSError?)
+            var nsError: NSError?
+            if let error = error {
+                nsError = makeNSError(error)
+            }
+
+            completion(data, response, nsError)
         }
 
         return dataTask
