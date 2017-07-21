@@ -52,8 +52,9 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
 #if !os(tvOS)
-    func testFileStorageOperations() {
-        let storageURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("oauth-token")
+    func testFileStorageOperations() throws {
+        let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
+        let storageURL = URL(fileURLWithPath: storagePath)
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         verifyTokenStorageOperations()
     }

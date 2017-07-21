@@ -56,10 +56,10 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         case .url(let storageURL):
             if let tokenData = tokenData {
                 do {
-                    try tokenData.write(to: storageURL, options: [])
+                    try tokenData.write(to: storageURL, options: [.atomic])
                     return true
                 }
-                catch _ {
+                catch {
                     return false
                 }
             }
@@ -68,7 +68,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
                     try FileManager.default.removeItem(at: storageURL)
                     return true
                 }
-                catch _ {
+                catch {
                     return false
                 }
             }
