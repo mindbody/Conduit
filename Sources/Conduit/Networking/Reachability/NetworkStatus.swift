@@ -17,11 +17,15 @@ import SystemConfiguration
 /// - reachableViaWWAN: The network is reachable through WWAN (LTE/4G/3G)
 /// - unreachable: The network is not reachable
 public enum NetworkStatus {
+    /// The network is reachable through WLAN (WiFi/ethernet)
     case reachableViaWLAN
+    /// The network is reachable with user intervention needed
     case reachableWithRequiredIntervention
 #if os(iOS)
+    /// The network is reachable through WWAN (LTE/4G/3G)
     case reachableViaWWAN
 #endif
+    /// The network is not reachable
     case unreachable
 
     init(systemReachabilityFlags: SCNetworkReachabilityFlags) {

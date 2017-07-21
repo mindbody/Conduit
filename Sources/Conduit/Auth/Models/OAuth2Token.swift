@@ -91,6 +91,10 @@ public class BasicOAuth2Token: NSObject, OAuth2Token {
         return "Basic \(self.base64EncodedUsernameAndPassword())"
     }
 
+    /// Creates a new BasicOauth2Token
+    /// - Parameters:
+    ///   - username: The plaintext username
+    ///   - password: The plaintext password
     public init(username: String, password: String) {
         self.username = username
         self.password = password

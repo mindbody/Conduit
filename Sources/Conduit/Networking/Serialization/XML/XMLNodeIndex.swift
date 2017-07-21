@@ -20,6 +20,8 @@ public struct XMLNodeIndex: Collection {
     }
 
     public typealias Iterator = NodeIterator
+
+    /// The indexed nodes
     public let nodes: [XMLNode]
 
     public func makeIterator() -> XMLNodeIndex.NodeIterator {
@@ -41,6 +43,7 @@ public struct XMLNodeIndex: Collection {
         return self.nodes.index(after: index)
     }
 
+    /// An iterator that supplies XMLNodes
     public struct NodeIterator: IteratorProtocol {
         fileprivate var nodeStack: [XMLNode]
 

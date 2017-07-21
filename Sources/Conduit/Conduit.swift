@@ -18,6 +18,7 @@ internal var logger: ConduitLoggerType = {
 /// A static configuration object for Conduit
 public final class ConduitConfig {
 
+    /// Handles logging operations across all of Conduit
     static public var logger: ConduitLoggerType = ConduitLogger()
 
 }

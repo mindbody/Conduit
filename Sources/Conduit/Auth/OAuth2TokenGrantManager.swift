@@ -22,9 +22,7 @@ struct OAuth2TokenGrantManager {
                 return
             }
             do {
-                guard let deserializedResponse = try responseDeserializer.deserializedObjectFrom(response: response,
-                                                                                                 data: data)
-                    as? [String:Any] else {
+                guard let deserializedResponse = try responseDeserializer.deserialize(response: response, data: data) as? [String:Any] else {
                         completion(.error(OAuth2Error.noResponse))
                         return
                 }

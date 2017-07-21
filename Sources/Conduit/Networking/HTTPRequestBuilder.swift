@@ -15,15 +15,25 @@ import Foundation
 /// in a GET request).
 public final class HTTPRequestBuilder {
 
+    /// An HTTP request method
     public enum Method: String {
+        /// Establishes an in initial HTTP tunnel
         case CONNECT
+        /// Deletes a resource
         case DELETE
+        /// Fetches a resource
         case GET
+        /// Similar to GET, but without response data
         case HEAD
+        /// Requests communication options / server capabilities
         case OPTIONS
-        case POST
-        case PUT
+        /// Updates an existing resource
         case PATCH
+        /// Submits a new resource
+        case POST
+        /// Adds or replaces an existing resource
+        case PUT
+        /// Initiates a simple server loopback
         case TRACE
     }
 
@@ -66,6 +76,9 @@ public final class HTTPRequestBuilder {
 
     // MARK: Initialization
 
+    /// Creates a new HTTPRequestBuilder
+    /// - Parameters:
+    ///   - url: The base URL at which the request is targeted
     public init(url: URL) {
         self.url = url
     }

@@ -10,13 +10,20 @@ import Foundation
 
 /// A structure that deserializes a provided NSURLResponse and response data into a loose transport object
 public protocol ResponseDeserializer {
-    /// Deserializes an NSURLResponse and response data into a loose transport object
+    /// Deserializes a URLResponse and response data into a loose transport object
     /// - Parameters:
     ///     - response: The URL response to deserialize and validate against
     ///     - data: The response data
     /// - Throws: A `ResponseDeserializerError` if deserialization is not possible
     /// - Returns: A non-domain specific transport object, such as a Dictionary or an Array
-    func deserializedObjectFrom(response: URLResponse?, data: Data?) throws -> Any
+    func deserialize(response: URLResponse?, data: Data?) throws -> Any
+
+    /// Deserializes unvalidated response data into a loose transport object
+    /// - Parameters:
+    ///     - data: The response data
+    /// - Throws: A `ResponseDeserializerError` if deserialization is not possible
+    /// - Returns: A non-domain specific transport object, such as a Dictionary or an Array
+    func deserialize(data: Data?) throws -> Any
 }
 
 /// A ResponseDeserializer that interacts with responses from an HTTP server
@@ -30,20 +37,30 @@ public protocol HTTPResponseDeserializer: ResponseDeserializer {
 }
 
 /// Errors that signify failures within `ResponseDeserializer`
-/// - Unknown: Deserialization could not be completed due to an unexpected error
-/// - NoResponse: No response was provided, or the response was empty
-/// - BadResponse: The response is not valid or indicates a failure
-/// - NoData: No response data was provided, or the data is empty
-/// - SerializationFailure: The response data could not be deserialized
+/// - unknown: Deserialization could not be completed due to an unexpected error
+/// - noResponse: No response was provided, or the response was empty
+/// - badResponse: The response is not valid or indicates a failure
+/// - noData: No response data was provided, or the data is empty
+/// - serializationFailure: The response data could not be deserialized
 public enum ResponseDeserializerError: Error {
+    /// Deserialization could not be completed due to an unexpected error
     case unknown
+    /// No response was provided, or the response was empty
     case noResponse
+    /// The response is not valid or indicates a failure
     case badResponse(responseObject: Any?)
+    /// No response data was provided, or the data is empty
     case noData
+    /// The response data could not be deserialized
     case deserializationFailure
 }
 
 public extension HTTPResponseDeserializer {
+
+    /// Validates the response against acceptable content types and status codes
+    /// - Parameters:
+    ///   - response: The URLResponse to validate against
+    ///   - responseObject: The deserialized response data
     public func validate(response: URLResponse?, responseObject: Any?) throws {
         guard let response = response as? HTTPURLResponse else {
             throw ResponseDeserializerError.noResponse
@@ -58,5 +75,14 @@ public extension HTTPResponseDeserializer {
                 throw ResponseDeserializerError.badResponse(responseObject: responseObject)
             }
         }
+    }
+
+    public func deserialize(response: URLResponse?, data: Data?) throws -> Any {
+
+        let responseObject = try deserialize(data: data)
+
+        try self.validate(response: response, responseObject: responseObject)
+
+        return responseObject
     }
 }

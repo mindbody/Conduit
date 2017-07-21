@@ -78,7 +78,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
 
         client.begin(request: modifiedRequest) { (data, response, _) in
             do {
-                let json = try deserializer.deserializedObjectFrom(response: response, data: data) as? [String: Any]
+                let json = try deserializer.deserialize(response: response, data: data) as? [String: Any]
                 let files = json?["files"] as? [String: String]
                 let forms = json?["form"] as? [String: String]
 
