@@ -1,6 +1,6 @@
 # Conduit
 
-[![Build Status](https://travis-ci.com/mindbody/Conduit.svg?token=pU7bnLhdpXaHcypnAMqR&branch=master)](https://travis-ci.com/Mindbody/Conduit)
+[![Build Status](https://travis-ci.com/mindbody/Conduit.svg?token=pU7bnLhdpXaHcypnAMqR&branch=master)](https://travis-ci.com/mindbody/Conduit)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Conduit is a session-based Swift HTTP networking and auth library.
@@ -180,7 +180,7 @@ This could be used for logging, proxying, authorization, and implementing strict
 /// Simple middelware example that logs each outbound request
 struct LoggingRequestPipelineMiddleware: RequestPipelineMiddleware {
 	
-	public func prepareForTransport(request: URLRequest: completion: @escaping Result<Void>.Block) {
+	public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
 		print("Outbound request: \(request)")
 	}
 
