@@ -69,9 +69,11 @@ public class BearerOAuth2Token: NSObject, OAuth2Token {
     }
 
     public override var debugDescription: String {
-        return String(format: "<BearerOAuth2Token:%p accessToken:\(self.accessToken) " +
-            "refreshToken:\(self.refreshToken ?? "nil") " +
-            "expiration:\(self.expiration)>", self)
+        return "{\n" +
+            "  access_token: \(accessToken),\n" +
+            "  refresh_token: \(refreshToken ?? "nil")\n" +
+            "  expiration: \(expiration)\n" +
+        "}"
     }
 }
 
@@ -116,7 +118,10 @@ public class BasicOAuth2Token: NSObject, OAuth2Token {
     }
 
     public override var debugDescription: String {
-        return String(format: "<BasicOAuth2Token:%p username:\(self.username) password:\(self.password)>", self)
+        return "{\n" +
+        "  username: \(username),\n" +
+        "  password: \(password)\n" +
+        "}"
     }
 }
 
