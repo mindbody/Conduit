@@ -183,9 +183,6 @@
 		1BD555A61F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
 		1BD555A71F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
 		1BD555A81F17DC81004B1172 /* URLSessionClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */; };
-		1BD555A91F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
-		1BD555AA1F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
-		1BD555AB1F17DC81004B1172 /* start-test-webserver in Resources */ = {isa = PBXBuildFile; fileRef = 1BD5555D1F17DC81004B1172 /* start-test-webserver */; };
 		1BD800341F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800351F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BD800361F167EEE00481DC9 /* Conduit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BD8002F1F167EEE00481DC9 /* Conduit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -222,15 +219,12 @@
 		1BD800D11F16CC4900481DC9 /* ConduitLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009D1F16CC4900481DC9 /* ConduitLogger.swift */; };
 		1BD800D21F16CC4900481DC9 /* ConduitLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009D1F16CC4900481DC9 /* ConduitLogger.swift */; };
 		1BD800D31F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
-		1BD800D41F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D51F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D61F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8009F1F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1BD800D71F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
-		1BD800D81F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800D91F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800DA1F16CC4900481DC9 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A01F16CC4900481DC9 /* NetworkReachability.swift */; };
 		1BD800DB1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
-		1BD800DC1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DD1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DE1F16CC4900481DC9 /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A11F16CC4900481DC9 /* NetworkStatus.swift */; };
 		1BD800DF1F16CC4900481DC9 /* RequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD800A21F16CC4900481DC9 /* RequestPipelineMiddleware.swift */; };
@@ -884,7 +878,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800551F16820800481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-iOS" */;
 			buildPhases = (
-				1BD8018F1F16D22D00481DC9 /* Start Local Webserver */,
+				1BB5D9781F1E8595009235DC /* Check Webservers Running */,
 				1BD800491F16820700481DC9 /* Sources */,
 				1BD8004A1F16820700481DC9 /* Frameworks */,
 				1BD8004B1F16820700481DC9 /* Resources */,
@@ -903,7 +897,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800641F16821400481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-tvOS" */;
 			buildPhases = (
-				1BD801901F16D23C00481DC9 /* Start Local Webserver */,
+				1BB5D9791F1E875C009235DC /* Check Webservers Running */,
 				1BD800581F16821400481DC9 /* Sources */,
 				1BD800591F16821400481DC9 /* Frameworks */,
 				1BD8005A1F16821400481DC9 /* Resources */,
@@ -922,7 +916,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800731F16821D00481DC9 /* Build configuration list for PBXNativeTarget "ConduitTests-macOS" */;
 			buildPhases = (
-				1BD801911F16D24600481DC9 /* Start Local Webserver */,
+				1BB5D97A1F1E877D009235DC /* Check Webservers Running */,
 				1BD800671F16821D00481DC9 /* Sources */,
 				1BD800681F16821D00481DC9 /* Frameworks */,
 				1BD800691F16821D00481DC9 /* Resources */,
@@ -1049,7 +1043,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555A91F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,7 +1050,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555AA1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,7 +1057,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BD555AB1F17DC81004B1172 /* start-test-webserver in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,47 +1070,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BD8018F1F16D22D00481DC9 /* Start Local Webserver */ = {
+		1BB5D9781F1E8595009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		1BD801901F16D23C00481DC9 /* Start Local Webserver */ = {
+		1BB5D9791F1E875C009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		1BD801911F16D24600481DC9 /* Start Local Webserver */ = {
+		1BB5D97A1F1E877D009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Start Local Webserver";
+			name = "Check Webservers Running";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/start-test-webserver\"";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
 		95B972261F197986008A8C96 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1164,7 +1155,6 @@
 				1BD801041F16CC4900481DC9 /* ResponseDeserializer.swift in Sources */,
 				1B279CA61F19524700C0005E /* OAuth2TokenStore.swift in Sources */,
 				1BD801141F16CC4900481DC9 /* XMLRequestSerializer.swift in Sources */,
-				1BD800D81F16CC4900481DC9 /* NetworkReachability.swift in Sources */,
 				1B279C9A1F19524700C0005E /* OAuth2TokenDiskStore.swift in Sources */,
 				1B279C721F19524700C0005E /* OAuth2Token.swift in Sources */,
 				1BD8010C1F16CC4900481DC9 /* XML.swift in Sources */,
@@ -1180,14 +1170,12 @@
 				1BD800E01F16CC4900481DC9 /* RequestPipelineMiddleware.swift in Sources */,
 				1B279C8A1F19524700C0005E /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
 				1BD800C01F16CC4900481DC9 /* AutoPurgingURLImageCache.swift in Sources */,
-				1BD800D41F16CC4900481DC9 /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
 				1BD801081F16CC4900481DC9 /* SOAPEnvelopeFactory.swift in Sources */,
 				1BD801181F16CC4900481DC9 /* XMLResponseDeserializer.swift in Sources */,
 				1BD800FC1F16CC4900481DC9 /* QueryString.swift in Sources */,
 				1B279C6A1F19524700C0005E /* OAuth2ServerEnvironment.swift in Sources */,
 				1B279C821F19524700C0005E /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B279C921F19524700C0005E /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
-				1BD800DC1F16CC4900481DC9 /* NetworkStatus.swift in Sources */,
 				1B279C621F19524700C0005E /* OAuth2AuthorizationStrategy.swift in Sources */,
 				1BD800EC1F16CC4900481DC9 /* HTTPRequestSerializer.swift in Sources */,
 				1B279C9E1F19524700C0005E /* OAuth2TokenKeychainStore.swift in Sources */,

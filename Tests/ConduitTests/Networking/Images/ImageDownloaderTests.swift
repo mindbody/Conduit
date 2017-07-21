@@ -106,8 +106,10 @@ class ImageDownloaderTests: XCTestCase {
         let imageDownloadedExpectation = expectation(description: "image downloaded")
         weak var weakImageDownloader = sut
         sut.downloadImage(for: imageRequest) { _ in
-            XCTAssert(weakImageDownloader == nil)
-            imageDownloadedExpectation.fulfill()
+            DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
+                XCTAssert(weakImageDownloader == nil)
+                imageDownloadedExpectation.fulfill()
+            }
         }
         sut = nil
         XCTAssert(weakImageDownloader != nil)
