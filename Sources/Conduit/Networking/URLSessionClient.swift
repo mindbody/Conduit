@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Dispatch
 
 public typealias SessionTaskCompletion = (Data?, URLResponse?, NSError?) -> Void
 public typealias SessionTaskProgressHandler = (Progress) -> Void

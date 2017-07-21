@@ -11,6 +11,7 @@
 #elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
+import Dispatch
 
 /// A concrete URLImageCache that automatically purges objects
 /// when memory constraints are met.

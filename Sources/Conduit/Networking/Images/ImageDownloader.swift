@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 3/7/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -17,6 +18,8 @@
 #elseif os(iOS) || os(tvOS) || os(watchOS)
     internal typealias Image = UIImage
 #endif
+
+import Dispatch
 
 /// Represents an error that occured within an ImageDownloader
 /// - invalidRequest: An invalid request was supplied, most likely with an empty URL
@@ -143,3 +146,5 @@ public final class ImageDownloader {
     }
 
 }
+
+#endif
