@@ -1,6 +1,6 @@
 # Conduit
 
-[![Build Status](https://travis-ci.com/mindbody/Conduit.svg?token=pU7bnLhdpXaHcypnAMqR&branch=master)](https://travis-ci.com/Mindbody/Conduit)
+[![Build Status](https://travis-ci.com/mindbody/Conduit.svg?token=pU7bnLhdpXaHcypnAMqR&branch=master)](https://travis-ci.com/mindbody/Conduit)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Conduit is a session-based Swift HTTP networking and auth library.
