@@ -9,6 +9,8 @@
 import Foundation
 
 /// Defines the 'severity' of a log message
+/// - Note: A higher log level verbosity will capture all logs within lower
+/// levels, i.e. LogLevel.info will capture .info, .warn, and .error logs
 public enum LogLevel: Int {
     /// Verbose debug logs
     case verbose
@@ -21,7 +23,7 @@ public enum LogLevel: Int {
     /// Error logs
     case error
     /// Ignores all logs
-    case none
+    case noOutput
 }
 
 /// Handles incoming log messages from all of Conduit

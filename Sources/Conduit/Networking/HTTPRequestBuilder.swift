@@ -27,12 +27,12 @@ public final class HTTPRequestBuilder {
         case HEAD
         /// Requests communication options / server capabilities
         case OPTIONS
+        /// Updates an existing resource
+        case PATCH
         /// Submits a new resource
         case POST
         /// Adds or replaces an existing resource
         case PUT
-        /// Updates an existing resource
-        case PATCH
         /// Initiates a simple server loopback
         case TRACE
     }
