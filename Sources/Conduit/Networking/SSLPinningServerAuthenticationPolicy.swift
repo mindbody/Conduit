@@ -6,6 +6,8 @@
 //  Copyright © 2016 MINDBODY. All rights reserved.
 //
 
+#if !os(Linux)
+
 import Foundation
 
 /// A granularity-level of SSL pinning to be performed
@@ -118,3 +120,5 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
     }
 
 }
+
+#endif

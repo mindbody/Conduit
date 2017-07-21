@@ -6,6 +6,8 @@
 //  Copyright © 2016 MINDBODY. All rights reserved.
 //
 
+#if !os(Linux)
+
 import Foundation
 import Security
 
@@ -89,5 +91,6 @@ public struct CertificateBundle {
             return nil
         }
     }
-
 }
+
+#endif
