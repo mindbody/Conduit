@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 7/11/16.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 import Foundation
 
@@ -65,3 +66,5 @@ public struct OAuth2TokenKeychainStore: OAuth2TokenStore {
         ].joined(separator: ".")
     }
 }
+
+#endif
