@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 3/7/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -63,3 +64,5 @@ public protocol URLImageCache {
     mutating func purge()
 
 }
+
+#endif

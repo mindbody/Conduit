@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 3/8/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -149,3 +150,5 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     #endif
 
 }
+
+#endif
