@@ -135,18 +135,10 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     private func makeRequestByApplyingAuthorizationHeader(to request: URLRequest,
                                                           with token: OAuth2Token,
                                                           completion: Result<URLRequest>.Block) {
-        guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
-            completion(.error(OAuth2Error.internalFailure))
-            return
-        }
+        var request = request
 
-        mutableRequest.setValue(token.authorizationHeaderValue, forHTTPHeaderField: "Authorization")
-        guard let request = mutableRequest.copy() as? URLRequest else {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
-            completion(.error(OAuth2Error.internalFailure))
-            return
-        }
+        request.setValue(token.authorizationHeaderValue, forHTTPHeaderField: "Authorization")
+
         completion(.value(request))
     }
 

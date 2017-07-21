@@ -49,6 +49,7 @@ open class HTTPRequestSerializer: RequestSerializer {
         var operatingSystemVersion: String?
         var deviceScale: String? = nil
 
+        #if !os(Linux)
         if let executableName = Bundle.main.object(forInfoDictionaryKey: kCFBundleExecutableKey as String) as? String {
             product = executableName
         }
@@ -63,6 +64,7 @@ open class HTTPRequestSerializer: RequestSerializer {
             let versionKey = kCFBundleVersionKey as String
             productVersion = Bundle.main.object(forInfoDictionaryKey: versionKey) as? String ?? "Unknown"
         }
+        #endif
 
         #if os(iOS)
             platform = "iOS"

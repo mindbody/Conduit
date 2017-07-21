@@ -64,6 +64,7 @@ public struct URLSessionClient: URLSessionClientType {
         private var taskResponses: [Int:TaskResponse] = [:]
         private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
 
+        #if !os(Linux)
         fileprivate func urlSession(_ session: URLSession,
                                     didReceive challenge: URLAuthenticationChallenge,
                                     completionHandler: @escaping SessionCompletionHandler) {
@@ -79,6 +80,7 @@ public struct URLSessionClient: URLSessionClientType {
             }
             completionHandler(.useCredential, URLCredential(trust: serverTrust))
         }
+        #endif
 
         /// Reports upload progress
         func urlSession(_ session: URLSession,
@@ -88,7 +90,7 @@ public struct URLSessionClient: URLSessionClientType {
                         totalBytesExpectedToSend: Int64) {
             if let progressHandler = taskUploadProgressHandlers[task.taskIdentifier] {
                 let currentProgress = taskUploadProgresses[task.taskIdentifier]
-                let newProgress = currentProgress ?? Progress()
+                let newProgress = currentProgress ?? Progress(parent: nil)
                 if currentProgress == nil {
                     serialQueue.sync {
                         taskUploadProgresses[task.taskIdentifier] = newProgress
