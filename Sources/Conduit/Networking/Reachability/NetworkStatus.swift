@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 12/14/16.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 import Foundation
 import SystemConfiguration
@@ -84,3 +85,5 @@ public enum NetworkStatus {
 #endif
     }
 }
+
+#endif

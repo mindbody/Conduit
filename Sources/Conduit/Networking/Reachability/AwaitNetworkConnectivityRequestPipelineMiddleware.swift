@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 4/24/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 import Foundation
 
@@ -52,3 +53,5 @@ public struct AwaitNetworkConnectivityRequestPipelineMiddleware: RequestPipeline
     }
 
 }
+
+#endif
