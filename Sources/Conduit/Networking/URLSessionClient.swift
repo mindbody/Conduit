@@ -111,7 +111,7 @@ public struct URLSessionClient: URLSessionClientType {
             if let expectedContentLength = taskResponse.expectedContentLength,
                 let progressHandler = taskDownloadProgressHandlers[dataTask.taskIdentifier] {
                 let currentProgress = taskDownloadProgresses[dataTask.taskIdentifier]
-                let newProgress = currentProgress ?? Progress()
+                let newProgress = currentProgress ?? Progress(parent: nil)
                 if currentProgress == nil {
                     serialQueue.sync {
                         taskDownloadProgresses[dataTask.taskIdentifier] = newProgress

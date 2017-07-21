@@ -42,6 +42,9 @@ open class HTTPRequestSerializer: RequestSerializer {
 
     // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
     static let userAgentHeader: HTTPHeader? = {
+        #if os(Linux) //TODO
+        return nil
+        #else
         let product: String
         let productVersion: String
         let platform: String?
@@ -49,7 +52,6 @@ open class HTTPRequestSerializer: RequestSerializer {
         var operatingSystemVersion: String?
         var deviceScale: String? = nil
 
-        #if !os(Linux)
         if let executableName = Bundle.main.object(forInfoDictionaryKey: kCFBundleExecutableKey as String) as? String {
             product = executableName
         }
@@ -64,7 +66,6 @@ open class HTTPRequestSerializer: RequestSerializer {
             let versionKey = kCFBundleVersionKey as String
             productVersion = Bundle.main.object(forInfoDictionaryKey: versionKey) as? String ?? "Unknown"
         }
-        #endif
 
         #if os(iOS)
             platform = "iOS"
@@ -105,6 +106,7 @@ open class HTTPRequestSerializer: RequestSerializer {
         }
 
         return nil
+        #endif
     }()
 
     /// The subset of HTTP verbs that will never have a request body.

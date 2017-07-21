@@ -369,6 +369,7 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
+		1B7221791F22B2A900C06016 /* LinuxBridging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxBridging.swift; sourceTree = "<group>"; };
 		1BC229A31F1D6BE4000DAF62 /* MockResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockResource.swift; sourceTree = "<group>"; };
 		1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
 		1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
@@ -754,6 +755,7 @@
 				1B279C271F19524700C0005E /* Auth */,
 				1BD8009C1F16CC4900481DC9 /* Conduit.swift */,
 				1BD8009D1F16CC4900481DC9 /* ConduitLogger.swift */,
+				1B7221791F22B2A900C06016 /* LinuxBridging.swift */,
 			);
 			path = Conduit;
 			sourceTree = "<group>";
