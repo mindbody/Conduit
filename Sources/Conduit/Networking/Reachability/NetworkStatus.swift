@@ -6,6 +6,8 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
+#if !os(watchOS)
+
 import Foundation
 import SystemConfiguration
 
@@ -84,3 +86,5 @@ public enum NetworkStatus {
 #endif
     }
 }
+
+#endif
