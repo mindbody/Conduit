@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 7/10/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 import XCTest
 @testable import Conduit
@@ -59,3 +60,5 @@ class NetworkStatusTests: XCTestCase {
     }
 
 }
+
+#endif

@@ -41,10 +41,12 @@ class OAuth2TokenStorageTests: XCTestCase {
         XCTAssert(sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) == nil)
     }
 
+#if !os(Linux)
     func testKeychainStorageOperations() {
         sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
         verifyTokenStorageOperations()
     }
+#endif
 
     func testUserDefaultsStorageOperations() {
         sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
