@@ -38,6 +38,10 @@ public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
             mutableRequest.httpBody = formEncodedParams?.data(using: String.Encoding.utf8)
         }
 
+        if mutableRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+            mutableRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        }
+
         return mutableRequest
     }
 
