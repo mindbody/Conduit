@@ -215,8 +215,8 @@ public struct FormPart {
         }
     }
     #else
-    private func dataFrom(image: Data, type: ImageFormat) -> Data? {
-        return image
+    private func dataFrom(image: Image, type: ImageFormat) -> Data? {
+        return image.data
     }
     #endif
 
@@ -262,7 +262,7 @@ public struct FormPart {
         /// An image with an associated compression format
         case image(UIImage, ImageFormat)
         #else
-        case image(Data, ImageFormat)
+        case image(Image, ImageFormat)
         #endif
 
         /// A video with an associated media container format
