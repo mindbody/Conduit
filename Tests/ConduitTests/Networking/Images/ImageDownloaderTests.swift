@@ -6,6 +6,7 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 import XCTest
+import Dispatch
 @testable import Conduit
 
 fileprivate class MonitoringURLSessionClient: URLSessionClientType {
