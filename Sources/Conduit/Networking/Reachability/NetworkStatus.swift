@@ -7,6 +7,8 @@
 //
 #if !os(Linux)
 
+#if !os(watchOS)
+
 import Foundation
 import SystemConfiguration
 

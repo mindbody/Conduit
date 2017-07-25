@@ -5,8 +5,7 @@
 //  Created by John Hammerlund on 4/24/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
-
+#if !os(Linux) && !os(watchOS)
 import Foundation
 
 /// A middleware component for use within a URLSessionClient pipeline that halts pipeline
