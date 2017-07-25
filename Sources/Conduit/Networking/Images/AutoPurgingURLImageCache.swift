@@ -74,7 +74,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         var image: ImageType?
         let cache = self.cache
         serialQueue.sync {
-            image = cache.object(forKey: identifier as NSString)
+            image = cache.object(forKey: NSString(string: identifier))
         }
         return image
     }
@@ -127,7 +127,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         let cache = self.cache
         let totalBytes = numberOfBytes(in: image)
         serialQueue.sync {
-            cache.setObject(image, forKey: identifier as NSString, cost: totalBytes)
+            cache.setObject(image, forKey: NSString(string: identifier), cost: totalBytes)
         }
     }
 
@@ -141,7 +141,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
 
         let cache = self.cache
         serialQueue.sync {
-            cache.removeObject(forKey: identifier as NSString)
+            cache.removeObject(forKey: NSString(string: identifier))
         }
     }
 
