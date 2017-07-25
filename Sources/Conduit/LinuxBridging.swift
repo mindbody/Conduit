@@ -20,6 +20,6 @@ func makeNSError(_ error: Error) -> NSError {
     #if os(Linux)
     return NSError(domain: error._domain, code: error._code)
     #else
-    return error as NSError?
+    return error as NSError
     #endif
 }
