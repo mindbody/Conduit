@@ -14,7 +14,7 @@ func arc4random_uniform(_ upperBound: UInt32) -> UInt32 {
     return UInt32(random())
 }
 
-public struct Image {
+public class Image {
 
     public let data: Data
 
