@@ -210,24 +210,28 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     }
 
     func testNotifiesMigratorPreAndPostFetchTokenHooksForRefreshes() throws {
+        let clientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "one-use-client", clientSecret: "hunter2", environment: mockServerEnvironment)
+
         let randomToken = BearerOAuth2Token(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date())
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
-        tokenStorage.store(token: randomToken, for: mockClientConfiguration, with: authorization)
+        tokenStorage.store(token: randomToken, for: clientConfiguration, with: authorization)
 
         let request = try makeDummyRequest()
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: mockClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: clientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
 
         let calledPreFetchHookExpectation = expectation(description: "called pre-fetch hook")
         let calledPostFetchHookExpectation = expectation(description: "called pre-fetch hook")
-        calledPreFetchHookExpectation.assertForOverFulfill = false
-        calledPostFetchHookExpectation.assertForOverFulfill = false
 
-        Auth.Migrator.registerPreFetchHook { _ in
-            calledPreFetchHookExpectation.fulfill()
+        Auth.Migrator.registerPreFetchHook { (client, _) in
+            if client.clientIdentifier == clientConfiguration.clientIdentifier {
+                calledPreFetchHookExpectation.fulfill()
+            }
         }
 
-        Auth.Migrator.registerPostFetchHook { _ in
-            calledPostFetchHookExpectation.fulfill()
+        Auth.Migrator.registerPostFetchHook { (client, _, _) in
+            if client.clientIdentifier == clientConfiguration.clientIdentifier {
+                calledPostFetchHookExpectation.fulfill()
+            }
         }
 
         sut.prepareForTransport(request: request, completion: { _ in })

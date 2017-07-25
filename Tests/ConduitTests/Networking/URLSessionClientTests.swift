@@ -123,7 +123,7 @@ class URLSessionClientTests: XCTestCase {
             XCTFail()
         }
         sessionProxy.suspend()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: NSEC_PER_SEC * 2)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             dispatchExecutedExpectation.fulfill()
         }
 
