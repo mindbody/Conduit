@@ -11,6 +11,7 @@
 #elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
+import Foundation
 
 /// Caches images keyed off of URLRequests
 public protocol URLImageCache {

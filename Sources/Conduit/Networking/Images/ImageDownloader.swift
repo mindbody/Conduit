@@ -11,6 +11,8 @@
 #elseif os(iOS) || os(tvOS) || os(watchOS)
     import UIKit
 #endif
+import Foundation
+import Dispatch
 
 #if os(OSX)
     internal typealias ImageType = NSImage
@@ -19,8 +21,6 @@
 #else
     internal typealias ImageType = Image
 #endif
-
-import Dispatch
 
 /// Represents an error that occured within an ImageDownloader
 /// - invalidRequest: An invalid request was supplied, most likely with an empty URL
