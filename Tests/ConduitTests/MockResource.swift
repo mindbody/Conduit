@@ -5,6 +5,7 @@
 //  Created by John Hammerlund on 7/17/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
 
 import XCTest
 #if os(OSX)
@@ -72,3 +73,5 @@ extension Data: ExpressibleByStringLiteral {
         return image
     }
 }
+
+#endif
