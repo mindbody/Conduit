@@ -44,9 +44,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func image(for request: URLRequest) -> NSImage? {
         return _image(for: request)
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -97,9 +95,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func cache(image: NSImage, for request: URLRequest) {
         _cache(image: image, for: request)
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif os(iOS) || os(tvOS) || os(watchOS)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
