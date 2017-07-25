@@ -28,9 +28,8 @@ public class Image: Equatable {
         }
         self.data = data
     }
-    
-}
 
+}
 
 #endif
 

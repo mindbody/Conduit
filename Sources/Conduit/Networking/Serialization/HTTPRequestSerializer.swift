@@ -42,8 +42,9 @@ open class HTTPRequestSerializer: RequestSerializer {
 
     // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
     static let userAgentHeader: HTTPHeader? = {
-        #if os(Linux) //TODO
-        return nil
+        #if os(Linux)
+        // Swift for Linux does not provide an interface to determine OS/product runtime information
+        return HTTPHeader("User-Agent", "\(ProcessInfo.processInfo.processName); Linux")
         #else
         let product: String
         let productVersion: String
