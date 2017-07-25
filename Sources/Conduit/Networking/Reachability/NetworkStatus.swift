@@ -5,9 +5,7 @@
 //  Created by John Hammerlund on 12/14/16.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
-
-#if !os(watchOS)
+#if !os(Linux) && !os(watchOS)
 
 import Foundation
 import SystemConfiguration
