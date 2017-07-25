@@ -14,6 +14,16 @@ func arc4random_uniform(_ upperBound: UInt32) -> UInt32 {
     return UInt32(random())
 }
 
+//public struct Image {
+//
+//    public let data: Data
+//
+//    public init(data: Data) {
+//        self.data = data
+//    }
+//
+//}
+
 #endif
 
 func makeNSError(_ error: Error) -> NSError {
@@ -22,4 +32,14 @@ func makeNSError(_ error: Error) -> NSError {
     #else
     return error as NSError
     #endif
+}
+
+public class Image {
+
+    public let data: Data
+
+    public init(data: Data) {
+        self.data = data
+    }
+
 }

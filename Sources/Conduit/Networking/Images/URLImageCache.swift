@@ -5,7 +5,6 @@
 //  Created by John Hammerlund on 3/7/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -30,6 +29,13 @@ public protocol URLImageCache {
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     func image(for request: URLRequest) -> UIImage?
+    #else
+    /// Attempts to retrieve a cached image for the given request
+    ///
+    /// - Parameters:
+    ///     - request: The request for the image
+    /// - Returns: The cached image or nil of none exists
+    func image(for request: URLRequest) -> Image?
     #endif
 
     /// Attempts to build a cache identifier for the given request
@@ -53,6 +59,13 @@ public protocol URLImageCache {
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     mutating func cache(image: UIImage, for request: URLRequest)
+    #else
+    /// Attempts to cache an image for a given request
+    ///
+    /// - Parameters:
+    ///     - image: The image to be cached
+    ///     - request: The original request for the image
+    mutating func cache(image: Image, for request: URLRequest)
     #endif
 
     /// Attempts to remove an image from the cache for a given request
@@ -64,5 +77,3 @@ public protocol URLImageCache {
     mutating func purge()
 
 }
-
-#endif

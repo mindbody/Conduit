@@ -5,8 +5,6 @@
 //  Created by John Hammerlund on 7/17/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
-
 import XCTest
 #if os(OSX)
     import AppKit
@@ -65,13 +63,11 @@ extension Data: ExpressibleByStringLiteral {
         self.init(stringLiteral: value)
     }
 
-    var image: Image {
-        guard let image = Image(data: self) else {
+    var image: ImageType {
+        guard let image = ImageType(data: self) else {
             XCTFail()
             fatalError("Invalid image")
         }
         return image
     }
 }
-
-#endif

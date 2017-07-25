@@ -5,7 +5,6 @@
 //  Created by John Hammerlund on 3/8/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -18,7 +17,7 @@ import Dispatch
 /// when memory constraints are met.
 public final class AutoPurgingURLImageCache: URLImageCache {
 
-    private let cache: NSCache<NSString, Image>
+    private let cache: NSCache<NSString, ImageType>
     private let serialQueue = DispatchQueue(
         label: "com.mindbodyonline.Conduit.AutoPurgingImageCache-\(UUID().uuidString)"
     )
@@ -55,14 +54,23 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func image(for request: URLRequest) -> UIImage? {
         return _image(for: request)
     }
+    #else
+    /// Attempts to retrieve a cached image for the given request
+    ///
+    /// - Parameters:
+    ///     - request: The request for the image
+    /// - Returns: The cached image or nil of none exists
+    public func image(for request: URLRequest) -> Image? {
+        return _image(for: request)
+    }
     #endif
 
-    private func _image(for request: URLRequest) -> Image? {
+    private func _image(for request: URLRequest) -> ImageType? {
         guard let identifier = cacheIdentifier(for: request) else {
             return nil
         }
 
-        var image: Image?
+        var image: ImageType?
         let cache = self.cache
         serialQueue.sync {
             image = cache.object(forKey: identifier as NSString)
@@ -99,9 +107,18 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func cache(image: UIImage, for request: URLRequest) {
         _cache(image: image, for: request)
     }
+    #else
+    /// Attempts to cache an image for a given request
+    ///
+    /// - Parameters:
+    ///     - image: The image to be cached
+    ///     - request: The original request for the image
+    public func cache(image: Image, for request: URLRequest) {
+        _cache(image: image, for: request)
+    }
     #endif
 
-    private func _cache(image: Image, for request: URLRequest) {
+    private func _cache(image: ImageType, for request: URLRequest) {
         guard let identifier = cacheIdentifier(for: request) else {
             return
         }
@@ -135,20 +152,20 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     }
 
     #if os(OSX)
-    private func numberOfBytes(in image: Image) -> Int {
+    private func numberOfBytes(in image: NSImage) -> Int {
         return image.tiffRepresentation?.count ?? 0
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
-    private func numberOfBytes(in image: Image) -> Int {
+    #elseif os(iOS) || os(tvOS) || os(watchOS)
+    private func numberOfBytes(in image: UIImage) -> Int {
         let size = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
         let bytesPerPixel = 4
         let scaledImageArea = Int(size.width * size.height)
         return scaledImageArea * bytesPerPixel
     }
+    #else
+    private func numberOfBytes(in image: Image) -> Int {
+        return image.data.count
+    }
     #endif
 
 }
-
-#endif

@@ -5,7 +5,6 @@
 //  Created by John Hammerlund on 3/7/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
 
 #if os(OSX)
     import AppKit
@@ -14,9 +13,11 @@
 #endif
 
 #if os(OSX)
-    internal typealias Image = NSImage
+    internal typealias ImageType = NSImage
 #elseif os(iOS) || os(tvOS) || os(watchOS)
-    internal typealias Image = UIImage
+    internal typealias ImageType = UIImage
+#else
+    internal typealias ImageType = Image
 #endif
 
 import Dispatch
@@ -39,6 +40,8 @@ public final class ImageDownloader {
         #elseif os(iOS) || os(tvOS) || os(watchOS)
         /// The resulting image
         public let image: UIImage?
+        #else
+        public let image: Image?
         #endif
         /// The error that occurred from transport or cache retrieval
         public let error: Error?
@@ -107,9 +110,9 @@ public final class ImageDownloader {
             // Strongly capture self within the completion handler to ensure
             // ImageDownloader is persisted long enough to respond
             proxy = self.sessionClient.begin(request: request) { (data, response, error) in
-                var image: Image?
+                var image: ImageType?
                 if let data = data {
-                    image = Image(data: data)
+                    image = ImageType(data: data)
                 }
 
                 if let image = image {
@@ -146,5 +149,3 @@ public final class ImageDownloader {
     }
 
 }
-
-#endif
