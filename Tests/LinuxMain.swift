@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Conduit
+@testable import ConduitTests
 
 XCTMain([
     testCase(HTTPRequestBuilderTests.allTests)
