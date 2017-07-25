@@ -28,7 +28,22 @@ fileprivate class MockRequestSerializer: RequestSerializer {
     }
 }
 
-class HTTPRequestBuilderTests: XCTestCase {
+extension HTTPRequestBuilderTests {
+
+    static var allTests: [(String, (HTTPRequestBuilderTests) -> () throws -> Void)] = {
+        return [
+            ("testGeneratesBasicRequests", testGeneratesBasicRequests),
+            ("testUsesProvidedRequestSerializer", testUsesProvidedRequestSerializer),
+            ("testUsesProvidedRequestSerializer", testUsesProvidedRequestSerializer),
+            ("testForwardsErrorsFromSerializer", testForwardsErrorsFromSerializer),
+            ("testAppliesAdditionalHeadersToRequests", testAppliesAdditionalHeadersToRequests),
+            ("testIgnoresQueryParamsIfPercentEncodedParamsAreSet", testIgnoresQueryParamsIfPercentEncodedParamsAreSet)
+        ]
+    }()
+
+}
+
+final class HTTPRequestBuilderTests: XCTestCase {
 
     var url: URL!
     var sut: HTTPRequestBuilder!
