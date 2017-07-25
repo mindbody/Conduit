@@ -18,16 +18,14 @@ build_configurations = [
 		:scheme => "Conduit-tvOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=latest,name=Apple TV 1080p",
-			"OS=9.2,name=Apple TV 1080p"
+			"OS=latest,name=Apple TV 1080p"
 		]
 	},
 	{
 		:scheme => "Conduit-watchOS",
 		:run_tests => false,
 		:destinations => [
-			"OS=latest,name=Apple Watch - 42mm",
-			"OS=2.2,name=Apple Watch - 42mm"
+			"OS=latest,name=Apple Watch - 42mm"
 		]
 	}
 ]
