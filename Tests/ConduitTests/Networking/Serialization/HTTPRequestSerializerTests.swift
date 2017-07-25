@@ -9,6 +9,15 @@
 import XCTest
 @testable import Conduit
 
+extension HTTPRequestSerializerTests {
+    static var allTests: [(String, (HTTPRequestSerializerTests) -> () throws -> Void)] = {
+        return [
+            ("testAddsRequiredW3Headers", testAddsRequiredW3Headers),
+            ("testRejectsBodyParametersForConflictingHTTPVerbs", testRejectsBodyParametersForConflictingHTTPVerbs)
+        ]
+    }()
+}
+
 class HTTPRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!

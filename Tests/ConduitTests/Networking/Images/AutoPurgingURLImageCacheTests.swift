@@ -5,10 +5,22 @@
 //  Created by John Hammerlund on 7/10/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
 
 import XCTest
 @testable import Conduit
+
+extension AutoPurgingURLImageCacheTests {
+
+    static var allTests: [(String, (AutoPurgingURLImageCacheTests) -> () throws -> Void)] = {
+        return [
+            ("testRetrievesCachedImages", testRetrievesCachedImages),
+            ("testGeneratesCacheIdentifiers", testGeneratesCacheIdentifiers),
+            ("testRemovesCachedImages", testRemovesCachedImages),
+            ("testRemovesAllCachedImagesWhenPurged", testRemovesAllCachedImagesWhenPurged)
+        ]
+    }()
+
+}
 
 class AutoPurgingURLImageCacheTests: XCTestCase {
 
@@ -64,5 +76,3 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
     }
 
 }
-
-#endif

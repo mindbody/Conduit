@@ -9,6 +9,23 @@
 import XCTest
 import Conduit
 
+extension ResultTests {
+    static var allTests: [(String, (ResultTests) -> () throws -> Void)] = {
+        return [
+            ("testResultShouldStoreAnInt", testResultShouldStoreAnInt),
+            ("testResultShouldBeAbleToStoreAnError", testResultShouldBeAbleToStoreAnError),
+            ("testResultShouldStoreVoid", testResultShouldStoreVoid),
+            ("testRewrappingAResultShouldAllowDifferentTypesWithoutChangingTheUnderlyingError", testRewrappingAResultShouldAllowDifferentTypesWithoutChangingTheUnderlyingError),
+            ("testShouldAllowRewrappingTheErrorWithADifferentError", testShouldAllowRewrappingTheErrorWithADifferentError),
+            ("testOptionalValueGetter", testOptionalValueGetter),
+            ("testOptionalErrorGetter", testOptionalErrorGetter),
+            ("testThrowingValueGetter", testThrowingValueGetter),
+            ("testThrowingValueGetterWithVoid", testThrowingValueGetterWithVoid),
+            ("testThrowingValueGetterErrorType", testThrowingValueGetterErrorType)
+        ]
+    }()
+}
+
 class ResultTests: XCTestCase {
 
     func testResultShouldStoreAnInt() {

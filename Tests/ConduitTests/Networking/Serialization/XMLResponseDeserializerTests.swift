@@ -9,6 +9,15 @@
 import XCTest
 @testable import Conduit
 
+extension XMLResponseDeserializerTests {
+    static var allTests: [(String, (XMLResponseDeserializerTests) -> () throws -> Void)] = {
+        return [
+            ("testThrowsErrorForEmptyResponse", testThrowsErrorForEmptyResponse),
+            ("testDeserializesToXML", testDeserializesToXML)
+        ]
+    }()
+}
+
 class XMLResponseDeserializerTests: XCTestCase {
 
     var deserializer: XMLResponseDeserializer!

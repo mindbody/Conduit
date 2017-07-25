@@ -9,6 +9,15 @@
 import XCTest
 @testable import Conduit
 
+extension FormEncodedRequestSerializerTests {
+    static var allTests: [(String, (FormEncodedRequestSerializerTests) -> () throws -> Void)] = {
+        return [
+            ("testURIEncodesBodyParameters", testURIEncodesBodyParameters),
+            ("testDoesntReplaceCustomDefinedHeaders", testDoesntReplaceCustomDefinedHeaders)
+        ]
+    }()
+}
+
 class FormEncodedRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!

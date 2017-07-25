@@ -9,6 +9,17 @@
 import XCTest
 @testable import Conduit
 
+extension SOAPEnvelopeFactoryTests {
+    static var allTests: [(String, (SOAPEnvelopeFactoryTests) -> () throws -> Void)] = {
+        return [
+            ("testProducesSOAPBodyElements", testProducesSOAPBodyElements),
+            ("testProducesSOAPEnvelopeElements", testProducesSOAPEnvelopeElements),
+            ("testProducesFormattedSOAPXML", testProducesFormattedSOAPXML),
+            ("testRespectsCustomPrefixAndRootNamespaceSchema", testRespectsCustomPrefixAndRootNamespaceSchema)
+        ]
+    }()
+}
+
 class SOAPEnvelopeFactoryTests: XCTestCase {
 
     var sut: SOAPEnvelopeFactory!

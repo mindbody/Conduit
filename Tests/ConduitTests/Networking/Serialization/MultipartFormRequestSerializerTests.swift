@@ -13,6 +13,16 @@ enum TestError: Error {
     case invalidTest
 }
 
+extension MultipartFormRequestSerializerTests {
+    static var allTests: [(String, (MultipartFormRequestSerializerTests) -> () throws -> Void)] = {
+        return [
+            ("testSerializesDataPerW3Spec", testSerializesDataPerW3Spec),
+            ("testRemovesFormPartContentTypeHeadersIfExplictlyRemoved", testRemovesFormPartContentTypeHeadersIfExplictlyRemoved),
+            ("testDoesntReplaceCustomDefinedHeaders", testDoesntReplaceCustomDefinedHeaders)
+        ]
+    }()
+}
+
 class MultipartFormRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!

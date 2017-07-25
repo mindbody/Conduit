@@ -9,6 +9,20 @@
 import XCTest
 @testable import Conduit
 
+extension OAuth2RequestPipelineMiddlewareTests {
+    static var allTests: [(String, (OAuth2RequestPipelineMiddlewareTests) -> () throws -> Void)] = {
+        return [
+            ("testAppliesBearerHeaderIfValidTokenExists", testAppliesBearerHeaderIfValidTokenExists),
+            ("testAppliesBasicHeaderForBasicClientAuthorization", testAppliesBasicHeaderForBasicClientAuthorization),
+            ("testRefreshesBearerTokenIfExpired", testRefreshesBearerTokenIfExpired),
+            ("testAttemptsPasswordGrantWithGuestCredentialsIfTheyExist", testAttemptsPasswordGrantWithGuestCredentialsIfTheyExist),
+            ("testAttemptsClientCredentialsGrantIfGuestCredentialsDontExist", testAttemptsClientCredentialsGrantIfGuestCredentialsDontExist),
+            ("testFailsForBearerUserAuthIfNoTokenExists", testFailsForBearerUserAuthIfNoTokenExists),
+            ("testNotifiesMigratorPreAndPostFetchTokenHooksForRefreshes", testNotifiesMigratorPreAndPostFetchTokenHooksForRefreshes)
+        ]
+    }()
+}
+
 class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     var mockServerEnvironment: OAuth2ServerEnvironment!

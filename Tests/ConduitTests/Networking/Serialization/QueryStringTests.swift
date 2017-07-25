@@ -9,6 +9,29 @@
 import XCTest
 @testable import Conduit
 
+extension QueryStringTests {
+    static var allTests: [(String, (QueryStringTests) -> () throws -> Void)] = {
+        return [
+            ("testHandlesExpectedSerializableTypesWithinFlatDictionary", testHandlesExpectedSerializableTypesWithinFlatDictionary),
+            ("testEncodesArraysByIndexing", testEncodesArraysByIndexing),
+            ("testEncodesArraysByDuplicatingKeys", testEncodesArraysByDuplicatingKeys),
+            ("testEncodesArraysWithBrackets", testEncodesArraysWithBrackets),
+            ("testEncodesArraysWithCommaSeparation", testEncodesArraysWithCommaSeparation),
+            ("testEncodesDictionariesWithDotNotation", testEncodesDictionariesWithDotNotation),
+            ("testEncodesDictionariesWithSubscriptNotation", testEncodesDictionariesWithSubscriptNotation),
+            ("testEncodesFragments", testEncodesFragments),
+            ("testDoesntEncodePlusSymbolsByDefault", testDoesntEncodePlusSymbolsByDefault),
+            ("testReplacesPlusSymbolWithEncodedSpaces", testReplacesPlusSymbolWithEncodedSpaces),
+            ("testReplacesPlusSymbolWithEncodedPlusSymbol", testReplacesPlusSymbolWithEncodedPlusSymbol),
+            ("testEncodesSpacesByDefault", testEncodesSpacesByDefault),
+            ("testEncodesSpacesWithDecodedPlusSymbols", testEncodesSpacesWithDecodedPlusSymbols),
+            ("testSpaceEncodingDoesntConflictWithPlusSymbolEncoding", testSpaceEncodingDoesntConflictWithPlusSymbolEncoding),
+            ("testDoesntEncodeReservedCharactersByDefault", testDoesntEncodeReservedCharactersByDefault),
+            ("testEncodesNonConflictingReservedCharactersWhenSpecified", testEncodesNonConflictingReservedCharactersWhenSpecified)
+        ]
+    }()
+}
+
 class QueryStringTests: XCTestCase {
 
     var queryString: QueryString!

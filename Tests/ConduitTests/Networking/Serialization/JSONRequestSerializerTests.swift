@@ -9,6 +9,17 @@
 import XCTest
 @testable import Conduit
 
+extension JSONRequestSerializerTests {
+    static var allTests: [(String, (JSONRequestSerializerTests) -> () throws -> Void)] = {
+        return [
+            ("testSerializesJSONObject", testSerializesJSONObject),
+            ("testAllowsFragmentedJSON", testAllowsFragmentedJSON),
+            ("testConfiguresDefaultContentTypeHeader", testConfiguresDefaultContentTypeHeader),
+            ("testDoesntReplaceCustomDefinedHeaders", testDoesntReplaceCustomDefinedHeaders)
+        ]
+    }()
+}
+
 class JSONRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!

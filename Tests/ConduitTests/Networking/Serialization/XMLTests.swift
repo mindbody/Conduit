@@ -9,6 +9,16 @@
 import XCTest
 import Conduit
 
+extension XMLTests {
+    static var allTests: [(String, (XMLTests) -> () throws -> Void)] = {
+        return [
+            ("testXMLNodeConstruction", testXMLNodeConstruction),
+            ("testXMLStringConstruction", testXMLStringConstruction),
+            ("testXMLStringOutputReconstruction", testXMLStringOutputReconstruction)
+        ]
+    }()
+}
+
 class XMLTests: XCTestCase {
 
     /// Test structure:

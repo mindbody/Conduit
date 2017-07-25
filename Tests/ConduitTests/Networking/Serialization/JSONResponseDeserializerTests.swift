@@ -9,6 +9,17 @@
 import XCTest
 @testable import Conduit
 
+extension JSONResponseDeserializerTests {
+    static var allTests: [(String, (JSONResponseDeserializerTests) -> () throws -> Void)] = {
+        return [
+            ("testThrowsErrorForEmptyResponse", testThrowsErrorForEmptyResponse),
+            ("testThrowsErrorForUnacceptableContentTypes", testThrowsErrorForUnacceptableContentTypes),
+            ("testDeserializesToJSON", testDeserializesToJSON),
+            ("testAllowsFragmentedJSON", testAllowsFragmentedJSON)
+        ]
+    }()
+}
+
 class JSONResponseDeserializerTests: XCTestCase {
 
     var deserializer: JSONResponseDeserializer!

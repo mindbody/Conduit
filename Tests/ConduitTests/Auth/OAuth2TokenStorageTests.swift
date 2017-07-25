@@ -9,6 +9,16 @@
 import XCTest
 @testable import Conduit
 
+extension OAuth2TokenStorageTests {
+    static var allTests: [(String, (OAuth2TokenStorageTests) -> () throws -> Void)] = {
+        return [
+            ("testUserDefaultsStorageOperations", testUserDefaultsStorageOperations),
+            ("testFileStorageOperations", testFileStorageOperations),
+            ("testMemoryStorageOperations", testMemoryStorageOperations)
+        ]
+    }()
+}
+
 class OAuth2TokenStorageTests: XCTestCase {
 
     var mockServerEnvironment: OAuth2ServerEnvironment!

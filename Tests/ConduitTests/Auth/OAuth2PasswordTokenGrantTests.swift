@@ -9,6 +9,15 @@
 import XCTest
 @testable import Conduit
 
+extension OAuth2PasswordTokenGrantTests {
+    static var allTests: [(String, (OAuth2PasswordTokenGrantTests) -> () throws -> Void)] = {
+        return [
+            ("testAttemptsToIssueTokenViaExtensionGrant", testAttemptsToIssueTokenViaExtensionGrant),
+            ("testIssuesTokenWithCorrectSessionClient", testIssuesTokenWithCorrectSessionClient)
+        ]
+    }()
+}
+
 class OAuth2PasswordTokenGrantTests: XCTestCase {
 
     var mockServerEnvironment: OAuth2ServerEnvironment!

@@ -9,6 +9,15 @@
 import XCTest
 @testable import Conduit
 
+extension OAuth2TokenGrantManagerTests {
+    static var allTests: [(String, (OAuth2TokenGrantManagerTests) -> () throws -> Void)] = {
+        return [
+            ("testErrorsGeneratedAsExpected", testErrorsGeneratedAsExpected),
+            ("testValidResponseGeneratesNoErrors", testValidResponseGeneratesNoErrors)
+        ]
+    }()
+}
+
 class OAuth2TokenGrantManagerTests: XCTestCase {
 
     typealias BadResponse = (response: URLResponse?, expectedError: OAuth2Error)

@@ -5,8 +5,6 @@
 //  Created by John Hammerlund on 7/10/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
-#if !os(Linux)
-
 import XCTest
 @testable import Conduit
 
@@ -25,6 +23,17 @@ fileprivate class MonitoringURLSessionClient: URLSessionClientType {
         numRequestsSent += 1
         return sessionClient.begin(request: request, completion: completion)
     }
+}
+
+extension ImageDownloaderTests {
+    static var allTests: [(String, (ImageDownloaderTests) -> () throws -> Void)] = {
+        return [
+            ("testOnlyHitsNetworkOncePerRequest", testOnlyHitsNetworkOncePerRequest),
+            ("testMarksImagesAsCachedAfterDownloaded", testMarksImagesAsCachedAfterDownloaded),
+            ("testHandlesSimultaneousRequestsForDifferentImages", testHandlesSimultaneousRequestsForDifferentImages),
+            ("testPersistsWhileOperationsAreRunning", testPersistsWhileOperationsAreRunning)
+        ]
+    }()
 }
 
 class ImageDownloaderTests: XCTestCase {
@@ -119,5 +128,3 @@ class ImageDownloaderTests: XCTestCase {
     }
 
 }
-
-#endif

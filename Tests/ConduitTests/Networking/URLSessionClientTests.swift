@@ -10,6 +10,22 @@ import XCTest
 import Dispatch
 @testable import Conduit
 
+extension URLSessionClientTests {
+    static var allTests: [(String, (URLSessionClientTests) -> () throws -> Void)] = {
+        return [
+            ("testBlocking", testBlocking),
+            ("testBlockingTimeout", testBlockingTimeout),
+            ("testTransformsRequestsThroughMiddlewarePipeline", testTransformsRequestsThroughMiddlewarePipeline),
+            ("testPausesAndEmptiesPipelineIfMiddlewareRequiresIt", testPausesAndEmptiesPipelineIfMiddlewareRequiresIt),
+            ("testCancelsRequestIfMiddlewareFails", testCancelsRequestIfMiddlewareFails),
+            ("testSessionTaskProxyAllowsCancellingRequestsBeforeTransport", testSessionTaskProxyAllowsCancellingRequestsBeforeTransport),
+            ("testReportsDownloadProgressForLargerTasks", testReportsDownloadProgressForLargerTasks),
+            ("testReportsUploadProgressForLargerTasks", testReportsUploadProgressForLargerTasks),
+            ("testHandlesConcurrentRequests", testHandlesConcurrentRequests)
+        ]
+    }()
+}
+
 class URLSessionClientTests: XCTestCase {
 
     func testBlocking() throws {
