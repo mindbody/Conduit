@@ -14,9 +14,13 @@ func arc4random_uniform(_ upperBound: UInt32) -> UInt32 {
     return UInt32(random())
 }
 
-public class Image {
+public class Image: Equatable {
 
     public let data: Data
+
+    public static func ==(lhs: Image, rhs: Image) -> Bool {
+        return lhs.data == rhs.data
+    }
 
     public init?(data: Data) {
         if data.isEmpty {
@@ -24,8 +28,9 @@ public class Image {
         }
         self.data = data
     }
-
+    
 }
+
 
 #endif
 
