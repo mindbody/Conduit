@@ -17,8 +17,10 @@ public protocol SessionTaskProxyType {
     /// Reports upload progress
     var uploadProgressHandler: SessionTaskProgressHandler? { get set }
 
+    #if !os(Linux)
     /// Cancels the task, or schedules it to be canceled
     func cancel()
+    #endif
 
     /// Suspends the task, or schedules it to be suspended
     func suspend()

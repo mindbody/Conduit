@@ -18,7 +18,6 @@ extension URLSessionClientTests {
             ("testTransformsRequestsThroughMiddlewarePipeline", testTransformsRequestsThroughMiddlewarePipeline),
             ("testPausesAndEmptiesPipelineIfMiddlewareRequiresIt", testPausesAndEmptiesPipelineIfMiddlewareRequiresIt),
             ("testCancelsRequestIfMiddlewareFails", testCancelsRequestIfMiddlewareFails),
-            ("testSessionTaskProxyAllowsCancellingRequestsBeforeTransport", testSessionTaskProxyAllowsCancellingRequestsBeforeTransport),
             ("testReportsDownloadProgressForLargerTasks", testReportsDownloadProgressForLargerTasks),
             ("testReportsUploadProgressForLargerTasks", testReportsUploadProgressForLargerTasks),
             ("testHandlesConcurrentRequests", testHandlesConcurrentRequests)
@@ -115,6 +114,7 @@ class URLSessionClientTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
+    #if !os(Linux) // cancel() isn't yet implemented in Linux
     func testSessionTaskProxyAllowsCancellingRequestsBeforeTransport() throws {
         let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
         let client: URLSessionClient = URLSessionClient()
@@ -128,6 +128,7 @@ class URLSessionClientTests: XCTestCase {
 
         waitForExpectations(timeout: 3)
     }
+    #endif
 
     func testSessionTaskProxyAllowsSuspendingRequestsBeforeTransport() throws {
         let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
