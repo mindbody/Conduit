@@ -198,10 +198,10 @@ public struct FormPart {
     private func dataFrom(image: NSImage, type: ImageFormat) -> Data? {
         if let imageRepresentation = image.representations[0] as? NSBitmapImageRep {
             if case .jpeg(let compressionQuality) = type {
-                let properties = [NSImageCompressionFactor: compressionQuality]
-                return imageRepresentation.representation(using: .JPEG, properties: properties)
+                let properties = [NSBitmapImageRep.PropertyKey.compressionFactor: compressionQuality]
+                return imageRepresentation.representation(using: .jpeg, properties: properties)
             }
-            return imageRepresentation.representation(using: .PNG, properties: [:])
+            return imageRepresentation.representation(using: .png, properties: [:])
         }
         return nil
     }
