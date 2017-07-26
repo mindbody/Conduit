@@ -10,7 +10,7 @@ import Foundation
 #if os(Linux)
 
 func arc4random_uniform(_ upperBound: UInt32) -> UInt32 {
-    srandom(UInt32(truncatingBitPattern: Int(Date.timeIntervalSinceReferenceDate * 1000000)))
+    srandom(UInt32(truncatingBitPattern: Int(Date.timeIntervalSinceReferenceDate * 1_000_000)))
     return UInt32(random()) % upperBound
 }
 

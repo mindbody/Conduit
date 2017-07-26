@@ -12,8 +12,6 @@ import XCTest
 extension OAuth2TokenStorageTests {
     static var allTests: [(String, (OAuth2TokenStorageTests) -> () throws -> Void)] = {
         return [
-            ("testUserDefaultsStorageOperations", testUserDefaultsStorageOperations),
-            ("testFileStorageOperations", testFileStorageOperations),
             ("testMemoryStorageOperations", testMemoryStorageOperations)
         ]
     }()
@@ -56,7 +54,6 @@ class OAuth2TokenStorageTests: XCTestCase {
         sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
         verifyTokenStorageOperations()
     }
-#endif
 
     func testUserDefaultsStorageOperations() {
         sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
@@ -70,6 +67,8 @@ class OAuth2TokenStorageTests: XCTestCase {
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         verifyTokenStorageOperations()
     }
+#endif
+
 #endif
 
     func testMemoryStorageOperations() {

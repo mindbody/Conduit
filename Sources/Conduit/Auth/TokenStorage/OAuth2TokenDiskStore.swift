@@ -5,6 +5,9 @@
 //  Created by John Hammerlund on 10/14/16.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
+#if !os(Linux)
+// Linux support for disk storage will be added once NSCoder usage is replaced
+// with Codable/Decodable tokens since NSCoder is not fully implemented
 
 import Foundation
 
@@ -92,3 +95,5 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     }
 
 }
+
+#endif
