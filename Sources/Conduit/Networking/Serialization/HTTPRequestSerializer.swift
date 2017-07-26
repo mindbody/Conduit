@@ -126,7 +126,8 @@ open class HTTPRequestSerializer: RequestSerializer {
             throw RequestSerializerError.invalidURL
         }
 
-        let httpMethodsWithNoBody = HTTPRequestSerializer.httpMethodsWithNoBody.flatMap { $0.rawValue }
+        let httpMethodsWithNoBody = HTTPRequestSerializer.httpMethodsWithNoBody.map { $0.rawValue }
+
         if bodyParameters != nil && httpMethodsWithNoBody.contains(httpMethod) {
             throw RequestSerializerError.httpVerbDoesNotAllowBodyParameters
         }

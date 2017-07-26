@@ -31,7 +31,7 @@ class HTTPRequestSerializerTests: XCTestCase {
             XCTFail()
             return
         }
-        let allHTTPHeaderKeys = serializedRequest.allHTTPHeaderFields?.keys.flatMap { $0 }
+        let allHTTPHeaderKeys = serializedRequest.allHTTPHeaderFields?.keys.map { $0 }
         for key in headerKeys {
             XCTAssert(allHTTPHeaderKeys?.contains(key) == true)
         }

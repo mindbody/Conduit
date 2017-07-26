@@ -41,7 +41,7 @@ class URLSessionClientTests: XCTestCase {
 
         let client = URLSessionClient(middleware: [middleware1, middleware2])
         let processedRequestExpectation = expectation(description: "processed request")
-        client.begin(request: originalRequest) { _ in
+        client.begin(request: originalRequest) { _, _, _  in
             processedRequestExpectation.fulfill()
         }
 
@@ -65,7 +65,7 @@ class URLSessionClientTests: XCTestCase {
         var completedDelayedRequests = 0
 
         for _ in 0..<numDelayedRequests {
-            client.begin(request: delayedRequest) { _ in
+            client.begin(request: delayedRequest) { _, _, _  in
                 completedDelayedRequests += 1
             }
         }
@@ -76,7 +76,7 @@ class URLSessionClientTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             blockingMiddleware.pipelineBehaviorOptions = .awaitsOutgoingCompletion
 
-            client.begin(request: immediateRequest) { _ in
+            client.begin(request: immediateRequest) { _, _, _  in
                 XCTAssert(completedDelayedRequests == numDelayedRequests)
                 requestSentExpectation.fulfill()
             }
@@ -183,7 +183,7 @@ class URLSessionClientTests: XCTestCase {
         for _ in 0..<numConcurrentRequests {
             let requestFinishedExpectation = expectation(description: "request finished")
             DispatchQueue.global().async {
-                client.begin(request: request) { _ in
+                client.begin(request: request) { _, _, _  in
                     requestFinishedExpectation.fulfill()
                     completedRequests += 1
                 }

@@ -222,11 +222,11 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         calledPreFetchHookExpectation.assertForOverFulfill = false
         calledPostFetchHookExpectation.assertForOverFulfill = false
 
-        Auth.Migrator.registerPreFetchHook { _ in
+        Auth.Migrator.registerPreFetchHook { _, _  in
             calledPreFetchHookExpectation.fulfill()
         }
 
-        Auth.Migrator.registerPostFetchHook { _ in
+        Auth.Migrator.registerPostFetchHook { _, _, _  in
             calledPostFetchHookExpectation.fulfill()
         }
 
