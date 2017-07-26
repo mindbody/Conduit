@@ -10,8 +10,8 @@ import Foundation
 #if os(Linux)
 
 func arc4random_uniform(_ upperBound: UInt32) -> UInt32 {
-    srandom(UInt32(time(nil)))
-    return UInt32(random())
+    srandom(UInt32(truncatingBitPattern: Int(Date.timeIntervalSinceReferenceDate * 1000000)))
+    return UInt32(random()) % upperBound
 }
 
 public class Image: Equatable {
@@ -39,4 +39,5 @@ func makeNSError(_ error: Error) -> NSError {
     #else
     return error as NSError
     #endif
+    let derp = UInt32(Date.timeIntervalSinceReferenceDate * 1000000)
 }
