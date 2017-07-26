@@ -184,7 +184,9 @@ internal struct QueryString {
     }
 
     private func queryItemsFromDictionary(dict: [String:Any]) -> [URLQueryItem] {
-        return dict.flatMap(queryItemsFrom)
+        return dict.flatMap { kvp in
+            queryItemsFrom(parameter: (kvp.key, kvp.value))
+        }
     }
 
     private func queryItemsFrom(parameter: (String, Any)) -> [URLQueryItem] {
