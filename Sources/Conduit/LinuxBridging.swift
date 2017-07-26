@@ -39,5 +39,4 @@ func makeNSError(_ error: Error) -> NSError {
     #else
     return error as NSError
     #endif
-    let derp = UInt32(Date.timeIntervalSinceReferenceDate * 1000000)
 }
