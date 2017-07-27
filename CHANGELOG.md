@@ -1,7 +1,7 @@
 ## Master
 
 #### Breaking
-- None
+- `XMLNode.children` is no longer optional, defaults to empty array.
 
 #### Enhancements
 Enhancements to `XMLNode` class:
