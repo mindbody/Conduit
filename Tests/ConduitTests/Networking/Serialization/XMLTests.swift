@@ -26,17 +26,17 @@ class XMLTests: XCTestCase {
 
     private func validate(xml: XML) {
         XCTAssert(xml.root?.name == "Root")
-        XCTAssert(xml.root?.children?.count == 3)
-        XCTAssert(xml.root?.children?.first?.isLeaf == true)
-        XCTAssert(xml.root?.children?[1].value == "test 🙂 value")
-        XCTAssert(xml.root?.children?.last?.isLeaf == false)
-        XCTAssert(xml.root?.children?.last?.children?.count == 2)
-        guard let attributes = xml.root?.children?.last?.children?.first?.attributes else {
+        XCTAssert(xml.root?.children.count == 3)
+        XCTAssert(xml.root?.children.first?.isLeaf == true)
+        XCTAssert(xml.root?.children[1].value == "test 🙂 value")
+        XCTAssert(xml.root?.children.last?.isLeaf == false)
+        XCTAssert(xml.root?.children.last?.children.count == 2)
+        guard let attributes = xml.root?.children.last?.children.first?.attributes else {
             XCTFail()
             return
         }
         XCTAssert(attributes == ["testKey": "testValue"])
-        XCTAssert(xml.root?.children?.last?.children?.last?.name == "LastNode")
+        XCTAssert(xml.root?.children.last?.children.last?.name == "LastNode")
     }
 
     func testXMLNodeConstruction() {
