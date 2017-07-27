@@ -39,6 +39,25 @@ public final class HTTPRequestBuilder {
 
     // MARK: Properties
 
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    // ...
     /// The generated request's URL
     public var url: URL
 
