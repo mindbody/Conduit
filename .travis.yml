@@ -1,7 +1,12 @@
 language: objective-c
 osx_image: xcode8.3
 
+cache:
+  - bundler: true
+
 install:
+  - bundle install
+  - bundle exec danger
   - pip install -r requirements.txt
   - brew bundle
 
