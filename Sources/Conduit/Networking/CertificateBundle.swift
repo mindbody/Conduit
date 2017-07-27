@@ -28,6 +28,25 @@ public struct CertificateBundle {
     public init(certificatePaths: [String]) {
         let certificates = CertificateBundle.certificatesFrom(paths: certificatePaths)
         self.init(certificates: certificates)
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        // ...
     }
 
     /// Creates a new CertificateBundle
