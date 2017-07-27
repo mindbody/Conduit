@@ -51,7 +51,7 @@ class XMLResponseDeserializerTests: XCTestCase {
                 return
         }
 
-        XCTAssert(xml.root?.children?.first?.name == "N")
+        XCTAssert(xml.root?.children.first?.name == "N")
     }
 
 }

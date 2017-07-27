@@ -24,8 +24,8 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
         let soapBodyNode = sut.makeSOAPBody(root: bodyNode)
 
         XCTAssert(soapBodyNode.name == "soap:Body")
-        XCTAssert(soapBodyNode.children?.count == 1)
-        XCTAssert(soapBodyNode.children?.first?.name == "N")
+        XCTAssert(soapBodyNode.children.count == 1)
+        XCTAssert(soapBodyNode.children.first?.name == "N")
     }
 
     func testProducesSOAPEnvelopeElements() {
@@ -42,8 +42,8 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
         let soapXML = sut.makeXML(soapBody: bodyNode)
 
         XCTAssert(soapXML.root?.name == "soap:Envelope")
-        XCTAssert(soapXML.root?.children?.count == 1)
-        XCTAssert(soapXML.root?["soap:Body"].first?.children?.count == 1)
+        XCTAssert(soapXML.root?.children.count == 1)
+        XCTAssert(soapXML.root?["soap:Body"].first?.children.count == 1)
         XCTAssert(soapXML.root?["soap:Body"]["N"].first != nil)
     }
 
@@ -56,8 +56,8 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
 
         XCTAssert(soapXML.root?.name == "soapenv:Envelope")
         XCTAssert(soapXML.root?.attributes["xmlns"] == "http://clients.mindbodyonline.com/api/0_5")
-        XCTAssert(soapXML.root?.children?.count == 1)
-        XCTAssert(soapXML.root?["soapenv:Body"].first?.children?.count == 1)
+        XCTAssert(soapXML.root?.children.count == 1)
+        XCTAssert(soapXML.root?["soapenv:Body"].first?.children.count == 1)
     }
 
 }

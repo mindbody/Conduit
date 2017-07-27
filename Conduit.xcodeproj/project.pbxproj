@@ -307,6 +307,13 @@
 		1BD800521F16820800481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD8FFFE1F167E7800481DC9 /* Conduit.framework */; };
 		1BD800611F16821400481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800191F167E8B00481DC9 /* Conduit.framework */; };
 		1BD800701F16821D00481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800261F167E9B00481DC9 /* Conduit.framework */; };
+		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BAB1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BB21F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
+		95E26BB31F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
+		95E26BB41F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,6 +441,8 @@
 		1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
+		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -656,6 +665,7 @@
 			children = (
 				1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */,
 				1B88B21A1F268C220022A69D /* XML.swift */,
+				95E26BA71F29649600804900 /* XMLNode.swift */,
 				1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */,
 				1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */,
 				1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */,
@@ -720,6 +730,7 @@
 				1BD555561F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift */,
 				1BD555571F17DC81004B1172 /* QueryStringTests.swift */,
 				1BD555581F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift */,
+				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
 				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
@@ -1180,6 +1191,7 @@
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2841F268C220022A69D /* KeychainOptions.swift in Sources */,
 				1B88B24C1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				95E26BA91F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B2341F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CC1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BC1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
@@ -1204,6 +1216,7 @@
 				1B88B2E91F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B2791F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26D1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
+				95E26BAA1F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B27D1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B2391F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				1B88B2411F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -1265,6 +1278,7 @@
 				1B88B2EA1F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B27A1F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26E1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
+				95E26BAB1F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B27E1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B23A1F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				1B88B2421F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -1337,6 +1351,7 @@
 				1BD555701F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CBF1F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD71F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB21F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555881F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1370,6 +1385,7 @@
 				1BD555711F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CC01F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD81F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB31F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555891F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDE1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1403,6 +1419,7 @@
 				1BD555721F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CC11F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD91F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB41F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD5558A1F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDF1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1428,6 +1445,7 @@
 				1B88B22B1F268C220022A69D /* OAuth2SafariAuthorizationStrategy.swift in Sources */,
 				1B88B27B1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B2371F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
+				95E26BA81F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B23F1F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
 				1B88B2871F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2BF1F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,

@@ -8,89 +8,9 @@
 
 import Foundation
 
-/// Represents a single node in an XML document
-public struct XMLNode: CustomStringConvertible {
-
-    /// Not technically a PI, but it follows the same formatting rules
-    static var versionInstruction: XMLNode = {
-        var node = XMLNode(name: "xml")
-        node.attributes = [
-            "version": "1.0",
-            "encoding": "utf-8"
-        ]
-        node.isProcessingInstruction = true
-        return node
-    }()
-
-    /// The name of the element
-    public var name: String
-    /// The child nodes
-    public var children: [XMLNode]?
-    /// The element attributes
-    public var attributes = [String: String]()
-    /// The contained text value of the element
-    public var value: String?
-    /// Determines whether or not the element is a processing instruction
-    public var isProcessingInstruction = false
-    /// Determines whether or not the element is a leaf (no children)
-    public var isLeaf: Bool {
-        return children?.isEmpty ?? true
-    }
-
-    private var isEmpty: Bool {
-        return isLeaf && value == nil
-    }
-
-    public init(name: String) {
-        self.name = name
-    }
-
-    /// Returns the first-level child element with the given element name
-    ///
-    /// - Parameter elementName: The name of the child element
-    public subscript(elementName: String) -> XMLNodeIndex {
-        let matchingChildren = children?.filter { $0.name == elementName } ?? []
-        return XMLNodeIndex(nodes: matchingChildren)
-    }
-
-    /// Generates the stringified XML
-    public func xmlValue() -> String {
-        let leftDelimiter = isProcessingInstruction ? "<?" : "<"
-        let rightDelimiter = isProcessingInstruction ? "?>" : (isEmpty ? "/>" : ">")
-
-        let hasAttributes = attributes.isEmpty == false
-        let startTag: String
-
-        if hasAttributes {
-            let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
-            startTag = "\(leftDelimiter)\(name) \(describedAttributes)\(rightDelimiter)"
-        }
-        else {
-            startTag = "\(leftDelimiter)\(name)\(rightDelimiter)"
-        }
-
-        let endTag = "\(leftDelimiter)/\(name)\(rightDelimiter)"
-
-        if isProcessingInstruction || isEmpty {
-            return startTag
-        }
-
-        if let children = children, children.isEmpty == false {
-            let body = children.map { $0.description }.joined()
-            return "\(startTag)\(body)\(endTag)"
-        }
-
-        if let value = value {
-            return "\(startTag)\(value)\(endTag)"
-        }
-
-        return startTag
-    }
-
-    public var description: String {
-        return xmlValue()
-    }
-
+public enum XMLError: Error {
+    case notFound
+    case invalidDataType
 }
 
 /// Represents an XML document
@@ -190,7 +110,7 @@ extension XML {
             let parentNode = workingTree.popLast()
             if var parentNode = parentNode {
                 if let finishedNode = finishedNode {
-                    var children = parentNode.children ?? []
+                    var children = parentNode.children
                     children.append(finishedNode)
                     parentNode.children = children
                 }
