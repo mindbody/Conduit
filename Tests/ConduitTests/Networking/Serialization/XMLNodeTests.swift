@@ -68,18 +68,6 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(try xml.get("rootonly", traversal: .breadthFirst), "Root only")
     }
 
-    func testPerformanceDepth() {
-        measure {
-            XCTAssertEqual(self.xml.nodes(named: "id", traversal: .depthFirst).count, 7)
-        }
-    }
-
-    func testPerformanceBreadth() {
-        measure {
-            XCTAssertEqual(self.xml.nodes(named: "id", traversal: .breadthFirst).count, 7)
-        }
-    }
-
     // swiftlint:disable line_length
     func testXMLOutput() {
         let output = "<xml><clients><client><id>client1</id><name>Bob</name><customers><customer><id>customer1</id><name>Customer Awesome</name></customer><customer><id>customer2</id><name>Another Customer</name></customer></customers></client><client><id>client2</id><name>Job</name><customers><customer><id>customer3</id><name>Yet Another Customer</name></customer></customers></client><client><id>client3</id><name>Joe</name></client></clients><id>root1</id><name>I'm Root</name><rootonly>Root only</rootonly></xml>"
