@@ -194,9 +194,7 @@ public struct URLSessionClient: URLSessionClientType {
     fileprivate let urlSession: URLSession
     fileprivate let serialQueue = DispatchQueue(label: serialQueueName, attributes: [])
     fileprivate let activeTaskQueueDispatchGroup = DispatchGroup()
-    // swiftlint:disable weak_delegate
     fileprivate let sessionDelegate = SessionDelegate()
-    // swiftlint:enable weak_delegate
 
     /// Creates a new URLSessionClient with provided middleware and NSURLSession parameters
     /// - Parameters:
@@ -211,6 +209,25 @@ public struct URLSessionClient: URLSessionClientType {
         self.urlSession = URLSession(configuration: sessionConfiguration, delegate: self.sessionDelegate,
                                      delegateQueue: delegateQueue)
     }
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    // ...
 
     /// Queues a request into the session pipeline, blocking until request completes or fails.
     /// Method will throw an error if the request times out or if there is no response.
