@@ -72,12 +72,12 @@ class OAuth2ClientCredentialsTokenGrantTests: XCTestCase {
     }
 
     func testIssuesTokenWithCorrectSessionClient() {
-        let operationQueue = OperationQueue()
+        let operationQueue = AuthTestUtilities.authSessionOperationQueue
         let sut = makeStrategy()
 
         let completionExpectation = expectation(description: "completion handler executed")
 
-        Auth.sessionClient = URLSessionClient(delegateQueue: operationQueue)
+        Auth.sessionClient = AuthTestUtilities.authSessionClient
 
         sut.issueToken { _ in
             XCTAssert(OperationQueue.current == operationQueue)

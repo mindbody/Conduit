@@ -7,8 +7,14 @@
 //
 
 import Foundation
+import Conduit
 
 class AuthTestUtilities {
+
+    static let authSessionOperationQueue = OperationQueue()
+    static let authSessionClient: URLSessionClient = {
+        return URLSessionClient(delegateQueue: authSessionOperationQueue)
+    }()
 
     static func deserialize(urlEncodedParameterData: Data) -> [String:String]? {
         guard let encodedString = String(data: urlEncodedParameterData, encoding: .utf8) else {
