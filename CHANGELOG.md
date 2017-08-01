@@ -1,6 +1,7 @@
 ## Master
 
 #### Breaking
+- Remove unnecessary casting to `NSError` on `SessionTaskCompletion`.
 - `XMLNode.children` is no longer optional, defaults to empty array.
 
 #### Enhancements
