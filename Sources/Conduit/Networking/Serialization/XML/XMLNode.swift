@@ -71,6 +71,19 @@ public struct XMLNode: CustomStringConvertible {
         return breadth + descendants + depth
     }
 
+    /// Retrieve the first descendant node with the given name
+    ///
+    /// - Parameter name: Node name to retrieve
+    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
+    /// - Returns: Descendant nodes
+    /// - Throws: XMLError if no descendant found
+    public func node(named name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> XMLNode {
+        guard let node = nodes(named: name, traversal: traversal).first else {
+            throw XMLError.notFound
+        }
+        return node
+    }
+
     /// Returns the first-level child nodes with the given name
     ///
     /// - Parameter nodeName: The name of the child element
@@ -87,10 +100,7 @@ public struct XMLNode: CustomStringConvertible {
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           or if casting to type fails
     public func get<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
-        guard let node = nodes(named: name, traversal: traversal).first else {
-            throw XMLError.notFound
-        }
-        return try node.getValue() as T
+        return try node(named: name, traversal: traversal).getValue() as T
     }
 
     /// Get node value (text node) converted to given type
