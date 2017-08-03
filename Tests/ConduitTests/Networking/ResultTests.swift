@@ -117,11 +117,11 @@ class ResultTests: XCTestCase {
 
 }
 
-fileprivate enum SomeError: Error {
+private enum SomeError: Error {
     case someCase
 }
 
-fileprivate enum MyError: Error, Equatable {
+private enum MyError: Error, Equatable {
     case errorOne
     case errorTwo
 }

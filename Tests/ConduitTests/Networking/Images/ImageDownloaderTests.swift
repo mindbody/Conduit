@@ -9,7 +9,7 @@
 import XCTest
 @testable import Conduit
 
-fileprivate class MonitoringURLSessionClient: URLSessionClientType {
+private class MonitoringURLSessionClient: URLSessionClientType {
     private let sessionClient = URLSessionClient()
     var middleware: [RequestPipelineMiddleware] = []
 

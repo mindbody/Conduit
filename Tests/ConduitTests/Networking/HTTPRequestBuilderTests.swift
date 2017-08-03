@@ -9,11 +9,11 @@
 import XCTest
 @testable import Conduit
 
-fileprivate enum MockSerializationError: Error {
+private enum MockSerializationError: Error {
     case testError
 }
 
-fileprivate class MockRequestSerializer: RequestSerializer {
+private class MockRequestSerializer: RequestSerializer {
     var shouldThrowError = false
     var hasBeenUtilized = false
 
