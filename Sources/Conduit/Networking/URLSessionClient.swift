@@ -51,6 +51,9 @@ public enum URLSessionClientError: Error {
 /// Pipes requests through provided middleware and queues them into a single NSURLSession
 public struct URLSessionClient: URLSessionClientType {
 
+    /// Shared URL session client, can be overriden
+    public static var shared: URLSessionClientType = URLSessionClient(delegateQueue: OperationQueue())
+
     fileprivate class SessionDelegate: NSObject, URLSessionDataDelegate {
 
         var serverAuthenticationPolicies: [ServerAuthenticationPolicyType] = []
