@@ -19,6 +19,69 @@ public struct CertificateBundle {
 
     static private let certificatesInBundle = CertificateBundle.certificatesWithinMainBundle()
 
+    //
+    //
+
+    //
+    //
+    //
+    //
+    //
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    ////
+    //
+
     // MARK: Public interface
 
     /// Creates a new CertificateBundle
