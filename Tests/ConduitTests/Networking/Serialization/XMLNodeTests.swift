@@ -9,6 +9,8 @@
 import XCTest
 import Conduit
 
+typealias XMLNode = Conduit.XMLNode
+
 class XMLNodeTests: XCTestCase {
 
     let xml = XMLNode(name: "xml", children: [
@@ -47,25 +49,83 @@ class XMLNodeTests: XCTestCase {
         XMLNode(name: "rootonly", value: "Root only")
     ])
 
+    let xmlDict: XMLDictionary = [
+        "clients": [
+            [
+                "client": [
+                    "id": "client1",
+                    "name": "Bob",
+                    "customers": [
+                        [
+                            "customer": [
+                                "id": "customer1",
+                                "name": "Customer Awesome"
+                            ]
+                        ],
+                        [
+                            "customer": [
+                                "id": "customer2",
+                                "name": "Another Customer"
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "client": [
+                    "id": "client2",
+                    "name": "Job",
+                    "customers": [
+                        [
+                            "customer": [
+                                "id": "customer3",
+                                "name": "Yet Another Customer"
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            [
+                "client": [
+                    "id": "client3",
+                    "name": "Joe"
+                ]
+            ]
+        ],
+        "id": "root1",
+        "name": "I'm Root",
+        "rootonly": "Root only"
+    ]
+
+    var testSubjects: [XMLNode] {
+        return [xml, XMLNode(name: "xml", children: xmlDict)]
+    }
+
     func testXMLTreeSearch() {
-        XCTAssertEqual(xml.name, "xml")
-        XCTAssertEqual(xml.nodes(named: "clients").count, 1)
-        XCTAssertEqual(xml.nodes(named: "client").count, 3)
-        XCTAssertEqual(xml.nodes(named: "customers").count, 2)
-        XCTAssertEqual(xml.nodes(named: "customer").count, 3)
-        XCTAssertEqual(xml.nodes(named: "id").count, 7)
+        for subject in testSubjects {
+            XCTAssertEqual(subject.name, "xml")
+            XCTAssertEqual(subject.nodes(named: "clients").count, 1)
+            XCTAssertEqual(subject.nodes(named: "client").count, 3)
+            XCTAssertEqual(subject.nodes(named: "customers").count, 2)
+            XCTAssertEqual(subject.nodes(named: "customer").count, 3)
+            XCTAssertEqual(subject.nodes(named: "id").count, 7)
+        }
     }
 
     func testXMLDepthTraversal() throws {
-        XCTAssertEqual(xml.nodes(named: "id", traversal: .depthFirst).first?.value, "customer1")
-        XCTAssertEqual(try xml.get("name", traversal: .depthFirst), "Customer Awesome")
-        XCTAssertEqual(try xml.get("rootonly", traversal: .depthFirst), "Root only")
+        for subject in testSubjects {
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.value, "customer1")
+            XCTAssertEqual(try subject.get("name", traversal: .depthFirst), "Customer Awesome")
+            XCTAssertEqual(try subject.get("rootonly", traversal: .depthFirst), "Root only")
+        }
     }
 
     func testXMLBreadthTraversal() throws {
-        XCTAssertEqual(xml.nodes(named: "id", traversal: .breadthFirst).first?.value, "root1")
-        XCTAssertEqual(try xml.get("name", traversal: .breadthFirst), "I'm Root")
-        XCTAssertEqual(try xml.get("rootonly", traversal: .breadthFirst), "Root only")
+        for subject in testSubjects {
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.value, "root1")
+            XCTAssertEqual(try subject.get("name", traversal: .breadthFirst), "I'm Root")
+            XCTAssertEqual(try subject.get("rootonly", traversal: .breadthFirst), "Root only")
+        }
     }
 
     // swiftlint:disable line_length
@@ -74,5 +134,13 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(xml.xmlValue(), output)
     }
     // swiftlint:enable line_length
+
+    func testFooBarBaz() {
+        let foo = "bar"
+        let bar = "foo"
+        let baz = 3
+        let node = XMLNode(name: "FooBar", children: ["Foo": foo, "Bar": bar, "Baz": baz])
+        XCTAssertEqual(node.xmlValue(), "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
+    }
 
 }
