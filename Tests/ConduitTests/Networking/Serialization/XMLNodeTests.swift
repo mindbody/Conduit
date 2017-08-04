@@ -9,6 +9,8 @@
 import XCTest
 import Conduit
 
+typealias XMLNode = Conduit.XMLNode
+
 class XMLNodeTests: XCTestCase {
 
     let xml = XMLNode(name: "xml", children: [
