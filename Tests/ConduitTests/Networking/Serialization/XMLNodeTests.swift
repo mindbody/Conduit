@@ -133,4 +133,12 @@ class XMLNodeTests: XCTestCase {
     }
     // swiftlint:enable line_length
 
+    func testFooBarBaz() {
+        let foo = "bar"
+        let bar = "foo"
+        let baz = 3
+        let node = XMLNode(name: "FooBar", children: ["Foo": foo, "Bar": bar, "Baz": baz])
+        XCTAssertEqual(node.xmlValue(), "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
+    }
+
 }

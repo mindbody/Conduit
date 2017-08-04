@@ -66,7 +66,7 @@ public struct XMLNode: CustomStringConvertible {
     ///
     /// Example:
     ///
-    ///     let node = XMLNode(name: "SourceCredentials", children: ["SourceName": sourceName, "Password": password])
+    ///     let node = XMLNode(name: "FooBar", children: ["Foo": foo, "Bar": bar])
     ///
     /// - Parameters:
     ///   - name: Name of the node
