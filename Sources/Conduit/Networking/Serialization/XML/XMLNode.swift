@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Convenience alias for making XMLNode from a dictionary
+public typealias XMLDictionary = [String: CustomStringConvertible]
+
 /// Represents a single node in an XML document
 public struct XMLNode: CustomStringConvertible {
 
@@ -53,6 +56,33 @@ public struct XMLNode: CustomStringConvertible {
         self.value = value
         self.attributes = attributes
         self.children = children
+    }
+
+    /// Construct XML node from a dictionary of [String: CustomStringConvertible]
+    /// - Supports nesting properties any number of levels
+    /// - Supports arrays of nodes with the same node name (tag)
+    /// - Supports text nodes from any type that conforms to CustomStringConverible (Int, Double, etc.)
+    /// - Does not support node attributes
+    ///
+    /// Example:
+    ///
+    ///     let node = XMLNode(name: "SourceCredentials", children: ["SourceName": sourceName, "Password": password])
+    ///
+    /// - Parameters:
+    ///   - name: Name of the node
+    ///   - children: Dictionary of children nodes
+    public init(name: String, children: XMLDictionary) {
+        self.name = name
+        self.children = children.map { (key, value) in
+            if let grandchild = value as? XMLDictionary {
+                return XMLNode(name: key, children: grandchild)
+            }
+            if let grandchildren = value as? [XMLDictionary] {
+                let nodes = grandchildren.flatMap { XMLNode(name: "", children: $0).children }
+                return XMLNode(name: key, children: nodes)
+            }
+            return XMLNode(name: key, value: String(describing: value))
+        }
     }
 
     /// Retrieve a list of all descendant nodes with the given name
