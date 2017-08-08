@@ -835,6 +835,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800111F167E8200481DC9 /* Build configuration list for PBXNativeTarget "Conduit-watchOS" */;
 			buildPhases = (
+				95B887901F3A38E200F61C28 /* SwiftLint */,
 				1BD800071F167E8200481DC9 /* Sources */,
 				1BD800081F167E8200481DC9 /* Frameworks */,
 				1BD800091F167E8200481DC9 /* Headers */,
@@ -853,6 +854,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD8001E1F167E8B00481DC9 /* Build configuration list for PBXNativeTarget "Conduit-tvOS" */;
 			buildPhases = (
+				95B887911F3A38F200F61C28 /* SwiftLint */,
 				1BD800141F167E8B00481DC9 /* Sources */,
 				1BD800151F167E8B00481DC9 /* Frameworks */,
 				1BD800161F167E8B00481DC9 /* Headers */,
@@ -871,6 +873,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD8002B1F167E9B00481DC9 /* Build configuration list for PBXNativeTarget "Conduit-macOS" */;
 			buildPhases = (
+				95B887921F3A390200F61C28 /* SwiftLint */,
 				1BD800211F167E9B00481DC9 /* Sources */,
 				1BD800221F167E9B00481DC9 /* Frameworks */,
 				1BD800231F167E9B00481DC9 /* Headers */,
@@ -946,7 +949,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800061F167E7800481DC9 /* Build configuration list for PBXNativeTarget "Conduit-iOS" */;
 			buildPhases = (
-				95B972261F197986008A8C96 /* Swiftlint */,
+				95B972261F197986008A8C96 /* SwiftLint */,
 				1BD8FFF91F167E7800481DC9 /* Sources */,
 				1BD8FFFA1F167E7800481DC9 /* Frameworks */,
 				1BD8FFFB1F167E7800481DC9 /* Headers */,
@@ -1123,14 +1126,56 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		95B972261F197986008A8C96 /* Swiftlint */ = {
+		95B887901F3A38E200F61C28 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B887911F3A38F200F61C28 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B887921F3A390200F61C28 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B972261F197986008A8C96 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
