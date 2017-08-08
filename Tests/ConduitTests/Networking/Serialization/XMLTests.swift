@@ -28,7 +28,7 @@ class XMLTests: XCTestCase {
         XCTAssert(xml.root?.name == "Root")
         XCTAssert(xml.root?.children.count == 3)
         XCTAssert(xml.root?.children.first?.isLeaf == true)
-        XCTAssert(xml.root?.children[1].value == "test 🙂 value")
+        XCTAssert(xml.root?.children[1].value() == "test 🙂 value")
         XCTAssert(xml.root?.children.last?.isLeaf == false)
         XCTAssert(xml.root?.children.last?.children.count == 2)
         guard let attributes = xml.root?.children.last?.children.first?.attributes else {
@@ -46,7 +46,7 @@ class XMLTests: XCTestCase {
 
         let n1 = XMLNode(name: "N")
         var n2 = XMLNode(name: "N")
-        n2.value = "test 🙂 value"
+        n2.textNode = "test 🙂 value"
         var n3 = XMLNode(name: "N")
         n3.children = [n4, n5]
 

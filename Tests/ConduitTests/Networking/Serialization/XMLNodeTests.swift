@@ -114,7 +114,7 @@ class XMLNodeTests: XCTestCase {
 
     func testXMLDepthTraversal() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.value, "customer1")
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.value(), "customer1")
             XCTAssertEqual(try subject.get("name", traversal: .depthFirst), "Customer Awesome")
             XCTAssertEqual(try subject.get("rootonly", traversal: .depthFirst), "Root only")
         }
@@ -122,7 +122,7 @@ class XMLNodeTests: XCTestCase {
 
     func testXMLBreadthTraversal() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.value, "root1")
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.value(), "root1")
             XCTAssertEqual(try subject.get("name", traversal: .breadthFirst), "I'm Root")
             XCTAssertEqual(try subject.get("rootonly", traversal: .breadthFirst), "Root only")
         }
@@ -143,4 +143,18 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(node.xmlValue(), "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
     }
 
+    func testXMLNodeValue() throws {
+        let children: XMLDictionary = [
+            "foo": 1,
+            "bar": 25.99,
+            "baz": "Lorem Ipsum",
+            "qux": true
+        ]
+        let xml = XMLNode(name: "xml", children: children)
+
+        XCTAssertEqual(try xml.node(named: "foo").value(), 1)
+        XCTAssertEqual(try xml.node(named: "bar").value(), 25.99)
+        XCTAssertEqual(try xml.node(named: "baz").value(), "Lorem Ipsum")
+        XCTAssertEqual(try xml.node(named: "qux").value(), true)
+    }
 }
