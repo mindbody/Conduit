@@ -109,7 +109,7 @@ class XMLNodeTests: XCTestCase {
 
     func testSubscripting() {
         for subject in testSubjects {
-            XCTAssertEqual(subject["id"]?.value(), "root1")
+            XCTAssertEqual(subject["id"]?.getValue(), "root1")
             XCTAssertNotNil(subject["clients"]?["client"]?["id"])
         }
     }
@@ -127,28 +127,28 @@ class XMLNodeTests: XCTestCase {
 
     func testXMLFirstLevelSearch() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .firstLevel).first?.value(), "root1")
-            XCTAssertEqual(try subject.get("name", traversal: .firstLevel), "I'm Root")
-            XCTAssertEqual(try subject.get("rootonly", traversal: .firstLevel), "Root only")
-            XCTAssertThrowsError(try subject.get("clientonly", traversal: .firstLevel) as String)
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .firstLevel).first?.getValue(), "root1")
+            XCTAssertEqual(try subject.getValue("name", traversal: .firstLevel), "I'm Root")
+            XCTAssertEqual(try subject.getValue("rootonly", traversal: .firstLevel), "Root only")
+            XCTAssertThrowsError(try subject.getValue("clientonly", traversal: .firstLevel) as String)
         }
     }
 
     func testXMLDepthTraversal() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.value(), "customer1")
-            XCTAssertEqual(try subject.get("name", traversal: .depthFirst), "Customer Awesome")
-            XCTAssertEqual(try subject.get("rootonly", traversal: .depthFirst), "Root only")
-            XCTAssertEqual(try subject.get("clientonly", traversal: .depthFirst), "Foo")
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.getValue(), "customer1")
+            XCTAssertEqual(try subject.getValue("name", traversal: .depthFirst), "Customer Awesome")
+            XCTAssertEqual(try subject.getValue("rootonly", traversal: .depthFirst), "Root only")
+            XCTAssertEqual(try subject.getValue("clientonly", traversal: .depthFirst), "Foo")
         }
     }
 
     func testXMLBreadthTraversal() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.value(), "root1")
-            XCTAssertEqual(try subject.get("name", traversal: .breadthFirst), "I'm Root")
-            XCTAssertEqual(try subject.get("rootonly", traversal: .breadthFirst), "Root only")
-            XCTAssertEqual(try subject.get("clientonly", traversal: .breadthFirst), "Foo")
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.getValue(), "root1")
+            XCTAssertEqual(try subject.getValue("name", traversal: .breadthFirst), "I'm Root")
+            XCTAssertEqual(try subject.getValue("rootonly", traversal: .breadthFirst), "Root only")
+            XCTAssertEqual(try subject.getValue("clientonly", traversal: .breadthFirst), "Foo")
         }
     }
 
@@ -176,9 +176,42 @@ class XMLNodeTests: XCTestCase {
         ]
         let xml = XMLNode(name: "xml", children: children)
 
-        XCTAssertEqual(try xml.node(named: "foo").value(), 1)
-        XCTAssertEqual(try xml.node(named: "bar").value(), 25.99)
-        XCTAssertEqual(try xml.node(named: "baz").value(), "Lorem Ipsum")
-        XCTAssertEqual(try xml.node(named: "qux").value(), true)
+        XCTAssertEqual(try xml.node(named: "foo").getValue(), 1)
+        XCTAssertEqual(try xml.node(named: "bar").getValue(), 25.99)
+        XCTAssertEqual(try xml.node(named: "baz").getValue(), "Lorem Ipsum")
+        XCTAssertEqual(try xml.node(named: "qux").getValue(), true)
+
+        XCTAssertEqual(try xml.getValue("foo"), 1)
+        XCTAssertEqual(try xml.getValue("bar"), 25.99)
+        XCTAssertEqual(try xml.getValue("baz"), "Lorem Ipsum")
+        XCTAssertEqual(try xml.getValue("qux"), true)
+
+        XCTAssertEqual(xml.getValue("foo"), Optional(1))
+        XCTAssertEqual(xml.getValue("bar"), Optional(25.99))
+        XCTAssertEqual(xml.getValue("baz"), Optional("Lorem Ipsum"))
+        XCTAssertEqual(xml.getValue("qux"), Optional(true))
+
+        XCTAssertEqual(xml["foo"]?.getValue(), 1)
+        XCTAssertEqual(xml["bar"]?.getValue(), 25.99)
+        XCTAssertEqual(xml["baz"]?.getValue(), "Lorem Ipsum")
+        XCTAssertEqual(xml["qux"]?.getValue(), true)
     }
+
+    func testXMLNodeValueGetters() throws {
+        let foo = XMLNode(name: "", value: 1)
+        let bar = XMLNode(name: "", value: 25.99)
+        let baz = XMLNode(name: "", value: "Lorem Ipsum")
+        let qux = XMLNode(name: "", value: true)
+
+        XCTAssertEqual(try foo.getValue(), 1)
+        XCTAssertEqual(try bar.getValue(), 25.99)
+        XCTAssertEqual(try baz.getValue(), "Lorem Ipsum")
+        XCTAssertEqual(try qux.getValue(), true)
+
+        XCTAssertEqual(foo.getValue(), Optional(1))
+        XCTAssertEqual(bar.getValue(), Optional(25.99))
+        XCTAssertEqual(baz.getValue(), Optional("Lorem Ipsum"))
+        XCTAssertEqual(qux.getValue(), Optional(true))
+    }
+
 }
