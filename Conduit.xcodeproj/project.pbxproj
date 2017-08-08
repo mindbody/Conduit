@@ -209,10 +209,6 @@
 		1B88B2E01F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
 		1B88B2E11F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
 		1B88B2E21F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
-		1B88B2E31F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E41F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E51F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E61F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
 		1B88B2E71F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
 		1B88B2E81F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
 		1B88B2E91F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
@@ -398,7 +394,6 @@
 		1B88B2171F268C220022A69D /* ResponseDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDeserializer.swift; sourceTree = "<group>"; };
 		1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOAPEnvelopeFactory.swift; sourceTree = "<group>"; };
 		1B88B21A1F268C220022A69D /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
-		1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNodeIndex.swift; sourceTree = "<group>"; };
 		1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializer.swift; sourceTree = "<group>"; };
 		1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLResponseDeserializer.swift; sourceTree = "<group>"; };
 		1B88B21E1F268C220022A69D /* ServerAuthenticationPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAuthenticationPolicy.swift; sourceTree = "<group>"; };
@@ -666,7 +661,6 @@
 				1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */,
 				1B88B21A1F268C220022A69D /* XML.swift */,
 				95E26BA71F29649600804900 /* XMLNode.swift */,
-				1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */,
 				1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */,
 				1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */,
 			);
@@ -723,6 +717,7 @@
 		1BD555511F17DC81004B1172 /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
+				95B8878F1F396F2600F61C28 /* XML */,
 				1BD555521F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift */,
 				1BD555531F17DC81004B1172 /* HTTPRequestSerializerTests.swift */,
 				1BD555541F17DC81004B1172 /* JSONRequestSerializerTests.swift */,
@@ -730,9 +725,6 @@
 				1BD555561F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift */,
 				1BD555571F17DC81004B1172 /* QueryStringTests.swift */,
 				1BD555581F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift */,
-				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
-				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
-				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -791,6 +783,16 @@
 				1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		95B8878F1F396F2600F61C28 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
+				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
+				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
+			);
+			name = XML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1170,7 +1172,6 @@
 				1B88B28C1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29C1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B41F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E41F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2441F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2601F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D81F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1232,7 +1233,6 @@
 				1B88B28D1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29D1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B51F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E51F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2451F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2611F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D91F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1294,7 +1294,6 @@
 				1B88B28E1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29E1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B61F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E61F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2461F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2621F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2DA1F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1458,7 +1457,6 @@
 				1B88B28B1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29B1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B31F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E31F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2431F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B25F1F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D71F268C220022A69D /* ResponseDeserializer.swift in Sources */,

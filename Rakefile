@@ -65,6 +65,7 @@ end
 desc "Clean all builds"
 task :clean do
 	`rm -rf .build`
+	`rm -rf Carthage`
 	build_configurations.each do |config|
 		scheme =  config[:scheme]
 		system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug clean | xcpretty")

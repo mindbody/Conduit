@@ -101,6 +101,13 @@ class XMLNodeTests: XCTestCase {
         return [xml, XMLNode(name: "xml", children: xmlDict)]
     }
 
+    func testSubscripting() {
+        for subject in testSubjects {
+            XCTAssertEqual(subject["id"]?.value(), "root1")
+            XCTAssertNotNil(subject["clients"]?["client"]?["id"])
+        }
+    }
+
     func testXMLTreeSearch() {
         for subject in testSubjects {
             XCTAssertEqual(subject.name, "xml")
