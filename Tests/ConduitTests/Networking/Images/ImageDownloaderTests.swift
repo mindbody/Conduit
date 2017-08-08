@@ -15,7 +15,7 @@ fileprivate class MonitoringURLSessionClient: URLSessionClientType {
 
     var numRequestsSent: Int = 0
 
-    func begin(request: URLRequest) throws -> (data: Data?, response: URLResponse) {
+    func begin(request: URLRequest) throws -> (data: Data?, response: HTTPURLResponse) {
         numRequestsSent += 1
         return try sessionClient.begin(request: request)
     }
@@ -87,10 +87,10 @@ class ImageDownloaderTests: XCTestCase {
         for url in imageURLs {
             dispatchGroup.enter()
             sut.downloadImage(for: URLRequest(url: url)) { response in
-                XCTAssert(response.image != nil)
-                XCTAssert(response.error == nil)
-                XCTAssert(response.isFromCache == false)
-                XCTAssert((response.urlResponse as? HTTPURLResponse)?.statusCode == 200)
+                XCTAssertNotNil(response.image)
+                XCTAssertNil(response.error)
+                XCTAssertFalse(response.isFromCache)
+                XCTAssertEqual(response.urlResponse?.statusCode, 200)
                 dispatchGroup.leave()
             }
         }

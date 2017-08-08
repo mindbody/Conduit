@@ -40,7 +40,7 @@ public final class ImageDownloader {
         /// The error that occurred from transport or cache retrieval
         public let error: Error?
         /// The URL response, if a download occurred
-        public let urlResponse: URLResponse?
+        public let urlResponse: HTTPURLResponse?
         /// Signifies if the image was retrieved directly from the cache
         public let isFromCache: Bool
     }
@@ -70,8 +70,7 @@ public final class ImageDownloader {
     ///     - request: The request for the image
     /// - Returns: A concrete SessionTaskProxyType
     @discardableResult
-    public func downloadImage(for request: URLRequest,
-                              completion: @escaping CompletionHandler) -> SessionTaskProxyType? {
+    public func downloadImage(for request: URLRequest, completion: @escaping CompletionHandler) -> SessionTaskProxyType? {
         var proxy: SessionTaskProxyType?
 
         serialQueue.sync { [weak self] in
