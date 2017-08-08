@@ -4,6 +4,7 @@
 - Remove unnecessary casting to `NSError` on `SessionTaskCompletion`.
 - `XMLNode.children` is no longer optional, defaults to empty array.
 - Auth shared `URLSessionClient` defaults to background operation queue.
+- Update `URLSessionClient` to return `HTTPURLResponse` for easy retrieval of HTTP status codes.
 
 #### Enhancements
 - Shared `URLSessionClient` with default background operation queue.
