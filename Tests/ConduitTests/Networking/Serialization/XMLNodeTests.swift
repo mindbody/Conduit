@@ -103,7 +103,7 @@ class XMLNodeTests: XCTestCase {
 
     func testSubscripting() {
         for subject in testSubjects {
-            XCTAssertEqual(subject["id"]?.value(), "root1")
+            XCTAssertEqual(subject["id"]?.value, "root1")
             XCTAssertNotNil(subject["clients"]?["client"]?["id"])
         }
     }
