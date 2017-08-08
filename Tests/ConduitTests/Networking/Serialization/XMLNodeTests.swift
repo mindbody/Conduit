@@ -167,7 +167,7 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(node.xmlValue(), "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
     }
 
-    func testXMLNodeValue() throws {
+    func testXMLNodeValueSearch() throws {
         let children: XMLDictionary = [
             "foo": 1,
             "bar": 25.99,
@@ -197,6 +197,36 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(xml["qux"]?.getValue(), true)
     }
 
+    func testXMLNodeValueSearchFailure() throws {
+        let children: XMLDictionary = [
+            "foo": 1,
+            "bar": 25.99,
+            "baz": "Lorem Ipsum",
+            "qux": true
+        ]
+        let xml = XMLNode(name: "xml", children: children)
+
+        XCTAssertThrowsError(try xml.node(named: "fooxx").getValue() as Int)
+        XCTAssertThrowsError(try xml.node(named: "barxx").getValue() as Double)
+        XCTAssertThrowsError(try xml.node(named: "bazxx").getValue() as String)
+        XCTAssertThrowsError(try xml.node(named: "quxxx").getValue() as Bool)
+
+        XCTAssertThrowsError(try xml.getValue("fooxx") as Int)
+        XCTAssertThrowsError(try xml.getValue("barxx") as Double)
+        XCTAssertThrowsError(try xml.getValue("bazxx") as String)
+        XCTAssertThrowsError(try xml.getValue("quxxx") as Bool)
+
+        XCTAssertNil(xml.getValue("fooxx") as Int?)
+        XCTAssertNil(xml.getValue("barxx") as Double?)
+        XCTAssertNil(xml.getValue("bazxx") as String?)
+        XCTAssertNil(xml.getValue("quxxx") as Bool?)
+
+        XCTAssertNil(xml["fooxx"]?.getValue() as Int?)
+        XCTAssertNil(xml["barxx"]?.getValue() as Double?)
+        XCTAssertNil(xml["bazxx"]?.getValue() as String?)
+        XCTAssertNil(xml["quxxx"]?.getValue() as Bool?)
+    }
+
     func testXMLNodeValueGetters() throws {
         let foo = XMLNode(name: "", value: 1)
         let bar = XMLNode(name: "", value: 25.99)
@@ -214,4 +244,29 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(qux.getValue(), Optional(true))
     }
 
+    func testXMLNodeValueGetterFailure() throws {
+        let foo = XMLNode(name: "")
+        let bar = XMLNode(name: "")
+        let baz = XMLNode(name: "")
+        let qux = XMLNode(name: "")
+
+        XCTAssertThrowsError(try foo.getValue() as Int)
+        XCTAssertThrowsError(try bar.getValue() as Double)
+        XCTAssertThrowsError(try baz.getValue() as String)
+        XCTAssertThrowsError(try qux.getValue() as Bool)
+
+        XCTAssertNil(foo.getValue() as Int?)
+        XCTAssertNil(bar.getValue() as Double?)
+        XCTAssertNil(baz.getValue() as String?)
+        XCTAssertNil(qux.getValue() as Bool?)
+    }
+
+}
+
+// MARK: - LosslessStringConvertible
+
+extension Int: LosslessStringConvertible {
+    public init?(_ description: String) {
+        self.init(description, radix: 10)
+    }
 }
