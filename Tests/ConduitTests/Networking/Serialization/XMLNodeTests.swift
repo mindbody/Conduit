@@ -109,7 +109,7 @@ class XMLNodeTests: XCTestCase {
 
     func testSubscripting() {
         for subject in testSubjects {
-            XCTAssertEqual(subject["id"]?.value, "root1")
+            XCTAssertEqual(subject["id"]?.value(), "root1")
             XCTAssertNotNil(subject["clients"]?["client"]?["id"])
         }
     }
@@ -127,7 +127,7 @@ class XMLNodeTests: XCTestCase {
 
     func testXMLFirstLevelSearch() throws {
         for subject in testSubjects {
-            XCTAssertEqual(subject.nodes(named: "id", traversal: .firstLevel).first?.value, "root1")
+            XCTAssertEqual(subject.nodes(named: "id", traversal: .firstLevel).first?.value(), "root1")
             XCTAssertEqual(try subject.get("name", traversal: .firstLevel), "I'm Root")
             XCTAssertEqual(try subject.get("rootonly", traversal: .firstLevel), "Root only")
             XCTAssertThrowsError(try subject.get("clientonly", traversal: .firstLevel) as String)
