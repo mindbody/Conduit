@@ -15,12 +15,12 @@ public enum OAuth2Error: Error {
     case noResponse
 
     /// The server response indicates a bad request
-    case clientFailure(Data?, URLResponse?)
+    case clientFailure(Data?, HTTPURLResponse?)
 
     /// An unexpected error occurred within the framework
     case internalFailure
 
     /// The server application responded with an unexpected failure
-    case serverFailure(Data?, URLResponse)
+    case serverFailure(Data?, HTTPURLResponse)
 
 }

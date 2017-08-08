@@ -17,7 +17,7 @@ class URLSessionClientTests: XCTestCase {
         let then = Date()
         let result = try client.begin(request: request)
         XCTAssertNotNil(result.data)
-        XCTAssertEqual((result.response as? HTTPURLResponse)?.statusCode, 200)
+        XCTAssertEqual(result.response.statusCode, 200)
         XCTAssertGreaterThanOrEqual(Date().timeIntervalSince(then), 2)
     }
 
@@ -192,6 +192,16 @@ class URLSessionClientTests: XCTestCase {
 
         waitForExpectations(timeout: 5)
         XCTAssert(completedRequests == numConcurrentRequests)
+    }
+
+    func testHTTPStatusCodes() throws {
+        let client = URLSessionClient(delegateQueue: OperationQueue())
+        let codes = [200, 304, 400, 403, 412, 500, 501]
+        for code in codes {
+            let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/status/\(code)"))
+            let result = try client.begin(request: request)
+            XCTAssertEqual(result.response.statusCode, code)
+        }
     }
 
 }

@@ -14,7 +14,7 @@ class XMLResponseDeserializerTests: XCTestCase {
     var deserializer: XMLResponseDeserializer!
     let validResponseHeaders = ["Content-Type": "application/xml"]
     var validResponseData: Data!
-    var validResponse: URLResponse!
+    var validResponse: HTTPURLResponse!
 
     override func setUp() {
         super.setUp()

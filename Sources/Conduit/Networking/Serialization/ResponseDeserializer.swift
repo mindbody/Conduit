@@ -10,13 +10,13 @@ import Foundation
 
 /// A structure that deserializes a provided NSURLResponse and response data into a loose transport object
 public protocol ResponseDeserializer {
-    /// Deserializes a URLResponse and response data into a loose transport object
+    /// Deserializes a HTTPURLResponse and response data into a loose transport object
     /// - Parameters:
     ///     - response: The URL response to deserialize and validate against
     ///     - data: The response data
     /// - Throws: A `ResponseDeserializerError` if deserialization is not possible
     /// - Returns: A non-domain specific transport object, such as a Dictionary or an Array
-    func deserialize(response: URLResponse?, data: Data?) throws -> Any
+    func deserialize(response: HTTPURLResponse?, data: Data?) throws -> Any
 
     /// Deserializes unvalidated response data into a loose transport object
     /// - Parameters:
@@ -59,14 +59,14 @@ public extension HTTPResponseDeserializer {
 
     /// Validates the response against acceptable content types and status codes
     /// - Parameters:
-    ///   - response: The URLResponse to validate against
+    ///   - response: The HTTPURLResponse to validate against
     ///   - responseObject: The deserialized response data
-    public func validate(response: URLResponse?, responseObject: Any?) throws {
-        guard let response = response as? HTTPURLResponse else {
+    public func validate(response: HTTPURLResponse?, responseObject: Any?) throws {
+        guard let response = response else {
             throw ResponseDeserializerError.noResponse
         }
 
-        if !self.acceptableStatusCodes.contains(response.statusCode) {
+        if acceptableStatusCodes.contains(response.statusCode) == false {
             throw ResponseDeserializerError.badResponse(responseObject: responseObject)
         }
 
@@ -77,11 +77,10 @@ public extension HTTPResponseDeserializer {
         }
     }
 
-    public func deserialize(response: URLResponse?, data: Data?) throws -> Any {
-
+    public func deserialize(response: HTTPURLResponse?, data: Data?) throws -> Any {
         let responseObject = try deserialize(data: data)
 
-        try self.validate(response: response, responseObject: responseObject)
+        try validate(response: response, responseObject: responseObject)
 
         return responseObject
     }
