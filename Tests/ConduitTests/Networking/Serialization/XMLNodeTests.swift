@@ -197,7 +197,7 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(xml["qux"]?.getValue(), true)
     }
 
-    func testXMLNodeValueSearchFailure() throws {
+    func testXMLNodeValueSearchFailure() {
         let children: XMLDictionary = [
             "foo": 1,
             "bar": 25.99,
@@ -244,7 +244,7 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(qux.getValue(), Optional(true))
     }
 
-    func testXMLNodeValueGetterFailure() throws {
+    func testXMLNodeValueGetterFailure() {
         let foo = XMLNode(name: "")
         let bar = XMLNode(name: "")
         let baz = XMLNode(name: "")
