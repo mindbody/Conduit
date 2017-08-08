@@ -59,7 +59,7 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLStringConstruction() {
-        guard let xml = XML(xmlString: xmlString) else {
+        guard let xml = XML(xmlString) else {
             XCTFail()
             return
         }
@@ -67,12 +67,19 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLStringOutputReconstruction() {
-        guard let originalXML = XML(xmlString: xmlString),
-            let xml = XML(xmlString: originalXML.xmlValue()) else {
-                XCTFail()
-                return
+        guard let originalXML = XML(xmlString), let xml = XML(originalXML.description) else {
+            XCTFail()
+            return
         }
         validate(xml: xml)
+    }
+
+    func testXMLNodeStringConstruction() {
+        let string = "<foo><bar>baz</bar></foo>"
+        let node = XMLNode(string)
+        XCTAssertEqual(node?.name, "foo")
+        XCTAssertEqual(node?["bar"]?.getValue(), "baz")
+        XCTAssertEqual(node?.description, string)
     }
 
 }

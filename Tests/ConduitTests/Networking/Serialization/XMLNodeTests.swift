@@ -155,7 +155,7 @@ class XMLNodeTests: XCTestCase {
     // swiftlint:disable line_length
     func testXMLOutput() {
         let output = "<xml><clients><client><id>client1</id><name>Bob</name><clientonly>Foo</clientonly><customers><customer><id>customer1</id><name>Customer Awesome</name></customer><customer><id>customer2</id><name>Another Customer</name></customer></customers></client><client><id>client2</id><name>Job</name><clientonly>Bar</clientonly><customers><customer><id>customer3</id><name>Yet Another Customer</name></customer></customers></client><client><id>client3</id><name>Joe</name><clientonly>Baz</clientonly></client></clients><id>root1</id><name>I'm Root</name><rootonly>Root only</rootonly></xml>"
-        XCTAssertEqual(xml.xmlValue(), output)
+        XCTAssertEqual(xml.description, output)
     }
     // swiftlint:enable line_length
 
@@ -164,7 +164,7 @@ class XMLNodeTests: XCTestCase {
         let bar = "foo"
         let baz = 3
         let node = XMLNode(name: "FooBar", children: ["Foo": foo, "Bar": bar, "Baz": baz])
-        XCTAssertEqual(node.xmlValue(), "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
+        XCTAssertEqual(node.description, "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
     }
 
     func testXMLNodeValueSearch() throws {

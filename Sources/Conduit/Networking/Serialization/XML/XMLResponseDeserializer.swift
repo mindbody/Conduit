@@ -26,10 +26,10 @@ public final class XMLResponseDeserializer: HTTPResponseDeserializer {
         guard let xmlString = String(data: data, encoding: .utf8) else {
             throw ResponseDeserializerError.deserializationFailure
         }
-        if let xml = XML(xmlString: xmlString) {
-            return xml
+        guard let xml = XML(xmlString) else {
+            throw ResponseDeserializerError.deserializationFailure
         }
-        throw ResponseDeserializerError.deserializationFailure
+        return xml
     }
 
 }
