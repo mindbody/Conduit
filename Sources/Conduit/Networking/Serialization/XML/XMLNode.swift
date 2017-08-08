@@ -94,7 +94,12 @@ public struct XMLNode: CustomStringConvertible {
         if isLeaf {
             return []
         }
+
         let matches = children.filter { $0.name == name }
+        if traversal == .firstLevel {
+            return matches
+        }
+
         let breadth = traversal == .breadthFirst ? matches : []
         let descendants = children.flatMap { $0.nodes(named: name, traversal: traversal) }
         let depth = traversal == .depthFirst ? matches : []
@@ -184,8 +189,8 @@ public struct XMLNode: CustomStringConvertible {
 }
 
 /// Traversal options for extracting nodes from an XMLNode tree
-/// - depthFirst will 
 public enum XMLNodeTraversal {
+    case firstLevel
     case depthFirst
     case breadthFirst
 }
