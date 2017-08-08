@@ -206,7 +206,7 @@ class URLSessionClientTests: XCTestCase {
 
 }
 
-fileprivate class BadMiddleware: RequestPipelineMiddleware {
+private class BadMiddleware: RequestPipelineMiddleware {
     enum WhyAreYouUsingThisMiddlewareError: Error {
         case userError
     }
@@ -218,7 +218,7 @@ fileprivate class BadMiddleware: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class TransformingMiddleware1: RequestPipelineMiddleware {
+private class TransformingMiddleware1: RequestPipelineMiddleware {
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
     let modifiedURL: URL
 
@@ -233,7 +233,7 @@ fileprivate class TransformingMiddleware1: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class TransformingMiddleware2: RequestPipelineMiddleware {
+private class TransformingMiddleware2: RequestPipelineMiddleware {
     var transformedRequest: URLRequest?
 
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
@@ -251,7 +251,7 @@ fileprivate class TransformingMiddleware2: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class BlockingMiddleware: RequestPipelineMiddleware {
+private class BlockingMiddleware: RequestPipelineMiddleware {
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
         completion(.value(request))

@@ -12,7 +12,7 @@ public typealias SessionTaskCompletion = (Data?, HTTPURLResponse?, Error?) -> Vo
 public typealias SessionTaskProgressHandler = (Progress) -> Void
 
 fileprivate typealias SessionCompletionHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
-fileprivate let serialQueueName = "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)"
+private let serialQueueName = "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)"
 
 /// A type that manages a session and queues URLRequest's
 public protocol URLSessionClientType {
@@ -35,7 +35,7 @@ public protocol URLSessionClientType {
     var middleware: [RequestPipelineMiddleware] { get set }
 }
 
-fileprivate class TaskResponse {
+private class TaskResponse {
     var data: Data?
     var response: HTTPURLResponse?
     var expectedContentLength: Int64?
