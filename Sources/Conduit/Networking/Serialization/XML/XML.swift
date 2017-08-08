@@ -98,8 +98,8 @@ extension XML {
 
         fileprivate func parser(_ parser: XMLParser, foundCharacters string: String) {
             if var activeNode = workingTree.popLast() {
-                let value = activeNode.value ?? ""
-                activeNode.value = value + string
+                let text = activeNode.text ?? ""
+                activeNode.text = text + string
                 workingTree.append(activeNode)
             }
         }

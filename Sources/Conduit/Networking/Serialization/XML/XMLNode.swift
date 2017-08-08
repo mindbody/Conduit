@@ -31,8 +31,8 @@ public struct XMLNode: CustomStringConvertible {
     public var children: [XMLNode]
     /// The element attributes
     public var attributes = [String: String]()
-    /// The contained text value of the element
-    public var value: String?
+    /// The contained text node (value) of the element
+    public var text: String?
     /// Determines whether or not the element is a processing instruction
     public var isProcessingInstruction = false
     /// Determines whether or not the element is a leaf (no children)
@@ -41,7 +41,7 @@ public struct XMLNode: CustomStringConvertible {
     }
 
     private var isEmpty: Bool {
-        return isLeaf && value == nil
+        return isLeaf && text == nil
     }
 
     /// Construct XMLNode with optional value, attributes and children
@@ -51,9 +51,9 @@ public struct XMLNode: CustomStringConvertible {
     ///   - value: String value (text node)
     ///   - attributes: Node attributes dictionary
     ///   - children: Array of child nodes
-    public init(name: String, value: String? = nil, attributes: [String : String] = [:], children: [XMLNode] = []) {
+    public init(name: String, value: CustomStringConvertible? = nil, attributes: [String : String] = [:], children: [XMLNode] = []) {
         self.name = name
-        self.value = value
+        self.text = value?.description
         self.attributes = attributes
         self.children = children
     }
@@ -126,28 +126,6 @@ public struct XMLNode: CustomStringConvertible {
         return children.first { $0.name == name }
     }
 
-    /// Retrieve the first descendant node with the given name, converted to the given type
-    ///
-    /// - Parameter name: Node name to retrieve
-    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
-    /// - Returns: Node value (text node) converted to given type
-    /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
-    ///           or if casting to type fails
-    public func get<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
-        return try node(named: name, traversal: traversal).getValue() as T
-    }
-
-    /// Get node value (text node) converted to given type
-    ///
-    /// - Returns: Node value (text node) converted to given type
-    /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
-    public func getValue<T: LosslessStringConvertible>() throws -> T {
-        guard let value = self.value, let result = T(value) else {
-            throw XMLError.invalidDataType
-        }
-        return result
-    }
-
     /// Generates the stringified XML
     public func xmlValue() -> String {
         let leftDelimiter = isProcessingInstruction ? "<?" : "<"
@@ -157,7 +135,7 @@ public struct XMLNode: CustomStringConvertible {
         let startTag: String
 
         if hasAttributes {
-            let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
+            let describedAttributes = attributes.map({ "\($0.key)=\"\($0.value)\"" }).joined(separator: " ")
             startTag = "\(leftDelimiter)\(name) \(describedAttributes)\(rightDelimiter)"
         }
         else {
@@ -171,11 +149,11 @@ public struct XMLNode: CustomStringConvertible {
         }
 
         if children.isEmpty == false {
-            let body = children.map { $0.description }.joined()
+            let body = children.map({ $0.description }).joined()
             return "\(startTag)\(body)\(endTag)"
         }
 
-        if let value = value {
+        if let value = text {
             return "\(startTag)\(value)\(endTag)"
         }
 
@@ -184,6 +162,58 @@ public struct XMLNode: CustomStringConvertible {
 
     public var description: String {
         return xmlValue()
+    }
+
+}
+
+// MARK: - Value getters
+
+public extension XMLNode {
+
+    /// Retrieve the first descendant node with the given name, converted to the given type
+    ///
+    /// - Parameter name: Node name to retrieve
+    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
+    /// - Returns: Node value (text node) converted to given type
+    /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
+    ///           or if casting to type fails
+    public func getValue<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
+        return try node(named: name, traversal: traversal).getValue() as T
+    }
+
+    /// Retrieve the first descendant node with the given name, converted to the given type
+    ///
+    /// - Parameter name: Node name to retrieve
+    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
+    /// - Returns: Node value (text node) converted to given type
+    /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
+    ///           or if casting to type fails
+    public func getValue<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
+        guard let node = try? node(named: name, traversal: traversal) else {
+            return nil
+        }
+        return try? node.getValue()
+    }
+
+    /// Get node value (text node) converted to given type
+    ///
+    /// - Returns: Node value (text node) converted to given type
+    /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
+    public func getValue<T: LosslessStringConvertible>() throws -> T {
+        guard let result: T = self.getValue() else {
+            throw XMLError.invalidDataType
+        }
+        return result
+    }
+
+    /// Get node valye (text node) converted to a given type
+    ///
+    /// - Returns: Node value (text node) converted to a given type, otherwise nil
+    public func getValue<T: LosslessStringConvertible>() -> T? {
+        guard let text = self.text else {
+            return nil
+        }
+        return T(text)
     }
 
 }
