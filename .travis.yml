@@ -11,4 +11,4 @@ install:
   - brew bundle
 
 script:
-  - rake clean test
+  - rake test
