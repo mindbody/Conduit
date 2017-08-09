@@ -82,4 +82,13 @@ class XMLTests: XCTestCase {
         XCTAssertEqual(node?.description, string)
     }
 
+    func testXMLNodeStringConstructionWithGenerics() {
+        let string = "<xml><int>1</int><double>12.34</double><bool>true</bool></xml>"
+        let node = XMLNode(string)
+        XCTAssertEqual(node?.name, "xml")
+        XCTAssertEqual(node?.getValue("int"), 1)
+        XCTAssertEqual(node?.getValue("double"), 12.34)
+        XCTAssertEqual(node?.getValue("bool"), true)
+    }
+
 }
