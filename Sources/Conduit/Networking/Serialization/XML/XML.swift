@@ -14,7 +14,7 @@ public enum XMLError: Error {
 }
 
 /// Represents an XML document
-public struct XML: CustomStringConvertible {
+public struct XML {
 
     /// The root of the document
     public var root: XMLNode?
@@ -31,22 +31,14 @@ public struct XML: CustomStringConvertible {
         self.processingInstructions = processingInstructions
     }
 
-    /// Attempts to produce an XML document with the provided XML string
-    ///
-    /// - Parameter xmlString: The XML to deserialize
-    public init?(xmlString: String) {
-        /// Internally, we hand deserialization off to a parser class
-        let parser = XML.Parser(xmlString: xmlString)
-        if let xml = parser?.parse() {
-            self = xml
-        }
-        else {
-            return nil
-        }
-    }
+}
 
-    /// Generates the stringified XML
-    public func xmlValue() -> String {
+// MARK: - CustomStringConvertible
+
+extension XML: CustomStringConvertible {
+
+    /// Serialized XML string output
+    public var description: String {
         var nodes = [XMLNode.versionInstruction]
         nodes.append(contentsOf: processingInstructions)
         if let root = root {
@@ -55,15 +47,30 @@ public struct XML: CustomStringConvertible {
         return nodes.map { $0.description }.joined()
     }
 
-    public var description: String {
-        return xmlValue()
+}
+
+// MARK: - LosslessStringConvertible
+
+extension XML: LosslessStringConvertible {
+
+    /// Attempts to produce an XML document with the provided XML string
+    ///
+    /// - Parameter description: The XML string to deserialize
+    public init?(_ description: String) {
+        let parser = XML.Parser(xmlString: description)
+        guard let xml = parser?.parse() else {
+            return nil
+        }
+        self = xml
     }
 
 }
 
-extension XML {
-    fileprivate class Parser: NSObject, XMLParserDelegate {
+// MARK: XML string parser
 
+extension XML {
+
+    fileprivate class Parser: NSObject, XMLParserDelegate {
         private let xmlParser: XMLParser
         private var workingTree = [XMLNode]()
         private var activeNode: XMLNode?
@@ -120,6 +127,6 @@ extension XML {
                 root = finishedNode
             }
         }
-
     }
+
 }

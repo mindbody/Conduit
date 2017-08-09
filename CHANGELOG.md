@@ -9,6 +9,8 @@
 - Remove `XMLNodeIndex`.
 - Update `XMLNode` subscript method to return `XMLNode?`.
 - Add `.firstLevel` traversal for `XMLNode` to retrieve direct children only.
+- Remove `xmlValue()` from `XMLNode` and `XML` classes, in favor of `description`.
+- Update `XMLNode` and `XML` to conform to `LosslessStringConvertible` protocol.
 
 #### Enhancements
 - Shared `URLSessionClient` with default background operation queue.

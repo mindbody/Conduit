@@ -12,7 +12,7 @@ import Foundation
 public typealias XMLDictionary = [String: CustomStringConvertible]
 
 /// Represents a single node in an XML document
-public struct XMLNode: CustomStringConvertible {
+public struct XMLNode {
 
     /// Not technically a PI, but it follows the same formatting rules
     static var versionInstruction: XMLNode = {
@@ -40,7 +40,7 @@ public struct XMLNode: CustomStringConvertible {
         return children.isEmpty
     }
 
-    private var isEmpty: Bool {
+    fileprivate var isEmpty: Bool {
         return isLeaf && text == nil
     }
 
@@ -125,9 +125,14 @@ public struct XMLNode: CustomStringConvertible {
     public subscript(name: String) -> XMLNode? {
         return children.first { $0.name == name }
     }
+}
 
-    /// Generates the stringified XML
-    public func xmlValue() -> String {
+// MARK: CustomStringConvertible
+
+extension XMLNode: CustomStringConvertible {
+
+    /// Serialized XML string output
+    public var description: String {
         let leftDelimiter = isProcessingInstruction ? "<?" : "<"
         let rightDelimiter = isProcessingInstruction ? "?>" : (isEmpty ? "/>" : ">")
 
@@ -160,8 +165,20 @@ public struct XMLNode: CustomStringConvertible {
         return startTag
     }
 
-    public var description: String {
-        return xmlValue()
+}
+
+// MARK: - LosslessStringConvertible
+
+extension XMLNode: LosslessStringConvertible {
+
+    /// Attempts to produce an XMLNode with the provided XML string
+    ///
+    /// - Parameter description: The XML string to deserialize
+    public init?(_ description: String) {
+        guard let node = XML(description)?.root else {
+            return nil
+        }
+        self = node
     }
 
 }
