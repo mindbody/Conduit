@@ -202,7 +202,7 @@ public extension XMLNode {
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           and no default has been provided, or if casting to type fails
-    public func getValue<T: XMLTextNodeConvertible>(_ name: String, default: T? = nil,
+    public func getValue<T: XMLTextNodeInitializable>(_ name: String, default: T? = nil,
                                                     traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
         return try node(named: name, traversal: traversal).getValue(default: `default`)
     }
@@ -214,7 +214,7 @@ public extension XMLNode {
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           or if casting to type fails
-    public func getValue<T: XMLTextNodeConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
+    public func getValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
         return try? node(named: name, traversal: traversal).getValue()
     }
 
@@ -223,7 +223,7 @@ public extension XMLNode {
     /// - Parameter default: Default value to return if no value is found
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
-    public func getValue<T: XMLTextNodeConvertible>(default: T? = nil) throws -> T {
+    public func getValue<T: XMLTextNodeInitializable>(default: T? = nil) throws -> T {
         guard let value = getValue() ?? `default` else {
             throw XMLError.invalidDataType
         }
@@ -233,7 +233,7 @@ public extension XMLNode {
     /// Get node valye (text node) converted to a given type
     ///
     /// - Returns: Node value (text node) converted to a given type, otherwise nil
-    public func getValue<T: XMLTextNodeConvertible>() -> T? {
+    public func getValue<T: XMLTextNodeInitializable>() -> T? {
         guard let textNode = text else {
             return nil
         }
@@ -242,39 +242,39 @@ public extension XMLNode {
 
 }
 
-// MARK: - XMLTextNodeConvertible
+// MARK: - XMLTextNodeInitializable
 
-/// Types conforming to `XMLTextNodeConvertible` can be constructed directly
+/// Types conforming to `XMLTextNodeInitializable` can be constructed directly
 /// from `XMLNode` text value.
-public protocol XMLTextNodeConvertible {
+public protocol XMLTextNodeInitializable {
     init?(xmlTextNode: String)
 }
 
-extension Int: XMLTextNodeConvertible {
+extension Int: XMLTextNodeInitializable {
     public init?(xmlTextNode: String) {
         self.init(xmlTextNode, radix: 10)
     }
 }
 
-extension Double: XMLTextNodeConvertible {
+extension Double: XMLTextNodeInitializable {
     public init?(xmlTextNode: String) {
         self.init(xmlTextNode)
     }
 }
 
-extension Decimal: XMLTextNodeConvertible {
+extension Decimal: XMLTextNodeInitializable {
     public init?(xmlTextNode: String) {
         self.init(string: xmlTextNode)
     }
 }
 
-extension String: XMLTextNodeConvertible {
+extension String: XMLTextNodeInitializable {
     public init?(xmlTextNode: String) {
         self = xmlTextNode
     }
 }
 
-extension Bool: XMLTextNodeConvertible {
+extension Bool: XMLTextNodeInitializable {
     public init?(xmlTextNode: String) {
         self.init(xmlTextNode)
     }
