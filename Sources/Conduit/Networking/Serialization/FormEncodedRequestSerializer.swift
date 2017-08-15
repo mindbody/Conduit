@@ -12,14 +12,7 @@ import Foundation
 public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
 
     /// Defines how parameters should be encoded within the HTTP body.
-    public var formattingOptions: QueryStringFormattingOptions
-
-    public override init() {
-        var formattingOptions = QueryStringFormattingOptions()
-        formattingOptions.plusSymbolEncodingRule = .replacedWithEncodedPlus
-        self.formattingOptions = formattingOptions
-        super.init()
-    }
+    public var formattingOptions = QueryStringFormattingOptions()
 
     override open func serializedRequestWith(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
 

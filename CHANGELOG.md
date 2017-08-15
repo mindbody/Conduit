@@ -5,6 +5,7 @@
 
 #### Enhancements
 - `FormEncodedRequestSerializer` now exposes query formatting options for body parameters
+- `QueryStringFormattingOptions` now encodes plus symbols by default
 
 #### Bug Fixes
 - None
