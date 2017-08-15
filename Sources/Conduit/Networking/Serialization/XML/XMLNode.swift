@@ -197,14 +197,12 @@ public extension XMLNode {
     /// Retrieve the first descendant node with the given name, converted to the given type
     ///
     /// - Parameter name: Node name to retrieve
-    /// - Parameter default: Default value to return if no value is found
     /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           and no default has been provided, or if casting to type fails
-    public func getValue<T: XMLTextNodeInitializable>(_ name: String, default: T? = nil,
-                                                      traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
-        return try node(named: name, traversal: traversal).getValue(default: `default`)
+    public func getValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
+        return try node(named: name, traversal: traversal).getValue()
     }
 
     /// Retrieve the first descendant node with the given name, converted to the given type
@@ -220,11 +218,10 @@ public extension XMLNode {
 
     /// Get node value (text node) converted to given type
     ///
-    /// - Parameter default: Default value to return if no value is found
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
-    public func getValue<T: XMLTextNodeInitializable>(default: T? = nil) throws -> T {
-        guard let value = getValue() ?? `default` else {
+    public func getValue<T: XMLTextNodeInitializable>() throws -> T {
+        guard let value: T = getValue() else {
             throw XMLError.invalidDataType
         }
         return value
