@@ -127,6 +127,13 @@ public struct XMLNode {
     }
 }
 
+/// Traversal options for extracting nodes from an XMLNode tree
+public enum XMLNodeTraversal {
+    case firstLevel
+    case depthFirst
+    case breadthFirst
+}
+
 // MARK: CustomStringConvertible
 
 extension XMLNode: CustomStringConvertible {
@@ -190,12 +197,14 @@ public extension XMLNode {
     /// Retrieve the first descendant node with the given name, converted to the given type
     ///
     /// - Parameter name: Node name to retrieve
+    /// - Parameter default: Default value to return if no value is found
     /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
-    ///           or if casting to type fails
-    public func getValue<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
-        return try node(named: name, traversal: traversal).getValue() as T
+    ///           and no default has been provided, or if casting to type fails
+    public func getValue<T: XMLTextNodeConvertible>(_ name: String, default: T? = nil,
+                                                    traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
+        return try node(named: name, traversal: traversal).getValue(default: `default`)
     }
 
     /// Retrieve the first descendant node with the given name, converted to the given type
@@ -205,39 +214,68 @@ public extension XMLNode {
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           or if casting to type fails
-    public func getValue<T: LosslessStringConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
-        guard let node = try? node(named: name, traversal: traversal) else {
-            return nil
-        }
-        return try? node.getValue()
+    public func getValue<T: XMLTextNodeConvertible>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
+        return try? node(named: name, traversal: traversal).getValue()
     }
 
     /// Get node value (text node) converted to given type
     ///
+    /// - Parameter default: Default value to return if no value is found
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
-    public func getValue<T: LosslessStringConvertible>() throws -> T {
-        guard let result: T = self.getValue() else {
+    public func getValue<T: XMLTextNodeConvertible>(default: T? = nil) throws -> T {
+        guard let value = getValue() ?? `default` else {
             throw XMLError.invalidDataType
         }
-        return result
+        return value
     }
 
     /// Get node valye (text node) converted to a given type
     ///
     /// - Returns: Node value (text node) converted to a given type, otherwise nil
-    public func getValue<T: LosslessStringConvertible>() -> T? {
-        guard let text = self.text else {
+    public func getValue<T: XMLTextNodeConvertible>() -> T? {
+        guard let textNode = text else {
             return nil
         }
-        return T(text)
+        return T(xmlTextNode: textNode)
     }
 
 }
 
-/// Traversal options for extracting nodes from an XMLNode tree
-public enum XMLNodeTraversal {
-    case firstLevel
-    case depthFirst
-    case breadthFirst
+// MARK: - XMLTextNodeConvertible
+
+/// Types conforming to `XMLTextNodeConvertible` can be constructed directly
+/// from `XMLNode` text value.
+public protocol XMLTextNodeConvertible {
+    init?(xmlTextNode: String)
+}
+
+extension Int: XMLTextNodeConvertible {
+    public init?(xmlTextNode: String) {
+        self.init(xmlTextNode, radix: 10)
+    }
+}
+
+extension Double: XMLTextNodeConvertible {
+    public init?(xmlTextNode: String) {
+        self.init(xmlTextNode)
+    }
+}
+
+extension Decimal: XMLTextNodeConvertible {
+    public init?(xmlTextNode: String) {
+        self.init(string: xmlTextNode)
+    }
+}
+
+extension String: XMLTextNodeConvertible {
+    public init?(xmlTextNode: String) {
+        self = xmlTextNode
+    }
+}
+
+extension Bool: XMLTextNodeConvertible {
+    public init?(xmlTextNode: String) {
+        self.init(xmlTextNode)
+    }
 }
