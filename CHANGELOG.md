@@ -1,10 +1,10 @@
 ## Master
 
 #### Breaking
-- None
+- `RequestSerializer` no longer handles query parameters
 
 #### Enhancements
-- None
+- `FormEncodedRequestSerializer` now exposes query formatting options for body parameters
 
 #### Bug Fixes
 - None

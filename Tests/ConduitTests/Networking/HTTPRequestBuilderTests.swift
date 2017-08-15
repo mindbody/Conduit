@@ -17,7 +17,7 @@ private class MockRequestSerializer: RequestSerializer {
     var shouldThrowError = false
     var hasBeenUtilized = false
 
-    func serializedRequestWith(request: URLRequest, bodyParameters: Any?, queryParameters: [String : Any]?) throws -> URLRequest {
+    func serializedRequestWith(request: URLRequest, bodyParameters: Any?) throws -> URLRequest {
         self.hasBeenUtilized = true
 
         if shouldThrowError {

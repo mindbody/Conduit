@@ -13,13 +13,9 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
 
     public override init() {}
 
-    public override func serializedRequestWith(request: URLRequest,
-                                               bodyParameters: Any? = nil,
-                                               queryParameters: [String: Any]? = nil) throws -> URLRequest {
+    public override func serializedRequestWith(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
 
-        var request = try super.serializedRequestWith(request: request,
-                                                      bodyParameters: bodyParameters,
-                                                      queryParameters: queryParameters)
+        var request = try super.serializedRequestWith(request: request, bodyParameters: bodyParameters)
 
         var bodyData: Data? = nil
         if bodyParameters != nil {
