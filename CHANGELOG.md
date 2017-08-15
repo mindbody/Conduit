@@ -1,10 +1,10 @@
 ## Master
 
 #### Breaking
-- None
+- `XMLNode` value getters have been updated to conform to `XMLTextNodeInitializable`.
 
 #### Enhancements
-- None
+- `XMLTextNodeInitializable` protocol has been added.
 
 #### Bug Fixes
 - None
