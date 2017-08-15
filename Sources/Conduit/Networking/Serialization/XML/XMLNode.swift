@@ -203,7 +203,7 @@ public extension XMLNode {
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           and no default has been provided, or if casting to type fails
     public func getValue<T: XMLTextNodeInitializable>(_ name: String, default: T? = nil,
-                                                    traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
+                                                      traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
         return try node(named: name, traversal: traversal).getValue(default: `default`)
     }
 
