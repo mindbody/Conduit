@@ -5,7 +5,6 @@
 
 #### Enhancements
 - `XMLTextNodeInitializable` protocol has been added.
-- `default` value parameter has been added to `XMLNode` value getters.
 
 #### Bug Fixes
 - None
