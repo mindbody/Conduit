@@ -13,7 +13,7 @@ class OAuth2TokenStorageTests: XCTestCase {
 
     var mockServerEnvironment: OAuth2ServerEnvironment!
     var mockClientConfiguration: OAuth2ClientConfiguration!
-    let mockToken = BearerOAuth2Token(accessToken: "herp", refreshToken: "derp", expiration: Date().addingTimeInterval(10_000))
+    let mockToken = BearerToken(accessToken: "herp", refreshToken: "derp", expiration: Date().addingTimeInterval(10_000))
     let mockAuthorization = OAuth2Authorization(type: .bearer, level: .user)
     var sut: OAuth2TokenStore!
 

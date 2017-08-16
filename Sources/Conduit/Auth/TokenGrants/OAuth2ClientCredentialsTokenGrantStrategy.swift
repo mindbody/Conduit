@@ -39,7 +39,7 @@ public struct OAuth2ClientCredentialsTokenGrantStrategy: OAuth2TokenGrantStrateg
         return request
     }
 
-    public func issueToken(_ completion: @escaping Result<BearerOAuth2Token>.Block) {
+    public func issueToken(_ completion: @escaping Result<BearerToken>.Block) {
         logger.verbose("Attempting to issue a new token with client credentials...")
         do {
             let request = try buildTokenGrantRequest()

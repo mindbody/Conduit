@@ -66,10 +66,10 @@
 		1B88B2481F268C220022A69D /* OAuth2Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */; };
 		1B88B2491F268C220022A69D /* OAuth2Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */; };
 		1B88B24A1F268C220022A69D /* OAuth2Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */; };
-		1B88B24B1F268C220022A69D /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2Token.swift */; };
-		1B88B24C1F268C220022A69D /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2Token.swift */; };
-		1B88B24D1F268C220022A69D /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2Token.swift */; };
-		1B88B24E1F268C220022A69D /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2Token.swift */; };
+		1B88B24B1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */; };
+		1B88B24C1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */; };
+		1B88B24D1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */; };
+		1B88B24E1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */; };
 		1B88B24F1F268C220022A69D /* OAuth2Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EE1F268C220022A69D /* OAuth2Error.swift */; };
 		1B88B2501F268C220022A69D /* OAuth2Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EE1F268C220022A69D /* OAuth2Error.swift */; };
 		1B88B2511F268C220022A69D /* OAuth2Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1EE1F268C220022A69D /* OAuth2Error.swift */; };
@@ -303,6 +303,10 @@
 		1BD800521F16820800481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD8FFFE1F167E7800481DC9 /* Conduit.framework */; };
 		1BD800611F16821400481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800191F167E8B00481DC9 /* Conduit.framework */; };
 		1BD800701F16821D00481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800261F167E9B00481DC9 /* Conduit.framework */; };
+		1BE352F41F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
@@ -356,7 +360,7 @@
 		1B88B1EA1F268C220022A69D /* OAuth2ClientConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ClientConfiguration.swift; sourceTree = "<group>"; };
 		1B88B1EB1F268C220022A69D /* OAuth2ServerEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ServerEnvironment.swift; sourceTree = "<group>"; };
 		1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Authorization.swift; sourceTree = "<group>"; };
-		1B88B1ED1F268C220022A69D /* OAuth2Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
+		1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2LegacyToken.swift; sourceTree = "<group>"; };
 		1B88B1EE1F268C220022A69D /* OAuth2Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2Error.swift; sourceTree = "<group>"; };
 		1B88B1EF1F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2RequestPipelineMiddleware.swift; sourceTree = "<group>"; };
 		1B88B1F01F268C220022A69D /* OAuth2TokenGrantManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManager.swift; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 		1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -554,7 +559,8 @@
 			children = (
 				1B88B1E91F268C220022A69D /* Configuration */,
 				1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */,
-				1B88B1ED1F268C220022A69D /* OAuth2Token.swift */,
+				1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */,
+				1BE352F31F44F4FC008212BC /* OAuth2Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1204,6 +1210,7 @@
 				1B88B2E81F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B2781F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26C1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
+				1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B27C1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B2381F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				1B88B2401F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -1237,7 +1244,7 @@
 				1B88B2701F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2841F268C220022A69D /* KeychainOptions.swift in Sources */,
-				1B88B24C1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				1B88B24C1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				95E26BA91F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B2341F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CC1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
@@ -1281,6 +1288,7 @@
 				1B88B2B51F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2451F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2611F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
+				1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B2D91F268C220022A69D /* ResponseDeserializer.swift in Sources */,
 				1B88B2311F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2951F268C220022A69D /* CertificateBundle.swift in Sources */,
@@ -1299,7 +1307,7 @@
 				1B88B2711F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2551F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2851F268C220022A69D /* KeychainOptions.swift in Sources */,
-				1B88B24D1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				1B88B24D1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2351F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CD1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BD1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
@@ -1342,6 +1350,7 @@
 				1B88B2B61F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2461F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2621F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
+				1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B2DA1F268C220022A69D /* ResponseDeserializer.swift in Sources */,
 				1B88B2321F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2961F268C220022A69D /* CertificateBundle.swift in Sources */,
@@ -1360,7 +1369,7 @@
 				1B88B2721F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2561F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2861F268C220022A69D /* KeychainOptions.swift in Sources */,
-				1B88B24E1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				1B88B24E1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2361F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CE1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BE1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
@@ -1506,6 +1515,7 @@
 				1B88B2431F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B25F1F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D71F268C220022A69D /* ResponseDeserializer.swift in Sources */,
+				1BE352F41F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B22F1F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2931F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2631F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
@@ -1524,7 +1534,7 @@
 				1B88B26F1F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2531F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2831F268C220022A69D /* KeychainOptions.swift in Sources */,
-				1B88B24B1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				1B88B24B1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2331F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CB1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BB1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,

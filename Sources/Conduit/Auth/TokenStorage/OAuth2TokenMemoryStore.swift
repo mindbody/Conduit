@@ -11,7 +11,7 @@ import Foundation
 /// An in-memory token store that lives as long as the consuming executable
 public class OAuth2TokenMemoryStore: OAuth2TokenStore {
 
-    private var tokens: [String:OAuth2Token] = [:]
+    private var tokens: [String:BearerToken] = [:]
 
     /// Creates a new OAuth2TokenMemoryStore
     public init() {}
@@ -22,7 +22,7 @@ public class OAuth2TokenMemoryStore: OAuth2TokenStore {
     }
 
     @discardableResult
-    public func store(token: OAuth2Token?, for client: OAuth2ClientConfiguration,
+    public func store(token: BearerToken?, for client: OAuth2ClientConfiguration,
                       with authorization: OAuth2Authorization) -> Bool {
         let tokenKey = tokenKeyFor(client: client, authorization: authorization)
         logger.debug("Storing token to memory with key: \(tokenKey)")
@@ -30,7 +30,7 @@ public class OAuth2TokenMemoryStore: OAuth2TokenStore {
         return true
     }
 
-    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2Token? {
+    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> BearerToken? {
         return tokens[tokenKeyFor(client: client, authorization: authorization)]
     }
 

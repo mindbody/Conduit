@@ -2,24 +2,17 @@
 //  OAuth2Token.swift
 //  Conduit
 //
-//  Created by John Hammerlund on 7/11/16.
+//  Created by John Hammerlund on 8/16/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
 import Foundation
 
-/// A token used for authorizing user or client requests
-public protocol OAuth2Token: class, NSCoding {
-    /// Determines whether or not the token is still valid
-    var isValid: Bool { get }
-
-    /// The authorization header value used to authorize requests against the server application
+public protocol OAuth2Token {
     var authorizationHeaderValue: String { get }
 }
 
-/// A token issued from an OAuth2 server application that represents
-/// a possession factor (hence "bearer") for a specific user
-public class BearerOAuth2Token: NSObject, OAuth2Token {
+public struct BearerToken: OAuth2Token, Codable {
 
     /// The access token
     public let accessToken: String
@@ -40,7 +33,7 @@ public class BearerOAuth2Token: NSObject, OAuth2Token {
         return "Bearer \(self.accessToken)"
     }
 
-    /// Creates a new BearerOAuth2Token
+    /// Creates a new BearerToken
     /// - Parameters:
     ///   - accessToken: The access_token
     ///   - refreshToken: (Optional) The refresh_token
@@ -49,35 +42,13 @@ public class BearerOAuth2Token: NSObject, OAuth2Token {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
         self.expiration = expiration
-        super.init()
     }
 
-    public required convenience init?(coder aDecoder: NSCoder) {
-        guard let token = aDecoder.decodeObject(forKey: "token") as? String,
-            let expiration = aDecoder.decodeObject(forKey: "expiration") as? Date else {
-                return nil
-        }
-        let refreshToken = aDecoder.decodeObject(forKey: "refreshToken") as? String
-
-        self.init(accessToken: token, refreshToken: refreshToken, expiration: expiration)
-    }
-
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.accessToken, forKey: "token")
-        aCoder.encode(self.expiration, forKey: "expiration")
-        aCoder.encode(self.refreshToken, forKey: "refreshToken")
-    }
-
-    public override var debugDescription: String {
-        return String(format: "<BearerOAuth2Token:%p accessToken:\(self.accessToken) " +
-            "refreshToken:\(self.refreshToken ?? "nil") " +
-            "expiration:\(self.expiration)>", self)
-    }
 }
 
 /// A token that encapsulates a user identifier and a password, most often
 /// used for authenticating a client against a server realm
-public class BasicOAuth2Token: NSObject, OAuth2Token {
+public class BasicToken: OAuth2Token {
 
     /// The username or client identifier
     let username: String
@@ -91,44 +62,17 @@ public class BasicOAuth2Token: NSObject, OAuth2Token {
         return "Basic \(self.base64EncodedUsernameAndPassword())"
     }
 
-    /// Creates a new BasicOauth2Token
+    /// Creates a new BasicToken
     /// - Parameters:
     ///   - username: The plaintext username
     ///   - password: The plaintext password
     public init(username: String, password: String) {
         self.username = username
         self.password = password
-        super.init()
     }
 
-    public required convenience init?(coder aDecoder: NSCoder) {
-        guard let username = aDecoder.decodeObject(forKey: "username") as? String,
-            let password = aDecoder.decodeObject(forKey: "password") as? String else {
-                return nil
-        }
-
-        self.init(username: username, password: password)
-    }
-
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.username, forKey: "username")
-        aCoder.encode(self.password, forKey: "password")
-    }
-
-    public override var debugDescription: String {
-        return String(format: "<BasicOAuth2Token:%p username:\(self.username) password:\(self.password)>", self)
-    }
 }
-
-extension BasicOAuth2Token {
-    func base64EncodedUsernameAndPassword() -> String {
-        let usernamePasswordString = "\(username):\(password)"
-        let base64EncodedData = usernamePasswordString.data(using: String.Encoding.utf8)
-        return base64EncodedData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) ?? ""
-    }
-}
-
-extension BearerOAuth2Token {
+extension BearerToken {
     private struct JSONKeys {
         static let accessToken = "access_token"
         static let tokenType = "token_type"
@@ -136,7 +80,7 @@ extension BearerOAuth2Token {
         static let refreshToken = "refresh_token"
     }
 
-    static func mapFrom(JSON: [String:Any]) -> BearerOAuth2Token? {
+    static func mapFrom(JSON: [String:Any]) -> BearerToken? {
         guard let tokenType = JSON[JSONKeys.tokenType] as? String,
             let accessToken = JSON[JSONKeys.accessToken] as? String,
             let expiresIn = JSON[JSONKeys.expiresIn] as? Int else {
@@ -150,8 +94,24 @@ extension BearerOAuth2Token {
             return nil
         }
 
-        return BearerOAuth2Token(accessToken: accessToken,
+        return BearerToken(accessToken: accessToken,
                                  refreshToken: refreshToken,
                                  expiration: Date().addingTimeInterval(TimeInterval(expiresIn)))
+    }
+}
+
+extension BearerToken {
+
+    init(legacyToken: BearerOAuth2Token) {
+        self.init(accessToken: legacyToken.accessToken, refreshToken: legacyToken.refreshToken, expiration: legacyToken.expiration)
+    }
+
+}
+
+extension BasicToken {
+    func base64EncodedUsernameAndPassword() -> String {
+        let usernamePasswordString = "\(username):\(password)"
+        let base64EncodedData = usernamePasswordString.data(using: String.Encoding.utf8)
+        return base64EncodedData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) ?? ""
     }
 }

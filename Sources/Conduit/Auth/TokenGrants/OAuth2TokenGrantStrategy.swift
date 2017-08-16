@@ -14,7 +14,7 @@ public protocol OAuth2TokenGrantStrategy {
     /// Attempts to issue a token with the given grant type
     /// - Parameters:
     ///   - completion: A closure that executes on token grant success/failure
-    func issueToken(_ completion: @escaping Result<BearerOAuth2Token>.Block)
+    func issueToken(_ completion: @escaping Result<BearerToken>.Block)
 
 }
 
@@ -24,7 +24,7 @@ extension OAuth2TokenGrantStrategy {
                                         grantType: String,
                                         additionalGrantParameters: [String:Any],
                                         requestSerializer: RequestSerializer = JSONRequestSerializer()) throws -> URLRequest {
-        let basicToken = BasicOAuth2Token(username: clientConfiguration.clientIdentifier,
+        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
                                           password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)

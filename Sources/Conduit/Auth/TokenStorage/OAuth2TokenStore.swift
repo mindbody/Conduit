@@ -18,7 +18,7 @@ public protocol OAuth2TokenStore {
     ///     - authorization: The type and level of authorization that the token is used for
     /// - Returns: A Bool indicating whether or not the storage or removal succeeded
     @discardableResult
-    func store(token: OAuth2Token?, for client: OAuth2ClientConfiguration,
+    func store(token: BearerToken?, for client: OAuth2ClientConfiguration,
                with authorization: OAuth2Authorization) -> Bool
 
     /// Retrieves the stored token for the given OAuth2 client and authorization type
@@ -26,7 +26,7 @@ public protocol OAuth2TokenStore {
     ///     - client: Describes the token's OAuth2 client
     ///     - authorization: The type and level of authorization that the token is used for
     /// - Returns: A stored token, or nil if a token doesn't exist
-    func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2Token?
+    func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> BearerToken?
 }
 
 public extension OAuth2TokenStore {

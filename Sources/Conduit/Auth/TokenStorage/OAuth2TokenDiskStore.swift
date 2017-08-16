@@ -41,11 +41,11 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     }
 
     @discardableResult
-    public func store(token: OAuth2Token?, for client: OAuth2ClientConfiguration,
+    public func store(token: BearerToken?, for client: OAuth2ClientConfiguration,
                       with authorization: OAuth2Authorization) -> Bool {
         var tokenData: Data? = nil
         if let token = token {
-            tokenData = NSKeyedArchiver.archivedData(withRootObject: token)
+            tokenData = try? JSONEncoder().encode(token)
         }
         switch storageMethod {
         case .userDefaults:
@@ -75,17 +75,24 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         }
     }
 
-    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2Token? {
+    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> BearerToken? {
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
-            if let data = UserDefaults.standard.object(forKey: identifier) as? Data {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? OAuth2Token
+            guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
+                return nil
             }
             return nil
         case .url(let storageURL):
-            if let data = FileManager.default.contents(atPath: storageURL.path) {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? OAuth2Token
+            guard let data = FileManager.default.contents(atPath: storageURL.path) else {
+                return nil
+            }
+            let decoder = JSONDecoder()
+            if let token = try? decoder.decode(BearerToken.self, from: data) {
+                return token
+            }
+            if let legacyToken = NSKeyedUnarchiver.unarchiveObject(with: data) as? BearerOAuth2Token {
+                return BearerToken(legacyToken: legacyToken)
             }
             return nil
         }

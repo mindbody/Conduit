@@ -27,7 +27,7 @@ public class Auth {
     ///
     /// It is important to note that any application that still requires the usage of an existing networking layer
     /// will have to hand off token management responsibilities to Conduit. This means that any token that is
-    /// currently stored within the consuming binary will need to use it to build a new BearerOAuth2Token and
+    /// currently stored within the consuming binary will need to use it to build a new BearerToken and
     /// store it in the appropriate OAuth2MemoryStore (often `Auth.defaultTokenStore`).
     ///
     /// Finally, assuming any pre-existing OAuth2 code requires the stop/start of a network queue.
@@ -49,7 +49,7 @@ public class Auth {
         /// A hook that fires when Conduit has finished or failed to refresh a token for a given
         /// client and authorization level
         public typealias TokenPostFetchHook =
-            (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel, Result<BearerOAuth2Token>) -> Void
+            (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel, Result<BearerToken>) -> Void
 
         fileprivate static var externalTokenPreFetchHooks: [TokenPreFetchHook] = []
         fileprivate static var externalTokenPostFetchHooks: [TokenPostFetchHook] = []
@@ -61,7 +61,7 @@ public class Auth {
         ///     - completion: A Result that contains the refreshed token, if it succeeds
         public static func refreshBearerTokenWithin(sessionClient: URLSessionClient,
                                                     middleware: OAuth2RequestPipelineMiddleware,
-                                                    completion: @escaping Result<BearerOAuth2Token>.Block) {
+                                                    completion: @escaping Result<BearerToken>.Block) {
             var sessionClient = sessionClient
             sessionClient.middleware = [middleware]
             guard let noOpURL = URL(string: "https://mindbodyonline.com") else {
@@ -71,14 +71,14 @@ public class Auth {
             var noOpRequest = URLRequest(url: noOpURL)
             noOpRequest.url = nil
 
-            guard let bearerToken = middleware.token as? BearerOAuth2Token else {
+            guard let bearerToken = middleware.token as? BearerToken else {
                 completion(.error(OAuth2Error.clientFailure(nil, nil)))
                 return
             }
 
-            let expiredToken = BearerOAuth2Token(accessToken: bearerToken.accessToken,
-                                                 refreshToken: bearerToken.refreshToken,
-                                                 expiration: Date())
+            let expiredToken = BearerToken(accessToken: bearerToken.accessToken,
+                                           refreshToken: bearerToken.refreshToken,
+                                           expiration: Date())
             middleware.tokenStorage.store(token: expiredToken,
                                           for: middleware.clientConfiguration,
                                           with: middleware.authorization)
@@ -86,7 +86,7 @@ public class Auth {
             sessionClient.begin(request: noOpRequest) { (data, response, _) in
                 if let token =
                     middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
-                                                     authorization: middleware.authorization) as? BearerOAuth2Token,
+                                                     authorization: middleware.authorization) as? BearerToken,
                     token.isValid {
                     completion(.value(token))
                 }
@@ -121,7 +121,7 @@ public class Auth {
 
         static func notifyTokenPostFetchHooksWith(client: OAuth2ClientConfiguration,
                                                   authorizationLevel: OAuth2Authorization.AuthorizationLevel,
-                                                  result: Result<BearerOAuth2Token>) {
+                                                  result: Result<BearerToken>) {
             for hook in self.externalTokenPostFetchHooks {
                 hook(client, authorizationLevel, result)
             }
