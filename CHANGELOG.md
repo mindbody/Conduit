@@ -7,8 +7,6 @@
 - `FormEncodedRequestSerializer` now exposes query formatting options for body parameters
 - `QueryStringFormattingOptions` now encodes plus symbols by default
 - `XMLNode` value getters have been updated to conform to `XMLTextNodeInitializable`.
-
-#### Enhancements
 - `XMLTextNodeInitializable` protocol has been added.
 
 #### Bug Fixes
