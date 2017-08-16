@@ -186,7 +186,7 @@ class QueryStringTests: XCTestCase {
         XCTAssert(encodedURL2.query == "42")
     }
 
-    func testDoesntEncodePlusSymbolsByDefault() {
+    func testEncodesPlusSymbolsByDefault() {
         queryString.parameters = [
             "key1": "value+1"
         ]
@@ -194,7 +194,7 @@ class QueryStringTests: XCTestCase {
             XCTFail()
             return
         }
-        XCTAssert(encodedURL.query == "key1=value+1")
+        XCTAssert(encodedURL.query == "key1=value%2B1")
     }
 
     func testReplacesPlusSymbolWithEncodedSpaces() {

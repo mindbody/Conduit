@@ -45,12 +45,8 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         self.formData.append(formPart)
     }
 
-    public override func serializedRequestWith(request: URLRequest,
-                                               bodyParameters: Any?,
-                                               queryParameters: [String : Any]? = nil) throws -> URLRequest {
-        let request = try super.serializedRequestWith(request: request,
-                                                      bodyParameters: bodyParameters,
-                                                      queryParameters: queryParameters)
+    public override func serializedRequestWith(request: URLRequest, bodyParameters: Any?) throws -> URLRequest {
+        let request = try super.serializedRequestWith(request: request, bodyParameters: bodyParameters)
 
         var mutableRequest = request
 
