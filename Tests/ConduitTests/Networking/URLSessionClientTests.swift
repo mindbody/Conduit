@@ -17,7 +17,7 @@ class URLSessionClientTests: XCTestCase {
         let then = Date()
         let result = try client.begin(request: request)
         XCTAssertNotNil(result.data)
-        XCTAssertEqual((result.response as? HTTPURLResponse)?.statusCode, 200)
+        XCTAssertEqual(result.response.statusCode, 200)
         XCTAssertGreaterThanOrEqual(Date().timeIntervalSince(then), 2)
     }
 
@@ -194,9 +194,19 @@ class URLSessionClientTests: XCTestCase {
         XCTAssert(completedRequests == numConcurrentRequests)
     }
 
+    func testHTTPStatusCodes() throws {
+        let client = URLSessionClient(delegateQueue: OperationQueue())
+        let codes = [200, 304, 400, 403, 412, 500, 501]
+        for code in codes {
+            let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/status/\(code)"))
+            let result = try client.begin(request: request)
+            XCTAssertEqual(result.response.statusCode, code)
+        }
+    }
+
 }
 
-fileprivate class BadMiddleware: RequestPipelineMiddleware {
+private class BadMiddleware: RequestPipelineMiddleware {
     enum WhyAreYouUsingThisMiddlewareError: Error {
         case userError
     }
@@ -208,7 +218,7 @@ fileprivate class BadMiddleware: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class TransformingMiddleware1: RequestPipelineMiddleware {
+private class TransformingMiddleware1: RequestPipelineMiddleware {
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
     let modifiedURL: URL
 
@@ -223,7 +233,7 @@ fileprivate class TransformingMiddleware1: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class TransformingMiddleware2: RequestPipelineMiddleware {
+private class TransformingMiddleware2: RequestPipelineMiddleware {
     var transformedRequest: URLRequest?
 
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
@@ -241,7 +251,7 @@ fileprivate class TransformingMiddleware2: RequestPipelineMiddleware {
     }
 }
 
-fileprivate class BlockingMiddleware: RequestPipelineMiddleware {
+private class BlockingMiddleware: RequestPipelineMiddleware {
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
         completion(.value(request))

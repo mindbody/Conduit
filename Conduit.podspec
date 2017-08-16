@@ -1,11 +1,13 @@
+$version = '0.3.0'
+
 Pod::Spec.new do |spec|
 	spec.name = 'Conduit'
-	spec.version = '0.0.1'
+	spec.version = $version
 	# spec.license = { :type -> 'MIT' }
 	spec.homepage = 'https://github.com/mindbody/Conduit'
 	spec.author = 'Conduit Contributors'
 	spec.summary = 'Robust Swift networking for web APIs'
-	spec.source = { :git => 'https://github.com/mindbody/Conduit.git', :tag => '0.0.1' }
+	spec.source = { :git => 'https://github.com/mindbody/Conduit.git', :tag => $version }
 	spec.source_files = 'Sources/**/*.swift'
 	spec.ios.framework = 'SystemConfiguration'
 	spec.tvos.framework = 'SystemConfiguration'

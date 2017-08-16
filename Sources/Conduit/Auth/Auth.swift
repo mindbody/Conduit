@@ -21,7 +21,7 @@ public class Auth {
 
     /// The session client in which token requests are piped through
     /// Warning: Using the same client as the consuming application or framework may induce threadlock.
-    public static var sessionClient: URLSessionClientType = URLSessionClient()
+    public static var sessionClient: URLSessionClientType = URLSessionClient(delegateQueue: OperationQueue())
 
     /// Provides an interface for migrating and adapting pre-existing application auth/networking layers.
     ///

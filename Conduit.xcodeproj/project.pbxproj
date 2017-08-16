@@ -209,10 +209,6 @@
 		1B88B2E01F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
 		1B88B2E11F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
 		1B88B2E21F268C220022A69D /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21A1F268C220022A69D /* XML.swift */; };
-		1B88B2E31F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E41F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E51F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
-		1B88B2E61F268C220022A69D /* XMLNodeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */; };
 		1B88B2E71F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
 		1B88B2E81F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
 		1B88B2E91F268C220022A69D /* XMLRequestSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */; };
@@ -307,6 +303,13 @@
 		1BD800521F16820800481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD8FFFE1F167E7800481DC9 /* Conduit.framework */; };
 		1BD800611F16821400481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800191F167E8B00481DC9 /* Conduit.framework */; };
 		1BD800701F16821D00481DC9 /* Conduit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD800261F167E9B00481DC9 /* Conduit.framework */; };
+		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BAB1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
+		95E26BB21F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
+		95E26BB31F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
+		95E26BB41F29A2FE00804900 /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,7 +394,6 @@
 		1B88B2171F268C220022A69D /* ResponseDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseDeserializer.swift; sourceTree = "<group>"; };
 		1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOAPEnvelopeFactory.swift; sourceTree = "<group>"; };
 		1B88B21A1F268C220022A69D /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
-		1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNodeIndex.swift; sourceTree = "<group>"; };
 		1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializer.swift; sourceTree = "<group>"; };
 		1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLResponseDeserializer.swift; sourceTree = "<group>"; };
 		1B88B21E1F268C220022A69D /* ServerAuthenticationPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAuthenticationPolicy.swift; sourceTree = "<group>"; };
@@ -434,6 +436,8 @@
 		1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ConduitTests-macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
+		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -656,7 +660,7 @@
 			children = (
 				1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */,
 				1B88B21A1F268C220022A69D /* XML.swift */,
-				1B88B21B1F268C220022A69D /* XMLNodeIndex.swift */,
+				95E26BA71F29649600804900 /* XMLNode.swift */,
 				1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */,
 				1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */,
 			);
@@ -713,6 +717,7 @@
 		1BD555511F17DC81004B1172 /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
+				95B8878F1F396F2600F61C28 /* XML */,
 				1BD555521F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift */,
 				1BD555531F17DC81004B1172 /* HTTPRequestSerializerTests.swift */,
 				1BD555541F17DC81004B1172 /* JSONRequestSerializerTests.swift */,
@@ -720,8 +725,6 @@
 				1BD555561F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift */,
 				1BD555571F17DC81004B1172 /* QueryStringTests.swift */,
 				1BD555581F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift */,
-				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
-				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -782,6 +785,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		95B8878F1F396F2600F61C28 /* XML */ = {
+			isa = PBXGroup;
+			children = (
+				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
+				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
+				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
+			);
+			name = XML;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -824,6 +837,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800111F167E8200481DC9 /* Build configuration list for PBXNativeTarget "Conduit-watchOS" */;
 			buildPhases = (
+				95B887901F3A38E200F61C28 /* SwiftLint */,
 				1BD800071F167E8200481DC9 /* Sources */,
 				1BD800081F167E8200481DC9 /* Frameworks */,
 				1BD800091F167E8200481DC9 /* Headers */,
@@ -842,6 +856,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD8001E1F167E8B00481DC9 /* Build configuration list for PBXNativeTarget "Conduit-tvOS" */;
 			buildPhases = (
+				95B887911F3A38F200F61C28 /* SwiftLint */,
 				1BD800141F167E8B00481DC9 /* Sources */,
 				1BD800151F167E8B00481DC9 /* Frameworks */,
 				1BD800161F167E8B00481DC9 /* Headers */,
@@ -860,6 +875,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD8002B1F167E9B00481DC9 /* Build configuration list for PBXNativeTarget "Conduit-macOS" */;
 			buildPhases = (
+				95B887921F3A390200F61C28 /* SwiftLint */,
 				1BD800211F167E9B00481DC9 /* Sources */,
 				1BD800221F167E9B00481DC9 /* Frameworks */,
 				1BD800231F167E9B00481DC9 /* Headers */,
@@ -935,7 +951,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BD800061F167E7800481DC9 /* Build configuration list for PBXNativeTarget "Conduit-iOS" */;
 			buildPhases = (
-				95B972261F197986008A8C96 /* Swiftlint */,
+				95B972261F197986008A8C96 /* SwiftLint */,
 				1BD8FFF91F167E7800481DC9 /* Sources */,
 				1BD8FFFA1F167E7800481DC9 /* Frameworks */,
 				1BD8FFFB1F167E7800481DC9 /* Headers */,
@@ -1113,14 +1129,56 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
 		};
-		95B972261F197986008A8C96 /* Swiftlint */ = {
+		95B887901F3A38E200F61C28 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B887911F3A38F200F61C28 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B887921F3A390200F61C28 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/env swiftlint autocorrect\n/usr/bin/env swiftlint lint\n";
+		};
+		95B972261F197986008A8C96 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1160,7 +1218,6 @@
 				1B88B28C1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29C1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B41F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E41F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2441F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2601F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D81F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1181,6 +1238,7 @@
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2841F268C220022A69D /* KeychainOptions.swift in Sources */,
 				1B88B24C1F268C220022A69D /* OAuth2Token.swift in Sources */,
+				95E26BA91F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B2341F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CC1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BC1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
@@ -1205,6 +1263,7 @@
 				1B88B2E91F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B2791F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26D1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
+				95E26BAA1F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B27D1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B2391F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				1B88B2411F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -1220,7 +1279,6 @@
 				1B88B28D1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29D1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B51F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E51F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2451F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2611F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D91F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1266,6 +1324,7 @@
 				1B88B2EA1F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B27A1F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26E1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
+				95E26BAB1F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B27E1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B23A1F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				1B88B2421F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -1281,7 +1340,6 @@
 				1B88B28E1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29E1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B61F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E61F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2461F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B2621F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2DA1F268C220022A69D /* ResponseDeserializer.swift in Sources */,
@@ -1338,6 +1396,7 @@
 				1BD555701F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CBF1F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD71F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB21F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555881F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1371,6 +1430,7 @@
 				1BD555711F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CC01F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD81F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB31F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555891F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDE1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1404,6 +1464,7 @@
 				1BD555721F17DC81004B1172 /* NetworkReachabilityTests.swift in Sources */,
 				1B279CC11F19558100C0005E /* AuthTestUtilities.swift in Sources */,
 				1B279CD91F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
+				95E26BB41F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD5558A1F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				1B279CDF1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
@@ -1429,6 +1490,7 @@
 				1B88B22B1F268C220022A69D /* OAuth2SafariAuthorizationStrategy.swift in Sources */,
 				1B88B27B1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B88B2371F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
+				95E26BA81F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B23F1F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
 				1B88B2871F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2BF1F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
@@ -1441,7 +1503,6 @@
 				1B88B28B1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29B1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B31F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
-				1B88B2E31F268C220022A69D /* XMLNodeIndex.swift in Sources */,
 				1B88B2431F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
 				1B88B25F1F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D71F268C220022A69D /* ResponseDeserializer.swift in Sources */,
