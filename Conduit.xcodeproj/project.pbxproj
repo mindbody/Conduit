@@ -32,6 +32,10 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
+		1B6E186B1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
+		1B6E186C1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
+		1B6E186D1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
+		1B6E186E1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
 		1B88B2231F268C220022A69D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1DF1F268C220022A69D /* Auth.swift */; };
 		1B88B2241F268C220022A69D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1DF1F268C220022A69D /* Auth.swift */; };
 		1B88B2251F268C220022A69D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B1DF1F268C220022A69D /* Auth.swift */; };
@@ -350,6 +354,7 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
+		1B6E186A1F461FF600E651DA /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		1B88B1DF1F268C220022A69D /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		1B88B1E21F268C220022A69D /* OAuth2AuthorizationRedirectHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationRedirectHandler.swift; sourceTree = "<group>"; };
 		1B88B1E31F268C220022A69D /* OAuth2SafariAuthorizationStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2SafariAuthorizationStrategy.swift; sourceTree = "<group>"; };
@@ -561,6 +566,7 @@
 				1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */,
 				1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */,
 				1BE352F31F44F4FC008212BC /* OAuth2Token.swift */,
+				1B6E186A1F461FF600E651DA /* DataConvertible.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1229,6 +1235,7 @@
 				1B88B2601F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1B88B2D81F268C220022A69D /* ResponseDeserializer.swift in Sources */,
 				1B88B2301F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
+				1B6E186C1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2941F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2641F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
 				1B88B2D41F268C220022A69D /* RequestSerializer.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				1B88B2F11F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
 				1B88B2811F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
 				1B88B3071F268C420022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
+				1B6E186D1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2ED1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
 				1B88B2691F268C220022A69D /* OAuth2ExtensionTokenGrantStrategy.swift in Sources */,
 				1B88B2991F268C220022A69D /* HTTPRequestBuilder.swift in Sources */,
@@ -1326,6 +1334,7 @@
 				1B88B2F21F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
 				1B88B2821F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
 				1B88B3081F268C430022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
+				1B6E186E1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2EE1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
 				1B88B26A1F268C220022A69D /* OAuth2ExtensionTokenGrantStrategy.swift in Sources */,
 				1B88B29A1F268C220022A69D /* HTTPRequestBuilder.swift in Sources */,
@@ -1498,6 +1507,7 @@
 				1B88B26B1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
 				1B88B22B1F268C220022A69D /* OAuth2SafariAuthorizationStrategy.swift in Sources */,
 				1B88B27B1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
+				1B6E186B1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2371F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				95E26BA81F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B23F1F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
@@ -2098,8 +2108,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -2158,8 +2168,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";

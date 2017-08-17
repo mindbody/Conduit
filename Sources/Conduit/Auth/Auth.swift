@@ -71,7 +71,7 @@ public class Auth {
             var noOpRequest = URLRequest(url: noOpURL)
             noOpRequest.url = nil
 
-            guard let bearerToken = middleware.token as? BearerToken else {
+            guard let bearerToken = middleware.token else {
                 completion(.error(OAuth2Error.clientFailure(nil, nil)))
                 return
             }
@@ -84,9 +84,8 @@ public class Auth {
                                           with: middleware.authorization)
 
             sessionClient.begin(request: noOpRequest) { (data, response, _) in
-                if let token =
-                    middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
-                                                     authorization: middleware.authorization) as? BearerToken,
+                if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
+                                                                              authorization: middleware.authorization),
                     token.isValid {
                     completion(.value(token))
                 }

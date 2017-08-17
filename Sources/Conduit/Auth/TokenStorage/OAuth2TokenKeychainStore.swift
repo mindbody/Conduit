@@ -27,16 +27,15 @@ public struct OAuth2TokenKeychainStore: OAuth2TokenStore {
     }
 
     @discardableResult
-    public func store(token: BearerToken?, for client: OAuth2ClientConfiguration,
-                      with authorization: OAuth2Authorization) -> Bool {
-        let account = accountIdentifierFor(authorization, clientConfiguration: client)
+    public func store<Token: DataConvertible & OAuth2Token>(token: Token?, for client: OAuth2ClientConfiguration,
+                                                            with authorization: OAuth2Authorization) -> Bool {
 
+        let account = accountIdentifierFor(authorization, clientConfiguration: client)
         let keychainWrapper = KeychainWrapper(serviceName: service, accessGroup: accessGroup)
         if let token = token {
             logger.debug("Storing token to keychain for account: \(account), service: \(service), " +
                          "accessGroup: \(accessGroup ?? "N/A")")
-            let encoder = JSONEncoder()
-            if let data = try? encoder.encode(token) {
+            if let data = token.serialize() {
                 return keychainWrapper.setData(data, forKey: account)
             }
             return false
@@ -48,20 +47,14 @@ public struct OAuth2TokenKeychainStore: OAuth2TokenStore {
         }
     }
 
-    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> BearerToken? {
+    public func tokenFor<Token: OAuth2Token & DataConvertible>(client: OAuth2ClientConfiguration,
+                                                               authorization: OAuth2Authorization) -> Token? {
         let keychainWrapper = KeychainWrapper(serviceName: service, accessGroup: accessGroup)
         let account = accountIdentifierFor(authorization, clientConfiguration: client)
         guard let data = keychainWrapper.data(forKey: account) else {
             return nil
         }
-        let decoder = JSONDecoder()
-        if let token = try? decoder.decode(BearerToken.self, from: data) {
-            return token
-        }
-        if let legacyToken = NSKeyedUnarchiver.unarchiveObject(with: data) as? BearerOAuth2Token {
-            return BearerToken(legacyToken: legacyToken)
-        }
-        return nil
+        return Token(serializedData: data)
     }
 
     private func accountIdentifierFor(_ authorization: OAuth2Authorization,

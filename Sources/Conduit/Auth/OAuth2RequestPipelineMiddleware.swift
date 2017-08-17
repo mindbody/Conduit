@@ -53,7 +53,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
                     if case OAuth2Error.clientFailure(_) = error {
-                        self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
+                        self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
                     completion(.error(error))
                 case .value(let newToken):
@@ -81,7 +81,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error issuing the new client token")
-                    self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
+                    self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     completion(.error(error))
                 case .value(let newToken):
                     logger.info("Successfully issued token")

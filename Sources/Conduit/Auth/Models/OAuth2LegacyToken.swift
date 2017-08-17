@@ -19,7 +19,7 @@ public protocol OAuth2LegacyToken: class, NSCoding {
 
 /// A token issued from an OAuth2 server application that represents
 /// a possession factor (hence "bearer") for a specific user
-public class BearerOAuth2Token: NSObject, OAuth2LegacyToken {
+public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
 
     /// The access token
     public let accessToken: String
@@ -77,7 +77,7 @@ public class BearerOAuth2Token: NSObject, OAuth2LegacyToken {
 
 /// A token that encapsulates a user identifier and a password, most often
 /// used for authenticating a client against a server realm
-public class BasicOAuth2Token: NSObject, OAuth2LegacyToken {
+public class BasicOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
 
     /// The username or client identifier
     let username: String

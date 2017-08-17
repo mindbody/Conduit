@@ -41,12 +41,9 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     }
 
     @discardableResult
-    public func store(token: BearerToken?, for client: OAuth2ClientConfiguration,
-                      with authorization: OAuth2Authorization) -> Bool {
-        var tokenData: Data? = nil
-        if let token = token {
-            tokenData = try? JSONEncoder().encode(token)
-        }
+    public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
+                                                            with authorization: OAuth2Authorization) -> Bool {
+        let tokenData = token?.serialize()
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
@@ -75,26 +72,21 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         }
     }
 
-    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> BearerToken? {
+    public func tokenFor<Token: OAuth2Token & DataConvertible>(client: OAuth2ClientConfiguration,
+                                                               authorization: OAuth2Authorization) -> Token? {
+        let jsonDecoder = JSONDecoder()
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
             guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
                 return nil
             }
-            return nil
+            return Token(serializedData: data)
         case .url(let storageURL):
             guard let data = FileManager.default.contents(atPath: storageURL.path) else {
                 return nil
             }
-            let decoder = JSONDecoder()
-            if let token = try? decoder.decode(BearerToken.self, from: data) {
-                return token
-            }
-            if let legacyToken = NSKeyedUnarchiver.unarchiveObject(with: data) as? BearerOAuth2Token {
-                return BearerToken(legacyToken: legacyToken)
-            }
-            return nil
+            return Token(serializedData: data)
         }
     }
 

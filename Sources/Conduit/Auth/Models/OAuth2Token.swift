@@ -12,7 +12,7 @@ public protocol OAuth2Token {
     var authorizationHeaderValue: String { get }
 }
 
-public struct BearerToken: OAuth2Token, Codable {
+public struct BearerToken: OAuth2Token, DataConvertible, Codable {
 
     /// The access token
     public let accessToken: String
