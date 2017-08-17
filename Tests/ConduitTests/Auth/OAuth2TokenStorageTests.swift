@@ -93,10 +93,47 @@ class OAuth2TokenStorageTests: XCTestCase {
         verifyTokenStorageOperations(with: mockLegacyToken)
     }
 
-    func testLegacyTokenMigration() {
-        let newToken = BearerToken(legacyToken: mockLegacyToken)
-        XCTAssert(newToken.accessToken == mockLegacyToken.accessToken)
-        XCTAssert(newToken.expiration == mockLegacyToken.expiration)
-        XCTAssert(newToken.refreshToken == mockLegacyToken.refreshToken)
+    private func validateLegacyTokenMigration() {
+        sut.store(token: mockLegacyToken, for: mockClientConfiguration, with: mockAuthorization)
+        guard let legacyToken: BearerOAuth2Token = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
+            XCTFail()
+            return
+        }
+
+        let newToken = BearerToken(legacyToken: legacyToken)
+        sut.store(token: newToken, for: mockClientConfiguration, with: mockAuthorization)
+        guard let migratedToken: BearerToken = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
+            XCTFail()
+            return
+        }
+        XCTAssert(migratedToken.accessToken == mockLegacyToken.accessToken)
+        XCTAssert(migratedToken.expiration == mockLegacyToken.expiration)
+        XCTAssert(migratedToken.refreshToken == mockLegacyToken.refreshToken)
+
+        sut.removeTokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
+    }
+
+    func testLegacyKeychainTokenMigration() {
+        sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        validateLegacyTokenMigration()
+    }
+
+    func testLegacyUserDefaultsTokenMigration() {
+        sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
+        validateLegacyTokenMigration()
+    }
+
+    #if !os(tvOS)
+    func testLegacyFileStorageTokenMigration() throws {
+        let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
+        let storageURL = URL(fileURLWithPath: storagePath)
+        sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
+        validateLegacyTokenMigration()
+    }
+    #endif
+
+    func testLegacyMemoryStorageTokenMigration() {
+        sut = OAuth2TokenMemoryStore()
+        validateLegacyTokenMigration()
     }
 }

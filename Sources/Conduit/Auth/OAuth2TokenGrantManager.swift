@@ -49,7 +49,7 @@ struct OAuth2TokenGrantManager {
             return OAuth2Error.clientFailure(data, response)
         case 400..<500:
             return OAuth2Error.clientFailure(data, response)
-        case 500..<Int.max:
+        case 500...:
             return OAuth2Error.serverFailure(data, response)
         default:
             return nil

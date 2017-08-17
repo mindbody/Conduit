@@ -8,17 +8,9 @@
 
 import Foundation
 
-/// A token used for authorizing user or client requests
-public protocol OAuth2LegacyToken: class, NSCoding {
-    /// Determines whether or not the token is still valid
-    var isValid: Bool { get }
-
-    /// The authorization header value used to authorize requests against the server application
-    var authorizationHeaderValue: String { get }
-}
-
 /// A token issued from an OAuth2 server application that represents
 /// a possession factor (hence "bearer") for a specific user
+@available(*, deprecated, message: "NSObject subclasses have been replaced with structs")
 public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
 
     /// The access token
@@ -77,7 +69,8 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
 
 /// A token that encapsulates a user identifier and a password, most often
 /// used for authenticating a client against a server realm
-public class BasicOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
+@available(*, deprecated, message: "NSObject subclasses have been replaced with structs")
+public class BasicOAuth2Token: NSObject, NSCoding, OAuth2Token {
 
     /// The username or client identifier
     let username: String
@@ -128,30 +121,3 @@ extension BasicOAuth2Token {
     }
 }
 
-extension BearerOAuth2Token {
-    private struct JSONKeys {
-        static let accessToken = "access_token"
-        static let tokenType = "token_type"
-        static let expiresIn = "expires_in"
-        static let refreshToken = "refresh_token"
-    }
-
-    static func mapFrom(JSON: [String:Any]) -> BearerOAuth2Token? {
-        guard let tokenType = JSON[JSONKeys.tokenType] as? String,
-            let accessToken = JSON[JSONKeys.accessToken] as? String,
-            let expiresIn = JSON[JSONKeys.expiresIn] as? Int else {
-                return nil
-        }
-
-        let refreshToken = JSON[JSONKeys.refreshToken] as? String
-
-        // RFC6749 5.1: The value of token_type is case-insensitive
-        if tokenType.lowercased() != "bearer" {
-            return nil
-        }
-
-        return BearerOAuth2Token(accessToken: accessToken,
-                                 refreshToken: refreshToken,
-                                 expiration: Date().addingTimeInterval(TimeInterval(expiresIn)))
-    }
-}

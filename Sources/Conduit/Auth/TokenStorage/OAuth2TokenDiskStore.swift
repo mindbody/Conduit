@@ -74,7 +74,6 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
 
     public func tokenFor<Token: OAuth2Token & DataConvertible>(client: OAuth2ClientConfiguration,
                                                                authorization: OAuth2Authorization) -> Token? {
-        let jsonDecoder = JSONDecoder()
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
