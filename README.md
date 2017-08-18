@@ -377,7 +377,7 @@ sessionClient.middleware.append(authMiddleware)
 
 sessionClient.begin(request) { (data, response, error) in
 	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserializedObjectFrom(response: response, data: data) as? [String : Any]
+	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
 	...
 }
 ```
