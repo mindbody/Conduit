@@ -66,7 +66,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
 
         var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: newRequest, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
             XCTFail()
             return
         }
@@ -104,7 +104,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
 
         var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: newRequest, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
             XCTFail()
             return
         }
@@ -129,7 +129,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail()
             return
         }

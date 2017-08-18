@@ -34,7 +34,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
 
         for test in tests {
-            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: test.0)
+            let serializedRequest = try? serializer.serialize(request: request, bodyParameters: test.0)
             guard let body = serializedRequest?.httpBody else {
                 XCTFail()
                 return
@@ -54,7 +54,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail()
             return
         }
@@ -68,7 +68,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
             "foo": "bar+baz"
         ]
 
-        let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: parameters)
+        let serializedRequest = try? serializer.serialize(request: request, bodyParameters: parameters)
         guard let body = serializedRequest?.httpBody else {
             XCTFail()
             return
