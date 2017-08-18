@@ -43,7 +43,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     @discardableResult
     public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
                                                             with authorization: OAuth2Authorization) -> Bool {
-        let tokenData = token?.serialize()
+        let tokenData = token?.serialized()
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)

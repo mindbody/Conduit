@@ -10,7 +10,7 @@ import Foundation
 
 /// A token issued from an OAuth2 server application that represents
 /// a possession factor (hence "bearer") for a specific user
-@available(*, deprecated, message: "NSObject subclasses have been replaced with structs")
+@available(*, deprecated, message: "NSObject subclasses are being removed; use BearerToken instead.")
 public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
 
     /// The access token
@@ -67,57 +67,10 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
     }
 }
 
-/// A token that encapsulates a user identifier and a password, most often
-/// used for authenticating a client against a server realm
-@available(*, deprecated, message: "NSObject subclasses have been replaced with structs")
-public class BasicOAuth2Token: NSObject, NSCoding, OAuth2Token {
+extension BearerOAuth2Token {
 
-    /// The username or client identifier
-    let username: String
-
-    /// The user or client password
-    let password: String
-
-    public var isValid: Bool = true
-
-    public var authorizationHeaderValue: String {
-        return "Basic \(self.base64EncodedUsernameAndPassword())"
+    public var converted: BearerToken {
+        return BearerToken(legacyToken: self)
     }
 
-    /// Creates a new BasicOauth2Token
-    /// - Parameters:
-    ///   - username: The plaintext username
-    ///   - password: The plaintext password
-    public init(username: String, password: String) {
-        self.username = username
-        self.password = password
-        super.init()
-    }
-
-    public required convenience init?(coder aDecoder: NSCoder) {
-        guard let username = aDecoder.decodeObject(forKey: "username") as? String,
-            let password = aDecoder.decodeObject(forKey: "password") as? String else {
-                return nil
-        }
-
-        self.init(username: username, password: password)
-    }
-
-    public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.username, forKey: "username")
-        aCoder.encode(self.password, forKey: "password")
-    }
-
-    public override var debugDescription: String {
-        return String(format: "<BasicOAuth2Token:%p username:\(self.username) password:\(self.password)>", self)
-    }
 }
-
-extension BasicOAuth2Token {
-    func base64EncodedUsernameAndPassword() -> String {
-        let usernamePasswordString = "\(username):\(password)"
-        let base64EncodedData = usernamePasswordString.data(using: String.Encoding.utf8)
-        return base64EncodedData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0)) ?? ""
-    }
-}
-

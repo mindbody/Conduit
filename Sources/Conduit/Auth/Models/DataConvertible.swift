@@ -8,14 +8,20 @@
 
 import Foundation
 
+/// A type that can be serialized and deserialized with arbitrary encoding
 public protocol DataConvertible {
-    func serialize() -> Data?
+    /// Serializes the structure with arbitrary encoding
+    func serialized() -> Data?
+
+    /// Deserializes the structure with encoding defined by `serialized()`
+    /// - Parameters:
+    ///    - serializedData: The data to deserialize
     init?(serializedData: Data)
 }
 
 extension DataConvertible where Self: Encodable {
 
-    public func serialize() -> Data? {
+    public func serialized() -> Data? {
         let encoder = JSONEncoder()
         return try? encoder.encode(self)
     }
@@ -26,17 +32,17 @@ extension DataConvertible where Self: Decodable {
 
     public init?(serializedData: Data) {
         let decoder = JSONDecoder()
-        guard let deserialzed = try? decoder.decode(Self.self, from: serializedData) else {
+        guard let deserialized = try? decoder.decode(Self.self, from: serializedData) else {
             return nil
         }
-        self = deserialzed
+        self = deserialized
     }
 
 }
 
 extension DataConvertible where Self: NSCoding {
 
-    public func serialize() -> Data? {
+    public func serialized() -> Data? {
         return NSKeyedArchiver.archivedData(withRootObject: self)
     }
 

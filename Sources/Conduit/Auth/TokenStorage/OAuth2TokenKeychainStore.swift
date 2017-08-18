@@ -35,7 +35,7 @@ public struct OAuth2TokenKeychainStore: OAuth2TokenStore {
         if let token = token {
             logger.debug("Storing token to keychain for account: \(account), service: \(service), " +
                          "accessGroup: \(accessGroup ?? "N/A")")
-            if let data = token.serialize() {
+            if let data = token.serialized() {
                 return keychainWrapper.setData(data, forKey: account)
             }
             return false

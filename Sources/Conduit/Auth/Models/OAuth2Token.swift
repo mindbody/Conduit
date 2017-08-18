@@ -8,10 +8,14 @@
 
 import Foundation
 
+/// A token used for authorizing requests
 public protocol OAuth2Token {
+    /// The authorization header value used to authorize requests against the server application
     var authorizationHeaderValue: String { get }
 }
 
+/// A token issued from an OAuth2 server application that represents
+/// a possession factor (hence "bearer") for a specific user
 public struct BearerToken: OAuth2Token, DataConvertible, Codable {
 
     /// The access token

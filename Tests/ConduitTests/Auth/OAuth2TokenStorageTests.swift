@@ -100,7 +100,7 @@ class OAuth2TokenStorageTests: XCTestCase {
             return
         }
 
-        let newToken = BearerToken(legacyToken: legacyToken)
+        let newToken = legacyToken.converted
         sut.store(token: newToken, for: mockClientConfiguration, with: mockAuthorization)
         guard let migratedToken: BearerToken = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
             XCTFail()
