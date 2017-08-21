@@ -15,7 +15,10 @@ class UserSessionManager {
     static let shared = UserSessionManager()
 
     var isUserLoggedIn: Bool {
-        return AuthManager.shared.localTokenStore.tokenFor(client: AuthManager.shared.localClientConfiguration, authorization: OAuth2Authorization(type: .bearer, level: .user)) != nil
+        if let _: BearerToken = AuthManager.shared.localTokenStore.tokenFor(client: AuthManager.shared.localClientConfiguration, authorization: OAuth2Authorization(type: .bearer, level: .user)) {
+            return true
+        }
+        return false
     }
 
     func logIn(username: String, password: String, completion: @escaping Result<Void>.Block) {
@@ -34,7 +37,7 @@ class UserSessionManager {
     }
 
     func logOut() {
-        AuthManager.shared.localTokenStore.store(token: nil, for: AuthManager.shared.localClientConfiguration, with: OAuth2Authorization(type: .bearer, level: .user))
+        AuthManager.shared.localTokenStore.removeTokenFor(client: AuthManager.shared.localClientConfiguration, authorization: OAuth2Authorization(type: .bearer, level: .user))
     }
 
 }
