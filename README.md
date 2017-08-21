@@ -59,7 +59,17 @@ github "mindbody/Conduit"
 
 ### Cocoapods
 
-TODO
+Add `Conduit` to your `Podfile`:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+target 'MyApplicationTarget' do
+    pod 'Conduit'
+end
+```
 
 ### Swift Package Manager
 
