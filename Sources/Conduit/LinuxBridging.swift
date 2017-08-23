@@ -18,7 +18,7 @@ public class Image: Equatable {
 
     public let data: Data
 
-    public static func ==(lhs: Image, rhs: Image) -> Bool {
+    public static func == (lhs: Image, rhs: Image) -> Bool {
         return lhs.data == rhs.data
     }
 
@@ -32,11 +32,3 @@ public class Image: Equatable {
 }
 
 #endif
-
-func makeNSError(_ error: Error) -> NSError {
-    #if os(Linux)
-    return NSError(domain: error._domain, code: error._code)
-    #else
-    return error as NSError
-    #endif
-}
