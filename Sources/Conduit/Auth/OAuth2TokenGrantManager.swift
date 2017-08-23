@@ -11,7 +11,7 @@ import Foundation
 struct OAuth2TokenGrantManager {
 
     static func issueTokenWith(authorizedRequest: URLRequest, responseDeserializer: ResponseDeserializer = JSONResponseDeserializer(),
-                               completion: @escaping Result<BearerOAuth2Token>.Block) {
+                               completion: @escaping Result<BearerToken>.Block) {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
         sessionClient.begin(request: authorizedRequest) { (data, response, error) in
@@ -31,7 +31,7 @@ struct OAuth2TokenGrantManager {
                 completion(.error(OAuth2Error.internalFailure))
                 return
             }
-            guard let newToken = BearerOAuth2Token.mapFrom(JSON: authTokenJSON) else {
+            guard let newToken = BearerToken.mapFrom(JSON: authTokenJSON) else {
                 completion(.error(OAuth2Error.internalFailure))
                 return
             }
@@ -49,7 +49,7 @@ struct OAuth2TokenGrantManager {
             return OAuth2Error.clientFailure(data, response)
         case 400..<500:
             return OAuth2Error.clientFailure(data, response)
-        case 500..<Int.max:
+        case 500...:
             return OAuth2Error.serverFailure(data, response)
         default:
             return nil

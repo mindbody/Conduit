@@ -50,7 +50,7 @@ class ResultTests: XCTestCase {
     }
 
     func testResultShouldStoreVoid() {
-        let sut = Result<Void>.value()
+        let sut = Result<Void>.value(())
         if case .value = sut {
             // Pass
         }
@@ -118,7 +118,7 @@ class ResultTests: XCTestCase {
     }
 
     func testThrowingValueGetterWithVoid() {
-        XCTAssertNoThrow(try Result<Void>.value().valueOrThrow())
+        XCTAssertNoThrow(try Result<Void>.value(()).valueOrThrow())
     }
 
     func testThrowingValueGetterErrorType() throws {

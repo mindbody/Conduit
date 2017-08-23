@@ -96,7 +96,7 @@ public final class HTTPRequestBuilder {
             }
         }
 
-        request = try serializer.serializedRequestWith(request: request, bodyParameters: bodyParameters)
+        request = try serializer.serialize(request: request, bodyParameters: bodyParameters)
         if let url = request.url {
             if let percentEncodedQuery = percentEncodedQuery {
                 var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)

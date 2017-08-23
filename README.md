@@ -59,7 +59,17 @@ github "mindbody/Conduit"
 
 ### Cocoapods
 
-TODO
+Add `Conduit` to your `Podfile`:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+target 'MyApplicationTarget' do
+    pod 'Conduit'
+end
+```
 
 ### Swift Package Manager
 
@@ -137,7 +147,7 @@ let request = try requestBuilder.build()
 let sessionClient = MySessionClientManager.kittnAPISessionClient
 sessionClient.begin(request) { (data, response, error) in
 	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserializedObjectFrom(response: response, data: data) as? [String : Any]
+	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
 	...
 }
 ```
@@ -377,7 +387,7 @@ sessionClient.middleware.append(authMiddleware)
 
 sessionClient.begin(request) { (data, response, error) in
 	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserializedObjectFrom(response: response, data: data) as? [String : Any]
+	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
 	...
 }
 ```
@@ -386,10 +396,12 @@ sessionClient.begin(request) { (data, response, error) in
 
 This repo includes an iOS example, which is attached to `Conduit.xcworkspace`
 
-## Credits
-
-TBD
-
 ## License
 
 TBD
+
+## Credits
+
+[![mindbody-logo](images/MindbodyLogo.png)](https://mindbodyonline.com/careers)
+
+Conduit is owned by MINDBODY, Inc. and continuously maintained by our [contributors](https://github.com/mindbody/Conduit/graphs/contributors).

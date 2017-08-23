@@ -20,7 +20,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     let authorization: OAuth2Authorization
     let tokenStorage: OAuth2TokenStore
 
-    var token: OAuth2Token? {
+    var token: BearerToken? {
         return tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization)
     }
 
@@ -45,7 +45,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Token is valid, proceeding to middleware completion")
             makeRequestByApplyingAuthorizationHeader(to: request, with: token, completion: completion)
         }
-        else if let token = self.token as? BearerOAuth2Token,
+        else if let token = self.token,
             token.refreshToken != nil {
             logger.info("Token is expired, proceeding to refresh token")
             refresh(token: token) { result in
@@ -53,7 +53,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
                     if case OAuth2Error.clientFailure(_) = error {
-                        self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
+                        self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
                     completion(.error(error))
                 case .value(let newToken):
@@ -81,7 +81,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error issuing the new client token")
-                    self.tokenStorage.store(token: nil, for: self.clientConfiguration, with: self.authorization)
+                    self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     completion(.error(error))
                 case .value(let newToken):
                     logger.info("Successfully issued token")
@@ -101,15 +101,15 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         else {
             // Apply basic header
             logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
-            let basicToken = BasicOAuth2Token(username: clientConfiguration.clientIdentifier,
-                                              password: clientConfiguration.clientSecret)
+            let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
+                                        password: clientConfiguration.clientSecret)
             makeRequestByApplyingAuthorizationHeader(to: request,
                                                      with: basicToken,
                                                      completion: completion)
         }
     }
 
-    private func issueTokenForClientUser(_ completion: @escaping Result<BearerOAuth2Token>.Block) {
+    private func issueTokenForClientUser(_ completion: @escaping Result<BearerToken>.Block) {
         // If guest user credentials exist, we attempt a password grant
         // Otherwise, we attempt a client_credentials grant
         logger.verbose("About to issue a new client bearer token...")
@@ -142,7 +142,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         completion(.value(request))
     }
 
-    private func buildTokenRefreshRequestFor(token: BearerOAuth2Token, completion: Result<URLRequest>.Block) {
+    private func buildTokenRefreshRequestFor(token: BearerToken, completion: Result<URLRequest>.Block) {
         guard let refreshToken = token.refreshToken else {
             logger.warn([
                 "A request required Bearer authorization, but the expired token",
@@ -152,7 +152,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             return
         }
 
-        let basicToken = BasicOAuth2Token(username: clientConfiguration.clientIdentifier,
+        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
                                           password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
@@ -173,7 +173,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         }
     }
 
-    private func refresh(token: BearerOAuth2Token, completion: @escaping Result<BearerOAuth2Token>.Block) {
+    private func refresh(token: BearerToken, completion: @escaping Result<BearerToken>.Block) {
         Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
                                                    authorizationLevel: authorization.level)
 

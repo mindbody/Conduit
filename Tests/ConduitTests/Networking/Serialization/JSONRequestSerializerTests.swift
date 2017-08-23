@@ -40,7 +40,7 @@ class JSONRequestSerializerTests: XCTestCase {
     }
 
     func testSerializesJSONObject() {
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: testJSONParameters) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: testJSONParameters) else {
             XCTFail()
             return
         }
@@ -56,7 +56,7 @@ class JSONRequestSerializerTests: XCTestCase {
 
     func testAllowsFragmentedJSON() {
         let fragmentedBody = "someemail@test.com"
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: fragmentedBody) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: fragmentedBody) else {
             XCTFail()
             return
         }
@@ -71,7 +71,7 @@ class JSONRequestSerializerTests: XCTestCase {
     }
 
     func testConfiguresDefaultContentTypeHeader() {
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail()
             return
         }
@@ -87,7 +87,7 @@ class JSONRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail()
             return
         }

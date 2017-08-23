@@ -70,29 +70,8 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     }
 
     func testAppliesBearerHeaderIfValidTokenExists() throws {
-        let randomToken = BearerOAuth2Token(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date().addingTimeInterval(1_000_000))
+        let randomToken = BearerToken(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date().addingTimeInterval(1_000_000))
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
-
-        tokenStorage.store(token: randomToken, for: validClientConfiguration, with: authorization)
-
-        let request = try makeDummyRequest()
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
-
-        let decorateRequestExpectation = expectation(description: "request immediately decorated")
-        sut.prepareForTransport(request: request) { result in
-            guard case .value(let request) = result else {
-                XCTFail()
-                return
-            }
-            XCTAssert(request.allHTTPHeaderFields?["Authorization"] == randomToken.authorizationHeaderValue)
-            decorateRequestExpectation.fulfill()
-        }
-        waitForExpectations(timeout: 0.1)
-    }
-
-    func testAppliesBasicHeaderForBasicClientAuthorization() throws {
-        let randomToken = BasicOAuth2Token(username: "test_user", password: "hunter2")
-        let authorization = OAuth2Authorization(type: .basic, level: .client)
 
         tokenStorage.store(token: randomToken, for: validClientConfiguration, with: authorization)
 
@@ -124,7 +103,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
                 XCTFail()
                 return
             }
-            let expiredToken = BearerOAuth2Token(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
+            let expiredToken = BearerToken(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
 
             self.tokenStorage.store(token: expiredToken, for: self.validClientConfiguration, with: authorization)
 
@@ -226,7 +205,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     func testNotifiesMigratorPreAndPostFetchTokenHooksForRefreshes() throws {
         let clientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "one-use-client", clientSecret: "hunter2", environment: mockServerEnvironment)
 
-        let randomToken = BearerOAuth2Token(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date())
+        let randomToken = BearerToken(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date())
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
         tokenStorage.store(token: randomToken, for: clientConfiguration, with: authorization)
 
@@ -236,16 +215,12 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let calledPreFetchHookExpectation = expectation(description: "called pre-fetch hook")
         let calledPostFetchHookExpectation = expectation(description: "called pre-fetch hook")
 
-        Auth.Migrator.registerPreFetchHook { (client, _) in
-            if client.clientIdentifier == clientConfiguration.clientIdentifier {
-                calledPreFetchHookExpectation.fulfill()
-            }
+        Auth.Migrator.registerPreFetchHook { _, _  in
+            calledPreFetchHookExpectation.fulfill()
         }
 
-        Auth.Migrator.registerPostFetchHook { (client, _, _) in
-            if client.clientIdentifier == clientConfiguration.clientIdentifier {
-                calledPostFetchHookExpectation.fulfill()
-            }
+        Auth.Migrator.registerPostFetchHook { _, _, _  in
+            calledPostFetchHookExpectation.fulfill()
         }
 
         sut.prepareForTransport(request: request, completion: { _ in })

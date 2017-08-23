@@ -45,8 +45,8 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         self.formData.append(formPart)
     }
 
-    public override func serializedRequestWith(request: URLRequest, bodyParameters: Any?) throws -> URLRequest {
-        let request = try super.serializedRequestWith(request: request, bodyParameters: bodyParameters)
+    public override func serialize(request: URLRequest, bodyParameters: Any?) throws -> URLRequest {
+        let request = try super.serialize(request: request, bodyParameters: bodyParameters)
 
         var mutableRequest = request
 
@@ -194,10 +194,10 @@ public struct FormPart {
     private func dataFrom(image: NSImage, type: ImageFormat) -> Data? {
         if let imageRepresentation = image.representations[0] as? NSBitmapImageRep {
             if case .jpeg(let compressionQuality) = type {
-                let properties = [NSImageCompressionFactor: compressionQuality]
-                return imageRepresentation.representation(using: .JPEG, properties: properties)
+                let properties = [NSBitmapImageRep.PropertyKey.compressionFactor: compressionQuality]
+                return imageRepresentation.representation(using: .jpeg, properties: properties)
             }
-            return imageRepresentation.representation(using: .PNG, properties: [:])
+            return imageRepresentation.representation(using: .png, properties: [:])
         }
         return nil
     }

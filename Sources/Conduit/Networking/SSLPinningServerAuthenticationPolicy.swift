@@ -86,12 +86,7 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
                     logger.error("Failed to retrieve public key from one of the certificates")
                     return false
                 }
-                // Current workaround for Apple's lack of SecKey equality in Swift
-                for pinnedPublicKey in self.certificateBundle.publicKeys as [AnyObject] {
-                    if pinnedPublicKey.isEqual(serverCertificatePublicKey as AnyObject) {
-                        return true
-                    }
-                }
+                return self.certificateBundle.publicKeys.contains(serverCertificatePublicKey)
             }
             else if self.pinningType == .certificateData {
                 let pinnedCertificateData = self.certificateBundle.certificates.map {
