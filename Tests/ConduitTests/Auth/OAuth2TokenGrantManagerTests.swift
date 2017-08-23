@@ -20,7 +20,7 @@ extension OAuth2TokenGrantManagerTests {
 
 class OAuth2TokenGrantManagerTests: XCTestCase {
 
-    typealias BadResponse = (response: URLResponse?, expectedError: OAuth2Error)
+    typealias BadResponse = (response: HTTPURLResponse?, expectedError: OAuth2Error)
 
     var badResponses: [BadResponse]!
 

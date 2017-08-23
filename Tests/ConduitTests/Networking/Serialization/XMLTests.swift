@@ -36,17 +36,17 @@ class XMLTests: XCTestCase {
 
     private func validate(xml: XML) {
         XCTAssert(xml.root?.name == "Root")
-        XCTAssert(xml.root?.children?.count == 3)
-        XCTAssert(xml.root?.children?.first?.isLeaf == true)
-        XCTAssert(xml.root?.children?[1].value == "test 🙂 value")
-        XCTAssert(xml.root?.children?.last?.isLeaf == false)
-        XCTAssert(xml.root?.children?.last?.children?.count == 2)
-        guard let attributes = xml.root?.children?.last?.children?.first?.attributes else {
+        XCTAssert(xml.root?.children.count == 3)
+        XCTAssert(xml.root?.children.first?.isLeaf == true)
+        XCTAssert(xml.root?.children[1].getValue() == "test 🙂 value")
+        XCTAssert(xml.root?.children.last?.isLeaf == false)
+        XCTAssert(xml.root?.children.last?.children.count == 2)
+        guard let attributes = xml.root?.children.last?.children.first?.attributes else {
             XCTFail()
             return
         }
         XCTAssert(attributes == ["testKey": "testValue"])
-        XCTAssert(xml.root?.children?.last?.children?.last?.name == "LastNode")
+        XCTAssert(xml.root?.children.last?.children.last?.name == "LastNode")
     }
 
     func testXMLNodeConstruction() {
@@ -56,7 +56,7 @@ class XMLTests: XCTestCase {
 
         let n1 = XMLNode(name: "N")
         var n2 = XMLNode(name: "N")
-        n2.value = "test 🙂 value"
+        n2.text = "test 🙂 value"
         var n3 = XMLNode(name: "N")
         n3.children = [n4, n5]
 
@@ -69,7 +69,7 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLStringConstruction() {
-        guard let xml = XML(xmlString: xmlString) else {
+        guard let xml = XML(xmlString) else {
             XCTFail()
             return
         }
@@ -77,12 +77,28 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLStringOutputReconstruction() {
-        guard let originalXML = XML(xmlString: xmlString),
-            let xml = XML(xmlString: originalXML.xmlValue()) else {
-                XCTFail()
-                return
+        guard let originalXML = XML(xmlString), let xml = XML(originalXML.description) else {
+            XCTFail()
+            return
         }
         validate(xml: xml)
+    }
+
+    func testXMLNodeStringConstruction() {
+        let string = "<foo><bar>baz</bar></foo>"
+        let node = XMLNode(string)
+        XCTAssertEqual(node?.name, "foo")
+        XCTAssertEqual(node?["bar"]?.getValue(), "baz")
+        XCTAssertEqual(node?.description, string)
+    }
+
+    func testXMLNodeStringConstructionWithGenerics() {
+        let string = "<xml><int>1</int><double>12.34</double><bool>true</bool></xml>"
+        let node = XMLNode(string)
+        XCTAssertEqual(node?.name, "xml")
+        XCTAssertEqual(node?.getValue("int"), 1)
+        XCTAssertEqual(node?.getValue("double"), 12.34)
+        XCTAssertEqual(node?.getValue("bool"), true)
     }
 
 }

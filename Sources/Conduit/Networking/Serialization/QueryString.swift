@@ -68,7 +68,7 @@ public struct QueryStringFormattingOptions {
     /// this follows Apple's behavior of not encoding plus symbols.
     ///
     /// [View Radar](http://www.openradar.me/24076063)
-    public var plusSymbolEncodingRule: PlusSymbolEncodingRule = .decoded
+    public var plusSymbolEncodingRule: PlusSymbolEncodingRule = .replacedWithEncodedPlus
 
     /// Determines whether ' ' should be replaced with '%20' or '+'. By default,
     /// this follows Apple's behavior of encoding to '%20'.
@@ -184,7 +184,9 @@ internal struct QueryString {
     }
 
     private func queryItemsFromDictionary(dict: [String:Any]) -> [URLQueryItem] {
-        return dict.flatMap(queryItemsFrom)
+        return dict.flatMap { kvp in
+            queryItemsFrom(parameter: (kvp.key, kvp.value))
+        }
     }
 
     private func queryItemsFrom(parameter: (String, Any)) -> [URLQueryItem] {

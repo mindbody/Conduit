@@ -10,8 +10,7 @@ import Foundation
 
 struct OAuth2TokenGrantManager {
 
-    static func issueTokenWith(authorizedRequest: URLRequest,
-                               responseDeserializer: ResponseDeserializer = JSONResponseDeserializer(),
+    static func issueTokenWith(authorizedRequest: URLRequest, responseDeserializer: ResponseDeserializer = JSONResponseDeserializer(),
                                completion: @escaping Result<BearerOAuth2Token>.Block) {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
@@ -22,7 +21,7 @@ struct OAuth2TokenGrantManager {
                 return
             }
             do {
-                guard let deserializedResponse = try responseDeserializer.deserialize(response: response, data: data) as? [String:Any] else {
+                guard let deserializedResponse = try responseDeserializer.deserialize(response: response, data: data) as? [String: Any] else {
                         completion(.error(OAuth2Error.noResponse))
                         return
                 }
@@ -40,8 +39,8 @@ struct OAuth2TokenGrantManager {
         }
     }
 
-    static func errorFrom(data: Data?, response: URLResponse?) -> Error? {
-        guard let response = response as? HTTPURLResponse else {
+    static func errorFrom(data: Data?, response: HTTPURLResponse?) -> Error? {
+        guard let response = response else {
             return OAuth2Error.noResponse
         }
 

@@ -43,7 +43,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
 
         for test in tests {
-            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: test.0, queryParameters: nil)
+            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: test.0)
             guard let body = serializedRequest?.httpBody else {
                 XCTFail()
                 return
@@ -70,6 +70,21 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         for customHeader in customDefaultHeaderFields {
             XCTAssert(modifiedRequest.value(forHTTPHeaderField: customHeader.0) == customHeader.1)
         }
+    }
+
+    func testEncodesPlusSymbolsByDefault() {
+        let parameters = [
+            "foo": "bar+baz"
+        ]
+
+        let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: parameters)
+        guard let body = serializedRequest?.httpBody else {
+            XCTFail()
+            return
+        }
+        let resultBodyString = String(data: body, encoding: .utf8)
+
+        XCTAssert(resultBodyString == "foo=bar%2Bbaz")
     }
 
 }

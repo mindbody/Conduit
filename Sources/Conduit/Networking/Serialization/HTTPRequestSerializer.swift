@@ -123,9 +123,7 @@ open class HTTPRequestSerializer: RequestSerializer {
         }
     }()
 
-    open func serializedRequestWith(request: URLRequest,
-                                    bodyParameters: Any? = nil,
-                                    queryParameters: [String: Any]? = nil) throws -> URLRequest {
+    open func serializedRequestWith(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
 
         guard let httpMethod = request.httpMethod, request.url != nil else {
             throw RequestSerializerError.invalidURL

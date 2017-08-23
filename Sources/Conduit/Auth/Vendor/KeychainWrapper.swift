@@ -42,7 +42,7 @@ let secAttrGeneric: String! = kSecAttrGeneric as String
 let secAttrAccount: String! = kSecAttrAccount as String
 let secAttrAccessGroup: String! = kSecAttrAccessGroup as String
 
-fileprivate let sharedKeychainWrapper = KeychainWrapper()
+private let sharedKeychainWrapper = KeychainWrapper()
 
 /// KeychainWrapper is a class to help make Keychain access in Swift more straightforward. It is designed to make 
 /// accessing the Keychain services more like using NSUserDefaults, which is much more familiar to people.

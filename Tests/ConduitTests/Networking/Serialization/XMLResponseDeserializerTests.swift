@@ -23,7 +23,7 @@ class XMLResponseDeserializerTests: XCTestCase {
     var deserializer: XMLResponseDeserializer!
     let validResponseHeaders = ["Content-Type": "application/xml"]
     var validResponseData: Data!
-    var validResponse: URLResponse!
+    var validResponse: HTTPURLResponse!
 
     override func setUp() {
         super.setUp()
@@ -60,7 +60,7 @@ class XMLResponseDeserializerTests: XCTestCase {
                 return
         }
 
-        XCTAssert(xml.root?.children?.first?.name == "N")
+        XCTAssert(xml.root?.children.first?.name == "N")
     }
 
 }

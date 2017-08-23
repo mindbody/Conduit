@@ -36,7 +36,7 @@ class HTTPRequestSerializerTests: XCTestCase {
 
     func testAddsRequiredW3Headers() {
         let headerKeys = ["Accept-Language", "User-Agent"]
-        guard let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil, queryParameters: nil) else {
+        guard let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
             XCTFail()
             return
         }
@@ -52,7 +52,7 @@ class HTTPRequestSerializerTests: XCTestCase {
             request.httpMethod = method.rawValue
 
             do {
-                _ = try serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"], queryParameters: nil)
+                _ = try serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"])
                 XCTFail()
             }
             catch let error {
@@ -66,7 +66,7 @@ class HTTPRequestSerializerTests: XCTestCase {
         func validatePassesFor(_ method: HTTPRequestBuilder.Method) {
             var request: URLRequest! = self.request
             request.httpMethod = method.rawValue
-            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"], queryParameters: nil)
+            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"])
             XCTAssert(serializedRequest != nil)
         }
 

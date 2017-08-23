@@ -10,7 +10,7 @@
 import XCTest
 @testable import Conduit
 
-fileprivate class MockAuthenticationChallengeSender: NSObject, URLAuthenticationChallengeSender {
+private class MockAuthenticationChallengeSender: NSObject, URLAuthenticationChallengeSender {
     func use(_ credential: URLCredential, for challenge: URLAuthenticationChallenge) {}
     func continueWithoutCredential(for challenge: URLAuthenticationChallenge) {}
     func cancel(_ challenge: URLAuthenticationChallenge) {}

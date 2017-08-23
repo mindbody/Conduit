@@ -25,7 +25,7 @@ class JSONResponseDeserializerTests: XCTestCase {
     var deserializer: JSONResponseDeserializer!
     let validResponseHeaders = ["Content-Type": "application/json"]
     var validResponseData: Data!
-    var validResponse: URLResponse!
+    var validResponse: HTTPURLResponse!
 
     override func setUp() {
         super.setUp()
