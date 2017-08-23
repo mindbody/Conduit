@@ -13,7 +13,6 @@ extension OAuth2RequestPipelineMiddlewareTests {
     static var allTests: [(String, (OAuth2RequestPipelineMiddlewareTests) -> () throws -> Void)] = {
         return [
             ("testAppliesBearerHeaderIfValidTokenExists", testAppliesBearerHeaderIfValidTokenExists),
-            ("testAppliesBasicHeaderForBasicClientAuthorization", testAppliesBasicHeaderForBasicClientAuthorization),
             ("testRefreshesBearerTokenIfExpired", testRefreshesBearerTokenIfExpired),
             ("testAttemptsPasswordGrantWithGuestCredentialsIfTheyExist", testAttemptsPasswordGrantWithGuestCredentialsIfTheyExist),
             ("testAttemptsClientCredentialsGrantIfGuestCredentialsDontExist", testAttemptsClientCredentialsGrantIfGuestCredentialsDontExist),
@@ -215,12 +214,16 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let calledPreFetchHookExpectation = expectation(description: "called pre-fetch hook")
         let calledPostFetchHookExpectation = expectation(description: "called pre-fetch hook")
 
-        Auth.Migrator.registerPreFetchHook { _, _  in
-            calledPreFetchHookExpectation.fulfill()
+        Auth.Migrator.registerPreFetchHook { client, _  in
+            if client.clientIdentifier == clientConfiguration.clientIdentifier {
+                calledPreFetchHookExpectation.fulfill()
+            }
         }
 
-        Auth.Migrator.registerPostFetchHook { _, _, _  in
-            calledPostFetchHookExpectation.fulfill()
+        Auth.Migrator.registerPostFetchHook { client, _, _  in
+            if client.clientIdentifier == clientConfiguration.clientIdentifier {
+                calledPostFetchHookExpectation.fulfill()
+            }
         }
 
         sut.prepareForTransport(request: request, completion: { _ in })

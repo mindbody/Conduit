@@ -20,7 +20,7 @@ extension QueryStringTests {
             ("testEncodesDictionariesWithDotNotation", testEncodesDictionariesWithDotNotation),
             ("testEncodesDictionariesWithSubscriptNotation", testEncodesDictionariesWithSubscriptNotation),
             ("testEncodesFragments", testEncodesFragments),
-            ("testDoesntEncodePlusSymbolsByDefault", testDoesntEncodePlusSymbolsByDefault),
+            ("testEncodesPlusSymbolsByDefault", testEncodesPlusSymbolsByDefault),
             ("testReplacesPlusSymbolWithEncodedSpaces", testReplacesPlusSymbolWithEncodedSpaces),
             ("testReplacesPlusSymbolWithEncodedPlusSymbol", testReplacesPlusSymbolWithEncodedPlusSymbol),
             ("testEncodesSpacesByDefault", testEncodesSpacesByDefault),

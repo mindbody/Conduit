@@ -131,7 +131,7 @@ class URLSessionClientTests: XCTestCase {
     #endif
 
     func testSessionTaskProxyAllowsSuspendingRequestsBeforeTransport() throws {
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
+        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/1"))
         let client: URLSessionClient = URLSessionClient()
 
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
