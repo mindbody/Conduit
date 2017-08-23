@@ -121,12 +121,18 @@ class URLSessionClientTests: XCTestCase {
         let sessionProxy = client.begin(request: request) { (_, _, _) in
             XCTFail()
         }
-        sessionProxy.suspend()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: NSEC_PER_SEC * 2)) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             dispatchExecutedExpectation.fulfill()
         }
 
-        waitForExpectations(timeout: 3)
+        // Suspending a task immediately after resuming it has no effect
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            sessionProxy.suspend()
+        }
+
+        waitForExpectations(timeout: 5)
     }
 
     func testReportsDownloadProgressForLargerTasks() throws {
