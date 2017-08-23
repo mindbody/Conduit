@@ -60,11 +60,6 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
         aCoder.encode(self.refreshToken, forKey: "refreshToken")
     }
 
-    public override var debugDescription: String {
-        return String(format: "<BearerOAuth2Token:%p accessToken:\(self.accessToken) " +
-            "refreshToken:\(self.refreshToken ?? "nil") " +
-            "expiration:\(self.expiration)>", self)
-    }
 }
 
 extension BearerOAuth2Token {

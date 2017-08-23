@@ -278,14 +278,13 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
         if let progressHandler = taskUploadProgressHandlers[task.taskIdentifier] {
             let currentProgress = taskUploadProgresses[task.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
+            let newProgress = currentProgress ?? Progress(totalUnitCount: totalBytesExpectedToSend)
             if currentProgress == nil {
                 serialQueue.sync {
                     taskUploadProgresses[task.taskIdentifier] = newProgress
                 }
             }
             newProgress.completedUnitCount = totalBytesSent
-            newProgress.totalUnitCount = totalBytesExpectedToSend
             progressHandler(newProgress)
         }
     }
@@ -299,14 +298,13 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
         if let expectedContentLength = taskResponse.expectedContentLength,
             let progressHandler = taskDownloadProgressHandlers[dataTask.taskIdentifier] {
             let currentProgress = taskDownloadProgresses[dataTask.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
+            let newProgress = currentProgress ?? Progress(totalUnitCount: expectedContentLength)
             if currentProgress == nil {
                 serialQueue.sync {
                     taskDownloadProgresses[dataTask.taskIdentifier] = newProgress
                 }
             }
             newProgress.completedUnitCount = Int64(responseData.count)
-            newProgress.totalUnitCount = expectedContentLength
             progressHandler(newProgress)
         }
     }
