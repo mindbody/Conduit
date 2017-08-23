@@ -127,6 +127,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         sut.removeTokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
     }
 
+#if !os(Linux)
     func testLegacyKeychainTokenMigration() {
         sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
         validateLegacyTokenMigration()
@@ -137,14 +138,16 @@ class OAuth2TokenStorageTests: XCTestCase {
         validateLegacyTokenMigration()
     }
 
-    #if !os(tvOS)
+#if !os(tvOS)
     func testLegacyFileStorageTokenMigration() throws {
         let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         validateLegacyTokenMigration()
     }
-    #endif
+#endif
+
+#endif
 
     func testLegacyMemoryStorageTokenMigration() {
         sut = OAuth2TokenMemoryStore()
