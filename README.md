@@ -5,7 +5,7 @@
 
 Conduit is a session-based Swift HTTP networking and auth library.
 
-Within each session, requests are sent through a serial [pipeline](https://en.wikipedia.org/wiki/Pipeline_(software)) before being dispatched to the network queue. Within the pipeline, requests are processed through a collection of [middleware](https://en.wikipedia.org/wiki/Interceptor_pattern) that can decorate requests, pause the session pipeline, and empty the outgoing queue. From this pattern, Conduit bundles pre-defined middleware for [OAuth2](https://oauth.net/2/) authentication through all major flows defined within [RFC 6749](https://tools.ietf.org/html/rfc6749) and automatically applies authorization to requests as defined in [RFC 6750](http://tools.ietf.org/html/rfc6750).
+Within each session, requests are sent through a serial [pipeline](https://en.wikipedia.org/wiki/Pipeline_(software)) before being dispatched to the network queue. Within the pipeline, requests are processed through a collection of [middleware](https://en.wikipedia.org/wiki/Interceptor_pattern) that can decorate requests, pause the session pipeline, and empty the outgoing queue. From this pattern, Conduit bundles pre-defined middleware for [OAuth2](https://oauth.net/2/) authorization grants through all major flows defined within [RFC 6749](https://tools.ietf.org/html/rfc6749) and automatically applies tokens to requests as defined in [RFC 6750](http://tools.ietf.org/html/rfc6750).
 
 - [Features](#features)
 - [Requirements](#requirements)
