@@ -402,6 +402,8 @@ TBD
 
 ## Credits
 
+Released under the Apache 2.0 license. See [LICENSE](LICENSE) for more details.
+
 [![mindbody-logo](images/MindbodyLogo.png)](https://mindbodyonline.com/careers)
 
 Conduit is owned by MINDBODY, Inc. and continuously maintained by our [contributors](https://github.com/mindbody/Conduit/graphs/contributors).
