@@ -398,11 +398,9 @@ This repo includes an iOS example, which is attached to `Conduit.xcworkspace`
 
 ## License
 
-TBD
+Released under the Apache 2.0 license. See [LICENSE](LICENSE) for more details.
 
 ## Credits
-
-Released under the Apache 2.0 license. See [LICENSE](LICENSE) for more details.
 
 [![mindbody-logo](images/MindbodyLogo.png)](https://mindbodyonline.com/careers)
 
