@@ -4,7 +4,7 @@
 - None
 
 #### Enhancements
-- None
+- Improved network logging, including a static request counter
 
 #### Bug Fixes
 - None
