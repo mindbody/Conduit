@@ -1,6 +1,18 @@
 ## Master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+
+## 0.4.0
+
+#### Breaking
 - `RequestSerializer` no longer handles query parameters
 - `XMLNode` value getters have been updated to conform to `XMLTextNodeInitializable`.
 
