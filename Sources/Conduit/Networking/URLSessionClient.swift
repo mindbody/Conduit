@@ -69,6 +69,7 @@ public struct URLSessionClient: URLSessionClientType {
     // swiftlint:disable weak_delegate
     fileprivate let sessionDelegate = SessionDelegate()
     // swiftlint:enable weak_delegate
+    private static var requestCounter: Int64 = 0
 
     /// Creates a new URLSessionClient with provided middleware and NSURLSession parameters
     /// - Parameters:
@@ -124,6 +125,8 @@ public struct URLSessionClient: URLSessionClientType {
     public func begin(request: URLRequest, completion: @escaping SessionTaskCompletion) -> SessionTaskProxyType {
         let sessionTaskProxy = SessionTaskProxy()
 
+        let requestID = OSAtomicIncrement64Barrier(&URLSessionClient.requestCounter)
+
         self.serialQueue.async {
 
             // First, check if the queue needs to be evicted and frozen
@@ -168,13 +171,12 @@ public struct URLSessionClient: URLSessionClientType {
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
             // so even though the pipeline is serial, requests run in parallel
-            let task = self.dataTaskWith(request: modifiedRequest, completion: completion)
-
-            logger.verbose(">>>>>>>>>>>>>>> REQUEST >>>>>>>>>>>>>>>>>>")
-            if let method = request.httpMethod, let url = request.url {
-                logger.debug("\(method) \(url)")
+            let task = self.dataTaskWith(request: modifiedRequest) { (data, response, error) in
+                self.log(data: data, response: response, request: request, requestID: requestID)
+                completion(data, response, error)
             }
-            logger.verbose("Sending request to network: \(request)")
+
+            self.log(request: request, requestID: requestID)
 
             self.sessionDelegate.registerDownloadProgressHandler(taskIdentifier: task.taskIdentifier) { progress in
                 sessionTaskProxy.downloadProgressHandler?(progress)
@@ -227,14 +229,6 @@ public struct URLSessionClient: URLSessionClientType {
 
         let dataTask = self.urlSession.dataTask(with: request)
         sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { (data, response, error) in
-            logger.verbose("<<<<<<<<<<<<<< RESPONSE <<<<<<<<<<<<<<<<<<<<")
-            if let response = response {
-                logger.verbose("Received response: \(response)")
-            }
-            else {
-                logger.warn("Received empty response.")
-            }
-
             // If for some reason the client isn't retained elsewhere, it will at least stay alive
             // while active tasks are running
             self.activeTaskQueueDispatchGroup.leave()
