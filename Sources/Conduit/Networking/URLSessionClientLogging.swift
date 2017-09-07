@@ -78,12 +78,14 @@ extension URLSessionClient {
             return "\(code) ↪️"
         case 401, 403:
             return "\(code) ⛔️"
+        case 404:
+            return "\(code) 🔎"
         case 400..<500:
             return "\(code) ❌"
         case 500..<Int.max:
             return "\(code) 💥"
         default:
-            return "\(code)"
+            return "\(code) ❓"
         }
     }
 
