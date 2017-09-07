@@ -26,6 +26,30 @@ public enum LogLevel: Int {
     case noOutput
 }
 
+extension LogLevel: Comparable {
+
+    public static func == (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue == rhs.rawValue
+    }
+
+    public static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue > rhs.rawValue
+    }
+
+    public static func <= (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue >= rhs.rawValue
+    }
+
+    public static func >= (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue <= rhs.rawValue
+    }
+
+    public static func > (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+
+}
+
 /// Handles incoming log messages from all of Conduit
 public protocol ConduitLoggerType {
     /// The severity of log messages received
