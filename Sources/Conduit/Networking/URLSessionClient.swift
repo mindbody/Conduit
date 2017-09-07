@@ -69,7 +69,7 @@ public struct URLSessionClient: URLSessionClientType {
     // swiftlint:disable weak_delegate
     fileprivate let sessionDelegate = SessionDelegate()
     // swiftlint:enable weak_delegate
-    private static var requestCounter: Int64 = 1
+    private static var requestCounter: Int64 = 0
 
     /// Creates a new URLSessionClient with provided middleware and NSURLSession parameters
     /// - Parameters:
