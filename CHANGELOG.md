@@ -4,6 +4,18 @@
 - None
 
 #### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+
+## 0.4.1
+
+#### Breaking
+- None
+
+#### Enhancements
 - Improved network logging, including a static request counter
 
 #### Bug Fixes
