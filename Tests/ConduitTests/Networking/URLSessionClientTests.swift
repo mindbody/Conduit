@@ -48,7 +48,7 @@ class URLSessionClientTests: XCTestCase {
         waitForExpectations(timeout: 5)
 
         guard let headers = middleware2.transformedRequest?.allHTTPHeaderFields else {
-            XCTFail()
+            XCTFail("Expected headers")
             return
         }
         XCTAssertEqual(middleware2.transformedRequest?.url, modifiedURL)
@@ -119,7 +119,7 @@ class URLSessionClientTests: XCTestCase {
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
 
         let sessionProxy = client.begin(request: request) { (_, _, _) in
-            XCTFail()
+            XCTFail("Request should not have been executed")
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -163,7 +163,7 @@ class URLSessionClientTests: XCTestCase {
         requestBuilder.serializer = serializer
         requestBuilder.method = .POST
         guard let request = try? requestBuilder.build() else {
-            XCTFail()
+            XCTFail("Failed to build rerquest")
             return
         }
 

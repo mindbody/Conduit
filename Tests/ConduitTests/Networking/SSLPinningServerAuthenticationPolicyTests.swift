@@ -39,7 +39,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
 
         guard let validCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, MockResource.validSSLCertificate as CFData),
             let invalidCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, MockResource.badSSLCertificate as CFData) else {
-                XCTFail()
+                XCTFail("Failed to create certificates")
                 return
         }
 
@@ -62,7 +62,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
             XCTAssertTrue(authenticationPolicy.evaluate(serverTrust: validTrust))
         }
         else {
-            XCTFail()
+            XCTFail("Failed to create trust with certificates")
         }
     }
 
@@ -77,7 +77,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
             XCTAssertFalse(authenticationPolicy.evaluate(serverTrust: invalidTrust))
         }
         else {
-            XCTFail()
+            XCTFail("Failed to create trust with certificates")
         }
     }
 

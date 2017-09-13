@@ -25,7 +25,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail()
+            XCTFail("Inavlid url")
             return
         }
 
@@ -67,7 +67,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
-            XCTFail()
+            XCTFail("Serialization failed")
             return
         }
 
@@ -86,7 +86,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
                 XCTAssert(forms?.keys.count == 1)
             }
             catch {
-                XCTFail()
+                XCTFail("Request failed")
             }
             receivedResponseExpectation.fulfill()
         }
@@ -105,12 +105,12 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
-            XCTFail()
+            XCTFail("Serialization failed")
             return
         }
 
         guard let httpBody = modifiedRequest.httpBody else {
-            XCTFail()
+            XCTFail("No body")
             return
         }
 
@@ -130,7 +130,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
         guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
-            XCTFail()
+            XCTFail("Serialization failed")
             return
         }
         for customHeader in customDefaultHeaderFields {

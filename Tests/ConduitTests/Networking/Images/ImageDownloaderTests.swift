@@ -37,7 +37,7 @@ class ImageDownloaderTests: XCTestCase {
         sut = ImageDownloader(cache: AutoPurgingURLImageCache())
 
         guard let url = URL(string: "http://localhost:3333/image/jpeg") else {
-            XCTFail()
+            XCTFail("Invalid url")
             return
         }
         imageRequest = URLRequest(url: url)

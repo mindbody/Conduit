@@ -27,7 +27,7 @@ class OAuth2TokenStorageTests: XCTestCase {
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
         }
         catch {
-            XCTFail()
+            XCTFail("Failed to fetch environment configuration")
         }
     }
 
@@ -96,14 +96,14 @@ class OAuth2TokenStorageTests: XCTestCase {
     private func validateLegacyTokenMigration() {
         sut.store(token: mockLegacyToken, for: mockClientConfiguration, with: mockAuthorization)
         guard let legacyToken: BearerOAuth2Token = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
-            XCTFail()
+            XCTFail("Failed to get token")
             return
         }
 
         let newToken = legacyToken.converted
         sut.store(token: newToken, for: mockClientConfiguration, with: mockAuthorization)
         guard let migratedToken: BearerToken = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
-            XCTFail()
+            XCTFail("Failed to get token")
             return
         }
         XCTAssert(migratedToken.accessToken == mockLegacyToken.accessToken)

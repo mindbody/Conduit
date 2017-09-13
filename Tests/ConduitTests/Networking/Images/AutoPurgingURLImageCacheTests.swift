@@ -13,8 +13,8 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
 
     var mockImageRequest: URLRequest {
         guard let url = URL(string: "http://localhost:3333/image/jpeg") else {
-            XCTFail()
-            preconditionFailure()
+            XCTFail("Invalid url")
+            preconditionFailure("Invalid url")
         }
         return URLRequest(url: url)
     }

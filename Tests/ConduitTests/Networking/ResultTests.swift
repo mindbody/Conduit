@@ -50,11 +50,11 @@ class ResultTests: XCTestCase {
                 XCTAssertEqual(e, MyError.errorOne)
             }
             else {
-                XCTFail()
+                XCTFail("Unexpected error type")
             }
         }
         else {
-            XCTFail()
+            XCTFail("Didn't get an error")
         }
     }
 
@@ -71,11 +71,11 @@ class ResultTests: XCTestCase {
                 XCTAssertEqual(e, MyError.errorTwo)
             }
             else {
-                XCTFail()
+                XCTFail("Unexpected error type")
             }
         }
         else {
-            XCTFail()
+            XCTFail("Didn't get an error")
         }
     }
 
@@ -88,7 +88,7 @@ class ResultTests: XCTestCase {
         let error = Result<Int>.error(MyError.errorOne).error
         XCTAssertNotNil(error)
         guard case .some(MyError.errorOne) = error else {
-            XCTFail()
+            XCTFail("Unexpected error")
             return
         }
         XCTAssertNil(Result<Int>.value(1).error)
@@ -111,7 +111,7 @@ class ResultTests: XCTestCase {
             // Pass
         }
         catch {
-            XCTFail()
+            XCTFail("Unexpected error type")
         }
     }
 

@@ -22,7 +22,9 @@ class XMLTests: XCTestCase {
     ///   </N>
     /// </Root>
 
-    let xmlString = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Root><N/><N>test 🙂 value</N><N><N testKey=\"testValue\"/><LastNode/></N></Root>"
+    let xmlString = """
+        <?xml version="1.0" encoding="utf-8"?><Root><N/><N>test 🙂 value</N><N><N testKey="testValue"/><LastNode/></N></Root>
+        """
 
     private func validate(xml: XML) {
         XCTAssert(xml.root?.name == "Root")
@@ -32,7 +34,7 @@ class XMLTests: XCTestCase {
         XCTAssert(xml.root?.children.last?.isLeaf == false)
         XCTAssert(xml.root?.children.last?.children.count == 2)
         guard let attributes = xml.root?.children.last?.children.first?.attributes else {
-            XCTFail()
+            XCTFail("No attributes")
             return
         }
         XCTAssert(attributes == ["testKey": "testValue"])
@@ -60,7 +62,7 @@ class XMLTests: XCTestCase {
 
     func testXMLStringConstruction() {
         guard let xml = XML(xmlString) else {
-            XCTFail()
+            XCTFail("Failed to parse string")
             return
         }
         validate(xml: xml)
@@ -68,7 +70,7 @@ class XMLTests: XCTestCase {
 
     func testXMLStringOutputReconstruction() {
         guard let originalXML = XML(xmlString), let xml = XML(originalXML.description) else {
-            XCTFail()
+            XCTFail("Failed to parse xml")
             return
         }
         validate(xml: xml)

@@ -19,14 +19,17 @@ class XMLResponseDeserializerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        guard let validResponseData = "<?xml version=\"1.0\" encoding=\"utf-8\"?><Root><N/></Root>".data(using: .utf8) else {
-            XCTFail()
+        let xml = """
+            <?xml version="1.0" encoding="utf-8"?><Root><N/></Root>
+            """
+        guard let validResponseData = xml.data(using: .utf8) else {
+            XCTFail("Failed to encode string")
             return
         }
 
         guard let url = URL(string: "http://localhost:3333"),
             let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
-                XCTFail()
+                XCTFail("Invalid response")
                 return
         }
 
@@ -38,17 +41,16 @@ class XMLResponseDeserializerTests: XCTestCase {
     func testThrowsErrorForEmptyResponse() {
         XCTAssertThrowsError(try deserializer.deserialize(response: nil, data: validResponseData), "throws .noResponse") { error in
             guard case ResponseDeserializerError.noResponse = error else {
-                XCTFail()
+                XCTFail("Invalid response")
                 return
             }
         }
     }
 
     func testDeserializesToXML() {
-        guard let obj = try? deserializer.deserialize(response: validResponse, data: validResponseData),
-            let xml = obj as? XML else {
-                XCTFail()
-                return
+        guard let obj = try? deserializer.deserialize(response: validResponse, data: validResponseData), let xml = obj as? XML else {
+            XCTFail("Failed to deserialize")
+            return
         }
 
         XCTAssert(xml.root?.children.first?.name == "N")

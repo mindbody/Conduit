@@ -42,7 +42,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
                                                                  environment: validServerEnvironment)
         }
         catch {
-            XCTFail()
+            XCTFail("Failed to set up configuration")
         }
     }
 
@@ -67,7 +67,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let decorateRequestExpectation = expectation(description: "request immediately decorated")
         sut.prepareForTransport(request: request) { result in
             guard case .value(let request) = result else {
-                XCTFail()
+                XCTFail("No value")
                 return
             }
             XCTAssert(request.allHTTPHeaderFields?["Authorization"] == randomToken.authorizationHeaderValue)
@@ -86,7 +86,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let clientCredentialsStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: validClientConfiguration)
         clientCredentialsStrategy.issueToken { result in
             guard let token = result.value else {
-                XCTFail()
+                XCTFail("No token")
                 return
             }
             let expiredToken = BearerToken(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
@@ -95,7 +95,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
             sut.prepareForTransport(request: request) { result in
                 guard let request = result.value else {
-                    XCTFail()
+                    XCTFail("MNo value")
                     return
                 }
                 let authorizationHeader = request.allHTTPHeaderFields?["Authorization"]
@@ -120,7 +120,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let tokenFetchedExpectation = expectation(description: "token fetched")
         sut.prepareForTransport(request: request) { result in
             guard case .value(let request) = result else {
-                XCTFail()
+                XCTFail("No value")
                 return
             }
             XCTAssert(request.allHTTPHeaderFields?["Authorization"]?.contains("Bearer") == true)
@@ -151,7 +151,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         let tokenFetchedExpectation = expectation(description: "token fetched")
         sut.prepareForTransport(request: request) { result in
             guard case .value(let request) = result else {
-                XCTFail()
+                XCTFail("No value")
                 return
             }
             XCTAssert(request.allHTTPHeaderFields?["Authorization"]?.contains("Bearer") == true)

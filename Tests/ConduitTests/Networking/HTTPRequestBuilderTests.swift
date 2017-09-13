@@ -37,7 +37,7 @@ class HTTPRequestBuilderTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail()
+            XCTFail("Invalid URL")
             return
         }
         self.url = url
@@ -54,7 +54,7 @@ class HTTPRequestBuilderTests: XCTestCase {
 
         sut.serializer = mockSerializer
         guard let request = try? sut.build() else {
-            XCTFail()
+            XCTFail("Failed to build the request")
             return
         }
 
@@ -69,7 +69,7 @@ class HTTPRequestBuilderTests: XCTestCase {
         sut.serializer = mockSerializer
         XCTAssertThrowsError(try sut.build(), "error forwarded") { error in
             guard case MockSerializationError.testError = error else {
-                XCTFail()
+                XCTFail("Unexpeted error was thrown")
                 return
             }
         }
@@ -81,7 +81,7 @@ class HTTPRequestBuilderTests: XCTestCase {
             "OtherHeader": "OtherValue"
         ]
         guard let request = try? sut.build() else {
-            XCTFail()
+            XCTFail("Failed to build the request")
             return
         }
 
@@ -96,7 +96,7 @@ class HTTPRequestBuilderTests: XCTestCase {
         ]
 
         guard let request = try? sut.build() else {
-            XCTFail()
+            XCTFail("Failed to build the request")
             return
         }
 
