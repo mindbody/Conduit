@@ -4,7 +4,7 @@
 - None
 
 #### Enhancements
-- None
+- All targets now require app-extension-safe API
 
 #### Bug Fixes
 - None
