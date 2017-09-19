@@ -342,6 +342,13 @@
 			remoteGlobalIDString = 1B0A34081F71AE07001C0970;
 			remoteInfo = "ConduitTestHost-iOS";
 		};
+		1BB3EE341F71BB2200D837DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B49463F1F71B01400754C58;
+			remoteInfo = "ConduitTestHost-tvOS";
+		};
 		1BD800531F16820800481DC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
@@ -1058,6 +1065,7 @@
 			);
 			dependencies = (
 				1BD800631F16821400481DC9 /* PBXTargetDependency */,
+				1BB3EE351F71BB2200D837DA /* PBXTargetDependency */,
 			);
 			name = "ConduitTests-tvOS";
 			productName = "ConduitTests-tvOS";
@@ -1146,6 +1154,7 @@
 					1BD8005B1F16821400481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 1B49463F1F71B01400754C58;
 					};
 					1BD8006A1F16821D00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1740,6 +1749,11 @@
 			isa = PBXTargetDependency;
 			target = 1B0A34081F71AE07001C0970 /* ConduitTestHost-iOS */;
 			targetProxy = 1B0A341B1F71AE3E001C0970 /* PBXContainerItemProxy */;
+		};
+		1BB3EE351F71BB2200D837DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B49463F1F71B01400754C58 /* ConduitTestHost-tvOS */;
+			targetProxy = 1BB3EE341F71BB2200D837DA /* PBXContainerItemProxy */;
 		};
 		1BD800541F16820800481DC9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2628,6 +2642,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConduitTestHost-tvOS.app/ConduitTestHost-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.2;
 			};
 			name = Debug;
@@ -2676,6 +2691,7 @@
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConduitTestHost-tvOS.app/ConduitTestHost-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.2;
 				VALIDATE_PRODUCT = YES;
 			};
