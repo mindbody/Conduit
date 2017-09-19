@@ -1,10 +1,20 @@
 ## Master
 
 #### Breaking
-- None
+- Minimum language version is now Swift 4
+- `OAuth2Token` protocol no longer inherits from `NSCoding`, removes `isValid`
+- All usage of `BearerOAuth2Token` and `BasicOAuth2Token` have been replaced with `BearerToken` and `BasicToken`
+- `OAuth2TokenStore` now requires generic `OAuth2Token & DataConvertible` types
+- `RequestSerializer` signature renamed according to Swift style guidelines
 
 #### Enhancements
 - All targets now require app-extension-safe API
+- Added `BearerToken` struct that leverages Swift-friendly `Codable` and `Decodable` protocols for storage
+- Added `BasicToken` struct with limited responsibility and usage
+- Added migration extension for `BearerOAuth2Token` => `BearerToken`
+- Added backwards-compatibility for `BearerOAuth2Token`
+- Deprecated `BearerOAuth2Token` and `BasicOAuth2Token`
+- Added test hosts for iOS 11 keychain support
 
 #### Bug Fixes
 - None
