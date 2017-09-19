@@ -1,4 +1,4 @@
-- [ ] I've read, understood, and done my best to follow the [*CONTRIBUTING guidelines](../CONTRIBUTING.md).
+- [ ] I've read, understood, and done my best to follow the [CONTRIBUTING guidelines](../CONTRIBUTING.md).
 
 This pull request includes (pick all that apply):
 
