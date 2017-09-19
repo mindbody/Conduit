@@ -27,7 +27,7 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
         }
         catch {
-            XCTFail()
+            XCTFail("Failed to set up configuration")
         }
     }
 
@@ -40,28 +40,23 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
         return strategy
     }
 
-    func testAttemptsToIssueTokenViaExtensionGrant() {
+    func testAttemptsToIssueTokenViaExtensionGrant() throws {
         let sut = makeStrategy()
 
-        do {
-            let request = try sut.buildTokenGrantRequest()
-            guard let body = request.httpBody,
-                let bodyParameters = AuthTestUtilities.deserialize(urlEncodedParameterData: body),
-                let headers = request.allHTTPHeaderFields else {
-                    XCTFail()
-                    return
-            }
+        let request = try sut.buildTokenGrantRequest()
+        guard let body = request.httpBody,
+            let bodyParameters = AuthTestUtilities.deserialize(urlEncodedParameterData: body),
+            let headers = request.allHTTPHeaderFields else {
+                XCTFail("Expected header and body")
+                return
+        }
 
-            XCTAssert(bodyParameters["grant_type"] == saml12GrantType)
-            for parameter in customParameters {
-                XCTAssert(bodyParameters[parameter.key] == parameter.value)
-            }
-            XCTAssert(request.httpMethod == "POST")
-            XCTAssert(headers["Authorization"]?.contains("Basic") == true)
+        XCTAssert(bodyParameters["grant_type"] == saml12GrantType)
+        for parameter in customParameters {
+            XCTAssert(bodyParameters[parameter.key] == parameter.value)
         }
-        catch {
-            XCTFail()
-        }
+        XCTAssert(request.httpMethod == "POST")
+        XCTAssert(headers["Authorization"]?.contains("Basic") == true)
     }
 
     func testIssuesTokenWithCorrectSessionClient() {

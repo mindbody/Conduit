@@ -13,7 +13,7 @@ import Foundation
     import WatchKit
 #endif
 
-struct HTTPHeader {
+private struct HTTPHeader {
     let name: String
     let value: String
 }
@@ -25,7 +25,7 @@ struct HTTPHeader {
 open class HTTPRequestSerializer: RequestSerializer {
 
     // https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-    static let acceptLanguageHeader: HTTPHeader = {
+    private static let acceptLanguageHeader: HTTPHeader = {
         func languageComponentFor(languageIdentifier: String, preferenceLevel: Float) -> String {
             return String(format: "\(languageIdentifier);q=%0.1g", preferenceLevel)
         }
@@ -41,7 +41,7 @@ open class HTTPRequestSerializer: RequestSerializer {
     }()
 
     // http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
-    static let userAgentHeader: HTTPHeader? = {
+    private static let userAgentHeader: HTTPHeader? = {
         let product: String
         let productVersion: String
         let platform: String?
@@ -118,13 +118,14 @@ open class HTTPRequestSerializer: RequestSerializer {
         }
     }()
 
-    open func serializedRequestWith(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
+    open func serialize(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
 
         guard let httpMethod = request.httpMethod, request.url != nil else {
             throw RequestSerializerError.invalidURL
         }
 
-        let httpMethodsWithNoBody = HTTPRequestSerializer.httpMethodsWithNoBody.flatMap { $0.rawValue }
+        let httpMethodsWithNoBody = HTTPRequestSerializer.httpMethodsWithNoBody.map { $0.rawValue }
+
         if bodyParameters != nil && httpMethodsWithNoBody.contains(httpMethod) {
             throw RequestSerializerError.httpVerbDoesNotAllowBodyParameters
         }

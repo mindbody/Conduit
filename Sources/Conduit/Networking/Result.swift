@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Represents a disjoint union of either a value<T> and an ErrorType
+/// Represents a disjoint union of either a value<T> and an Error
 /// This is similar to Scala's `Either` data type, and we can employ it
 /// to work around Swift's limited support for error handling in
 /// methods that return values via a closure.

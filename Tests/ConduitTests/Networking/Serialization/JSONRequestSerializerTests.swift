@@ -19,7 +19,7 @@ class JSONRequestSerializerTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail()
+            XCTFail("Inavlid url")
             return
         }
 
@@ -29,13 +29,13 @@ class JSONRequestSerializerTests: XCTestCase {
     }
 
     func testSerializesJSONObject() {
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: testJSONParameters) else {
-            XCTFail()
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: testJSONParameters) else {
+            XCTFail("Serialization failed")
             return
         }
 
         guard let httpBody = modifiedRequest.httpBody else {
-            XCTFail()
+            XCTFail("Expected body")
             return
         }
 
@@ -45,14 +45,13 @@ class JSONRequestSerializerTests: XCTestCase {
 
     func testAllowsFragmentedJSON() {
         let fragmentedBody = "someemail@test.com"
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: fragmentedBody) else {
-            XCTFail()
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: fragmentedBody) else {
+            XCTFail("Serialization failed")
             return
         }
 
-        guard let httpBody = modifiedRequest.httpBody,
-            let bodyString = String(data: httpBody, encoding: .utf8) else {
-            XCTFail()
+        guard let httpBody = modifiedRequest.httpBody, let bodyString = String(data: httpBody, encoding: .utf8) else {
+            XCTFail("No body")
             return
         }
 
@@ -60,8 +59,8 @@ class JSONRequestSerializerTests: XCTestCase {
     }
 
     func testConfiguresDefaultContentTypeHeader() {
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
-            XCTFail()
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
+            XCTFail("Serialization failed")
             return
         }
 
@@ -76,8 +75,8 @@ class JSONRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
-            XCTFail()
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
+            XCTFail("Serialization failed")
             return
         }
         for customHeader in customDefaultHeaderFields {

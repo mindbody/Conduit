@@ -17,7 +17,7 @@ class QueryStringTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "https://google.com") else {
-            XCTFail()
+            XCTFail("Inavlid url")
             return
         }
         queryString = QueryString(parameters: nil, url: url)
@@ -30,28 +30,28 @@ class QueryStringTests: XCTestCase {
         /// [String : Double]
         queryString.parameters = ["foo": "bar"]
         guard let encodedURL1 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL1.absoluteString.contains("foo=bar"))
 
         queryString.parameters = ["foo": NSNull()]
         guard let encodedURL2 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL2.query == "foo")
 
         queryString.parameters = ["foo": 1_234]
         guard let encodedURL3 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL3.absoluteString.contains("foo=1234"))
 
         queryString.parameters = ["foo": 1.234]
         guard let encodedURL4 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL4.absoluteString.contains("foo=1.234"))
@@ -61,7 +61,7 @@ class QueryStringTests: XCTestCase {
         queryString.parameters = ["foo": ["foo", "bar", 1_234, 1.234] ]
         queryString.formattingOptions.arrayFormat = .indexed
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("foo%5B0%5D=foo"))
@@ -74,7 +74,7 @@ class QueryStringTests: XCTestCase {
         queryString.parameters = ["foo": ["foo", "bar", 1_234, 1.234] ]
         queryString.formattingOptions.arrayFormat = .duplicatedKeys
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("foo=foo"))
@@ -87,7 +87,7 @@ class QueryStringTests: XCTestCase {
         queryString.parameters = ["foo": ["foo", "bar", 1_234, 1.234] ]
         queryString.formattingOptions.arrayFormat = .bracketed
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("foo%5B%5D=foo"))
@@ -100,7 +100,7 @@ class QueryStringTests: XCTestCase {
         queryString.parameters = ["foo": ["foo", "bar", 1_234, 1.234] ]
         queryString.formattingOptions.arrayFormat = .commaSeparated
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("foo=foo,bar,1234,1.234"))
@@ -127,7 +127,7 @@ class QueryStringTests: XCTestCase {
 
         queryString.formattingOptions.dictionaryFormat = .dotNotated
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("param1.key1=value1"))
@@ -159,7 +159,7 @@ class QueryStringTests: XCTestCase {
 
         queryString.formattingOptions.dictionaryFormat = .subscripted
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.absoluteString.contains("param1%5Bkey1%5D=value1"))
@@ -173,14 +173,14 @@ class QueryStringTests: XCTestCase {
     func testEncodesFragments() {
         queryString.parameters = "hello"
         guard let encodedURL1 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL1.query == "hello")
 
         queryString.parameters = 42
         guard let encodedURL2 = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL2.query == "42")
@@ -191,7 +191,7 @@ class QueryStringTests: XCTestCase {
             "key1": "value+1"
         ]
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query == "key1=value%2B1")
@@ -203,7 +203,7 @@ class QueryStringTests: XCTestCase {
         ]
         queryString.formattingOptions.plusSymbolEncodingRule = .replacedWithEncodedSpace
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query == "key1=value%201")
@@ -215,7 +215,7 @@ class QueryStringTests: XCTestCase {
         ]
         queryString.formattingOptions.plusSymbolEncodingRule = .replacedWithEncodedPlus
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query == "key1=value%2B1")
@@ -226,7 +226,7 @@ class QueryStringTests: XCTestCase {
             "key1": "value 1"
         ]
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query == "key1=value%201")
@@ -238,7 +238,7 @@ class QueryStringTests: XCTestCase {
         ]
         queryString.formattingOptions.spaceEncodingRule = .replacedWithDecodedPlus
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query == "key1=value+1")
@@ -254,7 +254,7 @@ class QueryStringTests: XCTestCase {
         queryString.formattingOptions.spaceEncodingRule = .replacedWithDecodedPlus
         queryString.formattingOptions.spaceEncodingRule = .replacedWithDecodedPlus
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query?.contains("key1=value%201") == true)
@@ -267,7 +267,7 @@ class QueryStringTests: XCTestCase {
             "!*'();:@$,/": "!*'();:@$,/"
         ]
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query?.contains("!*'();:@$,/=!*'();:@$,/") == true)
@@ -281,7 +281,7 @@ class QueryStringTests: XCTestCase {
         queryString.formattingOptions.plusSymbolEncodingRule = .replacedWithEncodedSpace
         queryString.formattingOptions.spaceEncodingRule = .replacedWithDecodedPlus
         guard let encodedURL = try? queryString.encodeURL() else {
-            XCTFail()
+            XCTFail("Encoding failed")
             return
         }
         XCTAssert(encodedURL.query?.contains("%21%2A%27%28%29%3B%3A%40%24%2C%2F%26%3Dabc%20+=%21%2A%27%28%29%3B%3A%40%24%2C%2F%26%3Dabc%20+") == true)
