@@ -1,3 +1,4 @@
+// swift-tools-version:4.0
 //
 //  Package.swift
 //  Conduit
@@ -10,5 +11,18 @@ import PackageDescription
 
 let package = Package(
     name: "Conduit",
-    dependencies : []
+    products: [
+        .library(
+            name: "Conduit",
+            targets: ["Conduit"]),
+    ],
+    dependencies : [],
+    targets: [
+        .target(
+            name: "Conduit",
+            dependencies: []),
+        .testTarget(
+            name: "ConduitTests",
+            dependencies: ["Conduit"]),
+    ]
 )

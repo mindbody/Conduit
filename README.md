@@ -5,7 +5,7 @@
 
 Conduit is a session-based Swift HTTP networking and auth library.
 
-Within each session, requests are sent through a serial [pipeline](https://en.wikipedia.org/wiki/Pipeline_(software)) before being dispatched to the network queue. Within the pipeline, requests are processed through a collection of [middleware](https://en.wikipedia.org/wiki/Interceptor_pattern) that can decorate requests, pause the session pipeline, and empty the outgoing queue. From this pattern, Conduit bundles pre-defined middleware for [OAuth2](https://oauth.net/2/) authentication through all major flows defined within [RFC 6749](https://tools.ietf.org/html/rfc6749) and automatically applies authorization to requests as defined in [RFC 6750](http://tools.ietf.org/html/rfc6750).
+Within each session, requests are sent through a serial [pipeline](https://en.wikipedia.org/wiki/Pipeline_(software)) before being dispatched to the network queue. Within the pipeline, requests are processed through a collection of [middleware](https://en.wikipedia.org/wiki/Interceptor_pattern) that can decorate requests, pause the session pipeline, and empty the outgoing queue. From this pattern, Conduit bundles pre-defined middleware for [OAuth2](https://oauth.net/2/) authorization grants through all major flows defined within [RFC 6749](https://tools.ietf.org/html/rfc6749) and automatically applies tokens to requests as defined in [RFC 6750](http://tools.ietf.org/html/rfc6750).
 
 - [Features](#features)
 - [Requirements](#requirements)
@@ -59,7 +59,17 @@ github "mindbody/Conduit"
 
 ### Cocoapods
 
-TODO
+Add `Conduit` to your `Podfile`:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+use_frameworks!
+
+target 'MyApplicationTarget' do
+    pod 'Conduit'
+end
+```
 
 ### Swift Package Manager
 
@@ -137,7 +147,7 @@ let request = try requestBuilder.build()
 let sessionClient = MySessionClientManager.kittnAPISessionClient
 sessionClient.begin(request) { (data, response, error) in
 	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserializedObjectFrom(response: response, data: data) as? [String : Any]
+	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
 	...
 }
 ```
@@ -377,7 +387,7 @@ sessionClient.middleware.append(authMiddleware)
 
 sessionClient.begin(request) { (data, response, error) in
 	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserializedObjectFrom(response: response, data: data) as? [String : Any]
+	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
 	...
 }
 ```
@@ -386,10 +396,12 @@ sessionClient.begin(request) { (data, response, error) in
 
 This repo includes an iOS example, which is attached to `Conduit.xcworkspace`
 
-## Credits
-
-TBD
-
 ## License
 
 Released under the Apache 2.0 license. See [LICENSE](LICENSE) for more details.
+
+## Credits
+
+[![mindbody-logo](images/MindbodyLogo.png)](https://mindbodyonline.com/careers)
+
+Conduit is owned by MINDBODY, Inc. and continuously maintained by our [contributors](https://github.com/mindbody/Conduit/graphs/contributors).

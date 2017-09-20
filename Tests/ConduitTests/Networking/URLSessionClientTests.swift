@@ -41,14 +41,14 @@ class URLSessionClientTests: XCTestCase {
 
         let client = URLSessionClient(middleware: [middleware1, middleware2])
         let processedRequestExpectation = expectation(description: "processed request")
-        client.begin(request: originalRequest) { _ in
+        client.begin(request: originalRequest) { _, _, _  in
             processedRequestExpectation.fulfill()
         }
 
         waitForExpectations(timeout: 5)
 
         guard let headers = middleware2.transformedRequest?.allHTTPHeaderFields else {
-            XCTFail()
+            XCTFail("Expected headers")
             return
         }
         XCTAssertEqual(middleware2.transformedRequest?.url, modifiedURL)
@@ -65,7 +65,7 @@ class URLSessionClientTests: XCTestCase {
         var completedDelayedRequests = 0
 
         for _ in 0..<numDelayedRequests {
-            client.begin(request: delayedRequest) { _ in
+            client.begin(request: delayedRequest) { _, _, _  in
                 completedDelayedRequests += 1
             }
         }
@@ -76,7 +76,7 @@ class URLSessionClientTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             blockingMiddleware.pipelineBehaviorOptions = .awaitsOutgoingCompletion
 
-            client.begin(request: immediateRequest) { _ in
+            client.begin(request: immediateRequest) { _, _, _  in
                 XCTAssert(completedDelayedRequests == numDelayedRequests)
                 requestSentExpectation.fulfill()
             }
@@ -119,14 +119,20 @@ class URLSessionClientTests: XCTestCase {
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
 
         let sessionProxy = client.begin(request: request) { (_, _, _) in
-            XCTFail()
+            XCTFail("Request should not have been executed")
         }
-        sessionProxy.suspend()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: NSEC_PER_SEC * 2)) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             dispatchExecutedExpectation.fulfill()
         }
 
-        waitForExpectations(timeout: 3)
+        // Suspending a task immediately after resuming it has no effect
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            sessionProxy.suspend()
+        }
+
+        waitForExpectations(timeout: 5)
     }
 
     func testReportsDownloadProgressForLargerTasks() throws {
@@ -157,7 +163,7 @@ class URLSessionClientTests: XCTestCase {
         requestBuilder.serializer = serializer
         requestBuilder.method = .POST
         guard let request = try? requestBuilder.build() else {
-            XCTFail()
+            XCTFail("Failed to build rerquest")
             return
         }
 
@@ -183,7 +189,7 @@ class URLSessionClientTests: XCTestCase {
         for _ in 0..<numConcurrentRequests {
             let requestFinishedExpectation = expectation(description: "request finished")
             DispatchQueue.global().async {
-                client.begin(request: request) { _ in
+                client.begin(request: request) { _, _, _  in
                     requestFinishedExpectation.fulfill()
                     completedRequests += 1
                 }

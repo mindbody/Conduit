@@ -14,9 +14,9 @@ public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
     /// Defines how parameters should be encoded within the HTTP body.
     public var formattingOptions = QueryStringFormattingOptions()
 
-    override open func serializedRequestWith(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
+    override open func serialize(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
 
-        var mutableRequest = try super.serializedRequestWith(request: request, bodyParameters: bodyParameters)
+        var mutableRequest = try super.serialize(request: request, bodyParameters: bodyParameters)
 
         guard let url = mutableRequest.url else {
             throw RequestSerializerError.invalidURL

@@ -50,7 +50,7 @@ extension MockResource {
 extension Data: ExpressibleByStringLiteral {
     public init(stringLiteral value: StaticString) {
         guard let data = Data(base64Encoded: "\(value)") else {
-            XCTFail()
+            XCTFail("Invalid data string")
             fatalError("Invalid data string")
         }
         self = data
@@ -66,7 +66,7 @@ extension Data: ExpressibleByStringLiteral {
 
     var image: Image {
         guard let image = Image(data: self) else {
-            XCTFail()
+            XCTFail("Invalid image")
             fatalError("Invalid image")
         }
         return image

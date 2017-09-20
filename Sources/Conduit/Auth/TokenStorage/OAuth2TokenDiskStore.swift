@@ -41,11 +41,14 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     }
 
     @discardableResult
-    public func store(token: OAuth2Token?, for client: OAuth2ClientConfiguration,
-                      with authorization: OAuth2Authorization) -> Bool {
-        var tokenData: Data? = nil
+    public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
+                                                            with authorization: OAuth2Authorization) -> Bool {
+        let tokenData: Data?
         if let token = token {
-            tokenData = NSKeyedArchiver.archivedData(withRootObject: token)
+            tokenData = try? token.serialized()
+        }
+        else {
+            tokenData = nil
         }
         switch storageMethod {
         case .userDefaults:
@@ -75,19 +78,20 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         }
     }
 
-    public func tokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2Token? {
+    public func tokenFor<Token: OAuth2Token & DataConvertible>(client: OAuth2ClientConfiguration,
+                                                               authorization: OAuth2Authorization) -> Token? {
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
-            if let data = UserDefaults.standard.object(forKey: identifier) as? Data {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? OAuth2Token
+            guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
+                return nil
             }
-            return nil
+            return try? Token(serializedData: data)
         case .url(let storageURL):
-            if let data = FileManager.default.contents(atPath: storageURL.path) {
-                return NSKeyedUnarchiver.unarchiveObject(with: data) as? OAuth2Token
+            guard let data = FileManager.default.contents(atPath: storageURL.path) else {
+                return nil
             }
-            return nil
+            return try? Token(serializedData: data)
         }
     }
 

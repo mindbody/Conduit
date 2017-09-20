@@ -29,7 +29,7 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
         }
         catch {
-            XCTFail()
+            XCTFail("Failed to set up configuration")
         }
     }
 
@@ -40,30 +40,25 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
         return strategy
     }
 
-    func testAttemptsToIssueTokenViaExtensionGrant() {
+    func testAttemptsToIssueTokenViaExtensionGrant() throws {
         let sut = makeStrategy()
 
-        do {
-            let request = try sut.buildTokenGrantRequest()
-            guard let body = request.httpBody,
-                let bodyParameters = AuthTestUtilities.deserialize(urlEncodedParameterData: body),
-                let headers = request.allHTTPHeaderFields else {
-                    XCTFail()
-                    return
-            }
+        let request = try sut.buildTokenGrantRequest()
+        guard let body = request.httpBody,
+            let bodyParameters = AuthTestUtilities.deserialize(urlEncodedParameterData: body),
+            let headers = request.allHTTPHeaderFields else {
+                XCTFail("Expected header and body")
+                return
+        }
 
-            XCTAssert(bodyParameters["grant_type"] == authorizationCodeGrantType)
-            XCTAssert(bodyParameters["redirect_uri"] == redirectURI)
-            XCTAssert(bodyParameters["code"] == authCode)
-            for parameter in customParameters {
-                XCTAssert(bodyParameters[parameter.key] == parameter.value)
-            }
-            XCTAssert(request.httpMethod == "POST")
-            XCTAssert(headers["Authorization"]?.contains("Basic") == true)
+        XCTAssert(bodyParameters["grant_type"] == authorizationCodeGrantType)
+        XCTAssert(bodyParameters["redirect_uri"] == redirectURI)
+        XCTAssert(bodyParameters["code"] == authCode)
+        for parameter in customParameters {
+            XCTAssert(bodyParameters[parameter.key] == parameter.value)
         }
-        catch {
-            XCTFail()
-        }
+        XCTAssert(request.httpMethod == "POST")
+        XCTAssert(headers["Authorization"]?.contains("Basic") == true)
     }
 
     func testIssuesTokenWithCorrectSessionClient() {

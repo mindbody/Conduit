@@ -18,7 +18,7 @@ class HTTPRequestSerializerTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail()
+            XCTFail("Invalid url")
             return
         }
         request = URLRequest(url: url)
@@ -27,11 +27,11 @@ class HTTPRequestSerializerTests: XCTestCase {
 
     func testAddsRequiredW3Headers() {
         let headerKeys = ["Accept-Language", "User-Agent"]
-        guard let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
-            XCTFail()
+        guard let serializedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
+            XCTFail("Failed to serialize request")
             return
         }
-        let allHTTPHeaderKeys = serializedRequest.allHTTPHeaderFields?.keys.flatMap { $0 }
+        let allHTTPHeaderKeys = serializedRequest.allHTTPHeaderFields?.keys.map { $0 }
         for key in headerKeys {
             XCTAssert(allHTTPHeaderKeys?.contains(key) == true)
         }
@@ -43,12 +43,12 @@ class HTTPRequestSerializerTests: XCTestCase {
             request.httpMethod = method.rawValue
 
             do {
-                _ = try serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"])
-                XCTFail()
+                _ = try serializer.serialize(request: request, bodyParameters: ["foo": "bar"])
+                XCTFail("Expected to fail serializing the request")
             }
             catch let error {
                 guard case RequestSerializerError.httpVerbDoesNotAllowBodyParameters = error else {
-                    XCTFail()
+                    XCTFail("Unexpected error type")
                     return
                 }
             }
@@ -57,7 +57,7 @@ class HTTPRequestSerializerTests: XCTestCase {
         func validatePassesFor(_ method: HTTPRequestBuilder.Method) {
             var request: URLRequest! = self.request
             request.httpMethod = method.rawValue
-            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: ["foo": "bar"])
+            let serializedRequest = try? serializer.serialize(request: request, bodyParameters: ["foo": "bar"])
             XCTAssert(serializedRequest != nil)
         }
 

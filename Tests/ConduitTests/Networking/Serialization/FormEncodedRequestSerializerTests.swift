@@ -18,7 +18,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         super.setUp()
 
         guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail()
+            XCTFail("Invalid url")
             return
         }
 
@@ -34,9 +34,9 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
 
         for test in tests {
-            let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: test.0)
+            let serializedRequest = try? serializer.serialize(request: request, bodyParameters: test.0)
             guard let body = serializedRequest?.httpBody else {
-                XCTFail()
+                XCTFail("Expected body")
                 return
             }
             let resultBodyString = String(data: body, encoding: .utf8)
@@ -54,8 +54,8 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: nil) else {
-            XCTFail()
+        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
+            XCTFail("Serialization failed")
             return
         }
         for customHeader in customDefaultHeaderFields {
@@ -68,9 +68,9 @@ class FormEncodedRequestSerializerTests: XCTestCase {
             "foo": "bar+baz"
         ]
 
-        let serializedRequest = try? serializer.serializedRequestWith(request: request, bodyParameters: parameters)
+        let serializedRequest = try? serializer.serialize(request: request, bodyParameters: parameters)
         guard let body = serializedRequest?.httpBody else {
-            XCTFail()
+            XCTFail("Expected body")
             return
         }
         let resultBodyString = String(data: body, encoding: .utf8)

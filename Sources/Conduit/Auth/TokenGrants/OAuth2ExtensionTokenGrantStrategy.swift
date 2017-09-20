@@ -42,7 +42,7 @@ public struct OAuth2ExtensionTokenGrantStrategy: OAuth2TokenGrantStrategy {
         return request
     }
 
-    public func issueToken(_ completion: @escaping Result<BearerOAuth2Token>.Block) {
+    public func issueToken(_ completion: @escaping Result<BearerToken>.Block) {
         logger.verbose("Attempting to issue a new token via extension grant...")
         do {
             let request = try buildTokenGrantRequest()

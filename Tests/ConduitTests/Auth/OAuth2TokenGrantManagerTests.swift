@@ -21,7 +21,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
         super.setUp()
 
         guard let url = dummyURL, let mockResponse = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil) else {
-            XCTFail()
+            XCTFail("Invalid response")
             return
         }
 
@@ -35,7 +35,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
 
     func testErrorsGeneratedAsExpected() {
         guard let url = dummyURL else {
-            XCTFail()
+            XCTFail("Inavlid url")
             return
         }
         let response401 = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil)
@@ -46,7 +46,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
             let error401 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response401) as? OAuth2Error,
             let error400 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response400) as? OAuth2Error,
             let error500 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response500) as? OAuth2Error else {
-                XCTFail()
+                XCTFail("Unexpected error type")
                 return
         }
 
@@ -54,7 +54,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
             case .clientFailure(_, _) = error401,
             case .clientFailure(_, _) = error400,
             case .serverFailure(_, _) = error500 else {
-                XCTFail()
+                XCTFail("Unexpected error type")
                 return
         }
 
@@ -62,7 +62,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
 
     func testValidResponseGeneratesNoErrors() {
         guard let url = dummyURL else {
-            XCTFail()
+            XCTFail("Inavlid url")
             return
         }
         let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: nil)

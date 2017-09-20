@@ -16,7 +16,7 @@ public protocol RequestSerializer {
     ///     - bodyParameters: Parameters to serialize into the HTTP Body
     /// - Throws: A `RequestSerializerError` if serialization is not possible
     /// - Returns: A serialized URLRequest
-    func serializedRequestWith(request: URLRequest, bodyParameters: Any?) throws -> URLRequest
+    func serialize(request: URLRequest, bodyParameters: Any?) throws -> URLRequest
 }
 
 /// Errors that signify failures within a `RequestSerializer`
