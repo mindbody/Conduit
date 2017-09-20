@@ -7,7 +7,7 @@ cache:
 install:
   - bundle install
   - bundle exec danger
-  - pip install -r requirements.txt
+  - pip install -r requirements.txt --user travis
   - brew update
   - brew bundle
 
