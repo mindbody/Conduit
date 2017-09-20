@@ -43,7 +43,13 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
     @discardableResult
     public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
                                                             with authorization: OAuth2Authorization) -> Bool {
-        let tokenData = token?.serialized()
+        let tokenData: Data?
+        if let token = token {
+            tokenData = try? token.serialized()
+        }
+        else {
+            tokenData = nil
+        }
         switch storageMethod {
         case .userDefaults:
             let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
@@ -80,12 +86,12 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
             guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
                 return nil
             }
-            return Token(serializedData: data)
+            return try? Token(serializedData: data)
         case .url(let storageURL):
             guard let data = FileManager.default.contents(atPath: storageURL.path) else {
                 return nil
             }
-            return Token(serializedData: data)
+            return try? Token(serializedData: data)
         }
     }
 

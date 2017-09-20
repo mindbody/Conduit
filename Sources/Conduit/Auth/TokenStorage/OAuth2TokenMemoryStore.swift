@@ -11,7 +11,7 @@ import Foundation
 /// An in-memory token store that lives as long as the consuming executable
 public class OAuth2TokenMemoryStore: OAuth2TokenStore {
 
-    private var tokens: [String:OAuth2Token & DataConvertible] = [:]
+    private var tokens: [String: OAuth2Token & DataConvertible] = [:]
 
     /// Creates a new OAuth2TokenMemoryStore
     public init() {}
