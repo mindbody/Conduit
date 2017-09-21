@@ -45,6 +45,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 ## Requirements
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
+
 | Conduit  Version | Swift Version |
 |------------------|---------------|
 | 0.4.x            | 3.x           |
@@ -79,11 +80,12 @@ end
 Add `Conduit` to your `Package.swift`:
 
 ```swift
+// swift-tools-version:4.0
 import PackageDescription
 
 let package = Package(
 	dependencies: [
-		.Package(url: "https://github.com/mindbody/Conduit.git", majorVersion: 0)
+		.package(url: "https://github.com/mindbody/Conduit.git", from: "0.5.0")
 	]
 )
 ```
