@@ -1,6 +1,17 @@
 ## Master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+## 0.5.0
+
+#### Breaking
 - Minimum language version is now Swift 4
 - `OAuth2Token` protocol no longer inherits from `NSCoding`, removes `isValid`
 - All usage of `BearerOAuth2Token` and `BasicOAuth2Token` have been replaced with `BearerToken` and `BasicToken`
