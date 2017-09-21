@@ -46,9 +46,9 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 - iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
 | Conduit  Version | Swift Version |
-|--------------------|----------------|
-| 0.4.x                   | 3.x                |
-| 0.5.x+                 | 4.0                |
+|------------------|---------------|
+| 0.4.x            | 3.x           |
+| 0.5.x+           | 4.0           |
 
 ## Installation
 
