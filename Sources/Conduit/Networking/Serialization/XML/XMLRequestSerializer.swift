@@ -19,7 +19,7 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
             request.setValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
 
-        if let bodyData = try bodyData(bodyParameters: bodyParameters) {
+        if let bodyData: Data = try bodyData(bodyParameters: bodyParameters) {
             request.setValue(String(bodyData.count), forHTTPHeaderField: "Content-Length")
             request.httpBody = bodyData
         }

@@ -154,7 +154,7 @@ class URLSessionClientTests: XCTestCase {
         let serializer = MultipartFormRequestSerializer()
         let client: URLSessionClient = URLSessionClient()
 
-        guard let videoData = data(base64EncodedResource: MockResource.sampleVideo) else {
+        guard let videoData = MockResource.sampleVideo.base64EncodedData else {
             throw TestError.invalidTest
         }
 

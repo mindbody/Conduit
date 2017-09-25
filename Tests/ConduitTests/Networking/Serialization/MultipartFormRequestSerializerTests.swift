@@ -34,9 +34,8 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
 
-        guard let image1 = data(base64EncodedResource: MockResource.cellTowersImage)?.image,
-            let image2 = data(base64EncodedResource: MockResource.evilSpaceshipImage)?.image,
-            let videoData = data(base64EncodedResource: MockResource.sampleVideo) else {
+        guard let image1 = MockResource.cellTowersImage.image, let image2 = MockResource.evilSpaceshipImage.image,
+            let videoData = MockResource.sampleVideo.base64EncodedData else {
                 throw TestError.invalidTest
         }
 
@@ -98,7 +97,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     func testRemovesFormPartContentTypeHeadersIfExplictlyRemoved() throws {
         let serializer = MultipartFormRequestSerializer()
 
-        guard let image1 = data(base64EncodedResource: MockResource.cellTowersImage)?.image else {
+        guard let image1 = MockResource.cellTowersImage.image else {
             throw TestError.invalidTest
         }
 

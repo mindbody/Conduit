@@ -35,8 +35,8 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
     }
 
     private func loadCertificates() throws -> (valid: SecCertificate, invalid: SecCertificate) {
-        guard let validCert = data(base64EncodedResource: MockResource.validSSLCertificate),
-            let invalidCert = data(base64EncodedResource: MockResource.badSSLCertificate),
+        guard let validCert = MockResource.validSSLCertificate.base64EncodedData,
+            let invalidCert = MockResource.badSSLCertificate.base64EncodedData,
             let validCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, validCert as CFData),
             let invalidCertificate = SecCertificateCreateWithData(kCFAllocatorMalloc, invalidCert as CFData) else {
                 throw TestError.invalidTest

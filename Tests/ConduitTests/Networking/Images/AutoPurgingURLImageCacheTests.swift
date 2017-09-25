@@ -21,7 +21,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
 
     func testRetrievesCachedImages() throws {
         let sut = AutoPurgingURLImageCache()
-        guard let copy = data(base64EncodedResource: MockResource.evilSpaceshipImage)?.image else {
+        guard let copy = MockResource.evilSpaceshipImage.image else {
             throw TestError.invalidTest
         }
         sut.cache(image: copy, for: mockImageRequest)
@@ -36,7 +36,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
 
     func testRemovesCachedImages() throws {
         let sut = AutoPurgingURLImageCache()
-        guard let image = data(base64EncodedResource: MockResource.evilSpaceshipImage)?.image else {
+        guard let image = MockResource.evilSpaceshipImage.image else {
             throw TestError.invalidTest
         }
         sut.cache(image: image, for: mockImageRequest)
@@ -52,7 +52,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
             URLRequest(url: try URL(absoluteString: "http://localhost:3333/image/jpeg?id=\($0)"))
         }
 
-        guard let image = data(base64EncodedResource: MockResource.evilSpaceshipImage)?.image else {
+        guard let image = MockResource.evilSpaceshipImage.image else {
             throw TestError.invalidTest
         }
 
