@@ -3,8 +3,8 @@ build_configurations = [
 		:scheme => "Conduit-iOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=9.3,name=iPhone 6S",
-			"OS=latest,name=iPhone 7 Plus"
+			"OS=9.3,name=iPhone 5S",
+			"OS=latest,name=iPhone X"
 		]
 	},
 	{
@@ -18,7 +18,8 @@ build_configurations = [
 		:scheme => "Conduit-tvOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=latest,name=Apple TV 1080p"
+			"OS=9.2,name=Apple TV 1080p",
+			"OS=latest,name=Apple TV 4K"
 		]
 	},
 	{
@@ -65,11 +66,9 @@ end
 desc "Clean all builds"
 task :clean do
 	`rm -rf .build`
-	`rm -rf Carthage`
 	build_configurations.each do |config|
 		scheme =  config[:scheme]
 		system("set -o pipefail && xcodebuild -scheme #{scheme} -configuration Debug clean | xcpretty")
 	end
 end
 
-task :default => "test"

@@ -30,7 +30,7 @@ public protocol OAuth2TokenStore {
                                                         authorization: OAuth2Authorization) -> Token?
 }
 
-public extension OAuth2TokenStore {
+extension OAuth2TokenStore {
 
     /// Removes all stored tokens for a given client
     /// - Parameters:

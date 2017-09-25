@@ -21,7 +21,7 @@ class AuthTestUtilities {
 
         urlComponents.percentEncodedQuery = encodedString
 
-        let params = urlComponents.queryItems?.reduce([String: String]()) { (dictionary, queryItem) in
+        let params = urlComponents.queryItems?.reduce([String: String]()) { dictionary, queryItem in
             var dict = dictionary
             dict[queryItem.name] = queryItem.value
             return dict

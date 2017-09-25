@@ -74,8 +74,8 @@ public class BasicToken: OAuth2Token {
         self.username = username
         self.password = password
     }
-
 }
+
 extension BearerToken {
     private struct JSONKeys {
         static let accessToken = "access_token"
@@ -99,17 +99,15 @@ extension BearerToken {
         }
 
         return BearerToken(accessToken: accessToken,
-                                 refreshToken: refreshToken,
-                                 expiration: Date().addingTimeInterval(TimeInterval(expiresIn)))
+                           refreshToken: refreshToken,
+                           expiration: Date().addingTimeInterval(TimeInterval(expiresIn)))
     }
 }
 
 extension BearerToken {
-
     init(legacyToken: BearerOAuth2Token) {
         self.init(accessToken: legacyToken.accessToken, refreshToken: legacyToken.refreshToken, expiration: legacyToken.expiration)
     }
-
 }
 
 extension BasicToken {

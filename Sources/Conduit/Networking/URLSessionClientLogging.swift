@@ -23,17 +23,21 @@ extension URLSessionClient {
             return
         }
 
-        var verboseLogComponents = ["\n>>>>>>>>>>>>>>> REQUEST #\(requestID) >>>>>>>>>>>>>>>>>>", endpoint]
-        if let headers = request.allHTTPHeaderFields,
-            !headers.isEmpty {
-            let allHeaders = headers.map { "  \($0.key): \($0.value)" }.joined(separator: "\n")
-            verboseLogComponents.append("Headers: {\n\(allHeaders)\n}")
+        var verboseLogComponents: [String] = [
+            "\n>>>>>>>>>>>>>>> REQUEST #\(requestID) >>>>>>>>>>>>>>>>>>",
+            endpoint
+        ]
+        if let headers = request.allHTTPHeaderFields, headers.isEmpty == false {
+            let allHeaders: [String] = headers.map { "  \($0.key): \($0.value)" }
+            let joined: String = allHeaders.joined(separator: "\n")
+            verboseLogComponents.append("Headers: {\n\(joined)\n}")
         }
         if let body = request.httpBody {
             let bodyString = String(data: body, encoding: .utf8) ?? "<Failed to Parse Body>"
             verboseLogComponents.append("\(bodyString)")
         }
-        logger.verbose(verboseLogComponents.joined(separator: "\n"))
+        let output: String = verboseLogComponents.joined(separator: "\n")
+        logger.verbose(output)
     }
 
     func log(data: Data?, response: HTTPURLResponse?, request: URLRequest, requestID: Int64) {

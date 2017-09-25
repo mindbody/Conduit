@@ -43,9 +43,9 @@ public class NetworkReachability {
             return nil
         }
         var reachability: SCNetworkReachability?
-        data.withUnsafeBytes({ (ptr: UnsafePointer<Int8>) in
+        data.withUnsafeBytes { (ptr: UnsafePointer<Int8>) in
             reachability = SCNetworkReachabilityCreateWithName(nil, ptr)
-        })
+        }
         guard let systemReachability = reachability else {
             return nil
         }

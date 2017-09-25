@@ -209,7 +209,9 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
             calledPostFetchHookExpectation.fulfill()
         }
 
-        sut.prepareForTransport(request: request, completion: { _ in })
+        sut.prepareForTransport(request: request) { _ in
+            // Pass
+        }
 
         waitForExpectations(timeout: 1)
     }

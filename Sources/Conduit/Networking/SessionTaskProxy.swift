@@ -49,12 +49,12 @@ final class SessionTaskProxy: SessionTaskProxyType {
         }
     }
 
-    fileprivate var shouldImmediatelyCancel: Bool = false {
+    private var shouldImmediatelyCancel: Bool = false {
         didSet {
             self.task?.cancel()
         }
     }
-    fileprivate var shouldImmediatelySuspend: Bool = false {
+    private var shouldImmediatelySuspend: Bool = false {
         didSet {
             self.task?.suspend()
         }

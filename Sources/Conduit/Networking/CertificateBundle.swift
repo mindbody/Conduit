@@ -82,7 +82,7 @@ public struct CertificateBundle {
     }
 
     static private func certificatesFrom(paths: [String]) -> [SecCertificate] {
-        return paths.flatMap { (path) in
+        return paths.flatMap { path in
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
                 return SecCertificateCreateWithData(nil, data as CFData)
             }

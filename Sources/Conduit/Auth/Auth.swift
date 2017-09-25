@@ -51,8 +51,8 @@ public class Auth {
         public typealias TokenPostFetchHook =
             (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel, Result<BearerToken>) -> Void
 
-        fileprivate static var externalTokenPreFetchHooks: [TokenPreFetchHook] = []
-        fileprivate static var externalTokenPostFetchHooks: [TokenPostFetchHook] = []
+        private static var externalTokenPreFetchHooks: [TokenPreFetchHook] = []
+        private static var externalTokenPostFetchHooks: [TokenPostFetchHook] = []
 
         /// Forces a token refresh within a session
         /// - Parameters:
@@ -85,7 +85,7 @@ public class Auth {
 
             sessionClient.begin(request: noOpRequest) { (data, response, _) in
                 if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
-                                                                              authorization: middleware.authorization),
+                                                                             authorization: middleware.authorization),
                     token.isValid {
                     completion(.value(token))
                 }

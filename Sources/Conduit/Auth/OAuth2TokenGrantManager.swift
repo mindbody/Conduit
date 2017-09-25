@@ -14,7 +14,7 @@ struct OAuth2TokenGrantManager {
                                completion: @escaping Result<BearerToken>.Block) {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
-        sessionClient.begin(request: authorizedRequest) { (data, response, error) in
+        sessionClient.begin(request: authorizedRequest) { data, response, error in
             let authTokenJSON: [String:Any]
             if let error = self.errorFrom(data: data, response: response) {
                 completion(.error(error))

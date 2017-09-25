@@ -70,7 +70,7 @@ extension XML: LosslessStringConvertible {
 
 extension XML {
 
-    fileprivate class Parser: NSObject, XMLParserDelegate {
+    private class Parser: NSObject, XMLParserDelegate {
         private let xmlParser: XMLParser
         private var workingTree = [XMLNode]()
         private var activeNode: XMLNode?
@@ -93,8 +93,8 @@ extension XML {
             return nil
         }
 
-        fileprivate func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?,
-                                qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?,
+                    attributes attributeDict: [String : String] = [:]) {
             var node = XMLNode(name: elementName)
             node.attributes = attributeDict
             if let parentNode = workingTree.popLast() {
@@ -103,7 +103,7 @@ extension XML {
             workingTree.append(node)
         }
 
-        fileprivate func parser(_ parser: XMLParser, foundCharacters string: String) {
+        func parser(_ parser: XMLParser, foundCharacters string: String) {
             if var activeNode = workingTree.popLast() {
                 let text = activeNode.text ?? ""
                 activeNode.text = text + string
@@ -111,8 +111,7 @@ extension XML {
             }
         }
 
-        fileprivate func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?,
-                                qualifiedName qName: String?) {
+        func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
             let finishedNode = workingTree.popLast()
             let parentNode = workingTree.popLast()
             if var parentNode = parentNode {

@@ -37,7 +37,7 @@ public enum Result<T> {
 
 // MARK: Optional getters
 
-public extension Result {
+extension Result {
 
     /// Optional value getter, useful when error value is ignored by the application.
     ///
@@ -76,7 +76,7 @@ public extension Result {
 
 // MARK: Throwing getters
 
-public extension Result {
+extension Result {
 
     /// Throwing value getter, useful to use on synchronous code. Will attempt to extract value.
     /// Throws error if no value is present.
@@ -102,7 +102,7 @@ public extension Result {
 
 // MARK: Error conversion
 
-public extension Result {
+extension Result {
 
     /// Converts the wrapped value (or error) to a different and instance of a different type, `TNew`
     ///

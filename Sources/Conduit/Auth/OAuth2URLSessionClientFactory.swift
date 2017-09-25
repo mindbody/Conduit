@@ -11,9 +11,9 @@ import Foundation
 class OAuth2URLSessionClientFactory {
 
     private struct TokenGrantRequestPipelineMiddleware: RequestPipelineMiddleware {
-        fileprivate var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .awaitsOutgoingCompletion
+        var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .awaitsOutgoingCompletion
 
-        fileprivate func prepareForTransport(request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
+        func prepareForTransport(request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
             completion(.value(request))
         }
     }
