@@ -1,16 +1,16 @@
 language: objective-c
 osx_image: xcode9
-
 cache:
-  - bundler: true
-
+- bundler: true
 install:
-  - export PATH=$HOME/Library/Python/2.7/bin:$PATH
-  - bundle install
-  - bundle exec danger
-  - pip install --user -r requirements.txt
-  - brew update
-  - brew bundle
-
+- export PATH=$HOME/Library/Python/2.7/bin:$PATH
+- bundle install
+- bundle exec danger
+- pip install --user -r requirements.txt
+- brew update
+- brew bundle
 script:
-  - rake test
+- rake test
+notifications:
+  slack:
+    secure: kZZ1Q6pasuOG4/fzybsOUiRwwO6Ce76ZFMJMWouCAmhsUySrwe7Q/HuMWu9+Av8906H8UkNKBmRV2RofvYynW6F0WQgua5gDUyBGp8Hh2zQb5Q2WIMYWxKiAwDw/F86Laur9iEhhHetEWaM6GKk4KTM1byhBbjrC+bA6DxvF/LMCWLRV11v0fwhCBMxQ5JmX69TUz+qDf99WlROFFGKsi4dK3aTiqrElTMcxOcmKslucSqsmlzUR61zJP+Mn56/i6i1jLGAVZpMzg4Jnlsk2NeDTQ/819nP20jU+/Gf1PFmvF5aH4UrJYw+8lMnyNvSArpSaiqtpzBqOvRYthjfxyt1wWAP68Ibrm8f+7p0cgW/GncFf0ElOLhzchcX2C8jf/q6Cfx/95eFN+MtUl/YYJY3qjZYC9ezmoVezjG2SDFLVPltGnNzKPa/K3ebrK9wUYTG3pnRGgxiXgHMu5np6qliJ54JU6i425YrZqhBeIboC7kt3rMTwMyPFOD4LZPG149+1UYFCgZsnuIpr3e5EEXhpPVJ4HdQybgxSLODAauiLJun/gMTTF7jY33qEcdZ0d8MQvUoKDCtF7LbZqtAqKgYRwPcqvOQq0nALATgS0ayqiUO7lDMeJwz0FXRARwrve8XxvlVTjTtdALIB4vcQtcp4wVwbxzxHZ1Wen7K5gKk=
