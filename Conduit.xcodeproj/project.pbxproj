@@ -612,9 +612,9 @@
 			children = (
 				1B4946301F71AF6D00754C58 /* AppDelegate.swift */,
 				1B4946311F71AF6D00754C58 /* Assets.xcassets */,
+				1B4946361F71AF6D00754C58 /* Info.plist */,
 				1B4946321F71AF6D00754C58 /* LaunchScreen.storyboard */,
 				1B4946341F71AF6D00754C58 /* Main.storyboard */,
-				1B4946361F71AF6D00754C58 /* Info.plist */,
 				1B4946371F71AF6D00754C58 /* ViewController.swift */,
 			);
 			path = iOS;
@@ -625,8 +625,8 @@
 			children = (
 				1B4946501F71B02C00754C58 /* AppDelegate.swift */,
 				1B4946511F71B02C00754C58 /* Assets.xcassets */,
-				1B4946521F71B02C00754C58 /* Main.storyboard */,
 				1B4946541F71B02C00754C58 /* Info.plist */,
+				1B4946521F71B02C00754C58 /* Main.storyboard */,
 				1B4946551F71B02C00754C58 /* ViewController.swift */,
 			);
 			path = tvOS;
@@ -635,16 +635,16 @@
 		1B88B1DE1F268C220022A69D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				1B88B1DF1F268C220022A69D /* Auth.swift */,
 				1B88B1E01F268C220022A69D /* AuthorizationCodeGrant */,
 				1B88B1E81F268C220022A69D /* Models */,
+				1B88B1F21F268C220022A69D /* TokenGrants */,
+				1B88B1F81F268C220022A69D /* TokenStorage */,
+				1B88B1FD1F268C220022A69D /* Vendor */,
+				1B88B1DF1F268C220022A69D /* Auth.swift */,
 				1B88B1EE1F268C220022A69D /* OAuth2Error.swift */,
 				1B88B1EF1F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift */,
 				1B88B1F01F268C220022A69D /* OAuth2TokenGrantManager.swift */,
 				1B88B1F11F268C220022A69D /* OAuth2URLSessionClientFactory.swift */,
-				1B88B1F21F268C220022A69D /* TokenGrants */,
-				1B88B1F81F268C220022A69D /* TokenStorage */,
-				1B88B1FD1F268C220022A69D /* Vendor */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -674,10 +674,10 @@
 			isa = PBXGroup;
 			children = (
 				1B88B1E91F268C220022A69D /* Configuration */,
+				1B6E186A1F461FF600E651DA /* DataConvertible.swift */,
 				1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */,
 				1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */,
 				1BE352F31F44F4FC008212BC /* OAuth2Token.swift */,
-				1B6E186A1F461FF600E651DA /* DataConvertible.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -726,16 +726,16 @@
 		1B88B2021F268C220022A69D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1B88B2031F268C220022A69D /* CertificateBundle.swift */,
-				1B88B2041F268C220022A69D /* HTTPRequestBuilder.swift */,
 				1B88B2051F268C220022A69D /* Images */,
 				1B88B2091F268C220022A69D /* Reachability */,
+				1B88B20F1F268C220022A69D /* Serialization */,
+				1B88B2031F268C220022A69D /* CertificateBundle.swift */,
+				1B88B2041F268C220022A69D /* HTTPRequestBuilder.swift */,
 				1B88B20D1F268C220022A69D /* RequestPipelineMiddleware.swift */,
 				1B88B20E1F268C220022A69D /* Result.swift */,
-				1B88B20F1F268C220022A69D /* Serialization */,
+				1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */,
 				1B88B21E1F268C220022A69D /* ServerAuthenticationPolicy.swift */,
 				1B88B21F1F268C220022A69D /* SessionTaskProxy.swift */,
-				1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */,
 				1B88B2211F268C220022A69D /* URL.swift */,
 				1B88B2221F268C220022A69D /* URLSessionClient.swift */,
 				1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */,
@@ -766,6 +766,7 @@
 		1B88B20F1F268C220022A69D /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
+				1B88B2181F268C220022A69D /* XML */,
 				1B88B2101F268C220022A69D /* FormEncodedRequestSerializer.swift */,
 				1B88B2111F268C220022A69D /* HTTPRequestSerializer.swift */,
 				1B88B2121F268C220022A69D /* JSONRequestSerializer.swift */,
@@ -774,7 +775,6 @@
 				1B88B2151F268C220022A69D /* QueryString.swift */,
 				1B88B2161F268C220022A69D /* RequestSerializer.swift */,
 				1B88B2171F268C220022A69D /* ResponseDeserializer.swift */,
-				1B88B2181F268C220022A69D /* XML */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -795,13 +795,13 @@
 			isa = PBXGroup;
 			children = (
 				1B279CB11F19558100C0005E /* Auth */,
+				1BD5553F1F17DC81004B1172 /* Networking */,
+				95CC71C11F797ACB003B4E31 /* Resources */,
 				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
 				1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */,
 				1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */,
 				1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */,
-				1BD5553F1F17DC81004B1172 /* Networking */,
 				1BC229A31F1D6BE4000DAF62 /* Resource.swift */,
-				95CC71C11F797ACB003B4E31 /* Resources */,
 				1BD5555D1F17DC81004B1172 /* start-test-webserver */,
 				1B279CE31F19558900C0005E /* stop-test-webserver */,
 			);
@@ -811,11 +811,11 @@
 		1BD5553F1F17DC81004B1172 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */,
 				1BD555411F17DC81004B1172 /* Images */,
 				1BD555441F17DC81004B1172 /* Reachability */,
-				1BD555501F17DC81004B1172 /* ResultTests.swift */,
 				1BD555511F17DC81004B1172 /* Serialization */,
+				1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */,
+				1BD555501F17DC81004B1172 /* ResultTests.swift */,
 				1BD5555B1F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift */,
 				1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */,
 			);
@@ -880,9 +880,9 @@
 			isa = PBXGroup;
 			children = (
 				1B88B1DE1F268C220022A69D /* Auth */,
+				1B88B2021F268C220022A69D /* Networking */,
 				1B88B2001F268C220022A69D /* Conduit.swift */,
 				1B88B2011F268C220022A69D /* ConduitLogger.swift */,
-				1B88B2021F268C220022A69D /* Networking */,
 			);
 			path = Conduit;
 			sourceTree = "<group>";
@@ -892,8 +892,8 @@
 			children = (
 				1BD8FFFF1F167E7800481DC9 /* Products */,
 				1BD8002E1F167EEE00481DC9 /* Sources */,
-				1BD800761F1682CF00481DC9 /* Tests */,
 				1B49462E1F71AF6D00754C58 /* TestHosts */,
+				1BD800761F1682CF00481DC9 /* Tests */,
 				1BD800871F1684DF00481DC9 /* Package.swift */,
 			);
 			sourceTree = "<group>";
@@ -921,7 +921,7 @@
 				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
-			name = XML;
+			path = XML;
 			sourceTree = "<group>";
 		};
 		95CC71C11F797ACB003B4E31 /* Resources */ = {
@@ -1827,6 +1827,7 @@
 				1B4946331F71AF6D00754C58 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		1B4946341F71AF6D00754C58 /* Main.storyboard */ = {
@@ -1835,6 +1836,7 @@
 				1B4946351F71AF6D00754C58 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		1B4946521F71B02C00754C58 /* Main.storyboard */ = {
@@ -1843,6 +1845,7 @@
 				1B4946531F71B02C00754C58 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2049,10 +2052,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2123,10 +2122,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
