@@ -64,9 +64,12 @@ extension URLSessionClient {
             verboseLogComponents.append("\(bodyString)")
         }
         logger.verbose(verboseLogComponents.joined(separator: "\n"))
+
+        logger.lastLog = LastLog(endpoint: endpoint, data: data, response: response, request: request)
+
     }
 
-    private func makeStatusDescription(code: Int?) -> String {
+    func makeStatusDescription(code: Int?) -> String {
         guard let code = code,
             code > 0 else {
                 return "<No Response> 🚫"
