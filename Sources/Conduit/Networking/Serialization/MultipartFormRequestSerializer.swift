@@ -23,7 +23,7 @@ import Foundation
 /// content types can be progressively added as needed.
 public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
-    static fileprivate let CRLF = "\r\n"
+    static private let CRLF = "\r\n"
 
     private var formData: [FormPart] = []
     private let contentBoundary = MultipartFormRequestSerializer.randomContentBoundary()
@@ -72,7 +72,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
             return String(c)
         }
 
-        return "----------------------------\(randomCharacters.joined(separator: ""))"
+        return "----------------------------\(randomCharacters.joined())"
     }
 
     private func encodedDataFrom(string: String) -> Data? {
@@ -172,20 +172,20 @@ public struct FormPart {
         self.name = name
         self.filename = filename
         self.content = content
-        self.contentType = self.content.mimeType()
+        self.contentType = content.mimeType()
     }
 
     func contentData() -> Data? {
         switch self.content {
-        case .image(let image, let type):
+        case let .image(image, type):
             return self.dataFrom(image: image, type: type)
-        case .video(let videoData, _):
+        case let .video(videoData, _):
             return videoData
-        case .pdf(let data):
+        case let .pdf(data):
             return data
-        case .binary(let data):
+        case let .binary(data):
             return data
-        case .text(let text):
+        case let .text(text):
             return text.data(using: .utf8)
         }
     }
@@ -269,7 +269,7 @@ public struct FormPart {
         /// A plaintext value
         case text(String)
 
-        fileprivate func mimeType() -> String {
+        func mimeType() -> String {
             switch self {
             case .image(_, let imageType):
                 return imageMimeType(imageType: imageType)
@@ -284,7 +284,7 @@ public struct FormPart {
             }
         }
 
-        fileprivate func imageMimeType(imageType: FormPart.ImageFormat) -> String {
+        private func imageMimeType(imageType: FormPart.ImageFormat) -> String {
             switch imageType {
             case .jpeg:
                 return "image/jpeg"
@@ -293,7 +293,7 @@ public struct FormPart {
             }
         }
 
-        fileprivate func videoMimeType(videoType: FormPart.VideoFormat) -> String {
+        private func videoMimeType(videoType: FormPart.VideoFormat) -> String {
             switch videoType {
             case .avi:
                 return "video/x-msvideo"

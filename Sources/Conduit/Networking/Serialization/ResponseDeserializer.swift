@@ -55,7 +55,7 @@ public enum ResponseDeserializerError: Error {
     case deserializationFailure
 }
 
-public extension HTTPResponseDeserializer {
+extension HTTPResponseDeserializer {
 
     /// Validates the response against acceptable content types and status codes
     /// - Parameters:

@@ -154,7 +154,9 @@ class URLSessionClientTests: XCTestCase {
         let serializer = MultipartFormRequestSerializer()
         let client: URLSessionClient = URLSessionClient()
 
-        let videoData = MockResource.sampleVideo
+        guard let videoData = MockResource.sampleVideo.base64EncodedData else {
+            throw TestError.invalidTest
+        }
 
         let formPart = FormPart(name: "test-video", filename: "test-video.mov", content: .video(videoData, .mov))
         serializer.append(formPart: formPart)
@@ -259,6 +261,7 @@ private class TransformingMiddleware2: RequestPipelineMiddleware {
 
 private class BlockingMiddleware: RequestPipelineMiddleware {
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
+
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
         completion(.value(request))
     }

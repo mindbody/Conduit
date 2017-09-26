@@ -261,9 +261,6 @@
 		1B88B3071F268C420022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B20A1F268C220022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1B88B3081F268C430022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B20A1F268C220022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
 		1B88B3091F268C440022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B88B20A1F268C220022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift */; };
-		1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
-		1BC229A51F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
-		1BC229A61F1D6BE4000DAF62 /* MockResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* MockResource.swift */; };
 		1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
 		1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */; };
@@ -325,6 +322,24 @@
 		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		9549B2521F799DA9005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
+		9549B2531F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
+		9549B2541F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
+		95CC71C71F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
+		95CC71C81F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
+		95CC71C91F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
+		95CC71CA1F797B0D003B4E31 /* celltowers.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C31F797B0C003B4E31 /* celltowers.txt */; };
+		95CC71CB1F797B0D003B4E31 /* celltowers.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C31F797B0C003B4E31 /* celltowers.txt */; };
+		95CC71CC1F797B0D003B4E31 /* celltowers.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C31F797B0C003B4E31 /* celltowers.txt */; };
+		95CC71CD1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
+		95CC71CE1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
+		95CC71CF1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
+		95CC71D01F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
+		95CC71D11F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
+		95CC71D21F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
+		95CC71D31F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
+		95CC71D41F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
+		95CC71D51F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
 		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
@@ -453,7 +468,7 @@
 		1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLPinningServerAuthenticationPolicy.swift; sourceTree = "<group>"; };
 		1B88B2211F268C220022A69D /* URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		1B88B2221F268C220022A69D /* URLSessionClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionClient.swift; sourceTree = "<group>"; };
-		1BC229A31F1D6BE4000DAF62 /* MockResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockResource.swift; sourceTree = "<group>"; };
+		1BC229A31F1D6BE4000DAF62 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-iOS.plist"; sourceTree = "<group>"; };
 		1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-macOS.plist"; sourceTree = "<group>"; };
 		1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Tests-tvOS.plist"; sourceTree = "<group>"; };
@@ -489,6 +504,11 @@
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
+		95CC71C21F797B0C003B4E31 /* badcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badcertificate.txt; sourceTree = "<group>"; };
+		95CC71C31F797B0C003B4E31 /* celltowers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = celltowers.txt; sourceTree = "<group>"; };
+		95CC71C41F797B0C003B4E31 /* evilspaceship.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = evilspaceship.txt; sourceTree = "<group>"; };
+		95CC71C51F797B0D003B4E31 /* validcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = validcertificate.txt; sourceTree = "<group>"; };
+		95CC71C61F797B0D003B4E31 /* video.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.txt; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -592,9 +612,9 @@
 			children = (
 				1B4946301F71AF6D00754C58 /* AppDelegate.swift */,
 				1B4946311F71AF6D00754C58 /* Assets.xcassets */,
+				1B4946361F71AF6D00754C58 /* Info.plist */,
 				1B4946321F71AF6D00754C58 /* LaunchScreen.storyboard */,
 				1B4946341F71AF6D00754C58 /* Main.storyboard */,
-				1B4946361F71AF6D00754C58 /* Info.plist */,
 				1B4946371F71AF6D00754C58 /* ViewController.swift */,
 			);
 			path = iOS;
@@ -605,8 +625,8 @@
 			children = (
 				1B4946501F71B02C00754C58 /* AppDelegate.swift */,
 				1B4946511F71B02C00754C58 /* Assets.xcassets */,
-				1B4946521F71B02C00754C58 /* Main.storyboard */,
 				1B4946541F71B02C00754C58 /* Info.plist */,
+				1B4946521F71B02C00754C58 /* Main.storyboard */,
 				1B4946551F71B02C00754C58 /* ViewController.swift */,
 			);
 			path = tvOS;
@@ -615,16 +635,16 @@
 		1B88B1DE1F268C220022A69D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				1B88B1DF1F268C220022A69D /* Auth.swift */,
 				1B88B1E01F268C220022A69D /* AuthorizationCodeGrant */,
 				1B88B1E81F268C220022A69D /* Models */,
+				1B88B1F21F268C220022A69D /* TokenGrants */,
+				1B88B1F81F268C220022A69D /* TokenStorage */,
+				1B88B1FD1F268C220022A69D /* Vendor */,
+				1B88B1DF1F268C220022A69D /* Auth.swift */,
 				1B88B1EE1F268C220022A69D /* OAuth2Error.swift */,
 				1B88B1EF1F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift */,
 				1B88B1F01F268C220022A69D /* OAuth2TokenGrantManager.swift */,
 				1B88B1F11F268C220022A69D /* OAuth2URLSessionClientFactory.swift */,
-				1B88B1F21F268C220022A69D /* TokenGrants */,
-				1B88B1F81F268C220022A69D /* TokenStorage */,
-				1B88B1FD1F268C220022A69D /* Vendor */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -654,10 +674,10 @@
 			isa = PBXGroup;
 			children = (
 				1B88B1E91F268C220022A69D /* Configuration */,
+				1B6E186A1F461FF600E651DA /* DataConvertible.swift */,
 				1B88B1EC1F268C220022A69D /* OAuth2Authorization.swift */,
 				1B88B1ED1F268C220022A69D /* OAuth2LegacyToken.swift */,
 				1BE352F31F44F4FC008212BC /* OAuth2Token.swift */,
-				1B6E186A1F461FF600E651DA /* DataConvertible.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -706,16 +726,16 @@
 		1B88B2021F268C220022A69D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1B88B2031F268C220022A69D /* CertificateBundle.swift */,
-				1B88B2041F268C220022A69D /* HTTPRequestBuilder.swift */,
 				1B88B2051F268C220022A69D /* Images */,
 				1B88B2091F268C220022A69D /* Reachability */,
+				1B88B20F1F268C220022A69D /* Serialization */,
+				1B88B2031F268C220022A69D /* CertificateBundle.swift */,
+				1B88B2041F268C220022A69D /* HTTPRequestBuilder.swift */,
 				1B88B20D1F268C220022A69D /* RequestPipelineMiddleware.swift */,
 				1B88B20E1F268C220022A69D /* Result.swift */,
-				1B88B20F1F268C220022A69D /* Serialization */,
+				1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */,
 				1B88B21E1F268C220022A69D /* ServerAuthenticationPolicy.swift */,
 				1B88B21F1F268C220022A69D /* SessionTaskProxy.swift */,
-				1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */,
 				1B88B2211F268C220022A69D /* URL.swift */,
 				1B88B2221F268C220022A69D /* URLSessionClient.swift */,
 				1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */,
@@ -746,6 +766,7 @@
 		1B88B20F1F268C220022A69D /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
+				1B88B2181F268C220022A69D /* XML */,
 				1B88B2101F268C220022A69D /* FormEncodedRequestSerializer.swift */,
 				1B88B2111F268C220022A69D /* HTTPRequestSerializer.swift */,
 				1B88B2121F268C220022A69D /* JSONRequestSerializer.swift */,
@@ -754,7 +775,6 @@
 				1B88B2151F268C220022A69D /* QueryString.swift */,
 				1B88B2161F268C220022A69D /* RequestSerializer.swift */,
 				1B88B2171F268C220022A69D /* ResponseDeserializer.swift */,
-				1B88B2181F268C220022A69D /* XML */,
 			);
 			path = Serialization;
 			sourceTree = "<group>";
@@ -774,13 +794,14 @@
 		1BD5553B1F17DC81004B1172 /* ConduitTests */ = {
 			isa = PBXGroup;
 			children = (
-				1BC229A31F1D6BE4000DAF62 /* MockResource.swift */,
-				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
-				1BD5553F1F17DC81004B1172 /* Networking */,
 				1B279CB11F19558100C0005E /* Auth */,
+				1BD5553F1F17DC81004B1172 /* Networking */,
+				95CC71C11F797ACB003B4E31 /* Resources */,
+				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
 				1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */,
 				1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */,
 				1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */,
+				1BC229A31F1D6BE4000DAF62 /* Resource.swift */,
 				1BD5555D1F17DC81004B1172 /* start-test-webserver */,
 				1B279CE31F19558900C0005E /* stop-test-webserver */,
 			);
@@ -790,11 +811,11 @@
 		1BD5553F1F17DC81004B1172 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */,
 				1BD555411F17DC81004B1172 /* Images */,
 				1BD555441F17DC81004B1172 /* Reachability */,
-				1BD555501F17DC81004B1172 /* ResultTests.swift */,
 				1BD555511F17DC81004B1172 /* Serialization */,
+				1BD555401F17DC81004B1172 /* HTTPRequestBuilderTests.swift */,
+				1BD555501F17DC81004B1172 /* ResultTests.swift */,
 				1BD5555B1F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift */,
 				1BD5555C1F17DC81004B1172 /* URLSessionClientTests.swift */,
 			);
@@ -859,9 +880,9 @@
 			isa = PBXGroup;
 			children = (
 				1B88B1DE1F268C220022A69D /* Auth */,
+				1B88B2021F268C220022A69D /* Networking */,
 				1B88B2001F268C220022A69D /* Conduit.swift */,
 				1B88B2011F268C220022A69D /* ConduitLogger.swift */,
-				1B88B2021F268C220022A69D /* Networking */,
 			);
 			path = Conduit;
 			sourceTree = "<group>";
@@ -871,8 +892,8 @@
 			children = (
 				1BD8FFFF1F167E7800481DC9 /* Products */,
 				1BD8002E1F167EEE00481DC9 /* Sources */,
-				1BD800761F1682CF00481DC9 /* Tests */,
 				1B49462E1F71AF6D00754C58 /* TestHosts */,
+				1BD800761F1682CF00481DC9 /* Tests */,
 				1BD800871F1684DF00481DC9 /* Package.swift */,
 			);
 			sourceTree = "<group>";
@@ -900,7 +921,19 @@
 				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
-			name = XML;
+			path = XML;
+			sourceTree = "<group>";
+		};
+		95CC71C11F797ACB003B4E31 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				95CC71C21F797B0C003B4E31 /* badcertificate.txt */,
+				95CC71C31F797B0C003B4E31 /* celltowers.txt */,
+				95CC71C41F797B0C003B4E31 /* evilspaceship.txt */,
+				95CC71C51F797B0D003B4E31 /* validcertificate.txt */,
+				95CC71C61F797B0D003B4E31 /* video.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1236,6 +1269,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CC71D31F797B0D003B4E31 /* video.txt in Resources */,
+				95CC71CD1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
+				95CC71D01F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71CA1F797B0D003B4E31 /* celltowers.txt in Resources */,
+				95CC71C71F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1281,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CC71D41F797B0D003B4E31 /* video.txt in Resources */,
+				95CC71CE1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
+				95CC71D11F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71CB1F797B0D003B4E31 /* celltowers.txt in Resources */,
+				95CC71C81F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1250,6 +1293,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95CC71D51F797B0D003B4E31 /* video.txt in Resources */,
+				95CC71CF1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
+				95CC71D21F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71CC1F797B0D003B4E31 /* celltowers.txt in Resources */,
+				95CC71C91F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,11 +1630,11 @@
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD11F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A01F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5556A1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558B1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555731F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555941F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,
+				9549B2521F799DA9005F0038 /* Resource.swift in Sources */,
 				1BD555A61F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
 				1BD5559D1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BD555A31F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
@@ -1617,11 +1665,11 @@
 				1BD5558F1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD21F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A11F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A51F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5556B1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1BD5558C1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555741F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555951F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,
+				9549B2531F799DAA005F0038 /* Resource.swift in Sources */,
 				1BD555A71F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
 				1BD5559E1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BD555A41F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
@@ -1652,11 +1700,11 @@
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD31F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
 				1BD555A21F17DC81004B1172 /* XMLTests.swift in Sources */,
-				1BC229A61F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5558D1F17DC81004B1172 /* HTTPRequestSerializerTests.swift in Sources */,
 				1BD555751F17DC81004B1172 /* NetworkStatusTests.swift in Sources */,
 				1BD555961F17DC81004B1172 /* MultipartFormRequestSerializerTests.swift in Sources */,
 				1BD555A81F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
+				9549B2541F799DAA005F0038 /* Resource.swift in Sources */,
 				1BD5559F1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BD555A51F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */,
@@ -1779,6 +1827,7 @@
 				1B4946331F71AF6D00754C58 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		1B4946341F71AF6D00754C58 /* Main.storyboard */ = {
@@ -1787,6 +1836,7 @@
 				1B4946351F71AF6D00754C58 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		1B4946521F71B02C00754C58 /* Main.storyboard */ = {
@@ -1795,6 +1845,7 @@
 				1B4946531F71B02C00754C58 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1831,8 +1882,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestHosts/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1869,8 +1921,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestHosts/iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1911,8 +1964,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestHosts/tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1949,8 +2003,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestHosts/tvOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2017,6 +2072,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2079,6 +2135,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2146,6 +2203,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2207,6 +2265,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2275,6 +2334,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				SDKROOT = appletvos;
@@ -2335,6 +2395,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				SDKROOT = appletvos;
@@ -2405,6 +2466,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				SDKROOT = macosx;
@@ -2466,6 +2528,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				SDKROOT = macosx;
@@ -2523,9 +2586,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2577,8 +2641,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2633,9 +2698,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-tvOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2684,8 +2750,9 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-tvOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2742,10 +2809,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-macOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -2794,9 +2862,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-macOS.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

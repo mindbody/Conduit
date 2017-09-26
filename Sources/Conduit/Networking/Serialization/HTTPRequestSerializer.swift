@@ -106,7 +106,7 @@ open class HTTPRequestSerializer: RequestSerializer {
     }()
 
     /// The subset of HTTP verbs that will never have a request body.
-    fileprivate static let httpMethodsWithNoBody: Set<HTTPRequestBuilder.Method> = [.GET, .HEAD]
+    static let httpMethodsWithNoBody: Set<HTTPRequestBuilder.Method> = [.GET, .HEAD]
 
     /// Required request headers for HTTP transport according to the W3 spec
     open static let defaultHTTPHeaders: [(String, String)] = {

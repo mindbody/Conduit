@@ -11,7 +11,8 @@ import Foundation
 public typealias SessionTaskCompletion = (Data?, HTTPURLResponse?, Error?) -> Void
 public typealias SessionTaskProgressHandler = (Progress) -> Void
 
-fileprivate typealias SessionCompletionHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+private typealias SessionCompletionHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+
 private let serialQueueName = "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)"
 
 /// A type that manages a session and queues URLRequest's
@@ -63,11 +64,11 @@ public struct URLSessionClient: URLSessionClientType {
         get { return self.sessionDelegate.serverAuthenticationPolicies }
         set { self.sessionDelegate.serverAuthenticationPolicies = newValue }
     }
-    fileprivate let urlSession: URLSession
-    fileprivate let serialQueue = DispatchQueue(label: serialQueueName, attributes: [])
-    fileprivate let activeTaskQueueDispatchGroup = DispatchGroup()
+    private let urlSession: URLSession
+    private let serialQueue = DispatchQueue(label: serialQueueName, attributes: [])
+    private let activeTaskQueueDispatchGroup = DispatchGroup()
     // swiftlint:disable weak_delegate
-    fileprivate let sessionDelegate = SessionDelegate()
+    private let sessionDelegate = SessionDelegate()
     // swiftlint:enable weak_delegate
     private static var requestCounter: Int64 = 0
 
@@ -100,7 +101,7 @@ public struct URLSessionClient: URLSessionClientType {
     public func begin(request: URLRequest) throws -> (data: Data?, response: HTTPURLResponse) {
         var result: (data: Data?, response: HTTPURLResponse?, error: Error?) = (nil, nil, nil)
         let semaphore = DispatchSemaphore(value: 0)
-        begin(request: request) { (data, response, error) in
+        begin(request: request) { data, response, error in
             result = (data, response, error)
             semaphore.signal()
         }
@@ -171,7 +172,7 @@ public struct URLSessionClient: URLSessionClientType {
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
             // so even though the pipeline is serial, requests run in parallel
-            let task = self.dataTaskWith(request: modifiedRequest) { (data, response, error) in
+            let task = self.dataTaskWith(request: modifiedRequest) { data, response, error in
                 self.log(data: data, response: response, request: request, requestID: requestID)
                 completion(data, response, error)
             }
@@ -194,7 +195,7 @@ public struct URLSessionClient: URLSessionClientType {
         return sessionTaskProxy
     }
 
-    fileprivate func synchronouslyPrepareForTransport(request: URLRequest) -> Result<URLRequest> {
+    private func synchronouslyPrepareForTransport(request: URLRequest) -> Result<URLRequest> {
         var middlwareError: Error?
         let middlewarePipelineDispatchGroup = DispatchGroup()
         var modifiedRequest = request
@@ -223,12 +224,11 @@ public struct URLSessionClient: URLSessionClientType {
         return .value(modifiedRequest)
     }
 
-    fileprivate func dataTaskWith(request: URLRequest,
-                                  completion: @escaping SessionTaskCompletion) -> URLSessionDataTask {
+    private func dataTaskWith(request: URLRequest, completion: @escaping SessionTaskCompletion) -> URLSessionDataTask {
         self.activeTaskQueueDispatchGroup.enter()
 
         let dataTask = self.urlSession.dataTask(with: request)
-        sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { (data, response, error) in
+        sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { data, response, error in
             // If for some reason the client isn't retained elsewhere, it will at least stay alive
             // while active tasks are running
             self.activeTaskQueueDispatchGroup.leave()
@@ -252,8 +252,7 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     private var taskResponses: [Int:TaskResponse] = [:]
     private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
 
-    fileprivate func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge,
-                                completionHandler: @escaping SessionCompletionHandler) {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
         for policy in self.serverAuthenticationPolicies {
             if !policy.evaluate(authenticationChallenge: challenge) {
                 completionHandler(.cancelAuthenticationChallenge, nil)

@@ -40,7 +40,7 @@ public struct XMLNode {
         return children.isEmpty
     }
 
-    fileprivate var isEmpty: Bool {
+    private var isEmpty: Bool {
         return isLeaf && text == nil
     }
 
@@ -73,7 +73,7 @@ public struct XMLNode {
     ///   - children: Dictionary of children nodes
     public init(name: String, children: XMLDictionary) {
         self.name = name
-        self.children = children.map { (key, value) in
+        self.children = children.map { key, value in
             if let grandchild = value as? XMLDictionary {
                 return XMLNode(name: key, children: grandchild)
             }
@@ -147,7 +147,7 @@ extension XMLNode: CustomStringConvertible {
         let startTag: String
 
         if hasAttributes {
-            let describedAttributes = attributes.map({ "\($0.key)=\"\($0.value)\"" }).joined(separator: " ")
+            let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
             startTag = "\(leftDelimiter)\(name) \(describedAttributes)\(rightDelimiter)"
         }
         else {
@@ -161,7 +161,7 @@ extension XMLNode: CustomStringConvertible {
         }
 
         if children.isEmpty == false {
-            let body = children.map({ $0.description }).joined()
+            let body = children.map { $0.description }.joined()
             return "\(startTag)\(body)\(endTag)"
         }
 
@@ -192,7 +192,7 @@ extension XMLNode: LosslessStringConvertible {
 
 // MARK: - Value getters
 
-public extension XMLNode {
+extension XMLNode {
 
     /// Retrieve the first descendant node with the given name, converted to the given type
     ///

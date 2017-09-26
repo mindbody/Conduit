@@ -102,7 +102,7 @@ public final class ImageDownloader {
 
             // Strongly capture self within the completion handler to ensure
             // ImageDownloader is persisted long enough to respond
-            proxy = self.sessionClient.begin(request: request) { (data, response, error) in
+            proxy = self.sessionClient.begin(request: request) { data, response, error in
                 var image: Image?
                 if let data = data {
                     image = Image(data: data)

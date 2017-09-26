@@ -61,16 +61,12 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
     }
 
     public override var debugDescription: String {
-        return String(format: "<BearerOAuth2Token:%p accessToken:\(self.accessToken) " +
-            "refreshToken:\(self.refreshToken ?? "nil") " +
-            "expiration:\(self.expiration)>", self)
+        let address = String(format: "%p", self)
+        let refreshToken = self.refreshToken ?? "nil"
+        return "<BearerOAuth2Token:\(address) accessToken:\(accessToken) refreshToken:\(refreshToken) expiration:\(expiration)>"
     }
-}
-
-extension BearerOAuth2Token {
 
     public var converted: BearerToken {
         return BearerToken(legacyToken: self)
     }
-
 }

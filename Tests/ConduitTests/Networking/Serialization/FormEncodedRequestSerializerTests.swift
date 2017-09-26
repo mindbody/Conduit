@@ -28,7 +28,7 @@ class FormEncodedRequestSerializerTests: XCTestCase {
     }
 
     func testURIEncodesBodyParameters() {
-        let tests = [
+        let tests: [([String: String], [String])] = [
             (["foo": "bar"], ["foo=bar"]),
             (["foo": "bar", "bing": "bang"], ["foo=bar", "bing=bang"])
         ]

@@ -161,7 +161,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         }
 
         let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
-                                          password: clientConfiguration.clientSecret)
+                                    password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
         requestBuilder.bodyParameters = ["grant_type": "refresh_token",

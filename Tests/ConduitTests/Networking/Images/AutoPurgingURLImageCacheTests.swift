@@ -19,9 +19,11 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
         return URLRequest(url: url)
     }
 
-    func testRetrievesCachedImages() {
+    func testRetrievesCachedImages() throws {
         let sut = AutoPurgingURLImageCache()
-        let copy = MockResource.evilSpaceshipImage
+        guard let copy = MockResource.evilSpaceshipImage.image else {
+            throw TestError.invalidTest
+        }
         sut.cache(image: copy, for: mockImageRequest)
         let image = sut.image(for: mockImageRequest)
         XCTAssert(image == copy)
@@ -32,9 +34,12 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
         XCTAssertNotNil(sut.cacheIdentifier(for: mockImageRequest))
     }
 
-    func testRemovesCachedImages() {
+    func testRemovesCachedImages() throws {
         let sut = AutoPurgingURLImageCache()
-        sut.cache(image: MockResource.evilSpaceshipImage, for: mockImageRequest)
+        guard let image = MockResource.evilSpaceshipImage.image else {
+            throw TestError.invalidTest
+        }
+        sut.cache(image: image, for: mockImageRequest)
         XCTAssertNotNil(sut.image(for: mockImageRequest))
         sut.removeImage(for: mockImageRequest)
         XCTAssertNil(sut.image(for: mockImageRequest))
@@ -47,8 +52,12 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
             URLRequest(url: try URL(absoluteString: "http://localhost:3333/image/jpeg?id=\($0)"))
         }
 
+        guard let image = MockResource.evilSpaceshipImage.image else {
+            throw TestError.invalidTest
+        }
+
         for request in imageRequests {
-            sut.cache(image: MockResource.evilSpaceshipImage, for: request)
+            sut.cache(image: image, for: request)
         }
 
         for request in imageRequests {

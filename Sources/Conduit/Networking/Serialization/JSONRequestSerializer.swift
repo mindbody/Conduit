@@ -52,7 +52,7 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
         return request
     }
 
-    fileprivate static func fragmentedDataFrom(jsonObject: Any?) -> Data? {
+    static func fragmentedDataFrom(jsonObject: Any?) -> Data? {
         var bodyString: String?
         if let number = jsonObject as? NSNumber {
             bodyString = String(describing: number)

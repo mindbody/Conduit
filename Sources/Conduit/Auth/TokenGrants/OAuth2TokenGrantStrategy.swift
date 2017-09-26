@@ -24,8 +24,7 @@ extension OAuth2TokenGrantStrategy {
                                         grantType: String,
                                         additionalGrantParameters: [String:Any],
                                         requestSerializer: RequestSerializer = JSONRequestSerializer()) throws -> URLRequest {
-        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
-                                          password: clientConfiguration.clientSecret)
+        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier, password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
         var parameters: [String:Any] = [

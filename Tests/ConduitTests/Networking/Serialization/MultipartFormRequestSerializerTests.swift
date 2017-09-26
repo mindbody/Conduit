@@ -18,9 +18,6 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     var request: URLRequest!
     var serializer: MultipartFormRequestSerializer!
 
-    let image1 = MockResource.cellTowersImage
-    var image2 = MockResource.evilSpaceshipImage
-
     override func setUp() {
         super.setUp()
 
@@ -37,7 +34,10 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
 
-        let videoData = MockResource.sampleVideo
+        guard let image1 = MockResource.cellTowersImage.image, let image2 = MockResource.evilSpaceshipImage.image,
+            let videoData = MockResource.sampleVideo.base64EncodedData else {
+                throw TestError.invalidTest
+        }
 
         let formPart1 = FormPart(name: "celltowers", filename: "celltowers.jpg",
                                  content: .image(image1, .jpeg(compressionQuality: 0.5)))
@@ -82,8 +82,8 @@ class MultipartFormRequestSerializerTests: XCTestCase {
                 let files = json?["files"] as? [String: String]
                 let forms = json?["form"] as? [String: String]
 
-                XCTAssert(files?.keys.count == 5)
-                XCTAssert(forms?.keys.count == 1)
+                XCTAssertEqual(files?.keys.count, 5)
+                XCTAssertEqual(forms?.keys.count, 1)
             }
             catch {
                 XCTFail("Request failed")
@@ -97,17 +97,17 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     func testRemovesFormPartContentTypeHeadersIfExplictlyRemoved() throws {
         let serializer = MultipartFormRequestSerializer()
 
-        var formPart = FormPart(name: "celltowers", filename: "celltowers.jpg",
-                                content: .image(image1, .jpeg(compressionQuality: 0.5)))
+        guard let image1 = MockResource.cellTowersImage.image else {
+            throw TestError.invalidTest
+        }
+
+        var formPart = FormPart(name: "celltowers", filename: "celltowers.jpg", content: .image(image1, .jpeg(compressionQuality: 0.5)))
         formPart.contentType = nil
         serializer.append(formPart: formPart)
 
         var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
         newRequest.httpMethod = "POST"
-        guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
-            XCTFail("Serialization failed")
-            return
-        }
+        let modifiedRequest = try serializer.serialize(request: newRequest, bodyParameters: nil)
 
         guard let httpBody = modifiedRequest.httpBody else {
             XCTFail("No body")
@@ -118,10 +118,10 @@ class MultipartFormRequestSerializerTests: XCTestCase {
             return
         }
 
-        XCTAssert(httpBody.range(of: contentTypeData) == nil)
+        XCTAssertNil(httpBody.range(of: contentTypeData))
     }
 
-    func testDoesntReplaceCustomDefinedHeaders() {
+    func testDoesntReplaceCustomDefinedHeaders() throws {
         let customDefaultHeaderFields = [
             "Accept-Language": "FlyingSpaghettiMonster",
             "User-Agent": "Chromebook. Remember those?",
@@ -129,12 +129,9 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         ]
         request.allHTTPHeaderFields = customDefaultHeaderFields
 
-        guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
-            XCTFail("Serialization failed")
-            return
-        }
+        let modifiedRequest = try serializer.serialize(request: request, bodyParameters: nil)
         for customHeader in customDefaultHeaderFields {
-            XCTAssert(modifiedRequest.value(forHTTPHeaderField: customHeader.0) == customHeader.1)
+            XCTAssertEqual(modifiedRequest.value(forHTTPHeaderField: customHeader.0), customHeader.1)
         }
     }
 
