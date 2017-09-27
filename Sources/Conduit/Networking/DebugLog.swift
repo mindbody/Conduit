@@ -1,5 +1,5 @@
 //
-//  LastLog.swift
+//  DebugLog.swift
 //  Conduit
 //
 //  Created by Bart Powers on 9/26/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LastLog {
+public struct DebugLog {
     var url: String
     var requestLog: RequestLog
     var responseLog: ResponseLog
@@ -30,11 +30,9 @@ struct RequestLog {
             let allHeaders = requestHeaders.map { "  \($0.key): \($0.value)" }.joined(separator: "\n")
             headers = "Headers: {\n\(allHeaders)\n}"
         }
-        if let requestBody = request.httpBody {
-            let bodyString = String(data: requestBody, encoding: .utf8) ?? "<Failed to Parse Body>"
-            body = bodyString
+        if let data = request.httpBody {
+            body = prettyPrintBody(data: data)
         }
-
     }
 }
 
@@ -52,8 +50,22 @@ struct ResponseLog {
         }
 
         if let data = data {
-            let bodyString = String(data: data, encoding: .utf8) ?? "<Failed to Parse Response Data>"
-            body = bodyString
+            body = prettyPrintBody(data: data)
         }
     }
+}
+
+private func prettyPrintBody(data: Data) -> String {
+    var prettyPrintedData = ""
+    if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted) {
+            if let string = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) {
+                prettyPrintedData = "Body: \n \(string as String)"
+            }
+        }
+    }
+    else {
+        prettyPrintedData = String(data: data, encoding: .utf8) ?? "<Failed to Parse Response Data>"
+    }
+    return prettyPrintedData
 }

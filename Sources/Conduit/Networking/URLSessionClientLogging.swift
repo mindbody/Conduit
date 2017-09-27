@@ -65,8 +65,10 @@ extension URLSessionClient {
         }
         logger.verbose(verboseLogComponents.joined(separator: "\n"))
 
-        logger.lastLog = LastLog(endpoint: endpoint, data: data, response: response, request: request)
-
+        if logger.debugLog == nil {
+            logger.debugLog = []
+        }
+        logger.debugLog?.append(DebugLog(endpoint: endpoint, data: data, response: response, request: request))
     }
 
     func makeStatusDescription(code: Int?) -> String {

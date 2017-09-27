@@ -53,7 +53,7 @@ extension LogLevel: Comparable {
 public protocol ConduitLoggerType {
     /// The severity of log messages received
     var level: LogLevel { get set }
-    var lastLog: LastLog? { get set }
+    var debugLog: [DebugLog]? { get set }
     /// Handles an incoming log message
     /// - Parameters:
     ///   - block: The log generator
@@ -93,7 +93,7 @@ extension ConduitLoggerType {
 
 class ConduitLogger: ConduitLoggerType {
     var level: LogLevel = .error
-    var lastLog: LastLog?
+    var debugLog: [DebugLog]?
 
     func log(_ block: @autoclosure () -> Any, function: String, filePath: String, line: Int) {
         if self.level.rawValue <= level.rawValue {

@@ -325,11 +325,11 @@
 		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
-		7E9931191F7ACBB80001446E /* LastLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* LastLog.swift */; };
-		7E99311A1F7ACBB80001446E /* LastLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* LastLog.swift */; };
-		7E99311B1F7ACBB80001446E /* LastLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* LastLog.swift */; };
-		7E99311C1F7ACBB80001446E /* LastLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* LastLog.swift */; };
-		7E99311E1F7B13AA0001446E /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99311D1F7B13AA0001446E /* Request.swift */; };
+		7E9931191F7ACBB80001446E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* DebugLog.swift */; };
+		7E99311A1F7ACBB80001446E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* DebugLog.swift */; };
+		7E99311B1F7ACBB80001446E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* DebugLog.swift */; };
+		7E99311C1F7ACBB80001446E /* DebugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9931181F7ACBB80001446E /* DebugLog.swift */; };
+		7E99311E1F7B13AA0001446E /* DebugLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E99311D1F7B13AA0001446E /* DebugLoggerTests.swift */; };
 		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
@@ -494,8 +494,8 @@
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
-		7E9931181F7ACBB80001446E /* LastLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastLog.swift; sourceTree = "<group>"; };
-		7E99311D1F7B13AA0001446E /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		7E9931181F7ACBB80001446E /* DebugLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLog.swift; sourceTree = "<group>"; };
+		7E99311D1F7B13AA0001446E /* DebugLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLoggerTests.swift; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -726,7 +726,7 @@
 				1B88B2211F268C220022A69D /* URL.swift */,
 				1B88B2221F268C220022A69D /* URLSessionClient.swift */,
 				1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */,
-				7E9931181F7ACBB80001446E /* LastLog.swift */,
+				7E9931181F7ACBB80001446E /* DebugLog.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -784,7 +784,7 @@
 			children = (
 				1BC229A31F1D6BE4000DAF62 /* MockResource.swift */,
 				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
-				7E99311D1F7B13AA0001446E /* Request.swift */,
+				7E99311D1F7B13AA0001446E /* DebugLoggerTests.swift */,
 				1BD5553F1F17DC81004B1172 /* Networking */,
 				1B279CB11F19558100C0005E /* Auth */,
 				1BD5553C1F17DC81004B1172 /* Info-Tests-iOS.plist */,
@@ -1395,7 +1395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E99311A1F7ACBB80001446E /* LastLog.swift in Sources */,
+				7E99311A1F7ACBB80001446E /* DebugLog.swift in Sources */,
 				1B88B2741F268C220022A69D /* OAuth2TokenDiskStore.swift in Sources */,
 				1B88B2241F268C220022A69D /* Auth.swift in Sources */,
 				1B88B2B81F268C220022A69D /* Result.swift in Sources */,
@@ -1463,7 +1463,7 @@
 				1B88B2A11F268C220022A69D /* ImageDownloader.swift in Sources */,
 				1B88B2F11F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
 				1B88B2811F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
-				7E99311B1F7ACBB80001446E /* LastLog.swift in Sources */,
+				7E99311B1F7ACBB80001446E /* DebugLog.swift in Sources */,
 				1B88B3071F268C420022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
 				1B6E186D1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2ED1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
@@ -1528,7 +1528,7 @@
 				1B88B2A21F268C220022A69D /* ImageDownloader.swift in Sources */,
 				1B88B2F21F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
 				1B88B2821F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
-				7E99311C1F7ACBB80001446E /* LastLog.swift in Sources */,
+				7E99311C1F7ACBB80001446E /* DebugLog.swift in Sources */,
 				1B88B3081F268C430022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
 				1B6E186E1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2EE1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
@@ -1593,7 +1593,7 @@
 				1B279CD41F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD11F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
-				7E99311E1F7B13AA0001446E /* Request.swift in Sources */,
+				7E99311E1F7B13AA0001446E /* DebugLoggerTests.swift in Sources */,
 				1BD555A01F17DC81004B1172 /* XMLTests.swift in Sources */,
 				1BC229A41F1D6BE4000DAF62 /* MockResource.swift in Sources */,
 				1BD5556A1F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift in Sources */,
@@ -1693,7 +1693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E9931191F7ACBB80001446E /* LastLog.swift in Sources */,
+				7E9931191F7ACBB80001446E /* DebugLog.swift in Sources */,
 				1B88B2731F268C220022A69D /* OAuth2TokenDiskStore.swift in Sources */,
 				1B88B2231F268C220022A69D /* Auth.swift in Sources */,
 				1B88B2B71F268C220022A69D /* Result.swift in Sources */,
