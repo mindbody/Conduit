@@ -69,12 +69,19 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
 
         Auth.sessionClient = URLSessionClient(delegateQueue: operationQueue)
 
-        sut.issueToken { _ in
+        sut.issueToken { result in
+            XCTAssertNotNil(result.error)
             XCTAssert(OperationQueue.current == operationQueue)
             completionExpectation.fulfill()
         }
 
         waitForExpectations(timeout: 5)
+    }
+
+    func testIssuesTokenSync() {
+        let sut = makeStrategy()
+        Auth.sessionClient = URLSessionClient(delegateQueue: OperationQueue())
+        XCTAssertThrowsError(try sut.issueToken())
     }
 
 }

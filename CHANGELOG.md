@@ -4,7 +4,19 @@
 - None
 
 #### Enhancements
+- Synchronous method for issuing authentication tokens
+
+#### Bug Fixes
 - None
+
+## 0.5.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- Unit Test improvements
+- Code clean up for additional SwiftLint rules
 
 #### Bug Fixes
 - None

@@ -15,11 +15,11 @@ struct OAuth2TokenGrantManager {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
         sessionClient.begin(request: authorizedRequest) { data, response, error in
-            let authTokenJSON: [String:Any]
             if let error = self.errorFrom(data: data, response: response) {
                 completion(.error(error))
                 return
             }
+            let authTokenJSON: [String: Any]
             do {
                 guard let deserializedResponse = try responseDeserializer.deserialize(response: response, data: data) as? [String: Any] else {
                         completion(.error(OAuth2Error.noResponse))
@@ -37,6 +37,22 @@ struct OAuth2TokenGrantManager {
             }
             completion(.value(newToken))
         }
+    }
+
+    static func issueTokenWith(authorizedRequest: URLRequest, responseDeserializer: ResponseDeserializer = JSONResponseDeserializer()) throws -> BearerToken {
+        let sessionClient = OAuth2URLSessionClientFactory.makeClient()
+
+        let result = try sessionClient.begin(request: authorizedRequest)
+        if let error = errorFrom(data: result.data, response: result.response) {
+            throw error
+        }
+        guard let authTokenJSON = try responseDeserializer.deserialize(response: result.response, data: result.data) as? [String: Any] else {
+            throw OAuth2Error.noResponse
+        }
+        guard let newToken = BearerToken.mapFrom(JSON: authTokenJSON) else {
+            throw OAuth2Error.internalFailure
+        }
+        return newToken
     }
 
     static func errorFrom(data: Data?, response: HTTPURLResponse?) -> Error? {

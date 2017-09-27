@@ -56,7 +56,7 @@ public struct OAuth2AuthorizationCodeTokenGrantStrategy: OAuth2TokenGrantStrateg
         return request
     }
 
-    public func issueToken(_ completion: @escaping Result<BearerToken>.Block) {
+    public func issueToken(completion: @escaping Result<BearerToken>.Block) {
         logger.verbose("Attempting to issue a new token via authorization code...")
         do {
             let request = try buildTokenGrantRequest()
@@ -65,6 +65,12 @@ public struct OAuth2AuthorizationCodeTokenGrantStrategy: OAuth2TokenGrantStrateg
         catch {
             completion(.error(error))
         }
+    }
+
+    public func issueToken() throws -> BearerToken {
+        logger.verbose("Attempting to issue a new token via authorization code...")
+        let request = try buildTokenGrantRequest()
+        return try OAuth2TokenGrantManager.issueTokenWith(authorizedRequest: request, responseDeserializer: responseDeserializer)
     }
 
 }
