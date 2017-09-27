@@ -118,23 +118,18 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         if let username = clientConfiguration.guestUsername,
             let password = clientConfiguration.guestPassword {
             logger.verbose("Guest user credentials exist. Attempting password grant...")
-            authenticationStrategy = OAuth2PasswordTokenGrantStrategy(username: username,
-                                                                      password: password,
-                                                                      clientConfiguration: clientConfiguration)
+            authenticationStrategy = OAuth2PasswordTokenGrantStrategy(username: username, password: password, clientConfiguration: clientConfiguration)
         }
         else {
             logger.verbose("Guest user credentials do not exist. Attempting client_credentials grant...")
             authenticationStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: clientConfiguration)
         }
-        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
-                                                   authorizationLevel: authorization.level)
+        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration, authorizationLevel: authorization.level)
 
-        authenticationStrategy.issueToken(completion)
+        authenticationStrategy.issueToken(completion: completion)
     }
 
-    private func makeRequestByApplyingAuthorizationHeader(to request: URLRequest,
-                                                          with token: OAuth2Token,
-                                                          completion: Result<URLRequest>.Block) {
+    private func makeRequestByApplyingAuthorizationHeader(to request: URLRequest, with token: OAuth2Token, completion: Result<URLRequest>.Block) {
         guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
             logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
             completion(.error(OAuth2Error.internalFailure))

@@ -39,7 +39,7 @@ public struct OAuth2ClientCredentialsTokenGrantStrategy: OAuth2TokenGrantStrateg
         return request
     }
 
-    public func issueToken(_ completion: @escaping Result<BearerToken>.Block) {
+    public func issueToken(completion: @escaping Result<BearerToken>.Block) {
         logger.verbose("Attempting to issue a new token with client credentials...")
         do {
             let request = try buildTokenGrantRequest()
@@ -48,6 +48,12 @@ public struct OAuth2ClientCredentialsTokenGrantStrategy: OAuth2TokenGrantStrateg
         catch {
             completion(.error(error))
         }
+    }
+
+    public func issueToken() throws -> BearerToken {
+        logger.verbose("Attempting to issue a new token with client credentials...")
+        let request = try buildTokenGrantRequest()
+        return try OAuth2TokenGrantManager.issueTokenWith(authorizedRequest: request)
     }
 
 }

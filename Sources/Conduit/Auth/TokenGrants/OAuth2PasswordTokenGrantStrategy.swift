@@ -51,7 +51,7 @@ public struct OAuth2PasswordTokenGrantStrategy: OAuth2TokenGrantStrategy {
         return request
     }
 
-    public func issueToken(_ completion: @escaping Result<BearerToken>.Block) {
+    public func issueToken(completion: @escaping Result<BearerToken>.Block) {
         logger.verbose("Attempting to issue a new token via username and password...")
         do {
             let request = try buildTokenGrantRequest()
@@ -60,6 +60,12 @@ public struct OAuth2PasswordTokenGrantStrategy: OAuth2TokenGrantStrategy {
         catch {
             completion(.error(error))
         }
+    }
+
+    public func issueToken() throws -> BearerToken {
+        logger.verbose("Attempting to issue a new token via username and password...")
+        let request = try buildTokenGrantRequest()
+        return try OAuth2TokenGrantManager.issueTokenWith(authorizedRequest: request)
     }
 
 }

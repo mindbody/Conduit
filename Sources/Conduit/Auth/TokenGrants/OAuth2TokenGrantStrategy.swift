@@ -12,9 +12,16 @@ import Foundation
 public protocol OAuth2TokenGrantStrategy {
 
     /// Attempts to issue a token with the given grant type
+    ///
     /// - Parameters:
     ///   - completion: A closure that executes on token grant success/failure
-    func issueToken(_ completion: @escaping Result<BearerToken>.Block)
+    func issueToken(completion: @escaping Result<BearerToken>.Block)
+
+    /// Attempts to issue a token with the given grant type
+    ///
+    /// - Returns: Access token
+    /// - Throws: Error if token grant failed
+    func issueToken() throws -> BearerToken
 
 }
 
