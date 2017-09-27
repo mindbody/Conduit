@@ -511,6 +511,7 @@
 		95CC71C61F797B0D003B4E31 /* video.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.txt; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
+		95F04E761F7C3B21003E9700 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -890,6 +891,7 @@
 		1BD8FFF21F167E6000481DC9 = {
 			isa = PBXGroup;
 			children = (
+				95F04E761F7C3B21003E9700 /* CHANGELOG.md */,
 				1BD8FFFF1F167E7800481DC9 /* Products */,
 				1BD8002E1F167EEE00481DC9 /* Sources */,
 				1B49462E1F71AF6D00754C58 /* TestHosts */,
