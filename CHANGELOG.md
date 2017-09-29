@@ -4,6 +4,17 @@
 - None
 
 #### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+## 0.5.2
+
+#### Breaking
+- None
+
+#### Enhancements
 - Synchronous method for issuing authentication tokens
 
 #### Bug Fixes
