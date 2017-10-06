@@ -84,7 +84,7 @@ extension BearerToken {
         static let refreshToken = "refresh_token"
     }
 
-    static func mapFrom(JSON: [String:Any]) -> BearerToken? {
+    static func mapFrom(JSON: [String: Any]) -> BearerToken? {
         guard let tokenType = JSON[JSONKeys.tokenType] as? String,
             let accessToken = JSON[JSONKeys.accessToken] as? String,
             let expiresIn = JSON[JSONKeys.expiresIn] as? Int else {

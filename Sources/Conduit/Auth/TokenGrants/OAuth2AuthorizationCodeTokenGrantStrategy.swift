@@ -17,7 +17,7 @@ public struct OAuth2AuthorizationCodeTokenGrantStrategy: OAuth2TokenGrantStrateg
 
     /// For server applications with complex realms, additional factors or user information
     /// may be necessary for user authentication
-    public var tokenGrantRequestAdditionalBodyParameters: [String:Any] = [:]
+    public var tokenGrantRequestAdditionalBodyParameters: [String: Any] = [:]
 
     /// The serializer used for token grant requests. Defaults to a FormEncodedRequestSerializer.
     public var requestSerializer: RequestSerializer = FormEncodedRequestSerializer()
@@ -37,7 +37,7 @@ public struct OAuth2AuthorizationCodeTokenGrantStrategy: OAuth2TokenGrantStrateg
     }
 
     func buildTokenGrantRequest() throws -> URLRequest {
-        var factors: [String:Any] = [
+        var factors: [String: Any] = [
             "code": code,
             "redirect_uri": redirectURI
         ]

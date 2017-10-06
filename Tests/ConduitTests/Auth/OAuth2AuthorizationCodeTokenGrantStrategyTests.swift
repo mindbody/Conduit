@@ -16,7 +16,7 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
     let authCode = "hunter2"
     let redirectURI = "x-oauth2-myapp://authorize"
     let authorizationCodeGrantType = "authorization_code"
-    let customParameters: [String : String] = [
+    let customParameters: [String: String] = [
         "some_id": "123abc"
     ]
 

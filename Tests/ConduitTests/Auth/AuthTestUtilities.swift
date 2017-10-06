@@ -10,7 +10,7 @@ import Foundation
 
 class AuthTestUtilities {
 
-    static func deserialize(urlEncodedParameterData: Data) -> [String:String]? {
+    static func deserialize(urlEncodedParameterData: Data) -> [String: String]? {
         guard let encodedString = String(data: urlEncodedParameterData, encoding: .utf8) else {
             return nil
         }

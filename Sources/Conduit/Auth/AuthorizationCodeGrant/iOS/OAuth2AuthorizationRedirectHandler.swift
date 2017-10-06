@@ -70,7 +70,7 @@ public class OAuth2AuthorizationRedirectHandler: NSObject {
             return shouldHandleURL
         }
 
-        var queryItemsDict: [String : String] = [:]
+        var queryItemsDict: [String: String] = [:]
 
         for item in queryItems {
             queryItemsDict[item.name] = item.value

@@ -51,7 +51,7 @@ public struct XMLNode {
     ///   - value: String value (text node)
     ///   - attributes: Node attributes dictionary
     ///   - children: Array of child nodes
-    public init(name: String, value: CustomStringConvertible? = nil, attributes: [String : String] = [:], children: [XMLNode] = []) {
+    public init(name: String, value: CustomStringConvertible? = nil, attributes: [String: String] = [:], children: [XMLNode] = []) {
         self.name = name
         self.text = value?.description
         self.attributes = attributes

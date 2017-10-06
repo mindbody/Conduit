@@ -29,7 +29,7 @@ public struct OAuth2AuthorizationRequest {
     public var state: String?
 
     /// Extension parameters that may be required or otherwise defined by the specific OAuth2 server
-    public var additionalParameters: [String : String]?
+    public var additionalParameters: [String: String]?
 
     /// Creates a new OAuth2AuthorizationRequest
     /// - Parameters:

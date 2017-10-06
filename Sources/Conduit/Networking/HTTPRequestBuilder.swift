@@ -43,7 +43,7 @@ public final class HTTPRequestBuilder {
     public var url: URL
 
     /// An optional array of HTTP Headers to apply to the request
-    public var headers: [String : String]?
+    public var headers: [String: String]?
 
     // Objc and non-objc versions of the `method` property exposed below.
 

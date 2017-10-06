@@ -94,7 +94,7 @@ extension XML {
         }
 
         func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?,
-                    attributes attributeDict: [String : String] = [:]) {
+                    attributes attributeDict: [String: String] = [:]) {
             var node = XMLNode(name: elementName)
             node.attributes = attributeDict
             if let parentNode = workingTree.popLast() {

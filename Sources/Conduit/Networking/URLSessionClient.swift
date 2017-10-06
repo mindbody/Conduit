@@ -242,12 +242,12 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
 
     var serverAuthenticationPolicies: [ServerAuthenticationPolicyType] = []
 
-    private var taskCompletionHandlers: [Int:SessionTaskCompletion] = [:]
-    private var taskDownloadProgressHandlers: [Int:SessionTaskProgressHandler] = [:]
-    private var taskDownloadProgresses: [Int:Progress] = [:]
-    private var taskUploadProgressHandlers: [Int:SessionTaskProgressHandler] = [:]
-    private var taskUploadProgresses: [Int:Progress] = [:]
-    private var taskResponses: [Int:TaskResponse] = [:]
+    private var taskCompletionHandlers: [Int: SessionTaskCompletion] = [:]
+    private var taskDownloadProgressHandlers: [Int: SessionTaskProgressHandler] = [:]
+    private var taskDownloadProgresses: [Int: Progress] = [:]
+    private var taskUploadProgressHandlers: [Int: SessionTaskProgressHandler] = [:]
+    private var taskUploadProgresses: [Int: Progress] = [:]
+    private var taskResponses: [Int: TaskResponse] = [:]
     private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
 
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
