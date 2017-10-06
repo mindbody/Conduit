@@ -13,8 +13,6 @@ public typealias SessionTaskProgressHandler = (Progress) -> Void
 
 private typealias SessionCompletionHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
 
-private let serialQueueName = "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)"
-
 /// A type that manages a session and queues URLRequest's
 public protocol URLSessionClientType {
 
@@ -65,7 +63,7 @@ public struct URLSessionClient: URLSessionClientType {
         set { self.sessionDelegate.serverAuthenticationPolicies = newValue }
     }
     private let urlSession: URLSession
-    private let serialQueue = DispatchQueue(label: serialQueueName, attributes: [])
+    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)", attributes: [])
     private let activeTaskQueueDispatchGroup = DispatchGroup()
     // swiftlint:disable weak_delegate
     private let sessionDelegate = SessionDelegate()

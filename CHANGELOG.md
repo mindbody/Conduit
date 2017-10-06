@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- URLSessionClient serial queue naming is now actually unique (only used for debugging)
 
 ## 0.5.2
 
