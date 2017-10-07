@@ -50,8 +50,8 @@ public final class ImageDownloader {
 
     private var cache: URLImageCache
     private let sessionClient: URLSessionClientType
-    private var sessionProxyMap: [String : SessionTaskProxyType] = [:]
-    private var completionHandlerMap: [String : [CompletionHandler]] = [:]
+    private var sessionProxyMap: [String: SessionTaskProxyType] = [:]
+    private var completionHandlerMap: [String: [CompletionHandler]] = [:]
     private let serialQueue = DispatchQueue(
         label: "com.mindbodyonline.Conduit.ImageDownloader-\(UUID().uuidString)"
     )

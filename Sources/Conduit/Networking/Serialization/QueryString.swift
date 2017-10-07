@@ -98,7 +98,7 @@ internal struct QueryString {
         var queryItems = [URLQueryItem]()
 
         switch params {
-        case let p as [String:Any]:
+        case let p as [String: Any]:
             queryItems.append(contentsOf: queryItemsFromDictionary(dict: p))
         case let n as NSNumber:
             let newPath = "\(url.absoluteString)?\(n.stringValue)"
@@ -183,7 +183,7 @@ internal struct QueryString {
         return newPercentEncodedQuery
     }
 
-    private func queryItemsFromDictionary(dict: [String:Any]) -> [URLQueryItem] {
+    private func queryItemsFromDictionary(dict: [String: Any]) -> [URLQueryItem] {
         return dict.flatMap { kvp in
             queryItemsFrom(parameter: (kvp.key, kvp.value))
         }
@@ -195,7 +195,7 @@ internal struct QueryString {
         if let parameterValue = parameter.1 as? [Any] {
             return queryItemsFrom(arrayParameter: (name, parameterValue))
         }
-        if let parameterValue = parameter.1 as? [String:Any] {
+        if let parameterValue = parameter.1 as? [String: Any] {
             return queryItemsFrom(dictionaryParameter: (name, parameterValue))
         }
         if let parameterValue = parameter.1 as? String {
@@ -229,7 +229,7 @@ internal struct QueryString {
         }
     }
 
-    private func queryItemsFrom(dictionaryParameter parameter: (String, [String:Any])) -> [URLQueryItem] {
+    private func queryItemsFrom(dictionaryParameter parameter: (String, [String: Any])) -> [URLQueryItem] {
         let key = parameter.0
         let value = parameter.1
         switch formattingOptions.dictionaryFormat {

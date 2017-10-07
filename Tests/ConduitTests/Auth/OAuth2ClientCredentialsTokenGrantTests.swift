@@ -14,7 +14,7 @@ class OAuth2ClientCredentialsTokenGrantTests: XCTestCase {
     var mockServerEnvironment: OAuth2ServerEnvironment!
     var mockClientConfiguration: OAuth2ClientConfiguration!
     let clientCredentialsGrantType = "client_credentials"
-    let customParameters: [String : String] = [
+    let customParameters: [String: String] = [
         "some_id": "123abc"
     ]
 

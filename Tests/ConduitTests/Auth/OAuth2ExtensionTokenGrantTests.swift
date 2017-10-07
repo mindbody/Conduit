@@ -14,7 +14,7 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
     var mockServerEnvironment: OAuth2ServerEnvironment!
     var mockClientConfiguration: OAuth2ClientConfiguration!
     let saml12GrantType = "urn:ietf:params:oauth:grant-type:sam12-bearer"
-    let customParameters: [String : String] = [
+    let customParameters: [String: String] = [
         "assertion": "123abc"
     ]
 

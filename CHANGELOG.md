@@ -9,6 +9,9 @@
 #### Bug Fixes
 - URLSessionClient serial queue naming is now actually unique (only used for debugging)
 
+#### Other
+- Code formatting updates from SwiftLint autocorrect
+
 ## 0.5.2
 
 #### Breaking

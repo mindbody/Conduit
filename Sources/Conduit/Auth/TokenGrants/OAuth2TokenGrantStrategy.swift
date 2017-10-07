@@ -29,12 +29,12 @@ extension OAuth2TokenGrantStrategy {
 
     func buildStandardTokenGrantRequest(clientConfiguration: OAuth2ClientConfiguration,
                                         grantType: String,
-                                        additionalGrantParameters: [String:Any],
+                                        additionalGrantParameters: [String: Any],
                                         requestSerializer: RequestSerializer = JSONRequestSerializer()) throws -> URLRequest {
         let basicToken = BasicToken(username: clientConfiguration.clientIdentifier, password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
-        var parameters: [String:Any] = [
+        var parameters: [String: Any] = [
             "grant_type": grantType
         ]
 

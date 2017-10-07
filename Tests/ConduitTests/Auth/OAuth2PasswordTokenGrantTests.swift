@@ -16,7 +16,7 @@ class OAuth2PasswordTokenGrantTests: XCTestCase {
     let username = "username"
     let password = "hunter2"
     let passwordGrantType = "password"
-    let customParameters: [String : String] = [
+    let customParameters: [String: String] = [
         "some_id": "123abc"
     ]
 

@@ -13,7 +13,7 @@ class JSONRequestSerializerTests: XCTestCase {
 
     var request: URLRequest!
     var serializer: JSONRequestSerializer!
-    let testJSONParameters = ["key1": "value1", "key2": 2, "key3": ["nested": true]] as [String : Any]
+    let testJSONParameters = ["key1": "value1", "key2": 2, "key3": ["nested": true]] as [String: Any]
 
     override func setUp() {
         super.setUp()
@@ -39,7 +39,7 @@ class JSONRequestSerializerTests: XCTestCase {
             return
         }
 
-        let json = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String : Any]
+        let json = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any]
         XCTAssert(json != nil)
     }
 
