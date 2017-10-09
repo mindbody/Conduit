@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1B279D141F19677300C0005E"
                BuildableName = "ConduitExampleIOS.app"
                BlueprintName = "ConduitExampleIOS"
-               ReferencedContainer = "container:ConduitExampleIOS.xcodeproj">
+               ReferencedContainer = "container:Example/ConduitExampleIOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,7 +36,7 @@
             BlueprintIdentifier = "1B279D141F19677300C0005E"
             BuildableName = "ConduitExampleIOS.app"
             BlueprintName = "ConduitExampleIOS"
-            ReferencedContainer = "container:ConduitExampleIOS.xcodeproj">
+            ReferencedContainer = "container:Example/ConduitExampleIOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "1B279D141F19677300C0005E"
             BuildableName = "ConduitExampleIOS.app"
             BlueprintName = "ConduitExampleIOS"
-            ReferencedContainer = "container:ConduitExampleIOS.xcodeproj">
+            ReferencedContainer = "container:Example/ConduitExampleIOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -79,7 +79,7 @@
             BlueprintIdentifier = "1B279D141F19677300C0005E"
             BuildableName = "ConduitExampleIOS.app"
             BlueprintName = "ConduitExampleIOS"
-            ReferencedContainer = "container:ConduitExampleIOS.xcodeproj">
+            ReferencedContainer = "container:Example/ConduitExampleIOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
