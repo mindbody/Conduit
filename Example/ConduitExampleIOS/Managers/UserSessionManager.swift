@@ -15,14 +15,16 @@ class UserSessionManager {
     static let shared = UserSessionManager()
 
     var isUserLoggedIn: Bool {
-        if let _: BearerToken = AuthManager.shared.localTokenStore.tokenFor(client: AuthManager.shared.localClientConfiguration, authorization: OAuth2Authorization(type: .bearer, level: .user)) {
+        if let _: BearerToken = AuthManager.shared.localTokenStore.tokenFor(client: AuthManager.shared.localClientConfiguration,
+                                                                            authorization: OAuth2Authorization(type: .bearer, level: .user)) {
             return true
         }
         return false
     }
 
     func logIn(username: String, password: String, completion: @escaping Result<Void>.Block) {
-        let authenticationStrategy = OAuth2PasswordTokenGrantStrategy(username: username, password: password, clientConfiguration: AuthManager.shared.localClientConfiguration)
+        let authenticationStrategy = OAuth2PasswordTokenGrantStrategy(username: username, password: password,
+                                                                      clientConfiguration: AuthManager.shared.localClientConfiguration)
 
         authenticationStrategy.issueToken { result in
             switch result {
@@ -30,14 +32,16 @@ class UserSessionManager {
                 completion(.error(error))
             case .value(let token):
                 /// Manual token grants must also manually store tokens
-                AuthManager.shared.localTokenStore.store(token: token, for: AuthManager.shared.localClientConfiguration, with: OAuth2Authorization(type: .bearer, level: .user))
+                AuthManager.shared.localTokenStore.store(token: token, for: AuthManager.shared.localClientConfiguration,
+                                                         with: OAuth2Authorization(type: .bearer, level: .user))
                 completion(.value(()))
             }
         }
     }
 
     func logOut() {
-        AuthManager.shared.localTokenStore.removeTokenFor(client: AuthManager.shared.localClientConfiguration, authorization: OAuth2Authorization(type: .bearer, level: .user))
+        AuthManager.shared.localTokenStore.removeTokenFor(client: AuthManager.shared.localClientConfiguration,
+                                                          authorization: OAuth2Authorization(type: .bearer, level: .user))
     }
 
 }
