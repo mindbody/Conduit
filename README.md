@@ -84,9 +84,9 @@ Add `Conduit` to your `Package.swift`:
 import PackageDescription
 
 let package = Package(
-	dependencies: [
-		.package(url: "https://github.com/mindbody/Conduit.git", from: "0.5.0")
-	]
+    dependencies: [
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.5.0")
+    ]
 )
 ```
 ---
@@ -106,11 +106,11 @@ let mySessionClient = URLSessionClient(sessionConfiguration: URLSessionConfigura
 
 ```swift
 class MySessionClientManager {
-	
-	/// Lazy-loaded URLSessionClient used for interacting with the Kittn API 🐱
-	static let kittnAPISessionClient: URLSessionClient = {
-		return URLSessionClient()
-	}()
+    
+    /// Lazy-loaded URLSessionClient used for interacting with the Kittn API 🐱
+    static let kittnAPISessionClient: URLSessionClient = {
+        return URLSessionClient()
+    }()
 
 }
 
@@ -133,14 +133,14 @@ requestBuilder.method = .GET
 requestBuilder.serializer = JSONRequestSerializer()
 // Powerful query string formatting options allow for complex query parameters
 requestBuilder.queryStringParameters = [
-	"options" : [
-		"include" : [
-			"fuzzy",
-			"fluffy",
-			"not mean"
-		],
-		"2+2" : 4
-	]
+    "options" : [
+        "include" : [
+            "fuzzy",
+            "fluffy",
+            "not mean"
+        ],
+        "2+2" : 4
+    ]
 ]
 requestBuilder.queryStringFormattingOptions.dictionaryFormat = .dotNotated
 requestBuilder.queryStringFormattingOptions.arrayFormat = .commaSeparated
@@ -151,9 +151,9 @@ let request = try requestBuilder.build()
 
 let sessionClient = MySessionClientManager.kittnAPISessionClient
 sessionClient.begin(request) { (data, response, error) in
-	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
-	...
+    let deserializer = JSONResponseDeserializer()
+    let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
+    ...
 }
 ```
 
@@ -194,10 +194,10 @@ This could be used for logging, proxying, authorization, and implementing strict
 ```swift
 /// Simple middelware example that logs each outbound request
 struct LoggingRequestPipelineMiddleware: RequestPipelineMiddleware {
-	
-	public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
-		print("Outbound request: \(request)")
-	}
+    
+    public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
+        print("Outbound request: \(request)")
+    }
 
 }
 
@@ -212,8 +212,8 @@ Since it's possible that a single session client may interact with disconnected 
 
 ```swift
 let sslPinningPolicy = SSLPinningServerAuthenticationPolicy(certificates: CertificateBundle.certificatesInBundle) { challenge in
-	// All challenges from other hosts will be ignored and will proceed through normal system evaluation
-	return challenge.protectionSpace.host == "api.example.com"
+    // All challenges from other hosts will be ignored and will proceed through normal system evaluation
+    return challenge.protectionSpace.host == "api.example.com"
 }
 
 mySessionClient.serverAuthenticationPolicies = [sslPinningPolicy]
@@ -229,7 +229,7 @@ Every Auth session requires a client configuration, which, in turn, requires an 
 
 ```swift
 guard let tokenGrantURL = URL(string: "https://api.example.com/oauth2/issue/token") else {
-	return
+    return
 }
 
 let scope = "cats dogs giraffes"
@@ -274,13 +274,13 @@ When manually creating and using an `OAuth2TokenGrantStrategy` (common for Resou
 // This token grant is most-likely issued on behalf of a user, so the authorization level is "user", and the authorization type is "bearer"
 let tokenGrantStrategy = OAuth2PasswordTokenGrantStrategy(username: "user@example.com", password: "hunter2", clientConfiguration: Auth.defaultClientConfiguration)
 tokenGrantStrategy.issueToken { result in
-	guard case .value(let token) = result else {
-		// Handle failure
-		return
-	}
-	let userBearerAuthorization = OAuth2Authorization(type: .bearer, level: .user)
-	Auth.defaultTokenStore.store(token: token, for: Auth.defaultClientConfiguration, with: userBearerAuthorization)
-	// Handle success
+    guard case .value(let token) = result else {
+        // Handle failure
+        return
+    }
+    let userBearerAuthorization = OAuth2Authorization(type: .bearer, level: .user)
+    Auth.defaultTokenStore.store(token: token, for: Auth.defaultClientConfiguration, with: userBearerAuthorization)
+    // Handle success
 }
 ```
 
@@ -288,13 +288,13 @@ tokenGrantStrategy.issueToken { result in
 // This token grant is issued on behalf of a client, so the authorization level is "client"
 let tokenGrantStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: Auth.defaultClientConfiguration)
 tokenGrantStrategy.issueToken { result in
-	guard case .value(let token) = result else {
-		// Handle failure
-		return
-	}
-	let clientBearerAuthorization = OAuth2Authorization(type: .bearer, level: .client)
-	Auth.defaultTokenStore.store(token: token, for: Auth.defaultClientConfiguration, with: clientBearerAuthorization)
-	// Handle success
+    guard case .value(let token) = result else {
+        // Handle failure
+        return
+    }
+    let clientBearerAuthorization = OAuth2Authorization(type: .bearer, level: .client)
+    Auth.defaultTokenStore.store(token: token, for: Auth.defaultClientConfiguration, with: clientBearerAuthorization)
+    // Handle success
 }
 ```
 
@@ -303,16 +303,16 @@ For the Authorization Code flow, there exists `OAuth2AuthorizationStrategy`. Cur
 ```swift
 // AppDelegate.swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-	OAuth2AuthorizationRedirectHandler.default.authorizationURLScheme = "x-my-custom-scheme"
-	// Other setup
-	return true
+    OAuth2AuthorizationRedirectHandler.default.authorizationURLScheme = "x-my-custom-scheme"
+    // Other setup
+    return true
 }
 
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-	if OAuth2AuthorizationRedirectHandler.default.handleOpen(url) {
-		return true
-	}
-	...
+    if OAuth2AuthorizationRedirectHandler.default.handleOpen(url) {
+        return true
+    }
+    ...
 }
 ```
 
@@ -320,8 +320,8 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpe
 // SampleAuthManager.swift
 
 guard let authorizationBaseURL = URL(string: "https://api.example.com/oauth2/authorize"),
-	let redirectURI = URL(string: "x-my-custom-scheme://authorize") else {
-	return
+    let redirectURI = URL(string: "x-my-custom-scheme://authorize") else {
+    return
 }
 let authorizationStrategy = OAuth2SafariAuthorizationStrategy(presentingViewController: visibleViewController, authorizationRequestEndpoint: authorizationBaseURL)
 
@@ -330,24 +330,24 @@ authorizationRequest.redirectURI = redirectURI
 authorizationRequest.scope = "cats dogs giraffes"
 authorizationRequest.state = "abc123"
 authorizationRequest.additionalParameters = [
-	"custom_param_1" : "value"
+    "custom_param_1" : "value"
 ]
 
 authorizationStrategy.authorize(request: authorizationRequest) { result in
-	guard case .value(let response) = result else {
-		// Handle failure
-		return
-	}
-	if response.state != authorizationRequest.state {
-		// We've been attacked! 👽
-		return
-	}
-	let tokenGrantStrategy = OAuth2AuthorizationCodeTokenGrantStrategy(code: response.code, redirectURI: redirectURI, clientConfiguration: Auth.defaultClientConfiguration)
+    guard case .value(let response) = result else {
+        // Handle failure
+        return
+    }
+    if response.state != authorizationRequest.state {
+        // We've been attacked! 👽
+        return
+    }
+    let tokenGrantStrategy = OAuth2AuthorizationCodeTokenGrantStrategy(code: response.code, redirectURI: redirectURI, clientConfiguration: Auth.defaultClientConfiguration)
 
-	tokenGrantStrategy.issueToken { result in
-		// Store token
-		// Handle success/failure
-	}
+    tokenGrantStrategy.issueToken { result in
+        // Store token
+        // Handle success/failure
+    }
 }
 ```
 
@@ -367,14 +367,14 @@ let requestBuilder = HTTPRequestBuilder(url: protectedKittensRequestURL)
 requestBuilder.method = .GET
 requestBuilder.serializer = JSONRequestSerializer()
 requestBuilder.queryStringParameters = [
-	"options" : [
-		"include" : [
-			"fuzzy",
-			"fluffy",
-			"not mean"
-		],
-		"2+2" : 4
-	]
+    "options" : [
+        "include" : [
+            "fuzzy",
+            "fluffy",
+            "not mean"
+        ],
+        "2+2" : 4
+    ]
 ]
 requestBuilder.queryStringFormattingOptions.dictionaryFormat = .dotNotated
 requestBuilder.queryStringFormattingOptions.arrayFormat = .commaSeparated
@@ -391,9 +391,9 @@ var sessionClient = MySessionClientManager.kittnAPISessionClient
 sessionClient.middleware.append(authMiddleware)
 
 sessionClient.begin(request) { (data, response, error) in
-	let deserializer = JSONResponseDeserializer()
-	let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
-	...
+    let deserializer = JSONResponseDeserializer()
+    let responseDict = try? deserializer.deserialize(response: response, data: data) as? [String : Any]
+    ...
 }
 ```
 
