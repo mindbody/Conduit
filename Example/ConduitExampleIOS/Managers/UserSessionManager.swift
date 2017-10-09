@@ -31,7 +31,7 @@ class UserSessionManager {
             case .value(let token):
                 /// Manual token grants must also manually store tokens
                 AuthManager.shared.localTokenStore.store(token: token, for: AuthManager.shared.localClientConfiguration, with: OAuth2Authorization(type: .bearer, level: .user))
-                completion(.value())
+                completion(.value(()))
             }
         }
     }

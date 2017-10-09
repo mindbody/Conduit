@@ -4,10 +4,12 @@
 - None
 
 #### Enhancements
-- None
+- Rakefile tasks now refer to the workspace and include ConduitExampleIOS
+- Rakefile task output is more verbose
 
 #### Bug Fixes
 - URLSessionClient serial queue naming is now actually unique (only used for debugging)
+- Updated ConduitExampleIOS to Swift 4
 
 #### Other
 - Code formatting updates from SwiftLint autocorrect
