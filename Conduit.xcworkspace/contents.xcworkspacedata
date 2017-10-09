@@ -5,6 +5,6 @@
       location = "group:Conduit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/john.hammerlund/Library/Github/Conduit/Example/ConduitExampleIOS.xcodeproj">
+      location = "group:Example/ConduitExampleIOS.xcodeproj">
    </FileRef>
 </Workspace>
