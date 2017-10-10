@@ -10,6 +10,7 @@
 #### Bug Fixes
 - URLSessionClient serial queue naming is now actually unique (only used for debugging)
 - Updated ConduitExampleIOS to Swift 4
+- Fixed `OAuth2TokenKeychainStore` accessibility
 
 #### Other
 - Code formatting updates from SwiftLint autocorrect
