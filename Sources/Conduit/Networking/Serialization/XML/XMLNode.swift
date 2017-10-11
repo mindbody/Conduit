@@ -114,7 +114,7 @@ public struct XMLNode {
     /// - Throws: XMLError if no descendant found
     public func node(named name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> XMLNode {
         guard let node = nodes(named: name, traversal: traversal).first else {
-            throw XMLError.notFound
+            throw XMLError.nodeNotFound(name: name)
         }
         return node
     }
