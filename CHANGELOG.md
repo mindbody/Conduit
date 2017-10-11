@@ -1,7 +1,7 @@
 ## Master
 
 #### Breaking
-- None
+- Include node name when throwing a 'node not found' error.
 
 #### Enhancements
 - Rakefile tasks now refer to the workspace and include ConduitExampleIOS
