@@ -9,7 +9,7 @@
 import Foundation
 
 public enum XMLError: Error {
-    case notFound
+    case nodeNotFound(name: String)
     case invalidDataType
 }
 
