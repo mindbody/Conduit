@@ -26,6 +26,7 @@
 - URLSessionClient serial queue naming is now actually unique (only used for debugging)
 - Updated ConduitExampleIOS to Swift 4
 - Fixed `OAuth2TokenKeychainStore` accessibility
+- Fixed legacy token migration within `OAuth2RequestPipelineMiddleware`
 
 #### Other
 - Code formatting updates from SwiftLint autocorrect
