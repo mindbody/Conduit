@@ -1,6 +1,21 @@
 ## Master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.6.0
+
+#### Breaking
 - Include node name when throwing a 'node not found' error.
 
 #### Enhancements
@@ -16,6 +31,7 @@
 #### Other
 - Code formatting updates from SwiftLint autocorrect
 
+
 ## 0.5.2
 
 #### Breaking
@@ -26,6 +42,7 @@
 
 #### Bug Fixes
 - None
+
 
 ## 0.5.1
 
@@ -38,6 +55,7 @@
 
 #### Bug Fixes
 - None
+
 
 ## 0.5.0
 
