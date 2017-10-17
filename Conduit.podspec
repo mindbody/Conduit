@@ -3,7 +3,7 @@ $version = '0.6.0'
 Pod::Spec.new do |spec|
 	spec.name = 'Conduit'
 	spec.version = $version
-	# spec.license = { :type -> 'MIT' }
+	spec.license = 'Apache 2.0'
 	spec.homepage = 'https://github.com/mindbody/Conduit'
 	spec.author = 'Conduit Contributors'
 	spec.summary = 'Robust Swift networking for web APIs'
