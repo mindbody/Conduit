@@ -1,4 +1,4 @@
-- [ ] I've read, understood, and done my best to follow the [*CONTRIBUTING guidelines](../CONTRIBUTING.md).
+- [ ] I've read, understood, and done my best to follow the [*CONTRIBUTING guidelines*](https://github.com/mindbody/conduit/blob/master/CONTRIBUTING.md).
 - [ ] I've searched [existing issues](https://github.com/mindbody/Conduit/issues?utf8=%E2%9C%93&q=is%3Aissue) to make sure this isn't a duplicate.
 
 <!-- If reporting a bug, please fill out the fields below -->

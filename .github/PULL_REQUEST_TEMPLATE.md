@@ -1,4 +1,4 @@
-- [ ] I've read, understood, and done my best to follow the [CONTRIBUTING guidelines](../CONTRIBUTING.md).
+- [ ] I've read, understood, and done my best to follow the [*CONTRIBUTING guidelines*](https://github.com/mindbody/conduit/blob/master/CONTRIBUTING.md).
 
 This pull request includes (pick all that apply):
 
