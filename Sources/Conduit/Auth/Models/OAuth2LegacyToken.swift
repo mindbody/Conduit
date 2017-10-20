@@ -25,11 +25,11 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
     public var isValid: Bool {
         let minimumExpirationTime: TimeInterval = 900 // 15 minutes
         let minimumExpirationDate = Date().addingTimeInterval(minimumExpirationTime)
-        return self.expiration > minimumExpirationDate
+        return expiration > minimumExpirationDate
     }
 
     public var authorizationHeaderValue: String {
-        return "Bearer \(self.accessToken)"
+        return "Bearer \(accessToken)"
     }
 
     /// Creates a new BearerOAuth2Token
@@ -55,9 +55,9 @@ public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token
     }
 
     public func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.accessToken, forKey: "token")
-        aCoder.encode(self.expiration, forKey: "expiration")
-        aCoder.encode(self.refreshToken, forKey: "refreshToken")
+        aCoder.encode(accessToken, forKey: "token")
+        aCoder.encode(expiration, forKey: "expiration")
+        aCoder.encode(refreshToken, forKey: "refreshToken")
     }
 
     public override var debugDescription: String {

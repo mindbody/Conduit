@@ -59,8 +59,8 @@ public struct URLSessionClient: URLSessionClientType {
     /// The authentication policies to be evaluated against for NSURLAuthenticationChallenges against the
     /// NSURLSession. Mutating this will affect all URLSessionClient copies.
     public var serverAuthenticationPolicies: [ServerAuthenticationPolicyType] {
-        get { return self.sessionDelegate.serverAuthenticationPolicies }
-        set { self.sessionDelegate.serverAuthenticationPolicies = newValue }
+        get { return sessionDelegate.serverAuthenticationPolicies }
+        set { sessionDelegate.serverAuthenticationPolicies = newValue }
     }
     private let urlSession: URLSession
     private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)", attributes: [])
@@ -126,7 +126,7 @@ public struct URLSessionClient: URLSessionClientType {
 
         let requestID = OSAtomicIncrement64Barrier(&URLSessionClient.requestCounter)
 
-        self.serialQueue.async {
+        serialQueue.async {
 
             // First, check if the queue needs to be evicted and frozen
 
@@ -223,9 +223,9 @@ public struct URLSessionClient: URLSessionClientType {
     }
 
     private func dataTaskWith(request: URLRequest, completion: @escaping SessionTaskCompletion) -> URLSessionDataTask {
-        self.activeTaskQueueDispatchGroup.enter()
+        activeTaskQueueDispatchGroup.enter()
 
-        let dataTask = self.urlSession.dataTask(with: request)
+        let dataTask = urlSession.dataTask(with: request)
         sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { data, response, error in
             // If for some reason the client isn't retained elsewhere, it will at least stay alive
             // while active tasks are running
@@ -251,7 +251,7 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
 
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
-        for policy in self.serverAuthenticationPolicies {
+        for policy in serverAuthenticationPolicies {
             if !policy.evaluate(authenticationChallenge: challenge) {
                 completionHandler(.cancelAuthenticationChallenge, nil)
                 return

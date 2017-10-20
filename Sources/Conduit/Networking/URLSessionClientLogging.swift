@@ -11,7 +11,7 @@ import Foundation
 extension URLSessionClient {
 
     func log(request: URLRequest, requestID: Int64) {
-        let endpoint = self.endpoint(request: request)
+        let endpoint = self.endpoint(from: request)
         if logger.level <= .debug {
             logger.debug("[🛫 #\(requestID)] \(endpoint)")
             return
@@ -33,7 +33,7 @@ extension URLSessionClient {
     }
 
     func log(data: Data?, response: HTTPURLResponse?, request: URLRequest, requestID: Int64) {
-        let endpoint = self.endpoint(request: request)
+        let endpoint = self.endpoint(from: request)
         let statusDescription = makeStatusDescription(code: response?.statusCode)
         let responseEndpointDescription = "\(endpoint) => \(statusDescription)"
 
@@ -53,7 +53,7 @@ extension URLSessionClient {
         logger.verbose(verboseLogComponents.joined(separator: "\n"))
     }
 
-    private func endpoint(request: URLRequest) -> String {
+    private func endpoint(from request: URLRequest) -> String {
         if let method = request.httpMethod, let url = request.url {
             return "\(method) \(url)"
         }

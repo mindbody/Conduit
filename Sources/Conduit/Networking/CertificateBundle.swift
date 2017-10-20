@@ -14,7 +14,7 @@ public struct CertificateBundle {
     let certificates: [SecCertificate]
 
     var publicKeys: [SecKey] {
-        return self.certificates.flatMap { CertificateBundle.publicKeyFrom(certificate: $0) }
+        return certificates.flatMap { CertificateBundle.publicKeyFrom(certificate: $0) }
     }
 
     static private let certificatesInBundle = CertificateBundle.certificatesWithinMainBundle()
@@ -53,7 +53,7 @@ public struct CertificateBundle {
 
     /// Searches the main bundle (if running within a bundled application) for DER certificates
     public static func bundleWithCertificatesWithinMainBundle() -> CertificateBundle {
-        return CertificateBundle(certificates: self.certificatesInBundle)
+        return CertificateBundle(certificates: certificatesInBundle)
     }
 
     static func publicKeyFrom(certificate: SecCertificate) -> SecKey? {
@@ -78,7 +78,7 @@ public struct CertificateBundle {
 
     static private func certificatesWithinMainBundle() -> [SecCertificate] {
         let bundlePaths = Bundle.main.paths(forResourcesOfType: "cer", inDirectory: ".")
-        return self.certificatesFrom(paths: bundlePaths)
+        return certificatesFrom(paths: bundlePaths)
     }
 
     static private func certificatesFrom(paths: [String]) -> [SecCertificate] {

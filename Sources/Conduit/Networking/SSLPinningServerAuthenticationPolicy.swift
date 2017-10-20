@@ -57,36 +57,36 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
         }
 
         logger.debug("Evaluating server trust")
-        if !self.evaluate(serverTrust: serverTrust) {
+        if !evaluate(serverTrust: serverTrust) {
             logger.debug("Server trust evaluation failed")
             return false
         }
 
-        if self.certificateBundle.certificates.isEmpty {
+        if certificateBundle.certificates.isEmpty {
             preconditionFailure("SSL Pinning requires at least one certificate resource to pin against.")
         }
 
         let serverCertificateBundle = CertificateBundle(serverTrust: serverTrust)
 
         logger.debug("Evaluating server certificate bundle for SSL pinning")
-        return self.evaluate(certificateBundle: serverCertificateBundle)
+        return evaluate(certificateBundle: serverCertificateBundle)
     }
 
     func evaluate(certificateBundle: CertificateBundle) -> Bool {
-        if self.pinningType == .none {
+        if pinningType == .none {
             logger.debug("SSL pinning type is set to .none -- ignoring")
             return true
         }
 
         for certificate in certificateBundle.certificates {
-            if self.pinningType == .publicKey {
+            if pinningType == .publicKey {
                 guard let serverCertificatePublicKey = CertificateBundle.publicKeyFrom(certificate: certificate) else {
                     logger.error("Failed to retrieve public key from one of the certificates")
                     return false
                 }
                 return self.certificateBundle.publicKeys.contains(serverCertificatePublicKey)
             }
-            else if self.pinningType == .certificateData {
+            else if pinningType == .certificateData {
                 let pinnedCertificateData = self.certificateBundle.certificates.map {
                     SecCertificateCopyData($0) as Data
                 }
@@ -102,7 +102,7 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
     }
 
     func evaluate(serverTrust: SecTrust) -> Bool {
-        if self.allowsInvalidSSLCertificates {
+        if allowsInvalidSSLCertificates {
             return true
         }
 

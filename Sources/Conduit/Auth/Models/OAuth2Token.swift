@@ -63,7 +63,7 @@ public class BasicToken: OAuth2Token {
     public var isValid: Bool = true
 
     public var authorizationHeaderValue: String {
-        return "Basic \(self.base64EncodedUsernameAndPassword())"
+        return "Basic \(base64EncodedUsernameAndPassword())"
     }
 
     /// Creates a new BasicToken
@@ -105,6 +105,7 @@ extension BearerToken {
 }
 
 extension BearerToken {
+    @available(*, deprecated, message: "BearerOAuth2Token will be removed in a future version.")
     init(legacyToken: BearerOAuth2Token) {
         self.init(accessToken: legacyToken.accessToken, refreshToken: legacyToken.refreshToken, expiration: legacyToken.expiration)
     }

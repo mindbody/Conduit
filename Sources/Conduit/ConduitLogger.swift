@@ -86,7 +86,7 @@ extension ConduitLoggerType {
     }
 
     func log(_ block: @autoclosure () -> Any, level: LogLevel, function: String, filePath: String, line: Int) {
-        if self.level.rawValue <= level.rawValue {
+        if level.rawValue <= level.rawValue {
             log(block, function: function, filePath: filePath, line: line)
         }
     }
@@ -96,7 +96,7 @@ class ConduitLogger: ConduitLoggerType {
     var level: LogLevel = .error
 
     func log(_ block: @autoclosure () -> Any, function: String, filePath: String, line: Int) {
-        if self.level.rawValue <= level.rawValue {
+        if level.rawValue <= level.rawValue {
             print("[Conduit] \(block())")
         }
     }
