@@ -70,7 +70,7 @@ extension HTTPResponseDeserializer {
             throw ResponseDeserializerError.badResponse(responseObject: responseObject)
         }
 
-        if let acceptableContentTypes = self.acceptableContentTypes {
+        if let acceptableContentTypes = acceptableContentTypes {
             guard let mimeType = response.mimeType, acceptableContentTypes.contains(mimeType) else {
                 throw ResponseDeserializerError.badResponse(responseObject: responseObject)
             }

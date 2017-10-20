@@ -29,11 +29,11 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
     private let contentBoundary = MultipartFormRequestSerializer.randomContentBoundary()
 
     private lazy var inlineContentBoundary: String = {
-        return "--\(self.contentBoundary)"
+        return "--\(contentBoundary)"
     }()
 
     private lazy var finalContentBoundary: String = {
-        return "--\(self.contentBoundary)--"
+        return "--\(contentBoundary)--"
     }()
 
     public override init() {}
@@ -42,7 +42,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
     /// - Parameters
     ///     - formPart: The part to add to the form
     public func append(formPart: FormPart) {
-        self.formData.append(formPart)
+        formData.append(formPart)
     }
 
     public override func serialize(request: URLRequest, bodyParameters: Any?) throws -> URLRequest {
@@ -51,10 +51,10 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         var mutableRequest = request
 
         if mutableRequest.value(forHTTPHeaderField: "Content-Type") == nil {
-            mutableRequest.setValue("multipart/form-data; boundary=\(self.contentBoundary)", forHTTPHeaderField: "Content-Type")
+            mutableRequest.setValue("multipart/form-data; boundary=\(contentBoundary)", forHTTPHeaderField: "Content-Type")
         }
 
-        let httpBody = try self.makeHTTPBody()
+        let httpBody = try makeHTTPBody()
 
         mutableRequest.setValue(String(httpBody.count), forHTTPHeaderField: "Content-Length")
         mutableRequest.httpBody = httpBody
@@ -100,20 +100,20 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
     private func inlineContentPartDataFrom(formPart: FormPart) throws -> Data {
         var mutableData = Data()
-        guard let boundaryData = self.encodedDataFrom(string: self.inlineContentBoundary),
-            let crlfData = self.encodedDataFrom(string: MultipartFormRequestSerializer.CRLF) else {
+        guard let boundaryData = encodedDataFrom(string: inlineContentBoundary),
+            let crlfData = encodedDataFrom(string: MultipartFormRequestSerializer.CRLF) else {
                 throw RequestSerializerError.serializationFailure
         }
         mutableData.append(boundaryData)
         mutableData.append(crlfData)
 
-        var headers = self.defaultHeadersFor(formPart: formPart)
+        var headers = defaultHeadersFor(formPart: formPart)
         for (key, value) in formPart.additionalHTTPHeaderFields {
             headers[key] = value
         }
         for header in headers {
             let headerStr = "\(header.0): \(header.1)\(MultipartFormRequestSerializer.CRLF)"
-            guard let headerData = self.encodedDataFrom(string: headerStr) else {
+            guard let headerData = encodedDataFrom(string: headerStr) else {
                 throw RequestSerializerError.serializationFailure
             }
             mutableData.append(headerData)
@@ -132,12 +132,12 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
     private func makeHTTPBody() throws -> Data {
         var mutableBody = Data()
 
-        for formData in self.formData {
-            try mutableBody.append(self.inlineContentPartDataFrom(formPart: formData))
+        for formData in formData {
+            try mutableBody.append(inlineContentPartDataFrom(formPart: formData))
         }
 
-        let boundaryLine = "\(self.finalContentBoundary)\(MultipartFormRequestSerializer.CRLF)"
-        guard let finalBoundaryData = self.encodedDataFrom(string: boundaryLine) else {
+        let boundaryLine = "\(finalContentBoundary)\(MultipartFormRequestSerializer.CRLF)"
+        guard let finalBoundaryData = encodedDataFrom(string: boundaryLine) else {
             throw RequestSerializerError.serializationFailure
         }
 
@@ -176,9 +176,9 @@ public struct FormPart {
     }
 
     func contentData() -> Data? {
-        switch self.content {
+        switch content {
         case let .image(image, type):
-            return self.dataFrom(image: image, type: type)
+            return dataFrom(image: image, type: type)
         case let .video(videoData, _):
             return videoData
         case let .pdf(data):

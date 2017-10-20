@@ -100,7 +100,7 @@ public class Auth {
         /// - Parameters:
         ///     - tokenPreFetchHook: The hook to be registered
         public static func registerPreFetchHook(_ hook: @escaping TokenPreFetchHook) {
-            self.externalTokenPreFetchHooks.append(hook)
+            externalTokenPreFetchHooks.append(hook)
         }
 
         /// Registers a hook that fires when Conduit has finished or failed to refresh a token for a
@@ -108,12 +108,12 @@ public class Auth {
         /// - Parameters:
         ///     - tokenPostFetchHook: The hook to be registered
         public static func registerPostFetchHook(_ hook: @escaping TokenPostFetchHook) {
-            self.externalTokenPostFetchHooks.append(hook)
+            externalTokenPostFetchHooks.append(hook)
         }
 
         static func notifyTokenPreFetchHooksWith(client: OAuth2ClientConfiguration,
                                                  authorizationLevel: OAuth2Authorization.AuthorizationLevel) {
-            for hook in self.externalTokenPreFetchHooks {
+            for hook in externalTokenPreFetchHooks {
                 hook(client, authorizationLevel)
             }
         }
@@ -121,7 +121,7 @@ public class Auth {
         static func notifyTokenPostFetchHooksWith(client: OAuth2ClientConfiguration,
                                                   authorizationLevel: OAuth2Authorization.AuthorizationLevel,
                                                   result: Result<BearerToken>) {
-            for hook in self.externalTokenPostFetchHooks {
+            for hook in externalTokenPostFetchHooks {
                 hook(client, authorizationLevel, result)
             }
         }

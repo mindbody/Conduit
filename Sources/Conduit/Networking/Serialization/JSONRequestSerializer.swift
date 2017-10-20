@@ -32,7 +32,7 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
                     JSONData = fragmentData
                 }
                 else {
-                    try JSONData = JSONSerialization.data(withJSONObject: bp, options: self.writingOptions)
+                    try JSONData = JSONSerialization.data(withJSONObject: bp, options: writingOptions)
                 }
             }
             catch _ {

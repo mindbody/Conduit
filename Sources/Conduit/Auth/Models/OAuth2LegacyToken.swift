@@ -8,10 +8,14 @@
 
 import Foundation
 
+public protocol LegacyConvertible {
+    var converted: BearerToken { get }
+}
+
 /// A token issued from an OAuth2 server application that represents
 /// a possession factor (hence "bearer") for a specific user
 @available(*, deprecated, message: "NSObject subclasses are being removed; use BearerToken instead.")
-public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token {
+public class BearerOAuth2Token: NSObject, NSCoding, DataConvertible, OAuth2Token, LegacyConvertible {
 
     /// The access token
     public let accessToken: String

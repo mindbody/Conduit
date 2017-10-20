@@ -40,10 +40,10 @@ final class SessionTaskProxy: SessionTaskProxyType {
                 return
             }
 
-            if self.shouldImmediatelyCancel {
+            if shouldImmediatelyCancel {
                 task.cancel()
             }
-            else if self.shouldImmediatelySuspend {
+            else if shouldImmediatelySuspend {
                 task.suspend()
             }
         }
@@ -51,25 +51,25 @@ final class SessionTaskProxy: SessionTaskProxyType {
 
     private var shouldImmediatelyCancel: Bool = false {
         didSet {
-            self.task?.cancel()
+            task?.cancel()
         }
     }
     private var shouldImmediatelySuspend: Bool = false {
         didSet {
-            self.task?.suspend()
+            task?.suspend()
         }
     }
 
     func cancel() {
-        self.shouldImmediatelyCancel = true
+        shouldImmediatelyCancel = true
     }
 
     func suspend() {
-        self.shouldImmediatelySuspend = true
+        shouldImmediatelySuspend = true
     }
 
     func resume() {
-        self.task?.resume()
+        task?.resume()
     }
 
 }

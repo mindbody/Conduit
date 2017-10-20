@@ -45,11 +45,11 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         let url = request.url?.absoluteString ?? "(Unknown URL)"
         let method = request.httpMethod ?? "(Unknown Method)"
         logger.verbose("Applying auth header to outgoing request: \(method) \(url)")
-        if let token = self.token, token.isValid {
+        if let token = token, token.isValid {
             logger.verbose("Token is valid, proceeding to middleware completion")
             makeRequestByApplyingAuthorizationHeader(to: request, with: token, completion: completion)
         }
-        else if let token = self.token,
+        else if let token = token,
             token.refreshToken != nil {
             logger.info("Token is expired, proceeding to refresh token")
             refresh(token: token) { result in

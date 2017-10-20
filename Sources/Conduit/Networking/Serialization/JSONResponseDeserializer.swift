@@ -32,7 +32,7 @@ public final class JSONResponseDeserializer: HTTPResponseDeserializer {
 
     private func deserializeObjectFrom(data: Data) throws -> Any {
         do {
-            return try JSONSerialization.jsonObject(with: data, options: self.readingOptions)
+            return try JSONSerialization.jsonObject(with: data, options: readingOptions)
         }
         catch {
             throw ResponseDeserializerError.deserializationFailure

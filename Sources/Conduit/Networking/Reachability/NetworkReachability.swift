@@ -84,7 +84,7 @@ public class NetworkReachability {
                                                    retain: nil,
                                                    release: nil,
                                                    copyDescription: nil)
-        SCNetworkReachabilitySetCallback(self.systemReachability, { (_, reachabilityFlags, info) in
+        SCNetworkReachabilitySetCallback(systemReachability, { (_, reachabilityFlags, info) in
             guard let info = info else {
                 return
             }
@@ -114,7 +114,7 @@ public class NetworkReachability {
     ///
     /// - Parameter observer: The observer to unregister
     public func unregister(observer: NetworkReachabilityObserver) {
-        if let idx = self.observers.index(where: { $0 === observer }) {
+        if let idx = observers.index(where: { $0 === observer }) {
             observers.remove(at: idx)
         }
     }
