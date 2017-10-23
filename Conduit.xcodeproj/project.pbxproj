@@ -46,6 +46,9 @@
 		1B4946561F71B03400754C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946501F71B02C00754C58 /* AppDelegate.swift */; };
 		1B4946571F71B03900754C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946521F71B02C00754C58 /* Main.storyboard */; };
 		1B4946581F71B03C00754C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946551F71B02C00754C58 /* ViewController.swift */; };
+		1B664BC21F9E8BBB009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
+		1B664BC31F9E8BBB009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
+		1B664BC41F9E8BBC009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
 		1B6E186B1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
 		1B6E186C1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
 		1B6E186D1F461FF600E651DA /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E186A1F461FF600E651DA /* DataConvertible.swift */; };
@@ -334,9 +337,9 @@
 		95CC71CD1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
 		95CC71CE1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
 		95CC71CF1F797B0D003B4E31 /* evilspaceship.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C41F797B0C003B4E31 /* evilspaceship.txt */; };
-		95CC71D01F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
-		95CC71D11F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
-		95CC71D21F797B0D003B4E31 /* validcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate.txt */; };
+		95CC71D01F797B0D003B4E31 /* validcertificate1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate1.txt */; };
+		95CC71D11F797B0D003B4E31 /* validcertificate1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate1.txt */; };
+		95CC71D21F797B0D003B4E31 /* validcertificate1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C51F797B0D003B4E31 /* validcertificate1.txt */; };
 		95CC71D31F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
 		95CC71D41F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
 		95CC71D51F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
@@ -412,6 +415,7 @@
 		1B4946531F71B02C00754C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B4946541F71B02C00754C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B4946551F71B02C00754C58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = validcertificate2.txt; sourceTree = "<group>"; };
 		1B6E186A1F461FF600E651DA /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		1B88B1DF1F268C220022A69D /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		1B88B1E21F268C220022A69D /* OAuth2AuthorizationRedirectHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationRedirectHandler.swift; sourceTree = "<group>"; };
@@ -507,7 +511,7 @@
 		95CC71C21F797B0C003B4E31 /* badcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badcertificate.txt; sourceTree = "<group>"; };
 		95CC71C31F797B0C003B4E31 /* celltowers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = celltowers.txt; sourceTree = "<group>"; };
 		95CC71C41F797B0C003B4E31 /* evilspaceship.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = evilspaceship.txt; sourceTree = "<group>"; };
-		95CC71C51F797B0D003B4E31 /* validcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = validcertificate.txt; sourceTree = "<group>"; };
+		95CC71C51F797B0D003B4E31 /* validcertificate1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = validcertificate1.txt; sourceTree = "<group>"; };
 		95CC71C61F797B0D003B4E31 /* video.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.txt; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
@@ -932,7 +936,8 @@
 				95CC71C21F797B0C003B4E31 /* badcertificate.txt */,
 				95CC71C31F797B0C003B4E31 /* celltowers.txt */,
 				95CC71C41F797B0C003B4E31 /* evilspaceship.txt */,
-				95CC71C51F797B0D003B4E31 /* validcertificate.txt */,
+				95CC71C51F797B0D003B4E31 /* validcertificate1.txt */,
+				1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */,
 				95CC71C61F797B0D003B4E31 /* video.txt */,
 			);
 			path = Resources;
@@ -1271,9 +1276,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B664BC21F9E8BBB009B99C2 /* validcertificate2.txt in Resources */,
 				95CC71D31F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CD1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
-				95CC71D01F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71D01F797B0D003B4E31 /* validcertificate1.txt in Resources */,
 				95CC71CA1F797B0D003B4E31 /* celltowers.txt in Resources */,
 				95CC71C71F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
@@ -1283,9 +1289,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B664BC31F9E8BBB009B99C2 /* validcertificate2.txt in Resources */,
 				95CC71D41F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CE1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
-				95CC71D11F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71D11F797B0D003B4E31 /* validcertificate1.txt in Resources */,
 				95CC71CB1F797B0D003B4E31 /* celltowers.txt in Resources */,
 				95CC71C81F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
@@ -1295,9 +1302,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B664BC41F9E8BBC009B99C2 /* validcertificate2.txt in Resources */,
 				95CC71D51F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CF1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
-				95CC71D21F797B0D003B4E31 /* validcertificate.txt in Resources */,
+				95CC71D21F797B0D003B4E31 /* validcertificate1.txt in Resources */,
 				95CC71CC1F797B0D003B4E31 /* celltowers.txt in Resources */,
 				95CC71C91F797B0D003B4E31 /* badcertificate.txt in Resources */,
 			);
