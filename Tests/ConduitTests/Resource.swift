@@ -16,8 +16,8 @@ import Foundation
 
 struct MockResource {
     static let badSSLCertificate = Resource(name: "badcertificate", type: "txt")
-    static let validSSLCertificate1 = Resource(name: "validcertificate1", type: "txt")
-    static let validSSLCertificate2 = Resource(name: "validcertificate2", type: "txt")
+    static let validRootCertificate = Resource(name: "validcertificate1", type: "txt")
+    static let validIntermediateCertificate = Resource(name: "validcertificate2", type: "txt")
     static let sampleVideo = Resource(name: "video", type: "txt")
     static let evilSpaceshipImage = Resource(name: "evilspaceship", type: "txt")
     static let cellTowersImage = Resource(name: "celltowers", type: "txt")
