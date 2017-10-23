@@ -84,7 +84,9 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
                     logger.error("Failed to retrieve public key from one of the certificates")
                     return false
                 }
-                return self.certificateBundle.publicKeys.contains(serverCertificatePublicKey)
+                if self.certificateBundle.publicKeys.contains(serverCertificatePublicKey) {
+                    return true
+                }
             }
             else if pinningType == .certificateData {
                 let pinnedCertificateData = self.certificateBundle.certificates.map {
