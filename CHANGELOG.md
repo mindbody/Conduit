@@ -7,6 +7,21 @@
 - None
 
 #### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.6.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
 - Fixed a critical issue with public-key pinning in `SSLPinningServerAuthenticationPolicy`
 
 #### Other
