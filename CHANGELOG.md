@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- Fixed a critical issue with public-key pinning in `SSLPinningServerAuthenticationPolicy`
 
 #### Other
 - None
