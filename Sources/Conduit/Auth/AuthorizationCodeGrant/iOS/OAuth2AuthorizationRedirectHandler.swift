@@ -50,7 +50,7 @@ public class OAuth2AuthorizationRedirectHandler: NSObject {
     /// - Parameters:
     ///   - url: The URL sent to the application
     public final func handleOpen(url: URL) -> Bool {
-        precondition(!authorizationURLScheme.isEmpty, "Redirect handler URL scheme must be set")
+        precondition(authorizationURLScheme.isEmpty == false, "Redirect handler URL scheme must be set")
         defer {
             activeHandler = nil
         }

@@ -252,7 +252,7 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
 
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
         for policy in serverAuthenticationPolicies {
-            if !policy.evaluate(authenticationChallenge: challenge) {
+            if policy.evaluate(authenticationChallenge: challenge) == false {
                 completionHandler(.cancelAuthenticationChallenge, nil)
                 return
             }

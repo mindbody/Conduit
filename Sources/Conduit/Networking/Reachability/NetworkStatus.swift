@@ -37,7 +37,7 @@ public enum NetworkStatus {
         }
 
 #if os(iOS)
-        guard !systemReachabilityFlags.contains(.isWWAN) else {
+        guard systemReachabilityFlags.contains(.isWWAN) == false else {
             self = .reachableViaWWAN
             return
         }
@@ -45,7 +45,7 @@ public enum NetworkStatus {
 
         var status: NetworkStatus = .unreachable
 
-        if !systemReachabilityFlags.contains(.connectionRequired) {
+        if systemReachabilityFlags.contains(.connectionRequired) == false {
             // If the network is reachable, but no connection is required, then the connection
             // is not WWAN (and therefore must be WiFi/ethernet)
             status = .reachableViaWLAN
@@ -54,7 +54,7 @@ public enum NetworkStatus {
         if systemReachabilityFlags.contains(.connectionOnDemand) ||
             systemReachabilityFlags.contains(.connectionOnTraffic) {
 
-            if !systemReachabilityFlags.contains(.interventionRequired) {
+            if systemReachabilityFlags.contains(.interventionRequired) == false {
                 // It's possible that the network is on-demand or will only initiate
                 // on traffic exchange. In these cases, it's possible that a user
                 // must first intervene/authenticate with the network before
