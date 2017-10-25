@@ -49,7 +49,7 @@ class OAuth2TokenStorageTests: XCTestCase {
 
 #if !os(tvOS)
     func testFileStorageOperations() throws {
-        let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
+        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString + ".oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
         let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
@@ -73,7 +73,7 @@ class OAuth2TokenStorageTests: XCTestCase {
 
     #if !os(tvOS)
     func testLegacyFileStorageOperations() throws {
-        let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
+        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString + ".oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
         let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
@@ -118,7 +118,7 @@ class OAuth2TokenStorageTests: XCTestCase {
 
     #if !os(tvOS)
     func testLegacyFileStorageTokenMigration() throws {
-        let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
+        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString + ".oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
         let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
         try validateLegacyTokenMigration(sut: sut)
