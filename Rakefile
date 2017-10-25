@@ -38,39 +38,28 @@ build_configurations = [
 	}
 ]
 
-def bash_exec(command)
-	command_strict = "set -o pipefail && #{command}"
-	puts "> #{command_strict}"
-	system(command_strict) || exit(1)
-end
-
 desc "Build all targets"
 task :build do
 	build_configurations.each do |config|
 		scheme = config[:scheme]
-		destinations = config[:destinations]
-		destinations.each do |destination|
-			bash_exec("xcodebuild -workspace Conduit.xcworkspace -scheme '#{scheme}' -destination '#{destination}' -configuration Debug build | xcpretty")
-		end
+    destinations = config[:destinations].map { |destination| "-destination '#{destination}'" }.join(" ")
+    execute "xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
 	end
 end
 
 desc "Run all unit tests on all platforms"
 task :test do
 	`./Tests/ConduitTests/start-test-webserver`
-	bash_exec("swift test")
+	execute "swift test --parallel"
 	build_configurations.each do |config|
 		scheme = config[:scheme]
-		destinations = config[:destinations]
-		first_destination = destinations[0]
-		if !config[:run_tests]
-			bash_exec("set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme '#{scheme}' -destination '#{first_destination}' -configuration Debug build | xcpretty")
-			next
-		end
-		# Binaries don't need to be recompiled for per version of each OS
-		bash_exec("set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme '#{scheme}' -destination '#{first_destination}' -configuration Debug build-for-testing | xcpretty")
-		destinations.each do |destination|
-			bash_exec("set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} -configuration Debug -destination '#{destination}' test-without-building | xcpretty")
+    destinations = config[:destinations].map { |destination| "-destination '#{destination}'" }.join(" ")
+
+		if config[:run_tests] then
+      execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build-for-testing analyze"
+    	execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet test-without-building"
+    else
+			execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
 		end
 	end
 	`./Tests/ConduitTests/stop-test-webserver`
@@ -80,7 +69,12 @@ desc "Clean all builds"
 task :clean do
 	`swift package reset`
 	build_configurations.each do |config|
-		scheme =  config[:scheme]
-		bash_exec("set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} -configuration Debug clean | xcpretty")
+		scheme = config[:scheme]
+		execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} -configuration Debug -quiet clean"
 	end
+end
+
+def execute(command)
+  puts "\n\e[36m======== EXECUTE: #{command} ========\e[39m\n"
+  system("set -o pipefail && #{command}") || exit(-1)
 end

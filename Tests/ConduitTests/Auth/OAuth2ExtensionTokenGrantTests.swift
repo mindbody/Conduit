@@ -11,27 +11,13 @@ import XCTest
 
 class OAuth2ExtensionTokenGrantTests: XCTestCase {
 
-    var mockServerEnvironment: OAuth2ServerEnvironment!
-    var mockClientConfiguration: OAuth2ClientConfiguration!
     let saml12GrantType = "urn:ietf:params:oauth:grant-type:sam12-bearer"
-    let customParameters: [String: String] = [
-        "assertion": "123abc"
-    ]
+    let customParameters: [String: String] = ["assertion": "123abc"]
 
-    override func setUp() {
-        super.setUp()
-
-        do {
-            mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
-            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
+    private func makeStrategy() throws -> OAuth2ExtensionTokenGrantStrategy {
+        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+        let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
-        }
-        catch {
-            XCTFail("Failed to set up configuration")
-        }
-    }
-
-    private func makeStrategy() -> OAuth2ExtensionTokenGrantStrategy {
         let grantType = saml12GrantType
 
         var strategy = OAuth2ExtensionTokenGrantStrategy(grantType: grantType, clientConfiguration: mockClientConfiguration)
@@ -41,7 +27,7 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
     }
 
     func testAttemptsToIssueTokenViaExtensionGrant() throws {
-        let sut = makeStrategy()
+        let sut = try makeStrategy()
 
         let request = try sut.buildTokenGrantRequest()
         guard let body = request.httpBody,
@@ -59,9 +45,9 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
         XCTAssert(headers["Authorization"]?.contains("Basic") == true)
     }
 
-    func testIssuesTokenWithCorrectSessionClient() {
+    func testIssuesTokenWithCorrectSessionClient() throws {
         let operationQueue = OperationQueue()
-        let sut = makeStrategy()
+        let sut = try makeStrategy()
 
         let completionExpectation = expectation(description: "completion handler executed")
 
@@ -76,8 +62,8 @@ class OAuth2ExtensionTokenGrantTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
-    func testIssuesTokenSync() {
-        let sut = makeStrategy()
+    func testIssuesTokenSync() throws {
+        let sut = try makeStrategy()
         Auth.sessionClient = URLSessionClient(delegateQueue: OperationQueue())
         XCTAssertThrowsError(try sut.issueToken())
     }

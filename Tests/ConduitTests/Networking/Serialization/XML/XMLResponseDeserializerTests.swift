@@ -11,49 +11,51 @@ import XCTest
 
 class XMLResponseDeserializerTests: XCTestCase {
 
-    var deserializer: XMLResponseDeserializer!
     let validResponseHeaders = ["Content-Type": "application/xml"]
-    var validResponseData: Data!
-    var validResponse: HTTPURLResponse!
 
     override func setUp() {
         super.setUp()
 
+    }
+
+    private func makeResonse() throws -> (response: HTTPURLResponse, data: Data) {
         let xml = """
             <?xml version="1.0" encoding="utf-8"?><Root><N/></Root>
             """
         guard let validResponseData = xml.data(using: .utf8) else {
-            XCTFail("Failed to encode string")
-            return
+            throw TestError.invalidTest
         }
 
         guard let url = URL(string: "http://localhost:3333"),
             let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
-                XCTFail("Invalid response")
-                return
+                throw TestError.invalidTest
         }
 
-        self.validResponseData = validResponseData
-        self.validResponse = validResponse
-        deserializer = XMLResponseDeserializer()
+        return (validResponse, validResponseData)
     }
 
-    func testThrowsErrorForEmptyResponse() {
-        XCTAssertThrowsError(try deserializer.deserialize(response: nil, data: validResponseData), "throws .noResponse") { error in
+    func testThrowsErrorForEmptyResponse() throws {
+        let deserializer = XMLResponseDeserializer()
+        let response = try makeResonse()
+        do {
+            _ = try deserializer.deserialize(response: nil, data: response.data)
+            XCTFail("Expected error")
+        }
+        catch let error {
             guard case ResponseDeserializerError.noResponse = error else {
-                XCTFail("Invalid response")
-                return
+                throw TestError.invalidTest
             }
         }
     }
 
-    func testDeserializesToXML() {
-        guard let obj = try? deserializer.deserialize(response: validResponse, data: validResponseData), let xml = obj as? XML else {
-            XCTFail("Failed to deserialize")
-            return
+    func testDeserializesToXML() throws {
+        let deserializer = XMLResponseDeserializer()
+        let response = try makeResonse()
+        guard let obj = try? deserializer.deserialize(response: response.response, data: response.data), let xml = obj as? XML else {
+            throw TestError.invalidTest
         }
 
-        XCTAssert(xml.root?.children.first?.name == "N")
+        XCTAssertEqual(xml.root?.children.first?.name, "N")
     }
 
 }

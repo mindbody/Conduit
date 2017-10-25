@@ -28,32 +28,23 @@ private class MonitoringURLSessionClient: URLSessionClientType {
 
 class ImageDownloaderTests: XCTestCase {
 
-    var sut: ImageDownloader!
-    var imageRequest: URLRequest!
-
-    override func setUp() {
-        super.setUp()
-
-        sut = ImageDownloader(cache: AutoPurgingURLImageCache())
-
-        guard let url = URL(string: "http://localhost:3333/image/jpeg") else {
-            XCTFail("Invalid url")
-            return
-        }
-        imageRequest = URLRequest(url: url)
-    }
-
-    func testOnlyHitsNetworkOncePerRequest() {
+    func testOnlyHitsNetworkOncePerRequest() throws {
         let monitoringSessionClient = MonitoringURLSessionClient()
-        sut = ImageDownloader(cache: AutoPurgingURLImageCache(), sessionClient: monitoringSessionClient)
+        let sut = ImageDownloader(cache: AutoPurgingURLImageCache(), sessionClient: monitoringSessionClient)
+        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let imageRequest = URLRequest(url: url)
         for _ in 0..<100 {
             sut.downloadImage(for: imageRequest) { _ in }
         }
         XCTAssert(monitoringSessionClient.numRequestsSent == 1)
     }
 
-    func testMarksImagesAsCachedAfterDownloaded() {
+    func testMarksImagesAsCachedAfterDownloaded() throws {
         let attemptedAllImageRetrievalsExpectation = expectation(description: "attempted all image retrievals")
+
+        let sut = ImageDownloader(cache: AutoPurgingURLImageCache())
+        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let imageRequest = URLRequest(url: url)
 
         sut.downloadImage(for: imageRequest) { response in
             XCTAssert(response.isFromCache == false)
@@ -63,7 +54,7 @@ class ImageDownloaderTests: XCTestCase {
             for _ in 0..<100 {
                 dispatchGroup.enter()
                 DispatchQueue.global().async {
-                    self.sut.downloadImage(for: self.imageRequest) { response in
+                    sut.downloadImage(for: imageRequest) { response in
                         XCTAssert(response.isFromCache == true)
                         dispatchGroup.leave()
                     }
@@ -82,6 +73,7 @@ class ImageDownloaderTests: XCTestCase {
             URL(string: "http://localhost:3333/image/jpeg?id=\($0)")
         }
 
+        let sut = ImageDownloader(cache: AutoPurgingURLImageCache())
         let fetchedAllImagesExpectation = expectation(description: "fetched all images")
         let dispatchGroup = DispatchGroup()
         for url in imageURLs {
@@ -102,10 +94,14 @@ class ImageDownloaderTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
-    func testPersistsWhileOperationsAreRunning() {
+    func testPersistsWhileOperationsAreRunning() throws {
         let imageDownloadedExpectation = expectation(description: "image downloaded")
+        var sut: ImageDownloader? = ImageDownloader(cache: AutoPurgingURLImageCache())
+        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let imageRequest = URLRequest(url: url)
+
         weak var weakImageDownloader = sut
-        sut.downloadImage(for: imageRequest) { _ in
+        sut?.downloadImage(for: imageRequest) { _ in
             DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
                 XCTAssert(weakImageDownloader == nil)
                 imageDownloadedExpectation.fulfill()

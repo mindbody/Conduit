@@ -11,15 +11,8 @@ import XCTest
 
 class SOAPEnvelopeFactoryTests: XCTestCase {
 
-    var sut: SOAPEnvelopeFactory!
-
-    override func setUp() {
-        super.setUp()
-
-        sut = SOAPEnvelopeFactory()
-    }
-
     func testProducesSOAPBodyElements() {
+        let sut = SOAPEnvelopeFactory()
         let bodyNode = XMLNode(name: "N")
         let soapBodyNode = sut.makeSOAPBody(root: bodyNode)
 
@@ -29,6 +22,7 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
     }
 
     func testProducesSOAPEnvelopeElements() {
+        let sut = SOAPEnvelopeFactory()
         let envelope = sut.makeSOAPEnvelope()
 
         XCTAssertEqual(envelope.name, "soap:Envelope")
@@ -38,6 +32,7 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
     }
 
     func testProducesFormattedSOAPXML() {
+        let sut = SOAPEnvelopeFactory()
         let bodyNode = XMLNode(name: "N")
         let soapXML = sut.makeXML(soapBody: bodyNode)
 
@@ -48,6 +43,7 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
     }
 
     func testRespectsCustomPrefixAndRootNamespaceSchema() {
+        var sut = SOAPEnvelopeFactory()
         sut.rootNamespaceSchema = "http://clients.mindbodyonline.com/api/0_5"
         sut.soapEnvelopeNamespace = "soapenv"
 

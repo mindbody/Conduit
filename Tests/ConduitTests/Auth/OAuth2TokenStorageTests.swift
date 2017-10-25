@@ -11,27 +11,19 @@ import XCTest
 
 class OAuth2TokenStorageTests: XCTestCase {
 
-    var mockServerEnvironment: OAuth2ServerEnvironment!
-    var mockClientConfiguration: OAuth2ClientConfiguration!
     let mockToken = BearerToken(accessToken: "herp", refreshToken: "derp", expiration: Date().addingTimeInterval(10_000))
     let mockLegacyToken = BearerOAuth2Token(accessToken: "herp", refreshToken: "derp", expiration: Date().addingTimeInterval(10_000))
     let mockAuthorization = OAuth2Authorization(type: .bearer, level: .user)
-    var sut: OAuth2TokenStore!
 
-    override func setUp() {
-        super.setUp()
-
-        do {
-            mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
-            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
+    private func makeMockClientConfiguration() throws -> OAuth2ClientConfiguration {
+        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+        let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
-        }
-        catch {
-            XCTFail("Failed to fetch environment configuration")
-        }
+        return mockClientConfiguration
     }
 
-    private func verifyTokenStorageOperations<Token: OAuth2Token & DataConvertible>(with token: Token) {
+    private func verifyTokenStorageOperations<Token: OAuth2Token & DataConvertible>(sut: OAuth2TokenStore, with token: Token) throws {
+        let mockClientConfiguration = try makeMockClientConfiguration()
         sut.removeAllTokensFor(client: mockClientConfiguration)
         XCTAssert(sut.store(token: token, for: mockClientConfiguration, with: mockAuthorization))
         var storedToken: Token? = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
@@ -45,55 +37,56 @@ class OAuth2TokenStorageTests: XCTestCase {
         XCTAssertNil(storedToken)
     }
 
-    func testKeychainStorageOperations() {
-        sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
-        verifyTokenStorageOperations(with: mockToken)
+    func testKeychainStorageOperations() throws {
+        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        try verifyTokenStorageOperations(sut: sut, with: mockToken)
     }
 
-    func testUserDefaultsStorageOperations() {
-        sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
-        verifyTokenStorageOperations(with: mockToken)
+    func testUserDefaultsStorageOperations() throws {
+        let sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
+        try verifyTokenStorageOperations(sut: sut, with: mockToken)
     }
 
 #if !os(tvOS)
     func testFileStorageOperations() throws {
         let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
-        sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
-        verifyTokenStorageOperations(with: mockToken)
+        let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
+        try verifyTokenStorageOperations(sut: sut, with: mockToken)
     }
 #endif
 
-    func testMemoryStorageOperations() {
-        sut = OAuth2TokenMemoryStore()
-        verifyTokenStorageOperations(with: mockToken)
+    func testMemoryStorageOperations() throws {
+        let sut = OAuth2TokenMemoryStore()
+        try verifyTokenStorageOperations(sut: sut, with: mockToken)
     }
 
-    func testLegacyKeychainStorageOperations() {
-        sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
-        verifyTokenStorageOperations(with: mockLegacyToken)
+    func testLegacyKeychainStorageOperations() throws {
+        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
     }
 
-    func testLegacyUserDefaultsStorageOperations() {
-        sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
-        verifyTokenStorageOperations(with: mockLegacyToken)
+    func testLegacyUserDefaultsStorageOperations() throws {
+        let sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
+        try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
     }
 
     #if !os(tvOS)
     func testLegacyFileStorageOperations() throws {
         let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
-        sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
-        verifyTokenStorageOperations(with: mockLegacyToken)
+        let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
+        try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
     }
     #endif
 
-    func testLegacyMemoryStorageOperations() {
-        sut = OAuth2TokenMemoryStore()
-        verifyTokenStorageOperations(with: mockLegacyToken)
+    func testLegacyMemoryStorageOperations() throws {
+        let sut = OAuth2TokenMemoryStore()
+        try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
     }
 
-    private func validateLegacyTokenMigration() {
+    private func validateLegacyTokenMigration(sut: OAuth2TokenStore) throws {
+        let mockClientConfiguration = try makeMockClientConfiguration()
         sut.store(token: mockLegacyToken, for: mockClientConfiguration, with: mockAuthorization)
         guard let legacyToken: BearerOAuth2Token = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization) else {
             XCTFail("Failed to get token")
@@ -113,27 +106,27 @@ class OAuth2TokenStorageTests: XCTestCase {
         sut.removeTokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
     }
 
-    func testLegacyKeychainTokenMigration() {
-        sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
-        validateLegacyTokenMigration()
+    func testLegacyKeychainTokenMigration() throws {
+        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        try validateLegacyTokenMigration(sut: sut)
     }
 
-    func testLegacyUserDefaultsTokenMigration() {
-        sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
-        validateLegacyTokenMigration()
+    func testLegacyUserDefaultsTokenMigration() throws {
+        let sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
+        try validateLegacyTokenMigration(sut: sut)
     }
 
     #if !os(tvOS)
     func testLegacyFileStorageTokenMigration() throws {
         let storagePath = NSTemporaryDirectory().appending("oauth-token.bin")
         let storageURL = URL(fileURLWithPath: storagePath)
-        sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
-        validateLegacyTokenMigration()
+        let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
+        try validateLegacyTokenMigration(sut: sut)
     }
     #endif
 
-    func testLegacyMemoryStorageTokenMigration() {
-        sut = OAuth2TokenMemoryStore()
-        validateLegacyTokenMigration()
+    func testLegacyMemoryStorageTokenMigration() throws {
+        let sut = OAuth2TokenMemoryStore()
+        try validateLegacyTokenMigration(sut: sut)
     }
 }
