@@ -38,7 +38,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
     func testKeychainStorageOperations() throws {
-        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        let sut = OAuth2TokenKeychainStore(service: UUID().uuidString)
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
     }
 
@@ -62,7 +62,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
     func testLegacyKeychainStorageOperations() throws {
-        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        let sut = OAuth2TokenKeychainStore(service: UUID().uuidString)
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
     }
 
@@ -107,7 +107,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
     func testLegacyKeychainTokenMigration() throws {
-        let sut = OAuth2TokenKeychainStore(service: "com.mindbodyonline.Conduit.testService")
+        let sut = OAuth2TokenKeychainStore(service: UUID().uuidString)
         try validateLegacyTokenMigration(sut: sut)
     }
 
