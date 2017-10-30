@@ -11,21 +11,16 @@ import XCTest
 
 class HTTPRequestSerializerTests: XCTestCase {
 
-    var request: URLRequest!
-    var serializer: HTTPRequestSerializer!
-
-    override func setUp() {
-        super.setUp()
-
-        guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail("Invalid url")
-            return
-        }
-        request = URLRequest(url: url)
-        serializer = HTTPRequestSerializer()
+    private func makeRequest() throws -> URLRequest {
+        let url = try URL(absoluteString: "http://localhost:3333")
+        let request = URLRequest(url: url)
+        return request
     }
 
-    func testAddsRequiredW3Headers() {
+    func testAddsRequiredW3Headers() throws {
+        let request = try makeRequest()
+        let serializer = HTTPRequestSerializer()
+
         let headerKeys = ["Accept-Language", "User-Agent"]
         guard let serializedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail("Failed to serialize request")
@@ -37,9 +32,12 @@ class HTTPRequestSerializerTests: XCTestCase {
         }
     }
 
-    func testRejectsBodyParametersForConflictingHTTPVerbs() {
+    func testRejectsBodyParametersForConflictingHTTPVerbs() throws {
+        let request = try makeRequest()
+        let serializer = HTTPRequestSerializer()
+
         func validateThrowsFor(_ method: HTTPRequestBuilder.Method) {
-            var request: URLRequest! = self.request
+            var request = request
             request.httpMethod = method.rawValue
 
             do {
@@ -55,7 +53,7 @@ class HTTPRequestSerializerTests: XCTestCase {
         }
 
         func validatePassesFor(_ method: HTTPRequestBuilder.Method) {
-            var request: URLRequest! = self.request
+            var request = request
             request.httpMethod = method.rawValue
             let serializedRequest = try? serializer.serialize(request: request, bodyParameters: ["foo": "bar"])
             XCTAssert(serializedRequest != nil)

@@ -11,23 +11,17 @@ import XCTest
 
 class FormEncodedRequestSerializerTests: XCTestCase {
 
-    var request: URLRequest!
-    var serializer: FormEncodedRequestSerializer!
-
-    override func setUp() {
-        super.setUp()
-
-        guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail("Invalid url")
-            return
-        }
-
-        request = URLRequest(url: url)
+    private func makeRequest() throws -> URLRequest {
+        let url = try URL(absoluteString: "http://localhost:3333")
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        serializer = FormEncodedRequestSerializer()
+        return request
     }
 
-    func testURIEncodesBodyParameters() {
+    func testURIEncodesBodyParameters() throws {
+        let request = try makeRequest()
+        let serializer = FormEncodedRequestSerializer()
+
         let tests: [([String: String], [String])] = [
             (["foo": "bar"], ["foo=bar"]),
             (["foo": "bar", "bing": "bang"], ["foo=bar", "bing=bang"])
@@ -46,7 +40,10 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         }
     }
 
-    func testDoesntReplaceCustomDefinedHeaders() {
+    func testDoesntReplaceCustomDefinedHeaders() throws {
+        var request = try makeRequest()
+        let serializer = FormEncodedRequestSerializer()
+
         let customDefaultHeaderFields = [
             "Accept-Language": "FlyingSpaghettiMonster",
             "User-Agent": "Chromebook. Remember those?",
@@ -63,7 +60,10 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         }
     }
 
-    func testEncodesPlusSymbolsByDefault() {
+    func testEncodesPlusSymbolsByDefault() throws {
+        let request = try makeRequest()
+        let serializer = FormEncodedRequestSerializer()
+
         let parameters = [
             "foo": "bar+baz"
         ]

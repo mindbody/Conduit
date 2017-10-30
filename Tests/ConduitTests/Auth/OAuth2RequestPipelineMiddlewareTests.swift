@@ -11,14 +11,6 @@ import XCTest
 
 class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
-    var mockServerEnvironment: OAuth2ServerEnvironment!
-    var validServerEnvironment: OAuth2ServerEnvironment!
-
-    var tokenStorage: OAuth2TokenStore!
-
-    var validClientConfiguration: OAuth2ClientConfiguration!
-    var mockClientConfiguration: OAuth2ClientConfiguration!
-
     let validClientID = "test_client"
     let validClientSecret = "test_secret"
     let guestUsername = "test_user"
@@ -26,24 +18,19 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     let randomTokenAccessToken = "abc123!!"
 
-    override func setUp() {
-        super.setUp()
-
-        tokenStorage = OAuth2TokenMemoryStore()
-
-        do {
-            mockServerEnvironment = OAuth2ServerEnvironment(scope: "urn:everything", tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
-            mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment,
+    private func makeMockClientConfiguration() throws -> OAuth2ClientConfiguration {
+        let mockServerEnvironment = OAuth2ServerEnvironment(scope: "urn:everything", tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+        let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment,
                                                                 guestUsername: "clientuser", guestPassword: "abc123")
+        return mockClientConfiguration
+    }
 
-            validServerEnvironment = OAuth2ServerEnvironment(scope: "all the things",
+    private func makeValidClientConfiguration() throws -> OAuth2ClientConfiguration {
+        let validServerEnvironment = OAuth2ServerEnvironment(scope: "all the things",
                                                              tokenGrantURL: try URL(absoluteString: "http://localhost:5000/oauth2/issue/token"))
-            validClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: validClientID, clientSecret: validClientSecret,
+        let validClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: validClientID, clientSecret: validClientSecret,
                                                                  environment: validServerEnvironment)
-        }
-        catch {
-            XCTFail("Failed to set up configuration")
-        }
+        return validClientConfiguration
     }
 
     private func makeDummyRequest() throws -> URLRequest {
@@ -58,7 +45,9 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     func testAppliesBearerHeaderIfValidTokenExists() throws {
         let randomToken = BearerToken(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date().addingTimeInterval(1_000_000))
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
 
+        let tokenStorage = OAuth2TokenMemoryStore()
         tokenStorage.store(token: randomToken, for: validClientConfiguration, with: authorization)
 
         let request = try makeDummyRequest()
@@ -78,7 +67,9 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     func testRefreshesBearerTokenIfExpired() throws {
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
         let request = try makeDummyRequest()
+        let tokenStorage = OAuth2TokenMemoryStore()
         let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
 
         let refreshTokenExpectation = expectation(description: "token refreshed")
@@ -91,16 +82,16 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
             }
             let expiredToken = BearerToken(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
 
-            self.tokenStorage.store(token: expiredToken, for: self.validClientConfiguration, with: authorization)
+            tokenStorage.store(token: expiredToken, for: validClientConfiguration, with: authorization)
 
             sut.prepareForTransport(request: request) { result in
                 guard let request = result.value else {
-                    XCTFail("MNo value")
+                    XCTFail("No value")
                     return
                 }
                 let authorizationHeader = request.allHTTPHeaderFields?["Authorization"]
-                XCTAssert(authorizationHeader?.contains("Bearer") == true)
-                XCTAssert(authorizationHeader != expiredToken.accessToken)
+                XCTAssertTrue(authorizationHeader?.contains("Bearer") == true)
+                XCTAssertNotEqual(authorizationHeader, expiredToken.accessToken)
 
                 refreshTokenExpectation.fulfill()
             }
@@ -111,11 +102,13 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     func testAttemptsPasswordGrantWithGuestCredentialsIfTheyExist() throws {
         let authorization = OAuth2Authorization(type: .bearer, level: .client)
+        var validClientConfiguration = try makeValidClientConfiguration()
 
         let request = try makeDummyRequest()
         validClientConfiguration.guestUsername = "test_user"
         validClientConfiguration.guestPassword = "hunter2"
-        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization,
+                                                  tokenStorage: OAuth2TokenMemoryStore())
 
         let tokenFetchedExpectation = expectation(description: "token fetched")
         sut.prepareForTransport(request: request) { result in
@@ -131,11 +124,12 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
         validClientConfiguration.guestUsername = "invalid_user"
         validClientConfiguration.guestPassword = "invalid_pass"
-        sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization,
+                                              tokenStorage: OAuth2TokenMemoryStore())
 
         let tokenFetchAttemptedExpectation = expectation(description: "token fetch failed")
         sut.prepareForTransport(request: request) { result in
-            XCTAssert(result.error != nil)
+            XCTAssertNotNil(result.error)
             tokenFetchAttemptedExpectation.fulfill()
         }
 
@@ -144,9 +138,11 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     func testAttemptsClientCredentialsGrantIfGuestCredentialsDontExist() throws {
         let authorization = OAuth2Authorization(type: .bearer, level: .client)
+        var validClientConfiguration = try makeValidClientConfiguration()
 
         let request = try makeDummyRequest()
-        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization,
+                                                  tokenStorage: OAuth2TokenMemoryStore())
 
         let tokenFetchedExpectation = expectation(description: "token fetched")
         sut.prepareForTransport(request: request) { result in
@@ -162,11 +158,12 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
         validClientConfiguration.clientIdentifier = "invalid_client"
         validClientConfiguration.clientSecret = "invalid_secret"
-        sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization,
+                                              tokenStorage: OAuth2TokenMemoryStore())
 
         let tokenFetchAttemptedExpectation = expectation(description: "token fetch failed")
         sut.prepareForTransport(request: request) { result in
-            XCTAssert(result.error != nil)
+            XCTAssertNotNil(result.error)
             tokenFetchAttemptedExpectation.fulfill()
         }
 
@@ -175,13 +172,15 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     func testFailsForBearerUserAuthIfNoTokenExists() throws {
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
 
         let request = try makeDummyRequest()
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization,
+                                                  tokenStorage: OAuth2TokenMemoryStore())
         let decorationFailedExpectation = expectation(description: "decoration failed")
 
         sut.prepareForTransport(request: request) { result in
-            XCTAssert(result.error != nil)
+            XCTAssertNotNil(result.error)
             decorationFailedExpectation.fulfill()
         }
 
@@ -191,6 +190,9 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     func testNotifiesMigratorPreAndPostFetchTokenHooksForRefreshes() throws {
         let randomToken = BearerToken(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date())
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let mockClientConfiguration = try makeMockClientConfiguration()
+
+        let tokenStorage = OAuth2TokenMemoryStore()
         tokenStorage.store(token: randomToken, for: mockClientConfiguration, with: authorization)
 
         let request = try makeDummyRequest()
@@ -219,7 +221,9 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     func testLegacyTokenMigration() throws {
         let randomToken = BearerOAuth2Token(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date().addingTimeInterval(1_000_000))
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
 
+        let tokenStorage = OAuth2TokenMemoryStore()
         tokenStorage.store(token: randomToken, for: validClientConfiguration, with: authorization)
 
         let request = try makeDummyRequest()

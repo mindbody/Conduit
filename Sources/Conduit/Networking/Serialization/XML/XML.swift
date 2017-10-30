@@ -26,7 +26,8 @@ public struct XML {
     /// - Parameter root: The root of the document
     /// - Parameter processingInstructions: Processing instructions at the root of the document
     public init(root: XMLNode, processingInstructions: [XMLNode] = []) {
-        precondition(!processingInstructions.contains { !$0.isProcessingInstruction })
+        let containesNotProcessingInstruction = processingInstructions.contains { $0.isProcessingInstruction == false }
+        precondition(containesNotProcessingInstruction == false)
         self.root = root
         self.processingInstructions = processingInstructions
     }

@@ -57,7 +57,7 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
         }
 
         logger.debug("Evaluating server trust")
-        if !evaluate(serverTrust: serverTrust) {
+        if evaluate(serverTrust: serverTrust) == false {
             logger.debug("Server trust evaluation failed")
             return false
         }
@@ -111,7 +111,7 @@ public struct SSLPinningServerAuthenticationPolicy: ServerAuthenticationPolicyTy
         var result: SecTrustResultType = .invalid
         let status = SecTrustEvaluate(serverTrust, &result)
         let didFailEvaluation = status != errSecSuccess || (result != .unspecified && result != .proceed)
-        return !didFailEvaluation
+        return didFailEvaluation == false
     }
 
 }

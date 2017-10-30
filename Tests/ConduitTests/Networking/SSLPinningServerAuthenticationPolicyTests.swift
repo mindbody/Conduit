@@ -24,20 +24,18 @@ private struct TestCertificateBundle {
 class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
 
     let fakeProtectionSpace = URLProtectionSpace(host: "localhost", port: 3_333, protocol: "http", realm: nil, authenticationMethod: nil)
-    var fakeAuthenticationChallenge: URLAuthenticationChallenge!
 
     let succeedingEvaluationPredicate: SSLPinningServerAuthenticationPolicy.SSLPinningServerEvaluationPredicate = { _ in
         return true
     }
 
-    override func setUp() {
-        super.setUp()
-        fakeAuthenticationChallenge = URLAuthenticationChallenge(protectionSpace: fakeProtectionSpace,
-                                                                 proposedCredential: nil,
-                                                                 previousFailureCount: 0,
-                                                                 failureResponse: nil,
-                                                                 error: nil,
-                                                                 sender: MockAuthenticationChallengeSender())
+    private func makeFaceAuthenticationChallenge() -> URLAuthenticationChallenge {
+        return URLAuthenticationChallenge(protectionSpace: fakeProtectionSpace,
+                                          proposedCredential: nil,
+                                          previousFailureCount: 0,
+                                          failureResponse: nil,
+                                          error: nil,
+                                          sender: MockAuthenticationChallengeSender())
     }
 
     private func loadCertificates() throws -> TestCertificateBundle {
@@ -155,6 +153,7 @@ class SSLPinningServerAuthenticationPolicyTests: XCTestCase {
             return false
         }
 
+        let fakeAuthenticationChallenge = makeFaceAuthenticationChallenge()
         XCTAssertTrue(authenticationPolicy.evaluate(authenticationChallenge: fakeAuthenticationChallenge))
     }
 }

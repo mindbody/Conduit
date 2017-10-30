@@ -13,25 +13,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
 
     typealias BadResponse = (response: HTTPURLResponse?, expectedError: OAuth2Error)
 
-    var badResponses: [BadResponse]!
-
     let dummyURL = URL(string: "http://localhost:3333/get")
-
-    override func setUp() {
-        super.setUp()
-
-        guard let url = dummyURL, let mockResponse = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil) else {
-            XCTFail("Invalid response")
-            return
-        }
-
-        badResponses = [
-            (nil, OAuth2Error.noResponse),
-            (HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
-            (HTTPURLResponse(url: url, statusCode: 400, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
-            (HTTPURLResponse(url: url, statusCode: 500, httpVersion: "1.1", headerFields: nil), OAuth2Error.serverFailure(nil, mockResponse))
-        ]
-    }
 
     func testErrorsGeneratedAsExpected() {
         guard let url = dummyURL else {
@@ -67,7 +49,25 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
         }
         let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: nil)
         let generatedError = OAuth2TokenGrantManager.errorFrom(data: nil, response: validResponse)
-        XCTAssert(generatedError == nil)
+        XCTAssertNil(generatedError)
     }
 
+    func testBadResponses() {
+        guard let url = dummyURL, let mockResponse = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil) else {
+            XCTFail("Invalid response")
+            return
+        }
+
+        let badResponses = [
+            (nil, OAuth2Error.noResponse),
+            (HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
+            (HTTPURLResponse(url: url, statusCode: 400, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
+            (HTTPURLResponse(url: url, statusCode: 500, httpVersion: "1.1", headerFields: nil), OAuth2Error.serverFailure(nil, mockResponse))
+        ]
+
+        badResponses.forEach { badResponse in
+            let generatedError = OAuth2TokenGrantManager.errorFrom(data: nil, response: badResponse.0)
+            XCTAssertNotNil(generatedError)
+        }
+    }
 }

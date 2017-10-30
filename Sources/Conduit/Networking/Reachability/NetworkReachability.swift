@@ -125,7 +125,7 @@ public class NetworkReachability {
     }
 
     private func startPollingReachability() {
-        if !isPollingReachability {
+        if isPollingReachability == false {
             isPollingReachability = SCNetworkReachabilityScheduleWithRunLoop(systemReachability,
                                                                              RunLoop.current.getCFRunLoop(),
                                                                              RunLoopMode.defaultRunLoopMode as CFString)

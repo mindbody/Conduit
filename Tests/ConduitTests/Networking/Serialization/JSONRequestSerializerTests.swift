@@ -11,24 +11,19 @@ import XCTest
 
 class JSONRequestSerializerTests: XCTestCase {
 
-    var request: URLRequest!
-    var serializer: JSONRequestSerializer!
     let testJSONParameters = ["key1": "value1", "key2": 2, "key3": ["nested": true]] as [String: Any]
 
-    override func setUp() {
-        super.setUp()
-
-        guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail("Inavlid url")
-            return
-        }
-
-        request = URLRequest(url: url)
+    private func makeRequest() throws -> URLRequest {
+        let url = try URL(absoluteString: "http://localhost:3333")
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        serializer = JSONRequestSerializer()
+        return request
     }
 
-    func testSerializesJSONObject() {
+    func testSerializesJSONObject() throws {
+        let request = try makeRequest()
+        let serializer = JSONRequestSerializer()
+
         guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: testJSONParameters) else {
             XCTFail("Serialization failed")
             return
@@ -43,7 +38,10 @@ class JSONRequestSerializerTests: XCTestCase {
         XCTAssert(json != nil)
     }
 
-    func testAllowsFragmentedJSON() {
+    func testAllowsFragmentedJSON() throws {
+        let request = try makeRequest()
+        let serializer = JSONRequestSerializer()
+
         let fragmentedBody = "someemail@test.com"
         guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: fragmentedBody) else {
             XCTFail("Serialization failed")
@@ -58,7 +56,10 @@ class JSONRequestSerializerTests: XCTestCase {
         XCTAssert(bodyString == "\"\(fragmentedBody)\"")
     }
 
-    func testConfiguresDefaultContentTypeHeader() {
+    func testConfiguresDefaultContentTypeHeader() throws {
+        let request = try makeRequest()
+        let serializer = JSONRequestSerializer()
+
         guard let modifiedRequest = try? serializer.serialize(request: request, bodyParameters: nil) else {
             XCTFail("Serialization failed")
             return
@@ -67,7 +68,10 @@ class JSONRequestSerializerTests: XCTestCase {
         XCTAssert(modifiedRequest.allHTTPHeaderFields?["Content-Type"] == "application/json")
     }
 
-    func testDoesntReplaceCustomDefinedHeaders() {
+    func testDoesntReplaceCustomDefinedHeaders() throws {
+        var request = try makeRequest()
+        let serializer = JSONRequestSerializer()
+
         let customDefaultHeaderFields = [
             "Accept-Language": "FlyingSpaghettiMonster",
             "User-Agent": "Chromebook. Remember those?",

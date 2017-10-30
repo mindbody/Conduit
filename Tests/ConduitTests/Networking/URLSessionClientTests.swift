@@ -91,7 +91,7 @@ class URLSessionClientTests: XCTestCase {
 
         let requestProcessedMiddleware = expectation(description: "request processed")
         client.begin(request: request) { (_, _, error) in
-            XCTAssert(error != nil)
+            XCTAssertNotNil(error)
             requestProcessedMiddleware.fulfill()
         }
 
@@ -104,7 +104,7 @@ class URLSessionClientTests: XCTestCase {
 
         let requestProcessedMiddleware = expectation(description: "request processed")
         let sessionProxy = client.begin(request: request) { (_, _, error) in
-            XCTAssert(error != nil)
+            XCTAssertNotNil(error)
             requestProcessedMiddleware.fulfill()
         }
         sessionProxy.cancel()
@@ -142,7 +142,7 @@ class URLSessionClientTests: XCTestCase {
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
         var sessionProxy = client.begin(request: request) { (_, _, _) in
-            XCTAssert(progress != nil)
+            XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
         sessionProxy.downloadProgressHandler = { progress = $0 }
@@ -172,7 +172,7 @@ class URLSessionClientTests: XCTestCase {
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
         var sessionProxy = client.begin(request: request) { (_, _, _) in
-            XCTAssert(progress != nil)
+            XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
         sessionProxy.uploadProgressHandler = { progress = $0 }

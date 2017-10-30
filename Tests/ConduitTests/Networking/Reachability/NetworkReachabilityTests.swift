@@ -11,17 +11,11 @@ import XCTest
 
 class NetworkReachabilityTests: XCTestCase {
 
-    var reachability: NetworkReachability!
-
-    override func setUp() {
-        super.setUp()
-
-        reachability = NetworkReachability(hostName: "google.com")
-    }
-
     func testImmediatelyStartsPollingReachabilityOnEventRegistration() {
-        reachability.register { _ in }
-        XCTAssert(reachability.isPollingReachability == true)
+        let reachability = NetworkReachability(hostName: "google.com")
+        reachability?.register { _ in }
+        XCTAssertNotNil(reachability)
+        XCTAssert(reachability?.isPollingReachability == true)
     }
 
 }

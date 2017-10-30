@@ -30,26 +30,19 @@ private class MockRequestSerializer: RequestSerializer {
 
 class HTTPRequestBuilderTests: XCTestCase {
 
-    var url: URL!
-    var sut: HTTPRequestBuilder!
-
-    override func setUp() {
-        super.setUp()
-
-        guard let url = URL(string: "http://localhost:3333") else {
-            XCTFail("Invalid URL")
-            return
-        }
-        self.url = url
-        sut = HTTPRequestBuilder(url: url)
+    private func makeRequestBuilder() throws -> HTTPRequestBuilder {
+        let url = try URL(absoluteString: "http://localhost:3333")
+        return HTTPRequestBuilder(url: url)
     }
 
-    func testGeneratesBasicRequests() {
+    func testGeneratesBasicRequests() throws {
+        let sut = try makeRequestBuilder()
         let request = try? sut.build()
-        XCTAssert(request != nil)
+        XCTAssertNotNil(request)
     }
 
-    func testUsesProvidedRequestSerializer() {
+    func testUsesProvidedRequestSerializer() throws {
+        let sut = try makeRequestBuilder()
         let mockSerializer = MockRequestSerializer()
 
         sut.serializer = mockSerializer
@@ -58,11 +51,12 @@ class HTTPRequestBuilderTests: XCTestCase {
             return
         }
 
-        XCTAssert(request.url == url)
+        XCTAssert(request.url == sut.url)
         XCTAssert(mockSerializer.hasBeenUtilized)
     }
 
-    func testForwardsErrorsFromSerializer() {
+    func testForwardsErrorsFromSerializer() throws {
+        let sut = try makeRequestBuilder()
         let mockSerializer = MockRequestSerializer()
         mockSerializer.shouldThrowError = true
 
@@ -75,7 +69,8 @@ class HTTPRequestBuilderTests: XCTestCase {
         }
     }
 
-    func testAppliesAdditionalHeadersToRequests() {
+    func testAppliesAdditionalHeadersToRequests() throws {
+        let sut = try makeRequestBuilder()
         sut.headers = [
             "SomeHeader": "SomeValue",
             "OtherHeader": "OtherValue"
@@ -89,7 +84,8 @@ class HTTPRequestBuilderTests: XCTestCase {
         XCTAssert(request.value(forHTTPHeaderField: "OtherHeader") == "OtherValue")
     }
 
-    func testIgnoresQueryParamsIfPercentEncodedParamsAreSet() {
+    func testIgnoresQueryParamsIfPercentEncodedParamsAreSet() throws {
+        let sut = try makeRequestBuilder()
         sut.percentEncodedQuery = "key1=value+1&key2=value%202"
         sut.queryStringParameters = [
             "key3": "key4"
