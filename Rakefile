@@ -40,41 +40,42 @@ build_configurations = [
 
 desc "Build all targets"
 task :build do
-	build_configurations.each do |config|
-		scheme = config[:scheme]
+  build_configurations.each do |config|
+    scheme = config[:scheme]
     destinations = config[:destinations].map { |destination| "-destination '#{destination}'" }.join(" ")
     execute "xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
-	end
+  end
 end
 
 desc "Run all unit tests on all platforms"
 task :test do
-	`./Tests/ConduitTests/start-test-webserver`
-	execute "swift test --parallel"
-	build_configurations.each do |config|
-		scheme = config[:scheme]
+  `./Tests/ConduitTests/start-test-webserver`
+  execute "swift test --parallel"
+  build_configurations.each do |config|
+    scheme = config[:scheme]
     destinations = config[:destinations].map { |destination| "-destination '#{destination}'" }.join(" ")
 
-		if config[:run_tests] then
+    if config[:run_tests] then
       execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build-for-testing analyze"
-    	execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet test-without-building"
+      execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet test-without-building"
     else
-			execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
-		end
-	end
-	`./Tests/ConduitTests/stop-test-webserver`
+      execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
+    end
+  end
+  `./Tests/ConduitTests/stop-test-webserver`
 end
 
 desc "Clean all builds"
 task :clean do
-	`swift package reset`
-	build_configurations.each do |config|
-		scheme = config[:scheme]
-		execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} -configuration Debug -quiet clean"
-	end
+  `swift package reset`
+  build_configurations.each do |config|
+    scheme = config[:scheme]
+    execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} -configuration Debug -quiet clean"
+  end
 end
 
 def execute(command)
   puts "\n\e[36m======== EXECUTE: #{command} ========\e[39m\n"
   system("set -o pipefail && #{command}") || exit(-1)
 end
+
