@@ -1,5 +1,20 @@
 ## Master
 
+#### breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.7.0
+
 #### Breaking
 - Remove implicit force unwrapped property Conduit.Auth.defaultClientConfiguration (now it is an optional).
 
