@@ -28,8 +28,8 @@ class FormEncodedRequestSerializerTests: XCTestCase {
         ]
 
         for test in tests {
-            let serializedRequest = try? serializer.serialize(request: request, bodyParameters: test.0)
-            guard let body = serializedRequest?.httpBody else {
+            let serializedRequest = try serializer.serialize(request: request, bodyParameters: test.0)
+            guard let body = serializedRequest.httpBody else {
                 XCTFail("Expected body")
                 return
             }
