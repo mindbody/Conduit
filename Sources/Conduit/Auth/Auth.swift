@@ -13,9 +13,6 @@ public class Auth {
 
     private init() {}
 
-    /// The default OAuth2ClientConfiguration, useful for single-client applications
-    public static var defaultClientConfiguration: OAuth2ClientConfiguration?
-
     /// The default OAuth2TokenStore, useful for single-client applications
     public static var defaultTokenStore: OAuth2TokenStore = OAuth2TokenMemoryStore()
 
