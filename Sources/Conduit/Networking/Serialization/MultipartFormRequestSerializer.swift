@@ -63,7 +63,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
     }
 
     private static func randomContentBoundary() -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".characters
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let lettersLength = UInt32(letters.count)
 
         let randomCharacters = (0..<12).map { _ -> String in
