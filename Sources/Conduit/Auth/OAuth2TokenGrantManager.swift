@@ -58,12 +58,7 @@ struct OAuth2TokenGrantManager {
 
     static func errorFrom(taskResponse: SessionTaskResponse) -> ConduitError? {
         guard let response = taskResponse.response else {
-            if let request = taskResponse.request {
-                return ConduitError.noResponse(request: request)
-            }
-            else {
-                return ConduitError.internalFailure(message: "No request found")
-            }
+            return ConduitError.noResponse(request: taskResponse.request)
         }
 
         if response.statusCode >= 400 {

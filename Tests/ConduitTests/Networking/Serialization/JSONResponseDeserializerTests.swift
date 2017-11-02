@@ -48,7 +48,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         let deserializer = JSONResponseDeserializer()
 
         XCTAssertThrowsError(try deserializer.deserialize(response: nil, data: response.data), "throws .noResponse") { error in
-            guard case ResponseDeserializerError.noResponse = error else {
+            guard case ConduitError.noResponse = error else {
                 XCTFail("No response")
                 return
             }
@@ -63,8 +63,8 @@ class JSONResponseDeserializerTests: XCTestCase {
 
         for invalidResponse in invalidResponses {
             XCTAssertThrowsError(try deserializer.deserialize(response: invalidResponse, data: response.data), "throws .badResponse") { error in
-                guard case ResponseDeserializerError.badResponse(_) = error else {
-                    XCTFail("Unexpected error")
+                guard case ConduitError.internalFailure = error else {
+                    XCTFail(error.localizedDescription)
                     return
                 }
             }
@@ -79,7 +79,8 @@ class JSONResponseDeserializerTests: XCTestCase {
         let response = try makeResponse()
         let deserializer = JSONResponseDeserializer()
 
-        guard let obj = try? deserializer.deserialize(response: response.response, data: response.data), let json = obj as? [String: String] else {
+        let obj = try deserializer.deserialize(response: response.response, data: response.data)
+        guard let json = obj as? [String: String] else {
             XCTFail("Deserialization failed")
             return
         }
@@ -100,8 +101,8 @@ class JSONResponseDeserializerTests: XCTestCase {
 
         func validateThrowsFor(_ data: Data) {
             XCTAssertThrowsError(try deserializer.deserialize(response: response.response, data: data), "throws .deserializationFailure") { error in
-                guard case ResponseDeserializerError.deserializationFailure = error else {
-                    XCTFail("Deserialization failed")
+                guard case ConduitError.deserializationError = error else {
+                    XCTFail(error.localizedDescription)
                     return
                 }
             }

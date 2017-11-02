@@ -14,4 +14,11 @@ public struct SessionTaskResponse {
     var response: HTTPURLResponse?
     var data: Data?
     var error: Error?
+
+    init(request: URLRequest? = nil, response: HTTPURLResponse? = nil, data: Data? = nil, error: Error? = nil) {
+        self.request = request
+        self.response = response
+        self.data = data
+        self.error = error
+    }
 }

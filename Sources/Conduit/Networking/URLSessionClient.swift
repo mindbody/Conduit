@@ -146,9 +146,7 @@ public struct URLSessionClient: URLSessionClientType {
             switch middlewareProcessingResult {
             case .error(let error):
                 self.urlSession.delegateQueue.addOperation {
-                    var response = SessionTaskResponse()
-                    response.error = error
-                    completion(response)
+                    completion(SessionTaskResponse(error: error))
                 }
                 return
             case .value(let request):

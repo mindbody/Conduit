@@ -45,7 +45,7 @@ class HTTPRequestSerializerTests: XCTestCase {
                 XCTFail("Expected to fail serializing the request")
             }
             catch let error {
-                guard case RequestSerializerError.httpVerbDoesNotAllowBodyParameters = error else {
+                guard case ConduitError.serializationError = error else {
                     XCTFail("Unexpected error type")
                     return
                 }

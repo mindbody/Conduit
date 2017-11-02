@@ -42,7 +42,7 @@ class XMLResponseDeserializerTests: XCTestCase {
             XCTFail("Expected error")
         }
         catch let error {
-            guard case ResponseDeserializerError.noResponse = error else {
+            guard case ConduitError.noResponse = error else {
                 throw TestError.invalidTest
             }
         }

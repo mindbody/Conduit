@@ -17,7 +17,7 @@ class URLSessionClientTests: XCTestCase {
         let then = Date()
         let result = try client.begin(request: request)
         XCTAssertNotNil(result.data)
-        XCTAssertEqual(result.response.statusCode, 200)
+        XCTAssertEqual(result.response?.statusCode, 200)
         XCTAssertGreaterThanOrEqual(Date().timeIntervalSince(then), 2)
     }
 
@@ -41,7 +41,7 @@ class URLSessionClientTests: XCTestCase {
 
         let client = URLSessionClient(middleware: [middleware1, middleware2])
         let processedRequestExpectation = expectation(description: "processed request")
-        client.begin(request: originalRequest) { _, _, _  in
+        client.begin(request: originalRequest) { _  in
             processedRequestExpectation.fulfill()
         }
 
@@ -65,7 +65,7 @@ class URLSessionClientTests: XCTestCase {
         var completedDelayedRequests = 0
 
         for _ in 0..<numDelayedRequests {
-            client.begin(request: delayedRequest) { _, _, _  in
+            client.begin(request: delayedRequest) { _ in
                 completedDelayedRequests += 1
             }
         }
@@ -76,7 +76,7 @@ class URLSessionClientTests: XCTestCase {
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
             blockingMiddleware.pipelineBehaviorOptions = .awaitsOutgoingCompletion
 
-            client.begin(request: immediateRequest) { _, _, _  in
+            client.begin(request: immediateRequest) { _ in
                 XCTAssert(completedDelayedRequests == numDelayedRequests)
                 requestSentExpectation.fulfill()
             }
@@ -90,8 +90,8 @@ class URLSessionClientTests: XCTestCase {
         let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
 
         let requestProcessedMiddleware = expectation(description: "request processed")
-        client.begin(request: request) { (_, _, error) in
-            XCTAssertNotNil(error)
+        client.begin(request: request) { taskResponse in
+            XCTAssertNotNil(taskResponse.error)
             requestProcessedMiddleware.fulfill()
         }
 
@@ -103,8 +103,8 @@ class URLSessionClientTests: XCTestCase {
         let client: URLSessionClient = URLSessionClient()
 
         let requestProcessedMiddleware = expectation(description: "request processed")
-        let sessionProxy = client.begin(request: request) { (_, _, error) in
-            XCTAssertNotNil(error)
+        let sessionProxy = client.begin(request: request) { taskResponse in
+            XCTAssertNotNil(taskResponse.error)
             requestProcessedMiddleware.fulfill()
         }
         sessionProxy.cancel()
@@ -118,7 +118,7 @@ class URLSessionClientTests: XCTestCase {
 
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
 
-        let sessionProxy = client.begin(request: request) { (_, _, _) in
+        let sessionProxy = client.begin(request: request) { _ in
             XCTFail("Request should not have been executed")
         }
 
@@ -141,7 +141,7 @@ class URLSessionClientTests: XCTestCase {
 
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
-        var sessionProxy = client.begin(request: request) { (_, _, _) in
+        var sessionProxy = client.begin(request: request) { _ in
             XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
@@ -171,7 +171,7 @@ class URLSessionClientTests: XCTestCase {
 
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
-        var sessionProxy = client.begin(request: request) { (_, _, _) in
+        var sessionProxy = client.begin(request: request) { _ in
             XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
@@ -191,7 +191,7 @@ class URLSessionClientTests: XCTestCase {
         for _ in 0..<numConcurrentRequests {
             let requestFinishedExpectation = expectation(description: "request finished")
             DispatchQueue.global().async {
-                client.begin(request: request) { _, _, _  in
+                client.begin(request: request) { _  in
                     requestFinishedExpectation.fulfill()
                     completedRequests += 1
                 }
@@ -208,7 +208,7 @@ class URLSessionClientTests: XCTestCase {
         for code in codes {
             let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/status/\(code)"))
             let result = try client.begin(request: request)
-            XCTAssertEqual(result.response.statusCode, code)
+            XCTAssertEqual(result.response?.statusCode, code)
         }
     }
 
@@ -219,7 +219,7 @@ private class BadMiddleware: RequestPipelineMiddleware {
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
 
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
-        completion(.error(WhyAreYouUsingThisMiddlewareError.userError))
+        completion(.error(TestError.otherError))
     }
 }
 

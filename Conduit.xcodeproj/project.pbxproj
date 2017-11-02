@@ -333,6 +333,9 @@
 		951B11CF1FABC08F00E7FF4B /* SessionTaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11CD1FABC08F00E7FF4B /* SessionTaskResponse.swift */; };
 		951B11D01FABC08F00E7FF4B /* SessionTaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11CD1FABC08F00E7FF4B /* SessionTaskResponse.swift */; };
 		951B11D11FABC08F00E7FF4B /* SessionTaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11CD1FABC08F00E7FF4B /* SessionTaskResponse.swift */; };
+		951B11D71FABDF3900E7FF4B /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11D21FABDC3000E7FF4B /* TestError.swift */; };
+		951B11D81FABDF3A00E7FF4B /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11D21FABDC3000E7FF4B /* TestError.swift */; };
+		951B11D91FABDF3A00E7FF4B /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951B11D21FABDC3000E7FF4B /* TestError.swift */; };
 		9549B2521F799DA9005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2531F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2541F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
@@ -524,6 +527,7 @@
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
 		951B11C81FABB2E800E7FF4B /* URLSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDelegate.swift; sourceTree = "<group>"; };
 		951B11CD1FABC08F00E7FF4B /* SessionTaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTaskResponse.swift; sourceTree = "<group>"; };
+		951B11D21FABDC3000E7FF4B /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
 		956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringDictionaryTests.swift; sourceTree = "<group>"; };
 		95CC71C21F797B0C003B4E31 /* badcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badcertificate.txt; sourceTree = "<group>"; };
@@ -826,6 +830,7 @@
 				1BD5553D1F17DC81004B1172 /* Info-Tests-macOS.plist */,
 				1BD5553E1F17DC81004B1172 /* Info-Tests-tvOS.plist */,
 				1BC229A31F1D6BE4000DAF62 /* Resource.swift */,
+				951B11D21FABDC3000E7FF4B /* TestError.swift */,
 				1BD5555D1F17DC81004B1172 /* start-test-webserver */,
 				1B279CE31F19558900C0005E /* stop-test-webserver */,
 			);
@@ -1691,6 +1696,7 @@
 				1BD555881F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				956D7E481FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B279CDD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
+				951B11D71FABDF3900E7FF4B /* TestError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1728,6 +1734,7 @@
 				1BD555891F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				956D7E491FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B279CDE1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
+				951B11D81FABDF3A00E7FF4B /* TestError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1765,6 +1772,7 @@
 				1BD5558A1F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				956D7E4A1FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B279CDF1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
+				951B11D91FABDF3A00E7FF4B /* TestError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

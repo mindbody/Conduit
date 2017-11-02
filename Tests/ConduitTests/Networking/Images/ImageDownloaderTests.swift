@@ -15,7 +15,7 @@ private class MonitoringURLSessionClient: URLSessionClientType {
 
     var numRequestsSent: Int = 0
 
-    func begin(request: URLRequest) throws -> (data: Data?, response: HTTPURLResponse) {
+    func begin(request: URLRequest) throws -> SessionTaskResponse {
         numRequestsSent += 1
         return try sessionClient.begin(request: request)
     }
