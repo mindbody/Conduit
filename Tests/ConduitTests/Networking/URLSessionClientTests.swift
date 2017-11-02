@@ -215,9 +215,6 @@ class URLSessionClientTests: XCTestCase {
 }
 
 private class BadMiddleware: RequestPipelineMiddleware {
-    enum WhyAreYouUsingThisMiddlewareError: Error {
-        case userError
-    }
 
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
 

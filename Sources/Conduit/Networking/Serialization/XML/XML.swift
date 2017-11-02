@@ -8,11 +8,6 @@
 
 import Foundation
 
-public enum XMLError: Error {
-    case nodeNotFound(name: String)
-    case invalidDataType
-}
-
 /// Represents an XML document
 public struct XML {
 

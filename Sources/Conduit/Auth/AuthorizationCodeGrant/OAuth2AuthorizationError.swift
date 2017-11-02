@@ -11,24 +11,33 @@ import Foundation
 /// An error that occured during a request for authorization, as
 /// defined by RFC6749 4.1.2.1
 public enum OAuth2AuthorizationError: Error {
+
     /// The request has invalid/missing parameters or is otherwise malformed
     case invalidRequest
+
     /// The client is not authorized for this request
     case unauthorizedClient
+
     /// The resource owner or authorization server denied the request
     case accessDenied
+
     /// The authorization server does not support this request
     case unsupportedResponseType
+
     /// The requested scope is invalid, unknown, or malformed
     case invalidScope
+
     /// The server encountered an unexpected server error (HTTP redirects are not
     /// allowed when the HTTP status code falls in the 500 range)
     case serverError
+
     /// The authorization server is temporarily unable to handle requests (HTTP redirects
     /// are not allowed when the HTTP status code falls in the 500 range)
     case temporarilyUnavailable
+
     /// The user cancelled the request
     case cancelled
+
     /// An unknown error occurred during or after the request
     case unknown
 

@@ -19,10 +19,6 @@ public protocol DataConvertible {
     init(serializedData: Data) throws
 }
 
-public enum DataConversionError: Error {
-    case invalidArchive
-}
-
 extension DataConvertible where Self: Encodable {
 
     public func serialized() throws -> Data {
@@ -47,9 +43,9 @@ extension DataConvertible where Self: NSCoding {
         return NSKeyedArchiver.archivedData(withRootObject: self)
     }
 
-    public init(serializedData: Data) throws {
-        guard let deserialized = NSKeyedUnarchiver.unarchiveObject(with: serializedData) as? Self else {
-            throw DataConversionError.invalidArchive
+    public init(serializedData data: Data) throws {
+        guard let deserialized = NSKeyedUnarchiver.unarchiveObject(with: data) as? Self else {
+            throw ConduitError.deserializationError(data: data, type: Self.self)
         }
         self = deserialized
     }

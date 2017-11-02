@@ -18,12 +18,6 @@
     internal typealias Image = UIImage
 #endif
 
-/// Represents an error that occured within an ImageDownloader
-/// - invalidRequest: An invalid request was supplied, most likely with an empty URL
-public enum ImageDownloaderError: Error {
-    case invalidRequest
-}
-
 /// Utilizes Conduit to download and safely cache/retrieve
 /// images across multiple threads
 public final class ImageDownloader {
@@ -74,45 +68,45 @@ public final class ImageDownloader {
         var proxy: SessionTaskProxyType?
 
         serialQueue.sync { [weak self] in
-            guard let `self` = self else {
+            guard let strongSelf = self else {
                 return
             }
 
-            if let image = self.cache.image(for: request) {
+            if let image = strongSelf.cache.image(for: request) {
                 let response = Response(image: image, error: nil, urlResponse: nil, isFromCache: true)
                 completion(response)
                 return
             }
 
-            guard let cacheIdentifier = self.cache.cacheIdentifier(for: request) else {
+            guard let cacheIdentifier = strongSelf.cache.cacheIdentifier(for: request) else {
                 let response = Response(image: nil,
-                                        error: ImageDownloaderError.invalidRequest,
+                                        error: ConduitError.internalFailure(message: "Failed to get image cache identifier."),
                                         urlResponse: nil,
                                         isFromCache: false)
                 completion(response)
                 return
             }
 
-            self.register(completionHandler: completion, for: cacheIdentifier)
+            strongSelf.register(completionHandler: completion, for: cacheIdentifier)
 
-            if let sessionTaskProxy = self.sessionProxyMap[cacheIdentifier] {
+            if let sessionTaskProxy = strongSelf.sessionProxyMap[cacheIdentifier] {
                 proxy = sessionTaskProxy
                 return
             }
 
             // Strongly capture self within the completion handler to ensure
             // ImageDownloader is persisted long enough to respond
-            proxy = self.sessionClient.begin(request: request) { data, response, error in
+            proxy = strongSelf.sessionClient.begin(request: request) { taskResponse in
                 var image: Image?
-                if let data = data {
+                if let data = taskResponse.data {
                     image = Image(data: data)
                 }
 
                 if let image = image {
-                    self.cache.cache(image: image, for: request)
+                    strongSelf.cache.cache(image: image, for: request)
                 }
 
-                let response = Response(image: image, error: error, urlResponse: response, isFromCache: false)
+                let response = Response(image: image, error: taskResponse.error, urlResponse: taskResponse.response, isFromCache: false)
                 let queue = OperationQueue.current ?? OperationQueue.main
 
                 func execute(handler: @escaping CompletionHandler) {
@@ -122,14 +116,14 @@ public final class ImageDownloader {
                 }
 
                 // Intentional retain cycle that releases immediately after execution
-                self.serialQueue.async {
-                    self.sessionProxyMap[cacheIdentifier] = nil
-                    self.completionHandlerMap[cacheIdentifier]?.forEach(execute)
-                    self.completionHandlerMap[cacheIdentifier] = nil
+                strongSelf.serialQueue.async {
+                    strongSelf.sessionProxyMap[cacheIdentifier] = nil
+                    strongSelf.completionHandlerMap[cacheIdentifier]?.forEach(execute)
+                    strongSelf.completionHandlerMap[cacheIdentifier] = nil
                 }
             }
 
-            self.sessionProxyMap[cacheIdentifier] = proxy
+            strongSelf.sessionProxyMap[cacheIdentifier] = proxy
         }
 
         return proxy

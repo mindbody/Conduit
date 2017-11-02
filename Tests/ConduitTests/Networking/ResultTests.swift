@@ -116,12 +116,3 @@ class ResultTests: XCTestCase {
     }
 
 }
-
-private enum SomeError: Error {
-    case someCase
-}
-
-private enum MyError: Error, Equatable {
-    case errorOne
-    case errorTwo
-}

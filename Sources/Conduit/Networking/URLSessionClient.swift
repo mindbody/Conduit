@@ -8,10 +8,7 @@
 
 import Foundation
 
-public typealias SessionTaskCompletion = (Data?, HTTPURLResponse?, Error?) -> Void
-public typealias SessionTaskProgressHandler = (Progress) -> Void
-
-private typealias SessionCompletionHandler = (URLSession.AuthChallengeDisposition, URLCredential?) -> Void
+public typealias SessionTaskCompletion = (SessionTaskResponse) -> Void
 
 /// A type that manages a session and queues URLRequest's
 public protocol URLSessionClientType {
@@ -20,8 +17,8 @@ public protocol URLSessionClientType {
     /// - Parameters:
     ///     - request: The URLRequest to be enqueued
     /// - Returns: Tuple containing data and response
-    /// - Throws: Error, if any
-    func begin(request: URLRequest) throws -> (data: Data?, response: HTTPURLResponse)
+    /// - Throws: ConduitError, if any
+    func begin(request: URLRequest) throws -> SessionTaskResponse
 
     /// Queues a request into the session pipeline
     /// - Parameters:
@@ -32,19 +29,6 @@ public protocol URLSessionClientType {
 
     /// The middleware that all incoming requests should be piped through
     var middleware: [RequestPipelineMiddleware] { get set }
-}
-
-private class TaskResponse {
-    var data: Data?
-    var response: HTTPURLResponse?
-    var expectedContentLength: Int64?
-    var error: Error?
-}
-
-/// Errors thrown from URLSessionClient requests
-public enum URLSessionClientError: Error {
-    case noResponse
-    case requestTimeout
 }
 
 /// Pipes requests through provided middleware and queues them into a single NSURLSession
@@ -62,12 +46,15 @@ public struct URLSessionClient: URLSessionClientType {
         get { return sessionDelegate.serverAuthenticationPolicies }
         set { sessionDelegate.serverAuthenticationPolicies = newValue }
     }
+
     private let urlSession: URLSession
     private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)", attributes: [])
     private let activeTaskQueueDispatchGroup = DispatchGroup()
+
     // swiftlint:disable weak_delegate
-    private let sessionDelegate = SessionDelegate()
+    private let sessionDelegate = URLSessionDelegate()
     // swiftlint:enable weak_delegate
+
     private static var requestCounter: Int64 = 0
 
     /// Creates a new URLSessionClient with provided middleware and NSURLSession parameters
@@ -96,24 +83,25 @@ public struct URLSessionClient: URLSessionClientType {
     ///     - request: The URLRequest to be enqueued
     /// - Returns: Tuple containing data and response
     /// - Throws: URLSessionClientError, if any
-    public func begin(request: URLRequest) throws -> (data: Data?, response: HTTPURLResponse) {
-        var result: (data: Data?, response: HTTPURLResponse?, error: Error?) = (nil, nil, nil)
+    public func begin(request: URLRequest) throws -> SessionTaskResponse {
+        var result = SessionTaskResponse()
         let semaphore = DispatchSemaphore(value: 0)
-        begin(request: request) { data, response, error in
-            result = (data, response, error)
+        begin(request: request) { taskResponse in
+            result = taskResponse
+            result.request = request
             semaphore.signal()
         }
         let timeout = urlSession.configuration.timeoutIntervalForRequest
         if semaphore.wait(timeout: .now() + timeout) == .timedOut {
-            throw URLSessionClientError.requestTimeout
+            throw ConduitError.internalFailure(message: "Request timed out")
         }
-        if let error = result.error {
-            throw error
+        guard result.error == nil else {
+            throw ConduitError.requestFailure(taskResponse: result)
         }
-        guard let response = result.response else {
-            throw URLSessionClientError.noResponse
+        guard result.response != nil else {
+            throw ConduitError.noResponse(request: request)
         }
-        return (data: result.data, response: response)
+        return result
     }
 
     /// Queues a request into the session pipeline
@@ -158,7 +146,9 @@ public struct URLSessionClient: URLSessionClientType {
             switch middlewareProcessingResult {
             case .error(let error):
                 self.urlSession.delegateQueue.addOperation {
-                    completion(nil, nil, error)
+                    var response = SessionTaskResponse()
+                    response.error = error
+                    completion(response)
                 }
                 return
             case .value(let request):
@@ -170,9 +160,9 @@ public struct URLSessionClient: URLSessionClientType {
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
             // so even though the pipeline is serial, requests run in parallel
-            let task = self.dataTaskWith(request: modifiedRequest) { data, response, error in
-                self.log(data: data, response: response, request: request, requestID: requestID)
-                completion(data, response, error)
+            let task = self.dataTaskWith(request: modifiedRequest) { taskResponse in
+                self.log(data: taskResponse.data, response: taskResponse.response, request: modifiedRequest, requestID: requestID)
+                completion(taskResponse)
             }
 
             self.log(request: request, requestID: requestID)
@@ -194,7 +184,7 @@ public struct URLSessionClient: URLSessionClientType {
     }
 
     private func synchronouslyPrepareForTransport(request: URLRequest) -> Result<URLRequest> {
-        var middlwareError: Error?
+        var middlwareError: ConduitError?
         let middlewarePipelineDispatchGroup = DispatchGroup()
         var modifiedRequest = request
 
@@ -206,8 +196,9 @@ public struct URLSessionClient: URLSessionClientType {
                 case .value(let request):
                     modifiedRequest = request
                 case .error(let error):
-                    logger.warn("Encountered an error within the middleware pipeline")
-                    middlwareError = error
+                    let message = "Encountered an error within the middleware pipeline: \(error.localizedDescription)"
+                    logger.warn(message)
+                    middlwareError = ConduitError.internalFailure(message: message)
                 }
                 middlewarePipelineDispatchGroup.leave()
             }
@@ -226,134 +217,14 @@ public struct URLSessionClient: URLSessionClientType {
         activeTaskQueueDispatchGroup.enter()
 
         let dataTask = urlSession.dataTask(with: request)
-        sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { data, response, error in
+        sessionDelegate.registerCompletionHandler(taskIdentifier: dataTask.taskIdentifier) { taskResponse in
             // If for some reason the client isn't retained elsewhere, it will at least stay alive
             // while active tasks are running
             self.activeTaskQueueDispatchGroup.leave()
-            completion(data, response, error)
+            completion(taskResponse)
         }
 
         return dataTask
-    }
-
-}
-
-private class SessionDelegate: NSObject, URLSessionDataDelegate {
-
-    var serverAuthenticationPolicies: [ServerAuthenticationPolicyType] = []
-
-    private var taskCompletionHandlers: [Int: SessionTaskCompletion] = [:]
-    private var taskDownloadProgressHandlers: [Int: SessionTaskProgressHandler] = [:]
-    private var taskDownloadProgresses: [Int: Progress] = [:]
-    private var taskUploadProgressHandlers: [Int: SessionTaskProgressHandler] = [:]
-    private var taskUploadProgresses: [Int: Progress] = [:]
-    private var taskResponses: [Int: TaskResponse] = [:]
-    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
-
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
-        for policy in serverAuthenticationPolicies {
-            if policy.evaluate(authenticationChallenge: challenge) == false {
-                completionHandler(.cancelAuthenticationChallenge, nil)
-                return
-            }
-        }
-        guard let serverTrust = challenge.protectionSpace.serverTrust else {
-            completionHandler(.useCredential, challenge.proposedCredential)
-            return
-        }
-        completionHandler(.useCredential, URLCredential(trust: serverTrust))
-    }
-
-    /// Reports upload progress
-    func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        if let progressHandler = taskUploadProgressHandlers[task.taskIdentifier] {
-            let currentProgress = taskUploadProgresses[task.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
-            if currentProgress == nil {
-                serialQueue.sync {
-                    taskUploadProgresses[task.taskIdentifier] = newProgress
-                }
-            }
-            newProgress.completedUnitCount = totalBytesSent
-            newProgress.totalUnitCount = totalBytesExpectedToSend
-            progressHandler(newProgress)
-        }
-    }
-
-    /// Reports download progress and appends response data
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        let taskResponse = taskResponseFor(taskIdentifier: dataTask.taskIdentifier)
-        var responseData = taskResponse.data ?? Data()
-        responseData.append(data)
-        taskResponse.data = responseData
-        if let expectedContentLength = taskResponse.expectedContentLength,
-            let progressHandler = taskDownloadProgressHandlers[dataTask.taskIdentifier] {
-            let currentProgress = taskDownloadProgresses[dataTask.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
-            if currentProgress == nil {
-                serialQueue.sync {
-                    taskDownloadProgresses[dataTask.taskIdentifier] = newProgress
-                }
-            }
-            newProgress.completedUnitCount = Int64(responseData.count)
-            newProgress.totalUnitCount = expectedContentLength
-            progressHandler(newProgress)
-        }
-    }
-
-    /// Prepares task response. This is always called before data is received.
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse,
-                    completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        let taskResponse = taskResponseFor(taskIdentifier: dataTask.taskIdentifier)
-        taskResponse.response = response as? HTTPURLResponse
-        taskResponse.expectedContentLength = response.expectedContentLength
-        completionHandler(.allow)
-    }
-
-    /// Fires completion handler and releases upload, download, and completion handlers
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        let taskResponse = taskResponseFor(taskIdentifier: task.taskIdentifier)
-        taskResponse.error = error
-        let completionHandler = taskCompletionHandlers[task.taskIdentifier]
-
-        serialQueue.sync {
-            taskCompletionHandlers[task.taskIdentifier] = nil
-            taskDownloadProgressHandlers[task.taskIdentifier] = nil
-            taskUploadProgressHandlers[task.taskIdentifier] = nil
-            taskDownloadProgresses[task.taskIdentifier] = nil
-            taskUploadProgresses[task.taskIdentifier] = nil
-        }
-
-        completionHandler?(taskResponse.data, taskResponse.response, taskResponse.error)
-    }
-
-    func registerCompletionHandler(taskIdentifier: Int, completionHandler: @escaping SessionTaskCompletion) {
-        serialQueue.sync {
-            self.taskCompletionHandlers[taskIdentifier] = completionHandler
-        }
-    }
-
-    func registerDownloadProgressHandler(taskIdentifier: Int, progressHandler: @escaping SessionTaskProgressHandler) {
-        serialQueue.sync {
-            self.taskDownloadProgressHandlers[taskIdentifier] = progressHandler
-        }
-    }
-
-    func registerUploadProgressHandler(taskIdentifier: Int, progressHandler: @escaping SessionTaskProgressHandler) {
-        serialQueue.sync {
-            self.taskUploadProgressHandlers[taskIdentifier] = progressHandler
-        }
-    }
-
-    private func taskResponseFor(taskIdentifier: Int) -> TaskResponse {
-        if let taskResponse = taskResponses[taskIdentifier] {
-            return taskResponse
-        }
-        let taskResponse = TaskResponse()
-        serialQueue.sync {
-            taskResponses[taskIdentifier] = taskResponse
-        }
-        return taskResponse
     }
 
 }

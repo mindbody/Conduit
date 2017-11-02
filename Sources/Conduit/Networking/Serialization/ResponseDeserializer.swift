@@ -36,25 +36,6 @@ public protocol HTTPResponseDeserializer: ResponseDeserializer {
     var acceptableContentTypes: [String]? { get set }
 }
 
-/// Errors that signify failures within `ResponseDeserializer`
-/// - unknown: Deserialization could not be completed due to an unexpected error
-/// - noResponse: No response was provided, or the response was empty
-/// - badResponse: The response is not valid or indicates a failure
-/// - noData: No response data was provided, or the data is empty
-/// - serializationFailure: The response data could not be deserialized
-public enum ResponseDeserializerError: Error {
-    /// Deserialization could not be completed due to an unexpected error
-    case unknown
-    /// No response was provided, or the response was empty
-    case noResponse
-    /// The response is not valid or indicates a failure
-    case badResponse(responseObject: Any?)
-    /// No response data was provided, or the data is empty
-    case noData
-    /// The response data could not be deserialized
-    case deserializationFailure
-}
-
 extension HTTPResponseDeserializer {
 
     /// Validates the response against acceptable content types and status codes
@@ -63,25 +44,26 @@ extension HTTPResponseDeserializer {
     ///   - responseObject: The deserialized response data
     public func validate(response: HTTPURLResponse?, responseObject: Any?) throws {
         guard let response = response else {
-            throw ResponseDeserializerError.noResponse
+            throw ConduitError.noResponse(request: nil)
         }
 
         if acceptableStatusCodes.contains(response.statusCode) == false {
-            throw ResponseDeserializerError.badResponse(responseObject: responseObject)
+            throw ConduitError.internalFailure(message: "Unnaceptable HTTP Status Code: \(response.statusCode)")
         }
 
         if let acceptableContentTypes = acceptableContentTypes {
-            guard let mimeType = response.mimeType, acceptableContentTypes.contains(mimeType) else {
-                throw ResponseDeserializerError.badResponse(responseObject: responseObject)
+            guard let mimeType = response.mimeType else {
+                throw ConduitError.internalFailure(message: "Invalid Mime type")
+            }
+            guard acceptableContentTypes.contains(mimeType) else {
+                throw ConduitError.internalFailure(message: "Unnaceptable Mime type: \(mimeType)")
             }
         }
     }
 
     public func deserialize(response: HTTPURLResponse?, data: Data?) throws -> Any {
         let responseObject = try deserialize(data: data)
-
         try validate(response: response, responseObject: responseObject)
-
         return responseObject
     }
 }

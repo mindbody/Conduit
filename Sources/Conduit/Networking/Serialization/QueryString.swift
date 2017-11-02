@@ -98,26 +98,25 @@ internal struct QueryString {
         var queryItems = [URLQueryItem]()
 
         switch params {
-        case let p as [String: Any]:
-            queryItems.append(contentsOf: queryItemsFromDictionary(dict: p))
-        case let n as NSNumber:
-            let newPath = "\(url.absoluteString)?\(n.stringValue)"
+        case let dictionary as [String: Any]:
+            queryItems.append(contentsOf: queryItemsFromDictionary(dict: dictionary))
+        case let number as NSNumber:
+            let newPath = "\(url.absoluteString)?\(number.stringValue)"
             guard let newUrl = URL(string: newPath) else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Invalid url: \(newPath)")
             }
             return newUrl
         default:
             let newPath = "\(url.absoluteString)?\(params)"
             guard let newUrl = URL(string: newPath) else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Invalid url: \(newPath)")
             }
             return newUrl
         }
 
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-            throw RequestSerializerError.serializationFailure
+            throw ConduitError.serializationError(message: "Failed to parse url components: \(url.absoluteString)")
         }
-
         components.queryItems = queryItems
 
         /// Respect encoding rules
@@ -127,7 +126,7 @@ internal struct QueryString {
         }
 
         guard let finalURL = components.url else {
-            throw RequestSerializerError.serializationFailure
+            throw ConduitError.serializationError(message: "Failed to compose url: \(url.absoluteString)")
         }
 
         return finalURL

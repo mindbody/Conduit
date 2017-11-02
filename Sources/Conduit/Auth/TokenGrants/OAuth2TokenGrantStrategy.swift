@@ -20,7 +20,7 @@ public protocol OAuth2TokenGrantStrategy {
     /// Attempts to issue a token with the given grant type
     ///
     /// - Returns: Access token
-    /// - Throws: Error if token grant failed
+    /// - Throws: ConduitError if token grant failed
     func issueToken() throws -> BearerToken
 
 }
@@ -55,8 +55,9 @@ extension OAuth2TokenGrantStrategy {
             return request
         }
         catch let error {
-            logger.error("Encountered an error building the token request. Error: \(error)")
-            throw OAuth2Error.internalFailure
+            let message = "Encountered an error building the token request. Error: \(error.localizedDescription)"
+            logger.error(message)
+            throw ConduitError.internalFailure(message: message)
         }
     }
 }

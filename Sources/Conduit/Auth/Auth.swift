@@ -59,20 +59,13 @@ public class Auth {
         ///     - sessionClient: The session in which to force a token refresh
         ///     - middleware: The middleware that describes the client configuration, authorization, and storage
         ///     - completion: A Result that contains the refreshed token, if it succeeds
-        public static func refreshBearerTokenWithin(sessionClient: URLSessionClient,
-                                                    middleware: OAuth2RequestPipelineMiddleware,
+        public static func refreshBearerTokenWithin(sessionClient: URLSessionClient, middleware: OAuth2RequestPipelineMiddleware,
                                                     completion: @escaping Result<BearerToken>.Block) {
             var sessionClient = sessionClient
             sessionClient.middleware = [middleware]
-            guard let noOpURL = URL(string: "https://mindbodyonline.com") else {
-                completion(.error(OAuth2Error.internalFailure))
-                return
-            }
-            var noOpRequest = URLRequest(url: noOpURL)
-            noOpRequest.url = nil
 
             guard let bearerToken = middleware.token else {
-                completion(.error(OAuth2Error.clientFailure(nil, nil)))
+                completion(.error(ConduitError.internalFailure(message: "Missing authentication token")))
                 return
             }
 
@@ -83,16 +76,22 @@ public class Auth {
                                           for: middleware.clientConfiguration,
                                           with: middleware.authorization)
 
-            sessionClient.begin(request: noOpRequest) { (data, response, _) in
-                if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
-                                                                             authorization: middleware.authorization),
+            let request = makeEmptyRequest()
+            sessionClient.begin(request: request) { taskResponse in
+                if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration, authorization: middleware.authorization),
                     token.isValid {
                     completion(.value(token))
                 }
                 else {
-                    completion(.error(OAuth2Error.clientFailure(data, response)))
+                    completion(.error(ConduitError.requestFailure(taskResponse: taskResponse)))
                 }
             }
+        }
+
+        private static func makeEmptyRequest() -> URLRequest {
+            var noOpRequest = URLRequest(url: URL(fileURLWithPath: ""))
+            noOpRequest.url = nil
+            return noOpRequest
         }
 
         /// Registers a hook that fires when Conduit is about to refresh a bearer token for a
