@@ -18,7 +18,7 @@ struct ProtectedThing {
 
     init(json: [String : Any]) throws {
         guard let secretThing = json[JSONKeys.secretThing.rawValue] as? Int else {
-            throw ResponseDeserializerError.deserializationFailure
+            throw ConduitError.deserializationError(data: nil, type: ProtectedThing.self)
         }
 
         self.secretThing = secretThing

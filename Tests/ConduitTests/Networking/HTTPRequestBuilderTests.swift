@@ -17,7 +17,7 @@ private class MockRequestSerializer: RequestSerializer {
         self.hasBeenUtilized = true
 
         if shouldThrowError {
-            throw TestError.otherError
+            throw TestError.someError
         }
 
         return request
@@ -58,7 +58,7 @@ class HTTPRequestBuilderTests: XCTestCase {
 
         sut.serializer = mockSerializer
         XCTAssertThrowsError(try sut.build(), "error forwarded") { error in
-            guard case TestError.otherError = error else {
+            guard case TestError.someError = error else {
                 XCTFail("Unexpeted error was thrown")
                 return
             }

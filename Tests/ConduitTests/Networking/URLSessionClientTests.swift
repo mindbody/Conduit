@@ -219,7 +219,7 @@ private class BadMiddleware: RequestPipelineMiddleware {
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
 
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
-        completion(.error(TestError.otherError))
+        completion(.error(TestError.someError))
     }
 }
 

@@ -10,6 +10,6 @@ import Foundation
 
 enum TestError: Error {
     case invalidTest
-    case otherError
+    case someError
     case yetAnotherError
 }

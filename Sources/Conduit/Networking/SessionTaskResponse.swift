@@ -10,12 +10,12 @@ import Foundation
 
 /// Session task response contains all elements from a network task request.
 public struct SessionTaskResponse {
-    var request: URLRequest?
-    var response: HTTPURLResponse?
-    var data: Data?
-    var error: Error?
+    public var request: URLRequest?
+    public var response: HTTPURLResponse?
+    public var data: Data?
+    public var error: Error?
 
-    init(request: URLRequest? = nil, response: HTTPURLResponse? = nil, data: Data? = nil, error: Error? = nil) {
+    public init(request: URLRequest? = nil, response: HTTPURLResponse? = nil, data: Data? = nil, error: Error? = nil) {
         self.request = request
         self.response = response
         self.data = data

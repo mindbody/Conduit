@@ -9,22 +9,18 @@
 import Foundation
 
 /// An error that prevented Conduit from fulfilling a given task.
+///
+/// - internalFailure: An unexpected error occurred within the framework.
+/// - noResponse: A network request expected to return a response, returned no reponse.
+///               Usually, the server application failed to respond within the timeout.
+/// - requestFailure: The server response indicates a bad request.
+/// - serializationError: Serialization error.
+/// - deserializationError: Deserialization error.
 public enum ConduitError: Error {
-
-    /// An unexpected error occurred within the framework.
     case internalFailure(message: String)
-
-    /// A network request expected to return a response, returned no reponse.
-    /// Usually, the server application failed to respond within the timeout.
     case noResponse(request: URLRequest?)
-
-    /// The server response indicates a bad request.
     case requestFailure(taskResponse: SessionTaskResponse)
-
-    /// Serialization error
     case serializationError(message: String)
-
-    /// Deserialization error
     case deserializationError(data: Data?, type: Any.Type)
 }
 

@@ -60,7 +60,7 @@ struct ProtectedResourceService {
             let dto: ProtectedThing
             do {
                 guard let json = try responseDeserializer.deserialize(response: response, data: data) as? [String : Any] else {
-                    throw ResponseDeserializerError.deserializationFailure
+                    throw ConduitError.deserializationError(data: data, type: ProtectedThing.self)
                 }
                 dto = try ProtectedThing(json: json)
             }

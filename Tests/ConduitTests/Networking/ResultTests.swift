@@ -22,8 +22,8 @@ class ResultTests: XCTestCase {
     }
 
     func testResultShouldBeAbleToStoreAnError() {
-        let sut = Result<Int>.error(TestError.otherError)
-        if case .error(let err) = sut, let error = err as? TestError, case .otherError = error {
+        let sut = Result<Int>.error(TestError.someError)
+        if case .error(let err) = sut, let error = err as? TestError, case .someError = error {
             // Pass
         }
         else {
@@ -42,12 +42,12 @@ class ResultTests: XCTestCase {
     }
 
     func testRewrappingAResultShouldAllowDifferentTypesWithoutChangingTheUnderlyingError() {
-        let r = Result<Int>.error(TestError.otherError)
+        let r = Result<Int>.error(TestError.someError)
         let rNew = r.convert { return Int64($0) } // Conversion we don't care about.
 
         if case .error(let e) = rNew {
             if let e = e as? TestError {
-                XCTAssertEqual(e, TestError.otherError)
+                XCTAssertEqual(e, TestError.someError)
             }
             else {
                 XCTFail("Unexpected error type")
@@ -59,7 +59,7 @@ class ResultTests: XCTestCase {
     }
 
     func testShouldAllowRewrappingTheErrorWithADifferentError() {
-        let r = Result<Int>.error(TestError.otherError)
+        let r = Result<Int>.error(TestError.someError)
 
         // Converts the underlying error to a different case, but leaves the value unchanged.
         let rNew = r.convert(errorConverter: { _ in
@@ -81,13 +81,13 @@ class ResultTests: XCTestCase {
 
     func testOptionalValueGetter() {
         XCTAssertEqual(Result<Int>.value(1).value, 1)
-        XCTAssertNil(Result<Int>.error(TestError.otherError).value)
+        XCTAssertNil(Result<Int>.error(TestError.someError).value)
     }
 
     func testOptionalErrorGetter() {
-        let error = Result<Int>.error(TestError.otherError).error
+        let error = Result<Int>.error(TestError.someError).error
         XCTAssertNotNil(error)
-        guard case .some(TestError.otherError) = error else {
+        guard case .some(TestError.someError) = error else {
             XCTFail("Unexpected error")
             return
         }
@@ -96,7 +96,7 @@ class ResultTests: XCTestCase {
 
     func testThrowingValueGetter() throws {
         XCTAssertEqual(try Result<Int>.value(1).valueOrThrow(), 1)
-        XCTAssertThrowsError(try Result<Int>.error(TestError.otherError).valueOrThrow())
+        XCTAssertThrowsError(try Result<Int>.error(TestError.someError).valueOrThrow())
     }
 
     func testThrowingValueGetterWithVoid() {
@@ -105,9 +105,9 @@ class ResultTests: XCTestCase {
 
     func testThrowingValueGetterErrorType() throws {
         do {
-            _ = try Result<Int>.error(TestError.otherError).valueOrThrow()
+            _ = try Result<Int>.error(TestError.someError).valueOrThrow()
         }
-        catch TestError.otherError {
+        catch TestError.someError {
             // Pass
         }
         catch {
