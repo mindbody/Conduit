@@ -20,7 +20,7 @@ struct ProtectedResourceService {
         var urlComponents = URLComponents(url: apiBaseURL, resolvingAgainstBaseURL: false)
         urlComponents?.path = "/answers/life"
         guard let url = urlComponents?.url else {
-            completion(.error(RequestSerializerError.invalidURL))
+            completion(.error(ConduitError.internalFailure(message: "Invalid url")))
             return
         }
 
@@ -40,7 +40,7 @@ struct ProtectedResourceService {
         do {
             request = try builder.build()
         }
-        catch {
+        catch let error {
             completion(.error(error))
             return
         }
@@ -55,16 +55,17 @@ struct ProtectedResourceService {
                                                              tokenStorage: AuthManager.shared.localTokenStore)
         sessionClient.middleware.append(authMiddleware)
 
-        sessionClient.begin(request: request) { (data, response, error) in
+        sessionClient.begin(request: request) { taskResponse in
             let responseDeserializer = JSONResponseDeserializer()
             let dto: ProtectedThing
             do {
-                guard let json = try responseDeserializer.deserialize(response: response, data: data) as? [String : Any] else {
-                    throw ConduitError.deserializationError(data: data, type: ProtectedThing.self)
+                guard let json = try responseDeserializer.deserialize(response: taskResponse.response, data: taskResponse.data)
+                    as? [String : Any] else {
+                        throw ConduitError.deserializationError(data: taskResponse.data, type: ProtectedThing.self)
                 }
                 dto = try ProtectedThing(json: json)
             }
-            catch {
+            catch let error {
                 completion(.error(error))
                 return
             }
