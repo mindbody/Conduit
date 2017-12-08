@@ -13,6 +13,16 @@
 - None
 
 
+## 0.7.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- Use Xcode new build system.
+- Run CI on Xcode 9.2 image.
+
+
 ## 0.7.0
 
 #### Breaking
