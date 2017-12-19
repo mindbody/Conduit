@@ -12,18 +12,18 @@ import Foundation
 /// - Note: A higher log level verbosity will capture all logs within lower
 /// levels, i.e. LogLevel.info will capture .info, .warn, and .error logs
 public enum LogLevel: Int {
-    /// Verbose debug logs
-    case verbose
-    /// Nonverbose debug logs
-    case debug
-    /// Informational progress logs
-    case info
-    /// Warning / potential harm logs
-    case warn
-    /// Error logs
-    case error
     /// Ignores all logs
-    case noOutput
+    case noOutput = 0
+    /// Error logs
+    case error = 1
+    /// Warning / potential harm logs
+    case warn = 2
+    /// Informational progress logs
+    case info = 3
+    /// Nonverbose debug logs
+    case debug = 4
+    /// Verbose debug logs
+    case verbose = 5
 }
 
 extension LogLevel: Comparable {
@@ -33,19 +33,19 @@ extension LogLevel: Comparable {
     }
 
     public static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
-        return lhs.rawValue > rhs.rawValue
+        return lhs.rawValue < rhs.rawValue
     }
 
     public static func <= (lhs: LogLevel, rhs: LogLevel) -> Bool {
-        return lhs.rawValue >= rhs.rawValue
-    }
-
-    public static func >= (lhs: LogLevel, rhs: LogLevel) -> Bool {
         return lhs.rawValue <= rhs.rawValue
     }
 
+    public static func >= (lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue >= rhs.rawValue
+    }
+
     public static func > (lhs: LogLevel, rhs: LogLevel) -> Bool {
-        return lhs.rawValue < rhs.rawValue
+        return lhs.rawValue > rhs.rawValue
     }
 
 }
@@ -86,7 +86,7 @@ extension ConduitLoggerType {
     }
 
     func log(_ block: @autoclosure () -> Any, level: LogLevel, function: String, filePath: String, line: Int) {
-        if level.rawValue <= level.rawValue {
+        if level <= self.level {
             log(block, function: function, filePath: filePath, line: line)
         }
     }
@@ -96,7 +96,7 @@ class ConduitLogger: ConduitLoggerType {
     var level: LogLevel = .error
 
     func log(_ block: @autoclosure () -> Any, function: String, filePath: String, line: Int) {
-        if level.rawValue <= level.rawValue {
+        if level <= self.level {
             print("[Conduit] \(block())")
         }
     }

@@ -12,7 +12,7 @@ extension URLSessionClient {
 
     func log(request: URLRequest, requestID: Int64) {
         let endpoint = self.endpoint(from: request)
-        if logger.level <= .debug {
+        if logger.level < .verbose {
             logger.debug("[🛫 #\(requestID)] \(endpoint)")
             return
         }
@@ -37,10 +37,11 @@ extension URLSessionClient {
         let statusDescription = makeStatusDescription(code: response?.statusCode)
         let responseEndpointDescription = "\(endpoint) => \(statusDescription)"
 
-        if logger.level <= .debug {
+        if logger.level < .verbose {
             logger.debug("[🛬 #\(requestID)] \(responseEndpointDescription)")
             return
         }
+
         var verboseLogComponents = ["\n<<<<<<<<<<<<<< RESPONSE #\(requestID) <<<<<<<<<<<<<<<<<<<<", responseEndpointDescription]
 
         if let headers = prettyHeaders(headers: response?.allHeaderFields as? [String: String]) {
