@@ -13,6 +13,21 @@
 - None
 
 
+## 0.7.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- Fix issue where Logger levels where being ignored.
+
+#### Other
+- None
+
+
 ## 0.7.1
 
 #### Breaking
