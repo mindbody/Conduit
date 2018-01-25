@@ -1,7 +1,7 @@
 ## Master
 
 #### breaking
-- None
+- Remove `Conduit.Auth.defaultClientConfiguration`
 
 #### Enhancements
 - None
@@ -41,7 +41,7 @@
 ## 0.7.0
 
 #### Breaking
-- Remove implicit force unwrapped property Conduit.Auth.defaultClientConfiguration (now it is an optional).
+- Remove implicit force unwrapped property `Conduit.Auth.defaultClientConfiguration` (now it is an optional).
 
 #### Enhancements
 - Refactor unit tests to allow for parallel testing. 
