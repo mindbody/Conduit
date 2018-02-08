@@ -21,13 +21,13 @@ public final class XMLResponseDeserializer: HTTPResponseDeserializer {
 
     public func deserialize(data: Data?) throws -> Any {
         guard let data = data, data.isEmpty == false else {
-            throw ResponseDeserializerError.noData
+            throw ConduitError.internalFailure(message: "No data")
         }
         guard let xmlString = String(data: data, encoding: .utf8) else {
-            throw ResponseDeserializerError.deserializationFailure
+            throw ConduitError.deserializationError(data: data, type: XML.self)
         }
         guard let xml = XML(xmlString) else {
-            throw ResponseDeserializerError.deserializationFailure
+            throw ConduitError.deserializationError(data: data, type: XML.self)
         }
         return xml
     }

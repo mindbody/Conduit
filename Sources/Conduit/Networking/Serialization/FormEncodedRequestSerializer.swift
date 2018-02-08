@@ -15,11 +15,10 @@ public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
     public var formattingOptions = QueryStringFormattingOptions()
 
     override open func serialize(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
-
         var mutableRequest = try super.serialize(request: request, bodyParameters: bodyParameters)
 
         guard let url = mutableRequest.url else {
-            throw RequestSerializerError.invalidURL
+            throw ConduitError.serializationError(message: "No URL")
         }
 
         if let bp = bodyParameters {

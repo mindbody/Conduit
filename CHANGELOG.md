@@ -1,7 +1,17 @@
 ## Master
 
-#### breaking
-- None
+#### Breaking
+- Add `SessionTaskResponse`
+- Update interface for `URLSessionClient.begin` methods to use
+  `SessionTaskResponse` instead of the `(data, response, error)` tuple.
+- Add `ConduitError`
+- Remove `OAuth2Error`
+- Remove `DataConversionError`
+- Remove `RequestSerializerError`
+- Remove `ResponseDeserializerError`
+- Remove `XMLError`
+- Remove `URLError`
+- Remove `URLSessionClientError`
 
 #### Enhancements
 - None
@@ -10,7 +20,7 @@
 - None
 
 #### Other
-- None
+- Unit and integration tests have been updated to use `TestError` where needed.
 
 
 ## 0.7.2
@@ -44,7 +54,7 @@
 - Remove implicit force unwrapped property Conduit.Auth.defaultClientConfiguration (now it is an optional).
 
 #### Enhancements
-- Refactor unit tests to allow for parallel testing. 
+- Refactor unit tests to allow for parallel testing.
 
 #### Bug Fixes
 - None

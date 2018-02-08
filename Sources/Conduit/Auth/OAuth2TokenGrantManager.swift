@@ -14,25 +14,26 @@ struct OAuth2TokenGrantManager {
                                completion: @escaping Result<BearerToken>.Block) {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
-        sessionClient.begin(request: authorizedRequest) { data, response, error in
-            if let error = self.errorFrom(data: data, response: response) {
+        sessionClient.begin(request: authorizedRequest) { taskResponse in
+            if let error = self.errorFrom(taskResponse: taskResponse) {
                 completion(.error(error))
                 return
             }
             let authTokenJSON: [String: Any]
             do {
-                guard let deserializedResponse = try responseDeserializer.deserialize(response: response, data: data) as? [String: Any] else {
-                        completion(.error(OAuth2Error.noResponse))
+                guard let deserializedResponse = try responseDeserializer.deserialize(response: taskResponse.response, data: taskResponse.data)
+                    as? [String: Any] else {
+                        completion(.error(ConduitError.noResponse(request: authorizedRequest)))
                         return
                 }
                 authTokenJSON = deserializedResponse
             }
             catch _ {
-                completion(.error(OAuth2Error.internalFailure))
+                completion(.error(ConduitError.deserializationError(data: taskResponse.data, type: BearerToken.self)))
                 return
             }
             guard let newToken = BearerToken.mapFrom(JSON: authTokenJSON) else {
-                completion(.error(OAuth2Error.internalFailure))
+                completion(.error(ConduitError.deserializationError(data: taskResponse.data, type: BearerToken.self)))
                 return
             }
             completion(.value(newToken))
@@ -42,33 +43,27 @@ struct OAuth2TokenGrantManager {
     static func issueTokenWith(authorizedRequest: URLRequest, responseDeserializer: ResponseDeserializer = JSONResponseDeserializer()) throws -> BearerToken {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
-        let result = try sessionClient.begin(request: authorizedRequest)
-        if let error = errorFrom(data: result.data, response: result.response) {
+        let taskResponse = try sessionClient.begin(request: authorizedRequest)
+        if let error = errorFrom(taskResponse: taskResponse) {
             throw error
         }
-        guard let authTokenJSON = try responseDeserializer.deserialize(response: result.response, data: result.data) as? [String: Any] else {
-            throw OAuth2Error.noResponse
+        guard let authTokenJSON = try responseDeserializer.deserialize(response: taskResponse.response, data: taskResponse.data) as? [String: Any] else {
+            throw ConduitError.noResponse(request: authorizedRequest)
         }
         guard let newToken = BearerToken.mapFrom(JSON: authTokenJSON) else {
-            throw OAuth2Error.internalFailure
+            throw ConduitError.deserializationError(data: taskResponse.data, type: BearerToken.self)
         }
         return newToken
     }
 
-    static func errorFrom(data: Data?, response: HTTPURLResponse?) -> Error? {
-        guard let response = response else {
-            return OAuth2Error.noResponse
+    static func errorFrom(taskResponse: SessionTaskResponse) -> ConduitError? {
+        guard let response = taskResponse.response else {
+            return ConduitError.noResponse(request: taskResponse.request)
         }
 
-        switch response.statusCode {
-        case 401:
-            return OAuth2Error.clientFailure(data, response)
-        case 400..<500:
-            return OAuth2Error.clientFailure(data, response)
-        case 500...:
-            return OAuth2Error.serverFailure(data, response)
-        default:
-            return nil
+        if response.statusCode >= 400 {
+            return ConduitError.requestFailure(taskResponse: taskResponse)
         }
+        return nil
     }
 }

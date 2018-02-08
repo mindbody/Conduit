@@ -9,10 +9,6 @@
 import XCTest
 @testable import Conduit
 
-enum TestError: Error {
-    case invalidTest
-}
-
 class MultipartFormRequestSerializerTests: XCTestCase {
 
     private func makeRequest() throws -> URLRequest {
@@ -67,17 +63,17 @@ class MultipartFormRequestSerializerTests: XCTestCase {
 
         let receivedResponseExpectation = expectation(description: "recieved response")
 
-        client.begin(request: modifiedRequest) { (data, response, _) in
+        client.begin(request: modifiedRequest) { taskResponse in
             do {
-                let json = try deserializer.deserialize(response: response, data: data) as? [String: Any]
+                let json = try deserializer.deserialize(response: taskResponse.response, data: taskResponse.data) as? [String: Any]
                 let files = json?["files"] as? [String: String]
                 let forms = json?["form"] as? [String: String]
 
                 XCTAssertEqual(files?.keys.count, 5)
                 XCTAssertEqual(forms?.keys.count, 1)
             }
-            catch {
-                XCTFail("Request failed")
+            catch let error {
+                XCTFail(error.localizedDescription)
             }
             receivedResponseExpectation.fulfill()
         }

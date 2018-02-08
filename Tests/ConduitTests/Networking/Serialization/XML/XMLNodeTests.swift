@@ -261,13 +261,13 @@ class XMLNodeTests: XCTestCase {
         XCTAssertNil(qux.getValue() as Bool?)
     }
 
-    func testThrowsNameOfNodeNotFound() throws {
+    func testThrowsInternalError() throws {
         let foo = XMLNode(name: "foo")
         do {
             _ = try foo.getValue("bar") as String
         }
-        catch XMLError.nodeNotFound(let name) {
-            XCTAssertEqual(name, "bar")
+        catch ConduitError.internalFailure(let message) {
+            XCTAssertTrue(message.contains("bar"))
         }
     }
 }

@@ -22,7 +22,6 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
     }
 
     public override func serialize(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
-
         var request = try super.serialize(request: request, bodyParameters: bodyParameters)
 
         var JSONData: Data? = nil
@@ -35,8 +34,8 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
                     try JSONData = JSONSerialization.data(withJSONObject: bp, options: writingOptions)
                 }
             }
-            catch _ {
-                throw RequestSerializerError.serializationFailure
+            catch let error {
+                throw ConduitError.serializationError(message: error.localizedDescription)
             }
         }
 

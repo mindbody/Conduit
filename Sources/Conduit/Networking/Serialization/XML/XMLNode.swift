@@ -114,7 +114,7 @@ public struct XMLNode {
     /// - Throws: XMLError if no descendant found
     public func node(named name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> XMLNode {
         guard let node = nodes(named: name, traversal: traversal).first else {
-            throw XMLError.nodeNotFound(name: name)
+            throw ConduitError.internalFailure(message: "XML node not found: \(name)")
         }
         return node
     }
@@ -222,7 +222,7 @@ extension XMLNode {
     /// - Throws: XMLError if node has no value (does not contain a text node) or if casting to type fails
     public func getValue<T: XMLTextNodeInitializable>() throws -> T {
         guard let value: T = getValue() else {
-            throw XMLError.invalidDataType
+            throw ConduitError.internalFailure(message: "Could not retrieve value as \(T.self)")
         }
         return value
     }

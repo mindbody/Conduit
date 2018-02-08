@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum URLError: Error {
-    case badURL
-}
-
 extension URL {
     /// Exception-based initializer for URL objects.
     ///
@@ -22,7 +18,7 @@ extension URL {
     /// - Throws: Throws URLError.badURL if the URL contains invalid characters, or is empty
     init(absoluteString string: String) throws {
         guard let url = URL(string: string) else {
-            throw URLError.badURL
+            throw ConduitError.internalFailure(message: "Invalid URL: \(string)")
         }
         self = url
     }

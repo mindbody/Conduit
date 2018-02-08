@@ -11,7 +11,7 @@ import XCTest
 
 class OAuth2TokenGrantManagerTests: XCTestCase {
 
-    typealias BadResponse = (response: HTTPURLResponse?, expectedError: OAuth2Error)
+    typealias BadResponse = (response: HTTPURLResponse?, expectedError: ConduitError)
 
     let dummyURL = URL(string: "http://localhost:3333/get")
 
@@ -20,22 +20,23 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
             XCTFail("Inavlid url")
             return
         }
-        let response401 = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil)
-        let response400 = HTTPURLResponse(url: url, statusCode: 400, httpVersion: "1.1", headerFields: nil)
-        let response500 = HTTPURLResponse(url: url, statusCode: 500, httpVersion: "1.1", headerFields: nil)
+        let noResponse = SessionTaskResponse()
+        let response401 = SessionTaskResponse(response: HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil))
+        let response400 = SessionTaskResponse(response: HTTPURLResponse(url: url, statusCode: 400, httpVersion: "1.1", headerFields: nil))
+        let response500 = SessionTaskResponse(response: HTTPURLResponse(url: url, statusCode: 500, httpVersion: "1.1", headerFields: nil))
 
-        guard let errorNoResponse = OAuth2TokenGrantManager.errorFrom(data: nil, response: nil) as? OAuth2Error,
-            let error401 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response401) as? OAuth2Error,
-            let error400 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response400) as? OAuth2Error,
-            let error500 = OAuth2TokenGrantManager.errorFrom(data: nil, response: response500) as? OAuth2Error else {
+        guard let errorNoResponse = OAuth2TokenGrantManager.errorFrom(taskResponse: noResponse),
+            let error401 = OAuth2TokenGrantManager.errorFrom(taskResponse: response401),
+            let error400 = OAuth2TokenGrantManager.errorFrom(taskResponse: response400),
+            let error500 = OAuth2TokenGrantManager.errorFrom(taskResponse: response500) else {
                 XCTFail("Unexpected error type")
                 return
         }
 
         guard case .noResponse = errorNoResponse,
-            case .clientFailure(_, _) = error401,
-            case .clientFailure(_, _) = error400,
-            case .serverFailure(_, _) = error500 else {
+            case .requestFailure = error401,
+            case .requestFailure = error400,
+            case .requestFailure = error500 else {
                 XCTFail("Unexpected error type")
                 return
         }
@@ -47,27 +48,9 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
             XCTFail("Inavlid url")
             return
         }
-        let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: nil)
-        let generatedError = OAuth2TokenGrantManager.errorFrom(data: nil, response: validResponse)
+        let taskResponse = SessionTaskResponse(response: HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: nil))
+        let generatedError = OAuth2TokenGrantManager.errorFrom(taskResponse: taskResponse)
         XCTAssertNil(generatedError)
     }
 
-    func testBadResponses() {
-        guard let url = dummyURL, let mockResponse = HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil) else {
-            XCTFail("Invalid response")
-            return
-        }
-
-        let badResponses = [
-            (nil, OAuth2Error.noResponse),
-            (HTTPURLResponse(url: url, statusCode: 401, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
-            (HTTPURLResponse(url: url, statusCode: 400, httpVersion: "1.1", headerFields: nil), OAuth2Error.clientFailure(nil, mockResponse)),
-            (HTTPURLResponse(url: url, statusCode: 500, httpVersion: "1.1", headerFields: nil), OAuth2Error.serverFailure(nil, mockResponse))
-        ]
-
-        badResponses.forEach { badResponse in
-            let generatedError = OAuth2TokenGrantManager.errorFrom(data: nil, response: badResponse.0)
-            XCTAssertNotNil(generatedError)
-        }
-    }
 }

@@ -33,9 +33,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     ///   - clientConfiguration: The configuration of the OAuth2 client
     ///   - authorization: The needed authorization type and level needed to decorate the request
     ///   - tokenStorage: The storage mechanism used to retrieve and update tokens
-    public init(clientConfiguration: OAuth2ClientConfiguration,
-                authorization: OAuth2Authorization,
-                tokenStorage: OAuth2TokenStore) {
+    public init(clientConfiguration: OAuth2ClientConfiguration, authorization: OAuth2Authorization, tokenStorage: OAuth2TokenStore) {
         self.clientConfiguration = clientConfiguration
         self.authorization = authorization
         self.tokenStorage = tokenStorage
@@ -49,14 +47,13 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Token is valid, proceeding to middleware completion")
             makeRequestByApplyingAuthorizationHeader(to: request, with: token, completion: completion)
         }
-        else if let token = token,
-            token.refreshToken != nil {
+        else if let token = token, token.refreshToken != nil {
             logger.info("Token is expired, proceeding to refresh token")
             refresh(token: token) { result in
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
-                    if case OAuth2Error.clientFailure(_) = error {
+                    if case ConduitError.requestFailure(_) = error {
                         self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
                     completion(.error(error))
@@ -72,8 +69,9 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             prepareForTransportWithClientAuthorization(request: request, completion: completion)
         }
         else {
-            logger.warn("Invalid or empty token supplied for user authorization")
-            completion(.error(OAuth2Error.clientFailure(nil, nil)))
+            let message = "Invalid or empty token supplied for user authorization"
+            logger.warn(message)
+            completion(.error(ConduitError.internalFailure(message: message)))
         }
     }
 
@@ -93,13 +91,9 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                     self.tokenStorage.store(token: newToken,
                                             for: self.clientConfiguration,
                                             with: self.authorization)
-                    self.makeRequestByApplyingAuthorizationHeader(to: request,
-                                                                  with: newToken,
-                                                                  completion: completion)
+                    self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
                 }
-                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
-                                                            authorizationLevel: self.authorization.level,
-                                                            result: result)
+                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration, authorizationLevel: self.authorization.level, result: result)
             }
         }
         else {
@@ -107,9 +101,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
             let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
                                         password: clientConfiguration.clientSecret)
-            makeRequestByApplyingAuthorizationHeader(to: request,
-                                                     with: basicToken,
-                                                     completion: completion)
+            makeRequestByApplyingAuthorizationHeader(to: request, with: basicToken, completion: completion)
         }
     }
 
@@ -135,15 +127,17 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
 
     private func makeRequestByApplyingAuthorizationHeader(to request: URLRequest, with token: OAuth2Token, completion: Result<URLRequest>.Block) {
         guard let mutableRequest = (request as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
-            completion(.error(OAuth2Error.internalFailure))
+            let message = "There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware"
+            logger.error(message)
+            completion(.error(ConduitError.internalFailure(message: message)))
             return
         }
 
         mutableRequest.setValue(token.authorizationHeaderValue, forHTTPHeaderField: "Authorization")
         guard let request = mutableRequest.copy() as? URLRequest else {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
-            completion(.error(OAuth2Error.internalFailure))
+            let message = "There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware"
+            logger.error(message)
+            completion(.error(ConduitError.internalFailure(message: message)))
             return
         }
         completion(.value(request))
@@ -151,11 +145,9 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
 
     private func buildTokenRefreshRequestFor(token: BearerToken, completion: Result<URLRequest>.Block) {
         guard let refreshToken = token.refreshToken else {
-            logger.warn([
-                "A request required Bearer authorization, but the expired token",
-                "does not have an available refresh token"
-            ].joined(separator: " "))
-            completion(.error(OAuth2Error.internalFailure))
+            let message = "A request required Bearer authorization, but the expired token does not have an available refresh token"
+            logger.error(message)
+            completion(.error(ConduitError.internalFailure(message: message)))
             return
         }
 
@@ -163,9 +155,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                                     password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
-        requestBuilder.bodyParameters = ["grant_type": "refresh_token",
-                                         "refresh_token": refreshToken,
-                                         "scope": clientConfiguration.environment.scope]
+        requestBuilder.bodyParameters = ["grant_type": "refresh_token", "refresh_token": refreshToken, "scope": clientConfiguration.environment.scope]
         requestBuilder.method = .POST
         requestBuilder.serializer = FormEncodedRequestSerializer()
 
@@ -174,15 +164,15 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             makeRequestByApplyingAuthorizationHeader(to: mutableRequest, with: basicToken, completion: completion)
         }
         catch let error {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
+            let message = "There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware"
+            logger.error(message)
             logger.debug("RequestBuilder Error: \(error)")
-            completion(.error(OAuth2Error.internalFailure))
+            completion(.error(ConduitError.internalFailure(message: message)))
         }
     }
 
     private func refresh(token: BearerToken, completion: @escaping Result<BearerToken>.Block) {
-        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
-                                                   authorizationLevel: authorization.level)
+        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration, authorizationLevel: authorization.level)
 
         buildTokenRefreshRequestFor(token: token) { result in
             var request: URLRequest
@@ -196,9 +186,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
 
             OAuth2TokenGrantManager.issueTokenWith(authorizedRequest: request) { result in
                 completion(result)
-                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
-                                                            authorizationLevel: self.authorization.level,
-                                                            result: result)
+                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration, authorizationLevel: self.authorization.level, result: result)
             }
         }
     }

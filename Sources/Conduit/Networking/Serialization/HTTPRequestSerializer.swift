@@ -119,15 +119,14 @@ open class HTTPRequestSerializer: RequestSerializer {
     }()
 
     open func serialize(request: URLRequest, bodyParameters: Any? = nil) throws -> URLRequest {
-
         guard let httpMethod = request.httpMethod, request.url != nil else {
-            throw RequestSerializerError.invalidURL
+            throw ConduitError.serializationError(message: "Missing URL")
         }
 
         let httpMethodsWithNoBody = HTTPRequestSerializer.httpMethodsWithNoBody.map { $0.rawValue }
 
         if bodyParameters != nil && httpMethodsWithNoBody.contains(httpMethod) {
-            throw RequestSerializerError.httpVerbDoesNotAllowBodyParameters
+            throw ConduitError.serializationError(message: "HTTP method \(httpMethod) does not support body")
         }
         var mutableRequest = request
 

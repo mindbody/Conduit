@@ -102,7 +102,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         var mutableData = Data()
         guard let boundaryData = encodedDataFrom(string: inlineContentBoundary),
             let crlfData = encodedDataFrom(string: MultipartFormRequestSerializer.CRLF) else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Failed to encode boundary data.")
         }
         mutableData.append(boundaryData)
         mutableData.append(crlfData)
@@ -114,13 +114,13 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         for header in headers {
             let headerStr = "\(header.0): \(header.1)\(MultipartFormRequestSerializer.CRLF)"
             guard let headerData = encodedDataFrom(string: headerStr) else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Failed to encode header data.")
             }
             mutableData.append(headerData)
         }
 
         guard let contentData = formPart.contentData() else {
-            throw RequestSerializerError.serializationFailure
+            throw ConduitError.serializationError(message: "Failed to encode content data.")
         }
         mutableData.append(crlfData)
         mutableData.append(contentData)
@@ -138,7 +138,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
         let boundaryLine = "\(finalContentBoundary)\(MultipartFormRequestSerializer.CRLF)"
         guard let finalBoundaryData = encodedDataFrom(string: boundaryLine) else {
-            throw RequestSerializerError.serializationFailure
+            throw ConduitError.serializationError(message: "Failed to encode boundary data.")
         }
 
         mutableBody.append(finalBoundaryData)

@@ -9,10 +9,6 @@
 import XCTest
 @testable import Conduit
 
-private enum MockSerializationError: Error {
-    case testError
-}
-
 private class MockRequestSerializer: RequestSerializer {
     var shouldThrowError = false
     var hasBeenUtilized = false
@@ -21,7 +17,7 @@ private class MockRequestSerializer: RequestSerializer {
         self.hasBeenUtilized = true
 
         if shouldThrowError {
-            throw MockSerializationError.testError
+            throw TestError.someError
         }
 
         return request
@@ -62,7 +58,7 @@ class HTTPRequestBuilderTests: XCTestCase {
 
         sut.serializer = mockSerializer
         XCTAssertThrowsError(try sut.build(), "error forwarded") { error in
-            guard case MockSerializationError.testError = error else {
+            guard case TestError.someError = error else {
                 XCTFail("Unexpeted error was thrown")
                 return
             }

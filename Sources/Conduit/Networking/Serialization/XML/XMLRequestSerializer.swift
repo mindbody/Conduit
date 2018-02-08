@@ -31,12 +31,12 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
         var bodyData: Data? = nil
         if bodyParameters != nil {
             guard let bodyParameters = bodyParameters as? XML else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Missing body data")
             }
             let bodyString = String(describing: bodyParameters)
             bodyData = bodyString.data(using: .utf8)
             guard bodyData != nil else {
-                throw RequestSerializerError.serializationFailure
+                throw ConduitError.serializationError(message: "Failed to encode body data")
             }
         }
         return bodyData

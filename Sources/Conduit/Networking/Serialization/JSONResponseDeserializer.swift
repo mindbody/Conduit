@@ -22,9 +22,9 @@ public final class JSONResponseDeserializer: HTTPResponseDeserializer {
         self.readingOptions = readingOptions
     }
 
-    public func deserialize(data: Data?) throws -> Any {
-        guard let data = data, data.isEmpty == false else {
-            throw ResponseDeserializerError.noData
+    public func deserialize(data optionalData: Data?) throws -> Any {
+        guard let data = optionalData, data.isEmpty == false else {
+            throw ConduitError.deserializationError(data: optionalData, type: Any.self)
         }
 
         return try deserializeObjectFrom(data: data)
@@ -35,7 +35,7 @@ public final class JSONResponseDeserializer: HTTPResponseDeserializer {
             return try JSONSerialization.jsonObject(with: data, options: readingOptions)
         }
         catch {
-            throw ResponseDeserializerError.deserializationFailure
+            throw ConduitError.deserializationError(data: data, type: Any.self)
         }
     }
 }
