@@ -42,18 +42,18 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLNodeConstruction() {
-        var n4 = XMLNode(name: "N")
-        n4.attributes = ["testKey": "testValue"]
-        let n5 = XMLNode(name: "LastNode")
+        var node4 = XMLNode(name: "N")
+        node4.attributes = ["testKey": "testValue"]
+        let node5 = XMLNode(name: "LastNode")
 
-        let n1 = XMLNode(name: "N")
-        var n2 = XMLNode(name: "N")
-        n2.text = "test 🙂 value"
-        var n3 = XMLNode(name: "N")
-        n3.children = [n4, n5]
+        let node1 = XMLNode(name: "N")
+        var node2 = XMLNode(name: "N")
+        node2.text = "test 🙂 value"
+        var node3 = XMLNode(name: "N")
+        node3.children = [node4, node5]
 
         var root = XMLNode(name: "Root")
-        root.children = [n1, n2, n3]
+        root.children = [node1, node2, node3]
 
         let xml = XML(root: root)
 

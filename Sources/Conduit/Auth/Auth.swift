@@ -83,7 +83,7 @@ public class Auth {
                                           for: middleware.clientConfiguration,
                                           with: middleware.authorization)
 
-            sessionClient.begin(request: noOpRequest) { (data, response, _) in
+            sessionClient.begin(request: noOpRequest) { data, response, _ in
                 if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
                                                                              authorization: middleware.authorization),
                     token.isValid {

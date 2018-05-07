@@ -14,7 +14,7 @@ public struct CertificateBundle {
     let certificates: [SecCertificate]
 
     var publicKeys: [SecKey] {
-        return certificates.flatMap { CertificateBundle.publicKeyFrom(certificate: $0) }
+        return certificates.compactMap { CertificateBundle.publicKeyFrom(certificate: $0) }
     }
 
     static private let certificatesInBundle = CertificateBundle.certificatesWithinMainBundle()
@@ -36,7 +36,7 @@ public struct CertificateBundle {
     ///   - serverTrust: A server trust, which contains a certificate chain
     public init(serverTrust: SecTrust) {
         let certificateCount = SecTrustGetCertificateCount(serverTrust)
-        let certificates = (0..<certificateCount).flatMap { SecTrustGetCertificateAtIndex(serverTrust, $0) }
+        let certificates = (0..<certificateCount).compactMap { SecTrustGetCertificateAtIndex(serverTrust, $0) }
 
         self.init(certificates: certificates)
     }
@@ -82,7 +82,7 @@ public struct CertificateBundle {
     }
 
     static private func certificatesFrom(paths: [String]) -> [SecCertificate] {
-        return paths.flatMap { path in
+        return paths.compactMap { path in
             if let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
                 return SecCertificateCreateWithData(nil, data as CFData)
             }
