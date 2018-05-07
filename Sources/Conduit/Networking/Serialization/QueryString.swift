@@ -98,10 +98,10 @@ internal struct QueryString {
         var queryItems = [URLQueryItem]()
 
         switch params {
-        case let p as [String: Any]:
-            queryItems.append(contentsOf: queryItemsFromDictionary(dict: p))
-        case let n as NSNumber:
-            let newPath = "\(url.absoluteString)?\(n.stringValue)"
+        case let dictionary as [String: Any]:
+            queryItems.append(contentsOf: queryItemsFromDictionary(dict: dictionary))
+        case let number as NSNumber:
+            let newPath = "\(url.absoluteString)?\(number.stringValue)"
             guard let newUrl = URL(string: newPath) else {
                 throw RequestSerializerError.serializationFailure
             }

@@ -26,13 +26,13 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
         var request = try super.serialize(request: request, bodyParameters: bodyParameters)
 
         var JSONData: Data? = nil
-        if let bp = bodyParameters {
+        if let bodyParameters = bodyParameters {
             do {
-                if let fragmentData = JSONRequestSerializer.fragmentedDataFrom(jsonObject: bp) {
+                if let fragmentData = JSONRequestSerializer.fragmentedDataFrom(jsonObject: bodyParameters) {
                     JSONData = fragmentData
                 }
                 else {
-                    try JSONData = JSONSerialization.data(withJSONObject: bp, options: writingOptions)
+                    try JSONData = JSONSerialization.data(withJSONObject: bodyParameters, options: writingOptions)
                 }
             }
             catch _ {

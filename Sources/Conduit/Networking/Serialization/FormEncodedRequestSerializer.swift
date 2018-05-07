@@ -22,10 +22,10 @@ public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
             throw RequestSerializerError.invalidURL
         }
 
-        if let bp = bodyParameters {
+        if let bodyParameters = bodyParameters {
             // This URI-encodes `p`, use an empty URL as the base.
             // Then we grab the .query property from the resulting URL
-            var queryString = QueryString(parameters: bp, url: url)
+            var queryString = QueryString(parameters: bodyParameters, url: url)
             queryString.formattingOptions = formattingOptions
             let formEncodedParams = try queryString.encodeURL().query
             mutableRequest.httpBody = formEncodedParams?.data(using: String.Encoding.utf8)

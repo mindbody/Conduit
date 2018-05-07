@@ -116,13 +116,13 @@ extension Result {
     /// - Returns: Result<TNew>
     public func convert<TNew>(errorConverter: ((Error) -> Error)? = nil, valueConverter: (T) -> TNew) -> Result<TNew> {
         switch self {
-        case .error(let e):
-            guard let ec = errorConverter else {
-                return .error(e)
+        case .error(let error):
+            guard let errorConverter = errorConverter else {
+                return .error(error)
             }
-            return .error(ec(e))
-        case .value(let v):
-            return .value(valueConverter(v))
+            return .error(errorConverter(error))
+        case .value(let value):
+            return .value(valueConverter(value))
         }
     }
 

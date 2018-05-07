@@ -90,7 +90,7 @@ class URLSessionClientTests: XCTestCase {
         let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
 
         let requestProcessedMiddleware = expectation(description: "request processed")
-        client.begin(request: request) { (_, _, error) in
+        client.begin(request: request) { _, _, error in
             XCTAssertNotNil(error)
             requestProcessedMiddleware.fulfill()
         }
@@ -103,7 +103,7 @@ class URLSessionClientTests: XCTestCase {
         let client: URLSessionClient = URLSessionClient()
 
         let requestProcessedMiddleware = expectation(description: "request processed")
-        let sessionProxy = client.begin(request: request) { (_, _, error) in
+        let sessionProxy = client.begin(request: request) { _, _, error in
             XCTAssertNotNil(error)
             requestProcessedMiddleware.fulfill()
         }
@@ -118,7 +118,7 @@ class URLSessionClientTests: XCTestCase {
 
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
 
-        let sessionProxy = client.begin(request: request) { (_, _, _) in
+        let sessionProxy = client.begin(request: request) { _, _, _ in
             XCTFail("Request should not have been executed")
         }
 
@@ -141,7 +141,7 @@ class URLSessionClientTests: XCTestCase {
 
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
-        var sessionProxy = client.begin(request: request) { (_, _, _) in
+        var sessionProxy = client.begin(request: request) { _, _, _ in
             XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
@@ -171,7 +171,7 @@ class URLSessionClientTests: XCTestCase {
 
         var progress: Progress?
         let requestFinishedExpectation = expectation(description: "request finished")
-        var sessionProxy = client.begin(request: request) { (_, _, _) in
+        var sessionProxy = client.begin(request: request) { _, _, _ in
             XCTAssertNotNil(progress)
             requestFinishedExpectation.fulfill()
         }
