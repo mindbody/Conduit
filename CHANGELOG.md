@@ -1,6 +1,20 @@
 ## Master
 
-#### breaking
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+## 0.8.0
+
+#### Breaking
 - Update to Xcode 9.3 / Swift 4.1
 
 #### Enhancements
