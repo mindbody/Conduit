@@ -1,7 +1,7 @@
 ## Master
 
 #### breaking
-- None
+- Update to Xcode 9.3 / Swift 4.1
 
 #### Enhancements
 - None
