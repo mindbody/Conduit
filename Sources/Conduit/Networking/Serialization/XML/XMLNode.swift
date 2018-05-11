@@ -88,9 +88,9 @@ public struct XMLNode {
     /// Retrieve a list of all descendant nodes with the given name
     ///
     /// - Parameter name: Node name to retrieve
-    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
+    /// - Parameter traversal: Node Traversal technique.
     /// - Returns: Array of descendant nodes
-    public func nodes(named name: String, traversal: XMLNodeTraversal = .breadthFirst) -> [XMLNode] {
+    public func nodes(named name: String, traversal: XMLNodeTraversal) -> [XMLNode] {
         if isLeaf {
             return []
         }
@@ -109,10 +109,10 @@ public struct XMLNode {
     /// Retrieve the first descendant node with the given name
     ///
     /// - Parameter name: Node name to retrieve
-    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
+    /// - Parameter traversal: Node Traversal technique.
     /// - Returns: Descendant nodes
     /// - Throws: XMLError if no descendant found
-    public func node(named name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> XMLNode {
+    public func node(named name: String, traversal: XMLNodeTraversal) throws -> XMLNode {
         guard let node = nodes(named: name, traversal: traversal).first else {
             throw XMLError.nodeNotFound(name: name)
         }
@@ -190,30 +190,28 @@ extension XMLNode: LosslessStringConvertible {
 
 }
 
-// MARK: - Value getters
+// MARK: - First level value getters
 
 extension XMLNode {
 
     /// Retrieve the first descendant node with the given name, converted to the given type
     ///
     /// - Parameter name: Node name to retrieve
-    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           and no default has been provided, or if casting to type fails
-    public func getValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) throws -> T {
-        return try node(named: name, traversal: traversal).getValue()
+    public func getValue<T: XMLTextNodeInitializable>(_ name: String) throws -> T {
+        return try node(named: name, traversal: .firstLevel).getValue()
     }
 
     /// Retrieve the first descendant node with the given name, converted to the given type
     ///
     /// - Parameter name: Node name to retrieve
-    /// - Parameter traversal: Node Traversal technique. Defaults to Breadth first
     /// - Returns: Node value (text node) converted to given type
     /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
     ///           or if casting to type fails
-    public func getValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal = .breadthFirst) -> T? {
-        return try? node(named: name, traversal: traversal).getValue()
+    public func getValue<T: XMLTextNodeInitializable>(_ name: String) -> T? {
+        return try? node(named: name, traversal: .firstLevel).getValue()
     }
 
     /// Get node value (text node) converted to given type
@@ -235,6 +233,34 @@ extension XMLNode {
             return nil
         }
         return T(xmlTextNode: textNode)
+    }
+
+}
+
+// MARK: - Recursive value getters
+
+extension XMLNode {
+
+    /// Retrieve the first descendant node with the given name, converted to the given type
+    ///
+    /// - Parameter name: Node name to retrieve
+    /// - Parameter traversal: Node Traversal technique.
+    /// - Returns: Node value (text node) converted to given type
+    /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
+    ///           and no default has been provided, or if casting to type fails
+    public func findValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal) throws -> T {
+        return try node(named: name, traversal: traversal).getValue()
+    }
+
+    /// Retrieve the first descendant node with the given name, converted to the given type
+    ///
+    /// - Parameter name: Node name to retrieve
+    /// - Parameter traversal: Node Traversal technique.
+    /// - Returns: Node value (text node) converted to given type
+    /// - Throws: XMLError if no descendant found, node has no value (does not contain a text node)
+    ///           or if casting to type fails
+    public func findValue<T: XMLTextNodeInitializable>(_ name: String, traversal: XMLNodeTraversal) -> T? {
+        return try? node(named: name, traversal: traversal).getValue()
     }
 
 }
