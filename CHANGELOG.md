@@ -12,6 +12,27 @@
 #### Other
 - None
 
+
+## 0.9.0
+
+#### Breaking
+- Update `XMLNode` interface to better define usage expectations.
+  - Default values for `nodes(named:traversal:)` and `node()` methods have been
+    removed and traversal algorithm must be now set explicitly.
+  - `getValue(name:)` has been updated to always use `.firstLevel` only.
+  - New method `findValue(name:traversal:)` has been added, and requires
+    the traversal algorithm to be set explicitly.
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
 ## 0.8.0
 
 #### Breaking
@@ -58,7 +79,7 @@
 - Remove implicit force unwrapped property Conduit.Auth.defaultClientConfiguration (now it is an optional).
 
 #### Enhancements
-- Refactor unit tests to allow for parallel testing. 
+- Refactor unit tests to allow for parallel testing.
 
 #### Bug Fixes
 - None
