@@ -89,7 +89,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.8.0")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.9.0")
     ]
 )
 ```
@@ -110,7 +110,7 @@ let mySessionClient = URLSessionClient(sessionConfiguration: URLSessionConfigura
 
 ```swift
 class MySessionClientManager {
-    
+
     /// Lazy-loaded URLSessionClient used for interacting with the Kittn API 🐱
     static let kittnAPISessionClient: URLSessionClient = {
         return URLSessionClient()
@@ -198,7 +198,7 @@ This could be used for logging, proxying, authorization, and implementing strict
 ```swift
 /// Simple middelware example that logs each outbound request
 struct LoggingRequestPipelineMiddleware: RequestPipelineMiddleware {
-    
+
     public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
         print("Outbound request: \(request)")
     }
