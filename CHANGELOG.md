@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- `refresh_token` grants no longer require a scope to be set
 
 #### Other
 - None
