@@ -84,12 +84,12 @@ end
 Add `Conduit` to your `Package.swift`:
 
 ```swift
-// swift-tools-version:4.0
+// swift-tools-version:4.1
 import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.9.0")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.9.1")
     ]
 )
 ```
