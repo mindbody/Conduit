@@ -163,9 +163,11 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                                     password: clientConfiguration.clientSecret)
 
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
-        requestBuilder.bodyParameters = ["grant_type": "refresh_token",
-                                         "refresh_token": refreshToken,
-                                         "scope": clientConfiguration.environment.scope]
+        var bodyParameters = ["grant_type": "refresh_token",
+                              "refresh_token": refreshToken]
+        /// "scope" won't be set if clientConfiguration.environment.scope is nil
+        bodyParameters["scope"] = clientConfiguration.environment.scope
+        requestBuilder.bodyParameters = bodyParameters
         requestBuilder.method = .POST
         requestBuilder.serializer = FormEncodedRequestSerializer()
 
