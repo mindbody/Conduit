@@ -3,7 +3,8 @@
 - None
 
 #### Enhancements
-- None
+- Custom refresh grant strategies can be provided on `OAuth2RequestPipelineMiddleware`
+- Default token refresh logic has been moved to `OAuth2RefreshTokenGrantStrategy`
 
 #### Bug Fixes
 - None
