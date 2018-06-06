@@ -18,5 +18,5 @@ public protocol OAuth2RefreshStrategyFactory {
     ///   - clientConfiguration: The configuration of the OAuth2 client
     /// - Returns: An OAuth2TokenGrantStrategy
     func make(refreshToken: String, clientConfiguration: OAuth2ClientConfiguration) -> OAuth2TokenGrantStrategy
-    
+
 }
