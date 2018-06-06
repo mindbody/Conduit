@@ -325,6 +325,14 @@
 		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BFD2F2E20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
+		1BFD2F2F20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
+		1BFD2F3020C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
+		1BFD2F3120C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
+		1BFD2F3320C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
+		1BFD2F3420C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
+		1BFD2F3520C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
+		1BFD2F3620C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
 		9549B2521F799DA9005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2531F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2541F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
@@ -514,6 +522,8 @@
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
+		1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshTokenGrantStrategy.swift; sourceTree = "<group>"; };
+		1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshStrategyFactory.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
 		956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringDictionaryTests.swift; sourceTree = "<group>"; };
 		95CC71C21F797B0C003B4E31 /* badcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badcertificate.txt; sourceTree = "<group>"; };
@@ -711,7 +721,9 @@
 				1B88B1F41F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift */,
 				1B88B1F51F268C220022A69D /* OAuth2ExtensionTokenGrantStrategy.swift */,
 				1B88B1F61F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift */,
+				1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */,
 				1B88B1F71F268C220022A69D /* OAuth2TokenGrantStrategy.swift */,
+				1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */,
 			);
 			path = TokenGrants;
 			sourceTree = "<group>";
@@ -1456,6 +1468,7 @@
 			files = (
 				1B88B2741F268C220022A69D /* OAuth2TokenDiskStore.swift in Sources */,
 				1B88B2241F268C220022A69D /* Auth.swift in Sources */,
+				1BFD2F3420C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
 				1B88B2B81F268C220022A69D /* Result.swift in Sources */,
 				1B88B2A01F268C220022A69D /* ImageDownloader.swift in Sources */,
 				1B88B2F01F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
@@ -1506,6 +1519,7 @@
 				95E26BA91F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B2341F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B88B2CC1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
+				1BFD2F2F20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B2BC1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B88B2DC1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
 			);
@@ -1540,7 +1554,9 @@
 				1B88B2491F268C220022A69D /* OAuth2Authorization.swift in Sources */,
 				1B88B2591F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2D11F268C220022A69D /* QueryString.swift in Sources */,
+				1BFD2F3520C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
 				1B88B2FD1F268C220022A69D /* URL.swift in Sources */,
+				1BFD2F3020C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B3051F268C3F0022A69D /* NetworkReachability.swift in Sources */,
 				1B88B2F51F268C220022A69D /* SessionTaskProxy.swift in Sources */,
 				1B88B28D1F268C220022A69D /* Conduit.swift in Sources */,
@@ -1604,7 +1620,9 @@
 				1B88B24A1F268C220022A69D /* OAuth2Authorization.swift in Sources */,
 				1B88B25A1F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2D21F268C220022A69D /* QueryString.swift in Sources */,
+				1BFD2F3620C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
 				1B88B2FE1F268C220022A69D /* URL.swift in Sources */,
+				1BFD2F3120C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B3061F268C3F0022A69D /* NetworkReachability.swift in Sources */,
 				1B88B2F61F268C220022A69D /* SessionTaskProxy.swift in Sources */,
 				1B88B28E1F268C220022A69D /* Conduit.swift in Sources */,
@@ -1774,6 +1792,7 @@
 				1B88B2371F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
 				95E26BA81F29649600804900 /* XMLNode.swift in Sources */,
 				1B88B23F1F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
+				1BFD2F3320C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
 				1B88B2871F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2BF1F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
 				1B88B23B1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
@@ -1796,6 +1815,7 @@
 				1B88B2C71F268C220022A69D /* JSONResponseDeserializer.swift in Sources */,
 				1B88B2FF1F268C220022A69D /* URLSessionClient.swift in Sources */,
 				1B88B2A31F268C220022A69D /* URLImageCache.swift in Sources */,
+				1BFD2F2E20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B28F1F268C220022A69D /* ConduitLogger.swift in Sources */,
 				1B88B2AF1F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C31F268C220022A69D /* JSONRequestSerializer.swift in Sources */,

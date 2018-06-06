@@ -9,6 +9,28 @@
 import XCTest
 @testable import Conduit
 
+class CustomRefreshTokenGrantStrategy: OAuth2TokenGrantStrategy {
+
+    enum Error: Swift.Error {
+        case didExecute
+    }
+
+    func issueToken(completion: @escaping (Result<BearerToken>) -> Void) {
+        completion(.error(CustomRefreshTokenGrantStrategy.Error.didExecute))
+    }
+
+    func issueToken() throws -> BearerToken {
+        return BearerToken(accessToken: "", expiration: Date())
+    }
+
+}
+
+struct CustomRefreshTokenGrantStrategyFactory: OAuth2RefreshStrategyFactory {
+    func make(refreshToken: String, clientConfiguration: OAuth2ClientConfiguration) -> OAuth2TokenGrantStrategy {
+        return CustomRefreshTokenGrantStrategy()
+    }
+}
+
 class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     let validClientID = "test_client"
@@ -94,6 +116,74 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
                 XCTAssertNotEqual(authorizationHeader, expiredToken.accessToken)
 
                 refreshTokenExpectation.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 2)
+    }
+
+    func testAllowsCustomTokenRefreshGrants() throws {
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
+        let request = try makeDummyRequest()
+        let tokenStorage = OAuth2TokenMemoryStore()
+        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+
+        sut.refreshStrategyFactory = CustomRefreshTokenGrantStrategyFactory()
+
+        let refreshTokenExpectation = expectation(description: "token refreshed")
+
+        let clientCredentialsStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: validClientConfiguration)
+        clientCredentialsStrategy.issueToken { result in
+            guard let token = result.value else {
+                XCTFail("No token")
+                return
+            }
+            let expiredToken = BearerToken(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
+
+            tokenStorage.store(token: expiredToken, for: validClientConfiguration, with: authorization)
+
+            sut.prepareForTransport(request: request) { result in
+                guard result.error is CustomRefreshTokenGrantStrategy.Error else {
+                    XCTFail("Custom strategy ignored")
+                    return
+                }
+
+                refreshTokenExpectation.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 2)
+    }
+
+    func testEmptyTokenRefreshStrategyPreventsRefreshes() throws {
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
+        let request = try makeDummyRequest()
+        let tokenStorage = OAuth2TokenMemoryStore()
+        var sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+
+        sut.refreshStrategyFactory = nil
+
+        let tokenInvalidatedExpectation = expectation(description: "token refresh ignored & token invalidated")
+
+        let clientCredentialsStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: validClientConfiguration)
+        clientCredentialsStrategy.issueToken { result in
+            guard let token = result.value else {
+                XCTFail("No token")
+                return
+            }
+            let expiredToken = BearerToken(accessToken: token.accessToken, refreshToken: token.refreshToken, expiration: Date())
+
+            tokenStorage.store(token: expiredToken, for: validClientConfiguration, with: authorization)
+
+            sut.prepareForTransport(request: request) { result in
+                guard let error = result.error, case OAuth2Error.clientFailure(_, _) = error else {
+                    XCTFail("Custom strategy ignored")
+                    return
+                }
+
+                tokenInvalidatedExpectation.fulfill()
             }
         }
 
