@@ -11,6 +11,8 @@
 
 #### Other
 - Code coverage is now enforced via codecov.io
+- Added `XMLRequestSerializerTests`
+- Added `AuthTokenMigratorTests`
 
 
 ## 0.9.2
