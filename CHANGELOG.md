@@ -10,7 +10,7 @@
 - None
 
 #### Other
-- None
+- Code coverage is now enforced via codecov.io
 
 
 ## 0.9.2
