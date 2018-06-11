@@ -325,6 +325,12 @@
 		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BF8E55D20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
+		1BF8E55E20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
+		1BF8E55F20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
+		1BF8E56120CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */; };
+		1BF8E56220CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */; };
+		1BF8E56320CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */; };
 		1BFD2F2E20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
 		1BFD2F2F20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
 		1BFD2F3020C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */; };
@@ -522,6 +528,8 @@
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
+		1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMigratorTests.swift; sourceTree = "<group>"; };
+		1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializerTests.swift; sourceTree = "<group>"; };
 		1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshTokenGrantStrategy.swift; sourceTree = "<group>"; };
 		1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshStrategyFactory.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
@@ -610,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				1B279CB21F19558100C0005E /* AuthTestUtilities.swift */,
+				1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */,
 				1B279CB81F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift */,
 				1B279CB91F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift */,
 				1B279CBA1F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift */,
@@ -947,6 +956,7 @@
 			children = (
 				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
 				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
+				1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
 			path = XML;
@@ -1662,6 +1672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BD5559A1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
+				1BF8E56120CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				1BD555851F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDA1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD41F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
@@ -1678,6 +1689,7 @@
 				1BD555A31F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1B279CCE1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
+				1BF8E55D20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
 				1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */,
 				1BD5556D1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */,
 				1BD555911F17DC81004B1172 /* JSONResponseDeserializerTests.swift in Sources */,
@@ -1699,6 +1711,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BD5559B1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
+				1BF8E56220CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				1BD555861F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDB1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD51F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
@@ -1715,6 +1728,7 @@
 				1BD555A41F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1B279CCF1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
+				1BF8E55E20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
 				1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */,
 				1BD5556E1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */,
 				1BD555921F17DC81004B1172 /* JSONResponseDeserializerTests.swift in Sources */,
@@ -1736,6 +1750,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BD5559C1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
+				1BF8E56320CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				1BD555871F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDC1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD61F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
@@ -1752,6 +1767,7 @@
 				1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1B279CD01F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
+				1BF8E55F20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
 				1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */,
 				1BD5556F1F17DC81004B1172 /* ImageDownloaderTests.swift in Sources */,
 				1BD555931F17DC81004B1172 /* JSONResponseDeserializerTests.swift in Sources */,
