@@ -11,8 +11,6 @@ import Foundation
 /// A static configuration object for Auth operations
 public class Auth {
 
-    private init() {}
-
     /// The default OAuth2ClientConfiguration, useful for single-client applications
     public static var defaultClientConfiguration: OAuth2ClientConfiguration?
 
