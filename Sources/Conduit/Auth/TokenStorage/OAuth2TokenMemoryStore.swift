@@ -35,4 +35,12 @@ public class OAuth2TokenMemoryStore: OAuth2TokenStore {
         return tokens[tokenKeyFor(client: client, authorization: authorization)] as? Token
     }
 
+    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        return true
+    }
+
+    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
+        return .inactive
+    }
+
 }

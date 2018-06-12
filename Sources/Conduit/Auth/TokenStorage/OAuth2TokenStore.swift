@@ -8,6 +8,11 @@
 
 import Foundation
 
+public enum OAuth2TokenRefreshState {
+    case inactive
+    case refreshing
+}
+
 /// A type that provides the ability to store and retrieve OAuth2 tokens
 public protocol OAuth2TokenStore {
 
@@ -28,6 +33,12 @@ public protocol OAuth2TokenStore {
     /// - Returns: A stored token, or nil if a token doesn't exist
     func tokenFor<Token: OAuth2Token & DataConvertible>(client: OAuth2ClientConfiguration,
                                                         authorization: OAuth2Authorization) -> Token?
+
+    @discardableResult
+    func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState,
+                           client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool
+
+    func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState
 }
 
 extension OAuth2TokenStore {
@@ -53,4 +64,14 @@ extension OAuth2TokenStore {
         store(token: emptyToken, for: client, with: authorization)
     }
 
+    func tokenIdentifierFor(clientConfiguration: OAuth2ClientConfiguration,
+                            authorization: OAuth2Authorization) -> String {
+        let authorizationLevel = authorization.level == .user ? "user-token" : "client-token"
+        return [
+            "com.mindbodyonline.connect.oauth-client",
+            clientConfiguration.clientIdentifier,
+            authorizationLevel,
+            authorization.type.rawValue
+            ].joined(separator: ".")
+    }
 }

@@ -68,6 +68,14 @@ public struct OAuth2TokenKeychainStore: OAuth2TokenStore {
         return try? Token(serializedData: data)
     }
 
+    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        return true
+    }
+
+    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
+        return .inactive
+    }
+
     private func accountIdentifierFor(_ authorization: OAuth2Authorization,
                                       clientConfiguration: OAuth2ClientConfiguration) -> String {
         let authorizationLevel = authorization.level == .user ? "user-token" : "client-token"

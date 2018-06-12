@@ -29,17 +29,6 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         self.storageMethod = storageMethod
     }
 
-    private func identifierFor(clientConfiguration: OAuth2ClientConfiguration,
-                               authorization: OAuth2Authorization) -> String {
-        let authorizationLevel = authorization.level == .user ? "user-token" : "client-token"
-        return [
-            "com.mindbodyonline.connect.oauth-client",
-            clientConfiguration.clientIdentifier,
-            authorizationLevel,
-            authorization.type.rawValue
-        ].joined(separator: ".")
-    }
-
     @discardableResult
     public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
                                                             with authorization: OAuth2Authorization) -> Bool {
@@ -52,7 +41,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         }
         switch storageMethod {
         case .userDefaults:
-            let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
+            let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
             let userDefaults = UserDefaults.standard
             userDefaults.set(tokenData, forKey: identifier)
             return userDefaults.synchronize()
@@ -82,7 +71,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
                                                                authorization: OAuth2Authorization) -> Token? {
         switch storageMethod {
         case .userDefaults:
-            let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
+            let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
             guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
                 return nil
             }
@@ -93,6 +82,13 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
             }
             return try? Token(serializedData: data)
         }
+    }
+    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        return true
+    }
+
+    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
+        return .inactive
     }
 
 }

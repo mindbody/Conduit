@@ -51,11 +51,20 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Token is valid, proceeding to middleware completion")
             makeRequestByApplyingAuthorizationHeader(to: request, with: token, completion: completion)
         }
+        else if tokenStorage.tokenRefreshStateFor(client: clientConfiguration, authorization: authorization) == .refreshing {
+            OAuth2TokenRefreshCoordinator.shared.waitForRefresh {
+                self.prepareForTransport(request: request, completion: completion)
+            }
+            return
+        }
         else if let token = token,
             token.refreshToken != nil,
             refreshStrategyFactory != nil {
             logger.info("Token is expired, proceeding to refresh token")
+            tokenStorage.storeRefreshState(.refreshing, client: clientConfiguration, authorization: authorization)
+            OAuth2TokenRefreshCoordinator.shared.beginTokenRefresh()
             refresh(token: token) { result in
+                self.tokenStorage.storeRefreshState(.inactive, client: self.clientConfiguration, authorization: self.authorization)
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
@@ -69,6 +78,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                     self.tokenStorage.store(token: newToken, for: self.clientConfiguration, with: self.authorization)
                     self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
                 }
+                OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
             }
         }
         else if authorization.level == .client {
