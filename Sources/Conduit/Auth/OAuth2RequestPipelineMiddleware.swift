@@ -21,7 +21,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     /// The maximum amount of time that multi-session locks should be issued when performing token refreshes.
     /// Short-lived processes, such as app extensions, should typically set a lower relinquish interval to defend
     /// against lengthy session locks when terminating mid-flight. This will allow the host process to quickly pick
-    /// up where the other process left off, if it needs to.
+    /// up where the other process left off, if it needs to. Defaults to 30 seconds.
     public var tokenRefreshLockRelinquishInterval: TimeInterval = 30
     let clientConfiguration: OAuth2ClientConfiguration
     let authorization: OAuth2Authorization
