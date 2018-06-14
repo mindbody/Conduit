@@ -133,7 +133,8 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
         }
     }
 
-    public func tokenFor<Token>(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Token? where Token: DataConvertible, Token: OAuth2Token {
+    public func tokenFor<Token>(client: OAuth2ClientConfiguration,
+                                authorization: OAuth2Authorization) -> Token? where Token: DataConvertible, Token: OAuth2Token {
         let storageURL = tokenFileURLFor(client: client, with: authorization)
         return prepareForReading(destination: storageURL) { url -> Token? in
             guard let data = FileManager.default.contents(atPath: url.path) else {

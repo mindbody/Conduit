@@ -31,6 +31,7 @@ struct CustomRefreshTokenGrantStrategyFactory: OAuth2RefreshStrategyFactory {
     }
 }
 
+// swiftlint:disable type_body_length
 class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     let validClientID = "test_client"
@@ -379,3 +380,4 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         }
     }
 }
+// swiftlint:enable type_body_length

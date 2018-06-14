@@ -8,10 +8,14 @@
 
 import Foundation
 
+/// Stores and retrieves OAuth2 tokens from UserDefaults
 public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
 
     private let userDefaults: UserDefaults
 
+    /// Creates a new OAuth2TokenUserDefaultsStore
+    ///
+    /// - Parameter userDefaults: The `UserDefaults` used for storage. Defaults to `UserDefaults.standard`
     public init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
     }
