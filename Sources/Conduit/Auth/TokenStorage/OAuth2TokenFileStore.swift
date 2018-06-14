@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// 
+/// I/O options for `OAuth2TokenFileStore`
 @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
 public struct OAuth2TokenFileStoreOptions {
 
@@ -16,6 +16,13 @@ public struct OAuth2TokenFileStoreOptions {
     let coordinatesFileAccess: Bool
     let tokenWritingOptions: Data.WritingOptions
 
+    /// Creates a new OAuth2TokenFileStoreOptions
+    ///
+    /// - Parameters:
+    ///   - storageDirectory: The directory in which tokens and token locks should be stored
+    ///   - coordinatesFileAccess: If true, then token access is serially handled by concurrent processes.
+    ///     Incurs performance overhead due to synchronous I/O. Defaults to `false`
+    ///   - tokenWritingOptions: Writing options for token storage. Defaults to `.atomic`
     public init(storageDirectory: URL, coordinatesFileAccess: Bool = false,
                 tokenWritingOptions: Data.WritingOptions = .atomic) {
         self.storageDirectory = storageDirectory
@@ -34,6 +41,9 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
         NSFileCoordinator(filePresenter: nil)
     }()
 
+    /// Creates a new OAuth2TokenFileStore
+    ///
+    /// - Parameter options: I/O options
     public init(options: OAuth2TokenFileStoreOptions) {
         self.options = options
     }
