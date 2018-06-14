@@ -9,6 +9,7 @@
 import Foundation
 
 /// Stores and retrieves OAuth2 tokens from local storage (unencrypted)
+@available(*, deprecated, message: "OAuth2TokenDiskStore is no longer supported. Please migrate to OAuth2TokenUserDefaultsStore or OAuth2TokenFileStore.")
 public class OAuth2TokenDiskStore: OAuth2TokenStore {
 
     /// The strategy by which the token is stored locally
@@ -29,17 +30,6 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         self.storageMethod = storageMethod
     }
 
-    private func identifierFor(clientConfiguration: OAuth2ClientConfiguration,
-                               authorization: OAuth2Authorization) -> String {
-        let authorizationLevel = authorization.level == .user ? "user-token" : "client-token"
-        return [
-            "com.mindbodyonline.connect.oauth-client",
-            clientConfiguration.clientIdentifier,
-            authorizationLevel,
-            authorization.type.rawValue
-        ].joined(separator: ".")
-    }
-
     @discardableResult
     public func store<Token: OAuth2Token & DataConvertible>(token: Token?, for client: OAuth2ClientConfiguration,
                                                             with authorization: OAuth2Authorization) -> Bool {
@@ -52,7 +42,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         }
         switch storageMethod {
         case .userDefaults:
-            let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
+            let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
             let userDefaults = UserDefaults.standard
             userDefaults.set(tokenData, forKey: identifier)
             return userDefaults.synchronize()
@@ -82,7 +72,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
                                                                authorization: OAuth2Authorization) -> Token? {
         switch storageMethod {
         case .userDefaults:
-            let identifier = identifierFor(clientConfiguration: client, authorization: authorization)
+            let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
             guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
                 return nil
             }
@@ -92,6 +82,39 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
                 return nil
             }
             return try? Token(serializedData: data)
+        }
+    }
+
+    public func lockRefreshToken(timeout: TimeInterval, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.lockRefreshToken(timeout: timeout, client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return false
+        }
+    }
+
+    public func unlockRefreshTokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.unlockRefreshTokenFor(client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return false
+        }
+    }
+
+    public func refreshTokenLockExpirationFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Date? {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.refreshTokenLockExpirationFor(client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return nil
         }
     }
 

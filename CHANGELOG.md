@@ -1,18 +1,22 @@
 ## master
 
 #### Breaking
-- None
+- `OAuth2TokenStore` now includes required interface for handling refresh token locks
 
 #### Enhancements
-- None
+- Loose-IPC is now used to handle a single active session across multiple processes (i.e. app extensions). Token refreshes were previously only safeguarded via serial pipeline; now, they are also protected against concurrent refreshes from other processes using the same storage
+- Precise token lock expiration control is available via `OAuth2RequestPipelineMiddleware.tokenRefreshLockRelinquishInterval`
+- `OAuth2TokenUserDefaultsStore` adds the ability to store to user-defined `UserDefaults`, most commonly for app group containers
+- `OAuth2TokenFileStore` adds additional I/O control, such as multiprocess file coordination via `NSFileCoordinator` and file protection
 
 #### Bug Fixes
-- None
+- `OAuth2TokenFileStore` solves a design flaw in `OAuth2TokenDiskStore` that prevented multiple tokes to be written for a single OAuth 2.0 client
 
 #### Other
 - Code coverage is now enforced via codecov.io
 - Added `XMLRequestSerializerTests`
 - Added `AuthTokenMigratorTests`
+- `OAuth2TokenDiskStore` is now deprecated in favor of `OAuth2TokenFileStore` and `OAuth2TokenUserDefaultsStore`
 
 
 ## 0.9.2
