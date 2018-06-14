@@ -113,7 +113,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
                 }
                 let authorizationHeader = request.allHTTPHeaderFields?["Authorization"]
                 XCTAssertTrue(authorizationHeader?.contains("Bearer") == true)
-                XCTAssertNotEqual(authorizationHeader, expiredToken.accessToken)
+                XCTAssert(authorizationHeader?.contains(expiredToken.accessToken) == false)
 
                 refreshTokenExpectation.fulfill()
             }
@@ -332,5 +332,50 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         XCTAssertNotNil(sut.token)
 
         waitForExpectations(timeout: 0.1)
+    }
+
+    func testCoordinatesRefreshesBetweenMultipleSessions() throws {
+        /// Simulates multiple sessions (different processes) triggering token refreshes at once
+
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let validClientConfiguration = try makeValidClientConfiguration()
+        let request = try makeDummyRequest()
+        let tokenStorage = OAuth2TokenMemoryStore()
+        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
+
+        let refreshTokenExpectation = expectation(description: "token refreshed")
+        let numSessions = 15
+        refreshTokenExpectation.expectedFulfillmentCount = numSessions
+        var authorizationHeaders: [String] = []
+        let arrayQueue = DispatchQueue(label: #function)
+
+        let clientCredentialsStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: validClientConfiguration)
+        let issuedToken = try clientCredentialsStrategy.issueToken()
+
+        let expiredToken = BearerToken(accessToken: issuedToken.accessToken, refreshToken: issuedToken.refreshToken, expiration: Date())
+
+        tokenStorage.store(token: expiredToken, for: validClientConfiguration, with: authorization)
+
+        for _ in 0..<numSessions {
+            sut.prepareForTransport(request: request) { result in
+                guard let request = result.value,
+                    let authorizationHeader = request.allHTTPHeaderFields?["Authorization"] else {
+                        XCTFail("No value")
+                        return
+                }
+                arrayQueue.sync {
+                    authorizationHeaders.append(authorizationHeader)
+                    refreshTokenExpectation.fulfill()
+                }
+            }
+        }
+
+        waitForExpectations(timeout: 5)
+
+        let firstHeader = authorizationHeaders[0]
+        XCTAssertFalse(firstHeader.contains(expiredToken.accessToken))
+        for header in authorizationHeaders {
+            XCTAssertEqual(firstHeader, header)
+        }
     }
 }

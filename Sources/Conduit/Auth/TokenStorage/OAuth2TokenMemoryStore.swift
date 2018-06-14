@@ -12,6 +12,7 @@ import Foundation
 public class OAuth2TokenMemoryStore: OAuth2TokenStore {
 
     private var tokens: [String: OAuth2Token & DataConvertible] = [:]
+    private var refreshTokenLockExpirations: [String: Date] = [:]
 
     /// Creates a new OAuth2TokenMemoryStore
     public init() {}
@@ -35,12 +36,21 @@ public class OAuth2TokenMemoryStore: OAuth2TokenStore {
         return tokens[tokenKeyFor(client: client, authorization: authorization)] as? Token
     }
 
-    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+    public func lockRefreshToken(timeout: TimeInterval, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        let tokenKey = tokenKeyFor(client: client, authorization: authorization)
+        refreshTokenLockExpirations[tokenKey] = Date(timeIntervalSinceNow: timeout)
         return true
     }
 
-    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
-        return .inactive
+    public func unlockRefreshTokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        let tokenKey = tokenKeyFor(client: client, authorization: authorization)
+        refreshTokenLockExpirations[tokenKey] = nil
+        return true
+    }
+
+    public func refreshTokenLockExpirationFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Date? {
+        let tokenKey = tokenKeyFor(client: client, authorization: authorization)
+        return refreshTokenLockExpirations[tokenKey]
     }
 
 }

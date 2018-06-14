@@ -41,12 +41,26 @@ public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
         return try? Token(serializedData: data)
     }
 
-    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
-        return true
+    public func lockRefreshToken(timeout: TimeInterval, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        let identifier = tokenLockIdentifierFor(clientConfiguration: client, authorization: authorization)
+        let expiration = Date().addingTimeInterval(timeout).timeIntervalSince1970
+        userDefaults.set(expiration, forKey: identifier)
+        return userDefaults.synchronize()
     }
 
-    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
-        return .inactive
+    public func unlockRefreshTokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        let identifier = tokenLockIdentifierFor(clientConfiguration: client, authorization: authorization)
+        userDefaults.removeObject(forKey: identifier)
+        return userDefaults.synchronize()
+    }
+
+    public func refreshTokenLockExpirationFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Date? {
+        let identifier = tokenLockIdentifierFor(clientConfiguration: client, authorization: authorization)
+        let timestamp = userDefaults.double(forKey: identifier)
+        if timestamp == 0 {
+            return nil
+        }
+        return Date(timeIntervalSince1970: timestamp)
     }
 
 }

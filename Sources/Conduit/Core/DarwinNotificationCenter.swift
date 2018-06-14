@@ -12,16 +12,21 @@ class DarwinNotificationObserver {
 
     let notificationName: String
     let handler: (DarwinNotificationObserver) -> Void
+    let queue: DispatchQueue
 
-    init(notificationName: String, handler: @escaping (DarwinNotificationObserver) -> Void) {
+    init(notificationName: String, queue: DispatchQueue, handler: @escaping (DarwinNotificationObserver) -> Void) {
         self.notificationName = notificationName
+        self.queue = queue
         self.handler = handler
     }
 
 }
 
+/// Utilizes Core OS (Darwin) notifications, which are delivered system-wide. These notifications cannot carry
+/// payloads, and sensitive information should not be broadcasted through this system.
 class DarwinNotificationCenter {
 
+    /// A Darwin system notification
     struct Notification {
         let name: String
 
@@ -31,14 +36,22 @@ class DarwinNotificationCenter {
     }
 
     static let `default` = DarwinNotificationCenter()
-    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.DarwinNotificationCenter")
+    private let notifierQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.DarwinNotificationCenter", attributes: .concurrent)
     private var observerMap: [String: [DarwinNotificationObserver]] = [:]
 
+    /// Registers a new observer for a given system notification
+    ///
+    /// - Parameters:
+    ///   - notification: The notification to observe
+    ///   - operationQueue: The queue where observations should be handled (defaults to a background queue)
+    ///   - handler: Handles observations when they occur
+    /// - Returns: A registered observer
     @discardableResult
-    func registerObserver(notification: Notification, handler: @escaping (DarwinNotificationObserver) -> Void) -> DarwinNotificationObserver {
+    func registerObserver(notification: Notification, queue: DispatchQueue = .global(), handler: @escaping (DarwinNotificationObserver) -> Void)
+        -> DarwinNotificationObserver {
         let notificationName = notification.name
-        let observer = DarwinNotificationObserver(notificationName: notificationName, handler: handler)
-        serialQueue.async {
+        let observer = DarwinNotificationObserver(notificationName: notificationName, queue: queue, handler: handler)
+        notifierQueue.async(flags: .barrier) {
             var observers = self.observerMap[notificationName] ?? []
             let existingKeys = self.observerMap.keys
             observers.append(observer)
@@ -48,17 +61,16 @@ class DarwinNotificationCenter {
             }
 
             let center = CFNotificationCenterGetDarwinNotifyCenter()
-            let selfPtr = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
+            /// This will fire on the main thread
             let callback: CFNotificationCallback = { center, observer, name, object, dictionary in
-                guard let observer = observer, let name = name else {
+                guard let name = name else {
                     return
                 }
-                let unretainedSelf = Unmanaged<DarwinNotificationCenter>.fromOpaque(observer).takeRetainedValue()
-                unretainedSelf.handleDarwinNotification(name: name.rawValue as String)
+                DarwinNotificationCenter.default.handleDarwinNotification(name: name.rawValue as String)
             }
 
             CFNotificationCenterAddObserver(center,
-                                            selfPtr,
+                                            nil,
                                             callback,
                                             notificationName as CFString,
                                             nil,
@@ -67,8 +79,11 @@ class DarwinNotificationCenter {
         return observer
     }
 
+    /// Unregisters an observer
+    ///
+    /// - Parameter observer: The observer to unregister
     func unregister(observer: DarwinNotificationObserver) {
-        serialQueue.async {
+        notifierQueue.async(flags: .barrier) {
             guard var observers = self.observerMap[observer.notificationName] else {
                 return
             }
@@ -81,27 +96,33 @@ class DarwinNotificationCenter {
 
             if observers.isEmpty {
                 let center = CFNotificationCenterGetDarwinNotifyCenter()
-                let selfPtr = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
                 CFNotificationCenterRemoveObserver(center,
-                                                   selfPtr,
+                                                   nil,
                                                    CFNotificationName(observer.notificationName as CFString),
                                                    nil)
             }
         }
     }
 
+    /// Broadcasts a system notification
+    ///
+    /// - Parameter notification: The notification to broadcast
     func post(notification: Notification) {
-        let center = CFNotificationCenterGetDarwinNotifyCenter()
-        CFNotificationCenterPostNotification(center, CFNotificationName(notification.name as CFString), nil, nil, true)
+        notifierQueue.async(flags: .barrier) {
+            let center = CFNotificationCenterGetDarwinNotifyCenter()
+            CFNotificationCenterPostNotification(center, CFNotificationName(notification.name as CFString), nil, nil, true)
+        }
     }
 
     private func handleDarwinNotification(name: String) {
-        serialQueue.async {
+        notifierQueue.sync(flags: .barrier) {
             guard let observers = self.observerMap[name] else {
                 return
             }
-            observers.forEach {
-                $0.handler($0)
+            observers.forEach { observer in
+                observer.queue.sync {
+                    observer.handler(observer)
+                }
             }
         }
     }

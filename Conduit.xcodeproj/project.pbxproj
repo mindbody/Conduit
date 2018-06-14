@@ -341,6 +341,9 @@
 		1BE352F51F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
 		1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE352F31F44F4FC008212BC /* OAuth2Token.swift */; };
+		1BE3774E20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */; };
+		1BE3774F20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */; };
+		1BE3775020D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */; };
 		1BF8E55D20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
 		1BF8E55E20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
 		1BF8E55F20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */; };
@@ -548,6 +551,7 @@
 		1BD800871F1684DF00481DC9 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		1BD8FFFE1F167E7800481DC9 /* Conduit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conduit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE352F31F44F4FC008212BC /* OAuth2Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Token.swift; sourceTree = "<group>"; };
+		1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarwinNotificationCenterTests.swift; sourceTree = "<group>"; };
 		1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthMigratorTests.swift; sourceTree = "<group>"; };
 		1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializerTests.swift; sourceTree = "<group>"; };
 		1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshTokenGrantStrategy.swift; sourceTree = "<group>"; };
@@ -868,6 +872,7 @@
 			isa = PBXGroup;
 			children = (
 				1B279CB11F19558100C0005E /* Auth */,
+				1BE3774C20D1AFA9005F2CEB /* Core */,
 				1BD5553F1F17DC81004B1172 /* Networking */,
 				95CC71C11F797ACB003B4E31 /* Resources */,
 				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
@@ -989,6 +994,14 @@
 				1B4946401F71B01400754C58 /* ConduitTestHost-tvOS.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1BE3774C20D1AFA9005F2CEB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		95B8878F1F396F2600F61C28 /* XML */ = {
@@ -1738,6 +1751,7 @@
 				9549B2521F799DA9005F0038 /* Resource.swift in Sources */,
 				1BD555A61F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
 				1BD5559D1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
+				1BE3774E20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1BD555A31F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1B279CCE1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
@@ -1777,6 +1791,7 @@
 				9549B2531F799DAA005F0038 /* Resource.swift in Sources */,
 				1BD555A71F17DC81004B1172 /* URLSessionClientTests.swift in Sources */,
 				1BD5559E1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
+				1BE3774F20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1BD555A41F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1B279CCF1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
@@ -1816,6 +1831,7 @@
 				9549B2541F799DAA005F0038 /* Resource.swift in Sources */,
 				1BD5559F1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BD555A51F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
+				1BE3775020D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */,
 				1B279CD01F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,

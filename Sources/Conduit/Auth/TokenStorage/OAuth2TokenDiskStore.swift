@@ -9,6 +9,7 @@
 import Foundation
 
 /// Stores and retrieves OAuth2 tokens from local storage (unencrypted)
+@available(*, deprecated, message: "OAuth2TokenDiskStore is no longer supported. Please migrate to OAuth2TokenUserDefaultsStore or OAuth2TokenFileStore.")
 public class OAuth2TokenDiskStore: OAuth2TokenStore {
 
     /// The strategy by which the token is stored locally
@@ -83,12 +84,38 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
             return try? Token(serializedData: data)
         }
     }
-    public func storeRefreshState(_ tokenRefreshState: OAuth2TokenRefreshState, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
-        return true
+
+    public func lockRefreshToken(timeout: TimeInterval, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.lockRefreshToken(timeout: timeout, client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return false
+        }
     }
 
-    public func tokenRefreshStateFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> OAuth2TokenRefreshState {
-        return .inactive
+    public func unlockRefreshTokenFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.unlockRefreshTokenFor(client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return false
+        }
+    }
+
+    public func refreshTokenLockExpirationFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Date? {
+        switch storageMethod {
+        case .userDefaults:
+            let userDefaultsStore = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+            return userDefaultsStore.refreshTokenLockExpirationFor(client: client, authorization: authorization)
+        case .url:
+            /// Unsupported; OAuth2TokenDiskStore only references a single path for token storage
+            return nil
+        }
     }
 
 }
