@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.10.0
+
+#### Breaking
 - `OAuth2TokenStore` now includes required interface for handling refresh token locks
 
 #### Enhancements
