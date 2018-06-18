@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.10.0
+
+#### Breaking
 - `OAuth2TokenStore` now includes required interface for handling refresh token locks
 
 #### Enhancements
@@ -10,7 +25,7 @@
 - `OAuth2TokenFileStore` adds additional I/O control, such as multiprocess file coordination via `NSFileCoordinator` and file protection
 
 #### Bug Fixes
-- `OAuth2TokenFileStore` solves a design flaw in `OAuth2TokenDiskStore` that prevented multiple tokes to be written for a single OAuth 2.0 client
+- `OAuth2TokenFileStore` solves a design flaw in `OAuth2TokenDiskStore` that prevented multiple tokens to be written for a single OAuth 2.0 client
 
 #### Other
 - Code coverage is now enforced via codecov.io
