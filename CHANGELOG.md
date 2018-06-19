@@ -7,6 +7,21 @@
 - None
 
 #### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.10.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
 - `OAuth2TokenUserDefaultsStore` doesn't default to `.standard` for certain operations
 
 #### Other
