@@ -11,7 +11,8 @@ import XCTest
 
 private class MonitoringURLSessionClient: URLSessionClientType {
     private let sessionClient = URLSessionClient()
-    var middleware: [RequestPipelineMiddleware] = []
+    var requestMiddleware: [RequestPipelineMiddleware] = []
+    var responseMiddleware: [ResponsePipelineMiddleware] = []
 
     var numRequestsSent: Int = 0
 

@@ -49,6 +49,10 @@
 		1B4946561F71B03400754C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946501F71B02C00754C58 /* AppDelegate.swift */; };
 		1B4946571F71B03900754C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946521F71B02C00754C58 /* Main.storyboard */; };
 		1B4946581F71B03C00754C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946551F71B02C00754C58 /* ViewController.swift */; };
+		1B49CBF720D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */; };
+		1B49CBF820D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */; };
+		1B49CBF920D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */; };
+		1B49CBFA20D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */; };
 		1B664BC21F9E8BBB009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
 		1B664BC31F9E8BBB009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
 		1B664BC41F9E8BBC009B99C2 /* validcertificate2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */; };
@@ -458,6 +462,7 @@
 		1B4946531F71B02C00754C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1B4946541F71B02C00754C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B4946551F71B02C00754C58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePipelineMiddleware.swift; sourceTree = "<group>"; };
 		1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = validcertificate2.txt; sourceTree = "<group>"; };
 		1B6E186A1F461FF600E651DA /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		1B88B1DF1F268C220022A69D /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
@@ -798,6 +803,7 @@
 				1B88B2031F268C220022A69D /* CertificateBundle.swift */,
 				1B88B2041F268C220022A69D /* HTTPRequestBuilder.swift */,
 				1B88B20D1F268C220022A69D /* RequestPipelineMiddleware.swift */,
+				1B49CBF620D9599200E02961 /* ResponsePipelineMiddleware.swift */,
 				1B88B20E1F268C220022A69D /* Result.swift */,
 				1B88B2201F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift */,
 				1B88B21E1F268C220022A69D /* ServerAuthenticationPolicy.swift */,
@@ -1592,6 +1598,7 @@
 				1B88B2CC1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1BFD2F2F20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B2BC1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
+				1B49CBF820D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1BA7C27A20D04AB0005AA024 /* OAuth2TokenFileStore.swift in Sources */,
 				1B88B2DC1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
 			);
@@ -1661,6 +1668,7 @@
 				1B88B2851F268C220022A69D /* KeychainOptions.swift in Sources */,
 				1B88B24D1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2351F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
+				1B49CBF920D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2CD1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BD1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B88B2DD1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
@@ -1731,6 +1739,7 @@
 				1B88B2861F268C220022A69D /* KeychainOptions.swift in Sources */,
 				1B88B24E1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2361F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
+				1B49CBFA20D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2CE1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BE1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B88B2DE1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
@@ -1904,6 +1913,7 @@
 				1B88B2D71F268C220022A69D /* ResponseDeserializer.swift in Sources */,
 				1BE352F41F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B22F1F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
+				1B49CBF720D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2931F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2631F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
 				1B88B2D31F268C220022A69D /* RequestSerializer.swift in Sources */,
