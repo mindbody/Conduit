@@ -31,7 +31,6 @@ public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
         }
 
         let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
-        let userDefaults = UserDefaults.standard
         userDefaults.set(tokenData, forKey: identifier)
         return userDefaults.synchronize()
     }
@@ -39,7 +38,7 @@ public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
     public func tokenFor<Token>(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization)
         -> Token? where Token: DataConvertible, Token: OAuth2Token {
         let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
-        guard let data = UserDefaults.standard.object(forKey: identifier) as? Data else {
+        guard let data = userDefaults.object(forKey: identifier) as? Data else {
             return nil
         }
         return try? Token(serializedData: data)
