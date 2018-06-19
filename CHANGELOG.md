@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- `OAuth2TokenUserDefaultsStore` doesn't default to `.standard` for certain operations
 
 #### Other
 - None

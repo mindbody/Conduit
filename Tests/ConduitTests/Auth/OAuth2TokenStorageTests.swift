@@ -59,8 +59,19 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
     }
 
-    func testUserDefaultsStorageOperations() throws {
+    func testStandardUserDefaultsStorageOperations() throws {
         let sut = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+        try verifyTokenStorageOperations(sut: sut, with: mockToken)
+        try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
+    }
+
+    func testDomainUserDefaultsStorageOperations() throws {
+        let groupIdentifier = "group.com.mindbodyonline.ConduitTests"
+        guard let userDefaults = UserDefaults(suiteName: groupIdentifier) else {
+            XCTFail("Failed to create sandboxed application group (this won't work with codesigning)")
+            return
+        }
+        let sut = OAuth2TokenUserDefaultsStore(userDefaults: userDefaults)
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
     }
