@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- Added workaround to fix SwiftLint crash: https://github.com/mindbody/Conduit/pull/97
 
 #### Other
 - None
