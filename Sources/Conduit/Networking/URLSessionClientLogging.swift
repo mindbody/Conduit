@@ -75,22 +75,26 @@ extension URLSessionClient {
             code > 0 else {
                 return "<No Response> 🚫"
         }
+        let statusSymbol: String
+
         switch code {
         case 200..<300:
-            return "\(code) ✅"
+            statusSymbol = "✅"
         case 300..<400:
-            return "\(code) ↪️"
+            statusSymbol = "↪️"
         case 401, 403:
-            return "\(code) ⛔️"
+            statusSymbol = "⛔️"
         case 404:
-            return "\(code) 🔎"
+            statusSymbol = "🔎"
         case 400..<500:
-            return "\(code) ❌"
+            statusSymbol = "❌"
         case 500..<Int.max:
-            return "\(code) 💥"
+            statusSymbol = "💥"
         default:
-            return "\(code) ❓"
+            statusSymbol = "❓"
         }
+
+        return "\(code) \(statusSymbol)"
     }
 
 }
