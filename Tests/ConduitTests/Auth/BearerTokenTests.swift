@@ -16,14 +16,14 @@ class BearerTokenTests: XCTestCase {
     let expiresIn: TimeInterval = 7_200
 
     lazy var tokenJSON: String = {
-"""
-{
-  "access_token": "\(accessToken)",
-  "refresh_token": "\(refreshToken)",
-  "expires_in": \(expiresIn),
-  "token_type": "bearer"
-}
-""".replacingOccurrences(of: "\n", with: "")
+        """
+        {
+          "access_token": "\(accessToken)",
+          "refresh_token": "\(refreshToken)",
+          "expires_in": \(expiresIn),
+          "token_type": "bearer"
+        }
+        """.replacingOccurrences(of: "\n", with: "")
     }()
 
     private func validate(token: BearerToken) {
@@ -67,12 +67,13 @@ class BearerTokenTests: XCTestCase {
 
     func testMapsTokenWithEmptyExpiration() throws {
         let json = """
-{
-"access_token": "\(accessToken)",
-"refresh_token": "\(refreshToken)",
-"token_type": "bearer"
-}
-"""
+        {
+        "access_token": "\(accessToken)",
+        "refresh_token": "\(refreshToken)",
+        "token_type": "bearer"
+        }
+        """
+
         guard let tokenData = json.data(using: .utf8) else {
             XCTFail("Token JSON corrupted")
             return
