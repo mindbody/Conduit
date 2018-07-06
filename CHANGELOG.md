@@ -7,6 +7,21 @@
 - None
 
 #### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.10.3
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
 - `expires_in` is no longer a required field for access token responses
 
 #### Other
