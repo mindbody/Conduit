@@ -86,9 +86,15 @@ extension BearerToken {
 
     static func mapFrom(JSON: [String: Any]) -> BearerToken? {
         guard let tokenType = JSON[JSONKeys.tokenType] as? String,
-            let accessToken = JSON[JSONKeys.accessToken] as? String,
-            let expiresIn = JSON[JSONKeys.expiresIn] as? Int else {
+            let accessToken = JSON[JSONKeys.accessToken] as? String else {
                 return nil
+        }
+        let expiration: Date
+        if let expiresIn = JSON[JSONKeys.expiresIn] as? Int {
+            expiration = Date().addingTimeInterval(TimeInterval(expiresIn))
+        }
+        else {
+            expiration = .distantFuture
         }
 
         let refreshToken = JSON[JSONKeys.refreshToken] as? String
@@ -100,7 +106,7 @@ extension BearerToken {
 
         return BearerToken(accessToken: accessToken,
                            refreshToken: refreshToken,
-                           expiration: Date().addingTimeInterval(TimeInterval(expiresIn)))
+                           expiration: expiration)
     }
 }
 
