@@ -41,11 +41,11 @@ class OAuth2TokenStorageTests: XCTestCase {
         let mockClientConfiguration = try makeMockClientConfiguration()
         sut.unlockRefreshTokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
         XCTAssertFalse(sut.isRefreshTokenLockedFor(client: mockClientConfiguration, authorization: mockAuthorization))
-        sut.lockRefreshToken(timeout: 0.1, client: mockClientConfiguration, authorization: mockAuthorization)
+        sut.lockRefreshToken(timeout: 0.3, client: mockClientConfiguration, authorization: mockAuthorization)
         XCTAssert(sut.isRefreshTokenLockedFor(client: mockClientConfiguration, authorization: mockAuthorization))
 
         let waitExpectation = expectation(description: "refresh token unlocked")
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.11) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.31) {
             XCTAssertFalse(sut.isRefreshTokenLockedFor(client: mockClientConfiguration, authorization: self.mockAuthorization))
             waitExpectation.fulfill()
         }
