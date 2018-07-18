@@ -42,10 +42,6 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
-		1B385E6B20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */; };
-		1B385E6C20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */; };
-		1B385E6D20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */; };
-		1B385E6E20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */; };
 		1B4946381F71AF7700754C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946371F71AF6D00754C58 /* ViewController.swift */; };
 		1B4946391F71AF7B00754C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946341F71AF6D00754C58 /* Main.storyboard */; };
 		1B49463A1F71AF7D00754C58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946321F71AF6D00754C58 /* LaunchScreen.storyboard */; };
@@ -454,7 +450,6 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
-		1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClientDeprecations.swift; sourceTree = "<group>"; };
 		1B4946301F71AF6D00754C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B4946311F71AF6D00754C58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B4946331F71AF6D00754C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -815,7 +810,6 @@
 				1B88B21F1F268C220022A69D /* SessionTaskProxy.swift */,
 				1B88B2211F268C220022A69D /* URL.swift */,
 				1B88B2221F268C220022A69D /* URLSessionClient.swift */,
-				1B385E6A20FEB20F001CC8FA /* URLSessionClientDeprecations.swift */,
 				1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */,
 			);
 			path = Networking;
@@ -1570,7 +1564,6 @@
 				1B88B2481F268C220022A69D /* OAuth2Authorization.swift in Sources */,
 				1BA7C27520D0498D005AA024 /* OAuth2TokenUserDefaultsStore.swift in Sources */,
 				1B88B2581F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
-				1B385E6C20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */,
 				1B88B2D01F268C220022A69D /* QueryString.swift in Sources */,
 				1B88B2FC1F268C220022A69D /* URL.swift in Sources */,
 				1B88B2F41F268C220022A69D /* SessionTaskProxy.swift in Sources */,
@@ -1676,7 +1669,6 @@
 				1B88B24D1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2351F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B49CBF920D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
-				1B385E6D20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */,
 				1B88B2CD1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BD1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B88B2DD1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
@@ -1748,7 +1740,6 @@
 				1B88B24E1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				1B88B2361F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B49CBFA20D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
-				1B385E6E20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */,
 				1B88B2CE1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
 				1B88B2BE1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B88B2DE1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
@@ -1928,7 +1919,6 @@
 				1B88B2D31F268C220022A69D /* RequestSerializer.swift in Sources */,
 				1B88B2C71F268C220022A69D /* JSONResponseDeserializer.swift in Sources */,
 				1B88B2FF1F268C220022A69D /* URLSessionClient.swift in Sources */,
-				1B385E6B20FEB20F001CC8FA /* URLSessionClientDeprecations.swift in Sources */,
 				1B88B2A31F268C220022A69D /* URLImageCache.swift in Sources */,
 				1BFD2F2E20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B28F1F268C220022A69D /* ConduitLogger.swift in Sources */,

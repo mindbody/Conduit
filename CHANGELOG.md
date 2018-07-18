@@ -1,10 +1,11 @@
 ## master
 
 #### Breaking
-- None
+- `middleware` has been replaced by `requestMiddleware`
 
 #### Enhancements
-- None
+- `ResponsePipelineMiddleware` added
+- `URLSessionClient` now accepts both request and response middleware
 
 #### Bug Fixes
 - None
