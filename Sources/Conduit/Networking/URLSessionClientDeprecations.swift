@@ -10,6 +10,7 @@ import Foundation
 
 extension URLSessionClient {
 
+    /// The middleware that all incoming requests should be piped through
     @available(*, deprecated, message: "Use requestMiddleware instead.")
     public var middleware: [RequestPipelineMiddleware] {
         get {

@@ -58,6 +58,7 @@ public struct URLSessionClient: URLSessionClientType {
     /// The middleware that all incoming requests should be piped through
     public var requestMiddleware: [RequestPipelineMiddleware]
 
+    /// The middleware that all response payloads should be piped through
     public var responseMiddleware: [ResponsePipelineMiddleware]
 
     /// The authentication policies to be evaluated against for NSURLAuthenticationChallenges against the
