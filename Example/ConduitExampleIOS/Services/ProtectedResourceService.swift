@@ -53,7 +53,7 @@ struct ProtectedResourceService {
         let authMiddleware = OAuth2RequestPipelineMiddleware(clientConfiguration: clientConfiguration,
                                                              authorization: userBearerAuthorization,
                                                              tokenStorage: AuthManager.shared.localTokenStore)
-        sessionClient.middleware.append(authMiddleware)
+        sessionClient.requestMiddleware.append(authMiddleware)
 
         sessionClient.begin(request: request) { (data, response, error) in
             let responseDeserializer = JSONResponseDeserializer()
