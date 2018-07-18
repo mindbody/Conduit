@@ -31,7 +31,9 @@ public protocol URLSessionClientType {
     func begin(request: URLRequest, completion: @escaping SessionTaskCompletion) -> SessionTaskProxyType
 
     /// The middleware that all incoming requests should be piped through
-    var middleware: [RequestPipelineMiddleware] { get set }
+    var requestMiddleware: [RequestPipelineMiddleware] { get set }
+
+    var responseMiddleware: [ResponsePipelineMiddleware] { get set }
 }
 
 private class TaskResponse {
@@ -54,7 +56,10 @@ public struct URLSessionClient: URLSessionClientType {
     public static var shared: URLSessionClientType = URLSessionClient(delegateQueue: OperationQueue())
 
     /// The middleware that all incoming requests should be piped through
-    public var middleware: [RequestPipelineMiddleware]
+    public var requestMiddleware: [RequestPipelineMiddleware]
+
+    /// The middleware that all response payloads should be piped through
+    public var responseMiddleware: [ResponsePipelineMiddleware]
 
     /// The authentication policies to be evaluated against for NSURLAuthenticationChallenges against the
     /// NSURLSession. Mutating this will affect all URLSessionClient copies.
@@ -76,10 +81,12 @@ public struct URLSessionClient: URLSessionClientType {
     ///     - sessionConfiguration: The NSURLSessionConfiguration used to construct the underlying NSURLSession.
     ///                             Defaults to NSURLSessionConfiguration.defaultSessionConfiguration()
     ///     - delegateQueue: The NSOperationQueue in which completion handlers should execute
-    public init(middleware: [RequestPipelineMiddleware] = [],
+    public init(requestMiddleware: [RequestPipelineMiddleware] = [],
+                responseMiddleware: [ResponsePipelineMiddleware] = [],
                 sessionConfiguration: URLSessionConfiguration = URLSessionConfiguration.default,
                 delegateQueue: OperationQueue = OperationQueue.main) {
-        self.middleware = middleware
+        self.requestMiddleware = requestMiddleware
+        self.responseMiddleware = responseMiddleware
         self.urlSession = URLSession(configuration: sessionConfiguration, delegate: self.sessionDelegate,
                                      delegateQueue: delegateQueue)
     }
@@ -132,7 +139,7 @@ public struct URLSessionClient: URLSessionClientType {
 
             logger.verbose("About to scan middlware options")
 
-            for middleware in self.middleware {
+            for middleware in self.requestMiddleware {
                 if middleware.pipelineBehaviorOptions.contains(.awaitsOutgoingCompletion) {
                     logger.verbose("=============== WAIT ===============")
                     logger.verbose("Pausing session queue")
@@ -157,8 +164,12 @@ public struct URLSessionClient: URLSessionClientType {
 
             switch middlewareProcessingResult {
             case .error(let error):
+                var response: HTTPURLResponse? = nil
+                var data: Data? = nil
+                var error: Error? = error
+                self.synchronouslyPrepare(request: request, response: &response, data: &data, error: &error)
                 self.urlSession.delegateQueue.addOperation {
-                    completion(nil, nil, error)
+                    completion(data, response, error)
                 }
                 return
             case .value(let request):
@@ -171,8 +182,16 @@ public struct URLSessionClient: URLSessionClientType {
             // Once tasks are created, the operation moves to the connection queue,
             // so even though the pipeline is serial, requests run in parallel
             let task = self.dataTaskWith(request: modifiedRequest) { data, response, error in
-                self.log(data: data, response: response, request: request, requestID: requestID)
-                completion(data, response, error)
+                var data = data
+                var response = response
+                var error = error
+                self.serialQueue.async {
+                    self.synchronouslyPrepare(request: request, response: &response, data: &data, error: &error)
+                    self.urlSession.delegateQueue.addOperation {
+                        self.log(data: data, response: response, request: request, requestID: requestID)
+                        completion(data, response, error)
+                    }
+                }
             }
 
             self.log(request: request, requestID: requestID)
@@ -198,7 +217,7 @@ public struct URLSessionClient: URLSessionClientType {
         let middlewarePipelineDispatchGroup = DispatchGroup()
         var modifiedRequest = request
 
-        for middleware in self.middleware {
+        for middleware in requestMiddleware {
             middlewarePipelineDispatchGroup.enter()
 
             middleware.prepareForTransport(request: modifiedRequest) { result in
@@ -212,7 +231,7 @@ public struct URLSessionClient: URLSessionClientType {
                 middlewarePipelineDispatchGroup.leave()
             }
 
-            _ = middlewarePipelineDispatchGroup.wait(timeout: DispatchTime.distantFuture)
+            _ = middlewarePipelineDispatchGroup.wait(timeout: .distantFuture)
 
             if let error = middlwareError {
                 return .error(error)
@@ -220,6 +239,20 @@ public struct URLSessionClient: URLSessionClientType {
         }
 
         return .value(modifiedRequest)
+    }
+
+    func synchronouslyPrepare(request: URLRequest, response: inout HTTPURLResponse?, data: inout Data?, error: inout Error?) {
+        let dispatchGroup = DispatchGroup()
+
+        for middleware in responseMiddleware {
+            dispatchGroup.enter()
+
+            middleware.prepare(request: request, response: &response, data: &data, error: &error) {
+                dispatchGroup.leave()
+            }
+
+            _ = dispatchGroup.wait(timeout: .distantFuture)
+        }
     }
 
     private func dataTaskWith(request: URLRequest, completion: @escaping SessionTaskCompletion) -> URLSessionDataTask {

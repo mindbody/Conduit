@@ -20,7 +20,7 @@ class OAuth2URLSessionClientFactory {
 
     static func makeClient() -> URLSessionClientType {
         var client = Auth.sessionClient
-        client.middleware.append(TokenGrantRequestPipelineMiddleware())
+        client.requestMiddleware.append(TokenGrantRequestPipelineMiddleware())
         return client
     }
 

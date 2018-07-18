@@ -61,7 +61,7 @@ public class Auth {
                                                     middleware: OAuth2RequestPipelineMiddleware,
                                                     completion: @escaping Result<BearerToken>.Block) {
             var sessionClient = sessionClient
-            sessionClient.middleware = [middleware]
+            sessionClient.requestMiddleware = [middleware]
             guard let noOpURL = URL(string: "https://mindbodyonline.com") else {
                 completion(.error(OAuth2Error.internalFailure))
                 return

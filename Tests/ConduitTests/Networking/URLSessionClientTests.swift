@@ -27,7 +27,7 @@ class URLSessionClientTests: XCTestCase {
         XCTAssertThrowsError(try client.begin(request: request))
     }
 
-    func testTransformsRequestsThroughMiddlewarePipeline() throws {
+    func testTransformsRequestsThroughRequestMiddlewarePipeline() throws {
         let originalURL = try URL(absoluteString: "http://localhost:3333/put")
         let modifiedURL = try URL(absoluteString: "http://localhost:3333/get")
         let originalHTTPHeaders = ["Accept-Language": "en-US"]
@@ -36,10 +36,10 @@ class URLSessionClientTests: XCTestCase {
         var originalRequest = URLRequest(url: originalURL)
         originalRequest.allHTTPHeaderFields = originalHTTPHeaders
 
-        let middleware1 = TransformingMiddleware1(url: modifiedURL)
-        let middleware2 = TransformingMiddleware2(HTTPHeaders: modifiedHTTPHeaders)
+        let middleware1 = TransformingRequestMiddleware1(url: modifiedURL)
+        let middleware2 = TransformingRequestMiddleware2(HTTPHeaders: modifiedHTTPHeaders)
 
-        let client = URLSessionClient(middleware: [middleware1, middleware2])
+        let client = URLSessionClient(requestMiddleware: [middleware1, middleware2])
         let processedRequestExpectation = expectation(description: "processed request")
         client.begin(request: originalRequest) { _, _, _  in
             processedRequestExpectation.fulfill()
@@ -55,9 +55,9 @@ class URLSessionClientTests: XCTestCase {
         XCTAssertEqual(headers, modifiedHTTPHeaders)
     }
 
-    func testPausesAndEmptiesPipelineIfMiddlewareRequiresIt() throws {
-        let blockingMiddleware = BlockingMiddleware()
-        let client = URLSessionClient(middleware: [blockingMiddleware])
+    func testPausesAndEmptiesPipelineIfRequestMiddlewareRequiresIt() throws {
+        let blockingMiddleware = BlockingRequestMiddleware()
+        let client = URLSessionClient(requestMiddleware: [blockingMiddleware])
 
         let delayedRequest = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
         let numDelayedRequests = 5
@@ -85,8 +85,8 @@ class URLSessionClientTests: XCTestCase {
         waitForExpectations(timeout: 7)
     }
 
-    func testCancelsRequestIfMiddlewareFails() throws {
-        let client = URLSessionClient(middleware: [BadMiddleware()])
+    func testCancelsRequestIfRequestMiddlewareFails() throws {
+        let client = URLSessionClient(requestMiddleware: [BadRequestMiddleware()])
         let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
 
         let requestProcessedMiddleware = expectation(description: "request processed")
@@ -96,6 +96,47 @@ class URLSessionClientTests: XCTestCase {
         }
 
         waitForExpectations(timeout: 1)
+    }
+
+    func testSeriallyProcessesResponseMiddleware() throws {
+        let baseResponseText = "test"
+        let base64EncodedResponseText = "dGVzdA=="
+        let transformerMiddleware1 = TransformingResponseMiddleware { data, response, error in
+            guard let data = data, let text = String(data: data, encoding: .utf8) else {
+                return (nil, nil, nil)
+            }
+            let transformedText = text + "a"
+            let transformedData = transformedText.data(using: .utf8)
+            return (transformedData, response, error)
+        }
+        let transformerMiddleware2 = TransformingResponseMiddleware { data, response, error in
+            guard let data = data, let text = String(data: data, encoding: .utf8) else {
+                return (nil, nil, nil)
+            }
+            let transformedText = text + "b"
+            let transformedData = transformedText.data(using: .utf8)
+            return (transformedData, response, error)
+        }
+        let transformerMiddleware3 = TransformingResponseMiddleware { data, response, error in
+            guard let data = data, let text = String(data: data, encoding: .utf8) else {
+                return (nil, nil, nil)
+            }
+            let transformedText = text + "c"
+            let transformedData = transformedText.data(using: .utf8)
+            return (transformedData, response, error)
+        }
+
+        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/base64/\(base64EncodedResponseText)"))
+        let client = URLSessionClient(responseMiddleware: [transformerMiddleware1, transformerMiddleware2, transformerMiddleware3],
+                                      delegateQueue: OperationQueue())
+
+        let (data, _) = try client.begin(request: request)
+
+        guard let transformedData = data, let text = String(data: transformedData, encoding: .utf8) else {
+            XCTFail("Transform failed")
+            return
+        }
+        XCTAssertEqual(text, "\(baseResponseText)abc")
     }
 
     func testSessionTaskProxyAllowsCancellingRequestsBeforeTransport() throws {
@@ -214,7 +255,7 @@ class URLSessionClientTests: XCTestCase {
 
 }
 
-private class BadMiddleware: RequestPipelineMiddleware {
+private class BadRequestMiddleware: RequestPipelineMiddleware {
     enum WhyAreYouUsingThisMiddlewareError: Error {
         case userError
     }
@@ -226,7 +267,7 @@ private class BadMiddleware: RequestPipelineMiddleware {
     }
 }
 
-private class TransformingMiddleware1: RequestPipelineMiddleware {
+private class TransformingRequestMiddleware1: RequestPipelineMiddleware {
     let pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
     let modifiedURL: URL
 
@@ -241,7 +282,7 @@ private class TransformingMiddleware1: RequestPipelineMiddleware {
     }
 }
 
-private class TransformingMiddleware2: RequestPipelineMiddleware {
+private class TransformingRequestMiddleware2: RequestPipelineMiddleware {
     var transformedRequest: URLRequest?
 
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
@@ -259,10 +300,33 @@ private class TransformingMiddleware2: RequestPipelineMiddleware {
     }
 }
 
-private class BlockingMiddleware: RequestPipelineMiddleware {
+private class BlockingRequestMiddleware: RequestPipelineMiddleware {
     var pipelineBehaviorOptions: RequestPipelineBehaviorOptions = .none
 
     func prepareForTransport(request: URLRequest, completion: @escaping Result<URLRequest>.Block) {
         completion(.value(request))
     }
+}
+
+private class TransformingResponseMiddleware: ResponsePipelineMiddleware {
+
+    typealias Transformer = (Data?, HTTPURLResponse?, Error?) -> (data: Data?, response: HTTPURLResponse?, error: Error?)
+
+    private let transformer: Transformer
+
+    init(transformer: @escaping Transformer) {
+        self.transformer = transformer
+    }
+
+    func prepare(request: URLRequest, response: inout HTTPURLResponse?, data: inout Data?, error: inout Error?, completion: @escaping () -> Void) {
+        let (transformedData, transformedResponse, transformedError) = transformer(data, response, error)
+        data = transformedData
+        error = transformedError
+        response = transformedResponse
+        let randomTimeInterval = TimeInterval(arc4random()) / TimeInterval(UInt32.max)
+        DispatchQueue.global().asyncAfter(deadline: .now() + randomTimeInterval) {
+            completion()
+        }
+    }
+
 }
