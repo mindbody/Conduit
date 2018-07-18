@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.11.0
+
+#### Breaking
 - `middleware` has been replaced by `requestMiddleware`
 
 #### Enhancements
