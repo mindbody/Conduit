@@ -11,7 +11,8 @@ import XCTest
 
 private class MonitoringURLSessionClient: URLSessionClientType {
     private let sessionClient = URLSessionClient()
-    var middleware: [RequestPipelineMiddleware] = []
+    var requestMiddleware: [RequestPipelineMiddleware] = []
+    var responseMiddleware: [ResponsePipelineMiddleware] = []
 
     var numRequestsSent: Int = 0
 
@@ -69,7 +70,7 @@ class ImageDownloaderTests: XCTestCase {
     }
 
     func testHandlesSimultaneousRequestsForDifferentImages() {
-        let imageURLs = (0..<10).flatMap {
+        let imageURLs = (0..<10).compactMap {
             URL(string: "http://localhost:3333/image/jpeg?id=\($0)")
         }
 

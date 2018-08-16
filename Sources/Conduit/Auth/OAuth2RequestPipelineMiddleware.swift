@@ -16,6 +16,13 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     public var pipelineBehaviorOptions: RequestPipelineBehaviorOptions {
         return token?.isValid == true ? .none : .awaitsOutgoingCompletion
     }
+    /// Provides a grant strategy to handle a token refresh. Defaults to OAuth2TokenRefreshGrantStrategyFactory.
+    public var refreshStrategyFactory: OAuth2RefreshStrategyFactory? = OAuth2TokenRefreshGrantStrategyFactory()
+    /// The maximum amount of time that multi-session locks should be issued when performing token refreshes.
+    /// Short-lived processes, such as app extensions, should typically set a lower relinquish interval to defend
+    /// against lengthy session locks when terminating mid-flight. This will allow the host process to quickly pick
+    /// up where the other process left off, if it needs to. Defaults to 30 seconds.
+    public var tokenRefreshLockRelinquishInterval: TimeInterval = 30
     let clientConfiguration: OAuth2ClientConfiguration
     let authorization: OAuth2Authorization
     let tokenStorage: OAuth2TokenStore
@@ -50,9 +57,24 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             makeRequestByApplyingAuthorizationHeader(to: request, with: token, completion: completion)
         }
         else if let token = token,
-            token.refreshToken != nil {
+            token.refreshToken != nil,
+            refreshStrategyFactory != nil {
+            if tokenStorage.isRefreshTokenLockedFor(client: clientConfiguration, authorization: authorization),
+                let tokenLockExpiration = tokenStorage.refreshTokenLockExpirationFor(client: clientConfiguration, authorization: authorization) {
+                logger.info("Token refresh is active in an alternate session; retrying once lock is relinquished")
+                let timeout = max(0, tokenLockExpiration.timeIntervalSinceNow)
+                OAuth2TokenRefreshCoordinator.shared.waitForRefresh(timeout: timeout) {
+                    /// If we hit the edge case where an unrelated session triggers OAuth2TokenRefreshCoordinator.endTokenRefresh(),
+                    /// then we'll recursively fall back into this branch
+                    self.prepareForTransport(request: request, completion: completion)
+                }
+                return
+            }
+            tokenStorage.lockRefreshToken(timeout: tokenRefreshLockRelinquishInterval, client: clientConfiguration, authorization: authorization)
             logger.info("Token is expired, proceeding to refresh token")
+            OAuth2TokenRefreshCoordinator.shared.beginTokenRefresh()
             refresh(token: token) { result in
+                self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
@@ -66,6 +88,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                     self.tokenStorage.store(token: newToken, for: self.clientConfiguration, with: self.authorization)
                     self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
                 }
+                OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
             }
         }
         else if authorization.level == .client {
@@ -149,57 +172,31 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         completion(.value(request))
     }
 
-    private func buildTokenRefreshRequestFor(token: BearerToken, completion: Result<URLRequest>.Block) {
+    private func refresh(token: BearerToken, completion: @escaping Result<BearerToken>.Block) {
+        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
+                                                   authorizationLevel: authorization.level)
         guard let refreshToken = token.refreshToken else {
             logger.warn([
                 "A request required Bearer authorization, but the expired token",
                 "does not have an available refresh token"
-            ].joined(separator: " "))
+                ].joined(separator: " "))
             completion(.error(OAuth2Error.internalFailure))
             return
         }
 
-        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
-                                    password: clientConfiguration.clientSecret)
-
-        let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
-        requestBuilder.bodyParameters = ["grant_type": "refresh_token",
-                                         "refresh_token": refreshToken,
-                                         "scope": clientConfiguration.environment.scope]
-        requestBuilder.method = .POST
-        requestBuilder.serializer = FormEncodedRequestSerializer()
-
-        do {
-            let mutableRequest = try requestBuilder.build()
-            makeRequestByApplyingAuthorizationHeader(to: mutableRequest, with: basicToken, completion: completion)
-        }
-        catch let error {
-            logger.error("There was an issue building an authorized request within the OAuth2RequestPipelineMiddleware")
-            logger.debug("RequestBuilder Error: \(error)")
+        guard let factory = refreshStrategyFactory else {
+            logger.warn("Refresh strategy is nil; aborting refresh_token grant")
             completion(.error(OAuth2Error.internalFailure))
+            return
         }
-    }
 
-    private func refresh(token: BearerToken, completion: @escaping Result<BearerToken>.Block) {
-        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
-                                                   authorizationLevel: authorization.level)
+        let grant = factory.make(refreshToken: refreshToken, clientConfiguration: clientConfiguration)
 
-        buildTokenRefreshRequestFor(token: token) { result in
-            var request: URLRequest
-            switch result {
-            case .error(let error):
-                completion(.error(error))
-                return
-            case .value(let req):
-                request = req
-            }
-
-            OAuth2TokenGrantManager.issueTokenWith(authorizedRequest: request) { result in
-                completion(result)
-                Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
-                                                            authorizationLevel: self.authorization.level,
-                                                            result: result)
-            }
+        grant.issueToken { result in
+            completion(result)
+            Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
+                                                        authorizationLevel: self.authorization.level,
+                                                        result: result)
         }
     }
 

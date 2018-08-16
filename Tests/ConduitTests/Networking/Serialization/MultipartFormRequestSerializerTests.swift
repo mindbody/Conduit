@@ -67,7 +67,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
 
         let receivedResponseExpectation = expectation(description: "recieved response")
 
-        client.begin(request: modifiedRequest) { (data, response, _) in
+        client.begin(request: modifiedRequest) { data, response, _ in
             do {
                 let json = try deserializer.deserialize(response: response, data: data) as? [String: Any]
                 let files = json?["files"] as? [String: String]

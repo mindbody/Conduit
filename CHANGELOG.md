@@ -1,6 +1,6 @@
-## Master
+## master
 
-#### breaking
+#### Breaking
 - None
 
 #### Enhancements
@@ -13,13 +13,186 @@
 - None
 
 
+## 0.11.0
+
+#### Breaking
+- `middleware` has been replaced by `requestMiddleware`
+
+#### Enhancements
+- `ResponsePipelineMiddleware` added
+- `URLSessionClient` now accepts both request and response middleware
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.10.3
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- `expires_in` is no longer a required field for access token responses
+
+#### Other
+- None
+
+
+## 0.10.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- Added workaround to fix SwiftLint crash: https://github.com/mindbody/Conduit/pull/97
+
+#### Other
+- None
+
+
+## 0.10.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- `OAuth2TokenUserDefaultsStore` doesn't default to `.standard` for certain operations
+
+#### Other
+- None
+
+
+## 0.10.0
+
+#### Breaking
+- `OAuth2TokenStore` now includes required interface for handling refresh token locks
+
+#### Enhancements
+- Loose-IPC is now used to handle a single active session across multiple processes (i.e. app extensions). Token refreshes were previously only safeguarded via serial pipeline; now, they are also protected against concurrent refreshes from other processes using the same storage
+- Precise token lock expiration control is available via `OAuth2RequestPipelineMiddleware.tokenRefreshLockRelinquishInterval`
+- `OAuth2TokenUserDefaultsStore` adds the ability to store to user-defined `UserDefaults`, most commonly for app group containers
+- `OAuth2TokenFileStore` adds additional I/O control, such as multiprocess file coordination via `NSFileCoordinator` and file protection
+
+#### Bug Fixes
+- `OAuth2TokenFileStore` solves a design flaw in `OAuth2TokenDiskStore` that prevented multiple tokens to be written for a single OAuth 2.0 client
+
+#### Other
+- Code coverage is now enforced via codecov.io
+- Added `XMLRequestSerializerTests`
+- Added `AuthTokenMigratorTests`
+- `OAuth2TokenDiskStore` is now deprecated in favor of `OAuth2TokenFileStore` and `OAuth2TokenUserDefaultsStore`
+
+
+## 0.9.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- Custom refresh grant strategies can be provided on `OAuth2RequestPipelineMiddleware`
+- Default token refresh logic has been moved to `OAuth2RefreshTokenGrantStrategy`
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.9.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- `refresh_token` grants no longer require a scope to be set
+
+#### Other
+- None
+
+
+## 0.9.0
+
+#### Breaking
+- Update `XMLNode` interface to better define usage expectations.
+  - Default values for `nodes(named:traversal:)` and `node()` methods have been
+    removed and traversal algorithm must be now set explicitly.
+  - `getValue(name:)` has been updated to always use `.firstLevel` only.
+  - New method `findValue(name:traversal:)` has been added, and requires
+    the traversal algorithm to be set explicitly.
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.8.0
+
+#### Breaking
+- Update to Xcode 9.3 / Swift 4.1
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.7.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- Fix issue where Logger levels where being ignored.
+
+#### Other
+- None
+
+
+## 0.7.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- Use Xcode new build system.
+- Run CI on Xcode 9.2 image.
+
+
 ## 0.7.0
 
 #### Breaking
 - Remove implicit force unwrapped property Conduit.Auth.defaultClientConfiguration (now it is an optional).
 
 #### Enhancements
-- Refactor unit tests to allow for parallel testing. 
+- Refactor unit tests to allow for parallel testing.
 
 #### Bug Fixes
 - None

@@ -42,12 +42,12 @@ class ResultTests: XCTestCase {
     }
 
     func testRewrappingAResultShouldAllowDifferentTypesWithoutChangingTheUnderlyingError() {
-        let r = Result<Int>.error(MyError.errorOne)
-        let rNew = r.convert { return Int64($0) } // Conversion we don't care about.
+        let result = Result<Int>.error(MyError.errorOne)
+        let rNew = result.convert { return Int64($0) } // Conversion we don't care about.
 
-        if case .error(let e) = rNew {
-            if let e = e as? MyError {
-                XCTAssertEqual(e, MyError.errorOne)
+        if case .error(let error) = rNew {
+            if let error = error as? MyError {
+                XCTAssertEqual(error, MyError.errorOne)
             }
             else {
                 XCTFail("Unexpected error type")
@@ -59,16 +59,16 @@ class ResultTests: XCTestCase {
     }
 
     func testShouldAllowRewrappingTheErrorWithADifferentError() {
-        let r = Result<Int>.error(MyError.errorOne)
+        let result = Result<Int>.error(MyError.errorOne)
 
         // Converts the underlying error to a different case, but leaves the value unchanged.
-        let rNew = r.convert(errorConverter: { _ in
+        let rNew = result.convert(errorConverter: { _ in
             return MyError.errorTwo
         }, valueConverter: { return $0 })
 
-        if case .error(let e) = rNew {
-            if let e = e as? MyError {
-                XCTAssertEqual(e, MyError.errorTwo)
+        if case .error(let error) = rNew {
+            if let error = error as? MyError {
+                XCTAssertEqual(error, MyError.errorTwo)
             }
             else {
                 XCTFail("Unexpected error type")

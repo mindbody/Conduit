@@ -84,7 +84,7 @@ public class NetworkReachability {
                                                    retain: nil,
                                                    release: nil,
                                                    copyDescription: nil)
-        SCNetworkReachabilitySetCallback(systemReachability, { (_, reachabilityFlags, info) in
+        SCNetworkReachabilitySetCallback(systemReachability, { _, reachabilityFlags, info in
             guard let info = info else {
                 return
             }

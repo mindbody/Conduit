@@ -52,7 +52,7 @@ class AuthManager {
     /// Token storage, retrieval, updates, and invalidation is automatically handled by Conduit
     /// except when manually issued from a grant strategy
     lazy var localTokenStore: OAuth2TokenStore = {
-        return OAuth2TokenDiskStore(storageMethod: .userDefaults)
+        return OAuth2TokenUserDefaultsStore(userDefaults: .standard)
     }()
 
 }

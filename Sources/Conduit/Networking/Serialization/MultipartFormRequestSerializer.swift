@@ -68,8 +68,8 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
         let randomCharacters = (0..<12).map { _ -> String in
             let offset = Int(arc4random_uniform(lettersLength))
-            let c = letters[letters.index(letters.startIndex, offsetBy: offset)]
-            return String(c)
+            let characters = letters[letters.index(letters.startIndex, offsetBy: offset)]
+            return String(characters)
         }
 
         return "----------------------------\(randomCharacters.joined())"

@@ -52,7 +52,8 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 | Conduit  Version | Swift Version |
 |------------------|---------------|
 | 0.4.x            | 3.x           |
-| 0.5.x+           | 4.0           |
+| 0.5 - 0.7.x      | 4.0           |
+| 0.8.x+           | 4.1           |
 
 ## Installation
 
@@ -83,12 +84,12 @@ end
 Add `Conduit` to your `Package.swift`:
 
 ```swift
-// swift-tools-version:4.0
+// swift-tools-version:4.1
 import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.7.0")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.11.0")
     ]
 )
 ```
@@ -109,7 +110,7 @@ let mySessionClient = URLSessionClient(sessionConfiguration: URLSessionConfigura
 
 ```swift
 class MySessionClientManager {
-    
+
     /// Lazy-loaded URLSessionClient used for interacting with the Kittn API 🐱
     static let kittnAPISessionClient: URLSessionClient = {
         return URLSessionClient()
@@ -197,7 +198,7 @@ This could be used for logging, proxying, authorization, and implementing strict
 ```swift
 /// Simple middelware example that logs each outbound request
 struct LoggingRequestPipelineMiddleware: RequestPipelineMiddleware {
-    
+
     public func prepareForTransport(request: URLRequest, completion: @escaping Result<Void>.Block) {
         print("Outbound request: \(request)")
     }

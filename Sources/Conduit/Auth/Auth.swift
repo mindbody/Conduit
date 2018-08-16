@@ -11,8 +11,6 @@ import Foundation
 /// A static configuration object for Auth operations
 public class Auth {
 
-    private init() {}
-
     /// The default OAuth2ClientConfiguration, useful for single-client applications
     public static var defaultClientConfiguration: OAuth2ClientConfiguration?
 
@@ -63,7 +61,7 @@ public class Auth {
                                                     middleware: OAuth2RequestPipelineMiddleware,
                                                     completion: @escaping Result<BearerToken>.Block) {
             var sessionClient = sessionClient
-            sessionClient.middleware = [middleware]
+            sessionClient.requestMiddleware = [middleware]
             guard let noOpURL = URL(string: "https://mindbodyonline.com") else {
                 completion(.error(OAuth2Error.internalFailure))
                 return
@@ -83,7 +81,7 @@ public class Auth {
                                           for: middleware.clientConfiguration,
                                           with: middleware.authorization)
 
-            sessionClient.begin(request: noOpRequest) { (data, response, _) in
+            sessionClient.begin(request: noOpRequest) { data, response, _ in
                 if let token: BearerToken = middleware.tokenStorage.tokenFor(client: middleware.clientConfiguration,
                                                                              authorization: middleware.authorization),
                     token.isValid {
