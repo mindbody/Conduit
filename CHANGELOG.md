@@ -4,7 +4,7 @@
 - None
 
 #### Enhancements
-- None
+- Improved verbose logging for middleware pipeline.
 
 #### Bug Fixes
 - None
