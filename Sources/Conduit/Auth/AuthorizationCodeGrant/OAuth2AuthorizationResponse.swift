@@ -18,14 +18,18 @@ public struct OAuth2AuthorizationResponse {
     /// callback. This is primarily used to prevent CSRF attacks.
     public let state: String?
 
+    /// 
+    public let scope: [String]?
+
     /// Creates a new OAuth2AuthorizationResponse
     /// - Parameters:
     ///   - code: The authorization code to be supplied to the authorization_code grant
     ///   - state: (Optional) An opaque value used by the client to maintain state between request and the
     ///            callback. This is primarily used to prevent CSRF attacks.
-    public init(code: String, state: String? = nil) {
+    public init(code: String, state: String? = nil, scope: [String]? = nil) {
         self.code = code
         self.state = state
+        self.scope = scope
     }
 
 }

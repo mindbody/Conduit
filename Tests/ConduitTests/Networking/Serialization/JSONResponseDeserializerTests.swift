@@ -32,7 +32,7 @@ class JSONResponseDeserializerTests: XCTestCase {
     }
 
     private func makeResponse(contentType: String? = nil) throws -> HTTPURLResponse {
-        var headerFields: [String: String]? = nil
+        var headerFields: [String: String]?
         if let contentType = contentType {
             headerFields = ["Content-Type": contentType]
         }

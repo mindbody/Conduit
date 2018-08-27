@@ -88,7 +88,13 @@ public class OAuth2AuthorizationRedirectHandler: NSObject {
         }
 
         let state = queryItemsDict["state"]
-        let response = OAuth2AuthorizationResponse(code: code, state: state)
+
+        var scope: [String]?
+        if let scopeItem = queryItemsDict["scope"] {
+            scope = scopeItem.split(separator: ",").map(String.init)
+        }
+
+        let response = OAuth2AuthorizationResponse(code: code, state: state, scope: scope)
         activeHandler?(.value(response))
         return shouldHandleURL
     }
