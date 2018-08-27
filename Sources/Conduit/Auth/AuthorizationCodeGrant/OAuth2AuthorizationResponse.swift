@@ -18,9 +18,8 @@ public struct OAuth2AuthorizationResponse {
     /// callback. This is primarily used to prevent CSRF attacks.
     public let state: String?
 
-    /// If the scope the user granted is identical to the scope the app requested, this parameter is optional.
-    /// If the granted scope is different from the requested scope, such as if the user modified the scope,
-    /// then this parameter is required.
+    /// The acess the user has given to the consuming application.
+    /// This value is returned as a comma separated list in the query string.
     public let scope: [String]?
 
     /// Creates a new OAuth2AuthorizationResponse
