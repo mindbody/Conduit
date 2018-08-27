@@ -12,9 +12,9 @@ import XCTest
 class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
 
     let authCode = "hunter2"
-    let redirectURI = "x-oauth2-myapp://authorize"
+    let redirectURI = "x-oauth2-myapp://authorize?scope=read,write"
     let authorizationCodeGrantType = "authorization_code"
-    let customParameters: [String: String] = ["some_id": "123abc", "scope": "read,write"]
+    let customParameters: [String: String] = ["some_id": "123abc"]
 
     private func makeStrategy() throws -> OAuth2AuthorizationCodeTokenGrantStrategy {
         let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
@@ -40,12 +40,12 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
         XCTAssert(bodyParameters["grant_type"] == authorizationCodeGrantType)
         XCTAssert(bodyParameters["redirect_uri"] == redirectURI)
         XCTAssert(bodyParameters["code"] == authCode)
-        XCTAssert(bodyParameters["scope"] == "read,write")
         for parameter in customParameters {
             XCTAssert(bodyParameters[parameter.key] == parameter.value)
         }
         XCTAssert(request.httpMethod == "POST")
         XCTAssert(headers["Authorization"]?.contains("Basic") == true)
+        XCTAssert(bodyParameters["redirect_uri"]?.contains("read,write") == true)
     }
 
     func testIssuesTokenWithCorrectSessionClient() throws {

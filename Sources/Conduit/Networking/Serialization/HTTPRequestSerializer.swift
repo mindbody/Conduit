@@ -45,9 +45,9 @@ open class HTTPRequestSerializer: RequestSerializer {
         let product: String
         let productVersion: String
         let platform: String?
-        var deviceModel: String? = nil
+        var deviceModel: String?
         var operatingSystemVersion: String?
-        var deviceScale: String? = nil
+        var deviceScale: String?
 
         if let executableName = Bundle.main.object(forInfoDictionaryKey: kCFBundleExecutableKey as String) as? String {
             product = executableName
