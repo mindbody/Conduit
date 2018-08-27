@@ -164,8 +164,8 @@ public struct URLSessionClient: URLSessionClientType {
 
             switch middlewareProcessingResult {
             case .error(let error):
-                var response: HTTPURLResponse?
-                var data: Data?
+                var response: HTTPURLResponse? = nil
+                var data: Data? = nil
                 var error: Error? = error
                 self.synchronouslyPrepare(request: request, response: &response, data: &data, error: &error)
                 self.urlSession.delegateQueue.addOperation {
