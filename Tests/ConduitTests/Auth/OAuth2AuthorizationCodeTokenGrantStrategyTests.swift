@@ -14,7 +14,8 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
     let authCode = "hunter2"
     let redirectURI = "x-oauth2-myapp://authorize"
     let authorizationCodeGrantType = "authorization_code"
-    let customParameters: [String: String] = ["some_id": "123abc"]
+    let scope = "read,write"
+    let customParameters: [String: String] = ["some_id": "123abc", "scope": scope]
 
     private func makeStrategy() throws -> OAuth2AuthorizationCodeTokenGrantStrategy {
         let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
@@ -40,6 +41,7 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
         XCTAssert(bodyParameters["grant_type"] == authorizationCodeGrantType)
         XCTAssert(bodyParameters["redirect_uri"] == redirectURI)
         XCTAssert(bodyParameters["code"] == authCode)
+        XCTAssert(bodyParameters["scope"] == scope)
         for parameter in customParameters {
             XCTAssert(bodyParameters[parameter.key] == parameter.value)
         }
