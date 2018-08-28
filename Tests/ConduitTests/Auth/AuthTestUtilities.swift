@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import Conduit
 
 class AuthTestUtilities {
 
@@ -30,4 +31,29 @@ class AuthTestUtilities {
         return params
     }
 
+    static func makeSecureRandom(length: Int) -> String {
+        var buffer = [UInt8](repeating: 0, count: length)
+        _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
+        return base64URLEncode(Data(bytes: buffer))
+    }
+
+    private static func base64URLEncode(_ input: Data) -> String {
+        return input.base64EncodedString()
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+            .trimmingCharacters(in: .whitespaces)
+    }
+
+}
+
+class MockSafariAuthorizationStrategy: NSObject, OAuth2AuthorizationStrategy {
+    func authorize(request: OAuth2AuthorizationRequest, completion: @escaping (Result<OAuth2AuthorizationResponse>) -> Void) {
+        let state = request.state
+        let code = AuthTestUtilities.makeSecureRandom(length: 32)
+        var params = request.additionalParameters
+        params?["scope"] = request.scope
+        let response = OAuth2AuthorizationResponse(code: code, state: state, queryItems: params)
+        completion(.value(response))
+    }
 }
