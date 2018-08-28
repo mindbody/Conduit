@@ -88,7 +88,7 @@ public class OAuth2AuthorizationRedirectHandler: NSObject {
         }
 
         let state = queryItemsDict["state"]
-        let response = OAuth2AuthorizationResponse(code: code, state: state, queryItems: queryItemsDict)
+        let response = OAuth2AuthorizationResponse(code: code, state: state, customParameters: queryItemsDict)
         activeHandler?(.value(response))
         return shouldHandleURL
     }

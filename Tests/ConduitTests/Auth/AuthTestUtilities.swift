@@ -53,7 +53,7 @@ class MockSafariAuthorizationStrategy: NSObject, OAuth2AuthorizationStrategy {
         let code = AuthTestUtilities.makeSecureRandom(length: 32)
         var params = request.additionalParameters
         params?["scope"] = request.scope
-        let response = OAuth2AuthorizationResponse(code: code, state: state, queryItems: params)
+        let response = OAuth2AuthorizationResponse(code: code, state: state, customParameters: params)
         completion(.value(response))
     }
 }

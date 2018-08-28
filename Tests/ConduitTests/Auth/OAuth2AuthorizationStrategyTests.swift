@@ -39,7 +39,7 @@ class OAuth2AuthorizationStrategyTests: XCTestCase {
 
         wait(for: [expect], timeout: TimeInterval(5))
         XCTAssertNotNil(response.code)
-        XCTAssert(response.queryItems?.contains { $0 == "scope" && $1 == scope } == true)
+        XCTAssert(response.customParameters?.contains { $0 == "scope" && $1 == scope } == true)
         XCTAssertEqual(response.state, request.state)
     }
 }
