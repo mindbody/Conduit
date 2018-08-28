@@ -20,3 +20,4 @@ active_pid=$(
 
 # Adds the resulting process ID to a simple line-separated list to later be killed
 echo $active_pid >> $DIR/.active_pids
+
