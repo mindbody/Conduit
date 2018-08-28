@@ -14,7 +14,7 @@ public enum XMLError: Error {
 }
 
 /// Represents an XML document
-public struct XML {
+public final class XML {
 
     /// The root of the document
     public var root: XMLNode?
@@ -53,18 +53,16 @@ extension XML: CustomStringConvertible {
 // MARK: - LosslessStringConvertible
 
 extension XML: LosslessStringConvertible {
-
     /// Attempts to produce an XML document with the provided XML string
     ///
     /// - Parameter description: The XML string to deserialize
-    public init?(_ description: String) {
+    public convenience init?(_ description: String) {
         let parser = XML.Parser(xmlString: description)
-        guard let xml = parser?.parse() else {
+        guard let xml = parser?.parse(), let root = xml.root else {
             return nil
         }
-        self = xml
+        self.init(root: root)
     }
-
 }
 
 // MARK: XML string parser
@@ -87,8 +85,7 @@ extension XML {
         }
 
         func parse() -> XML? {
-            if xmlParser.parse(),
-                let root = root {
+            if xmlParser.parse(), let root = root {
                 return XML(root: root)
             }
             return nil
@@ -96,7 +93,7 @@ extension XML {
 
         func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?,
                     attributes attributeDict: [String: String] = [:]) {
-            var node = XMLNode(name: elementName)
+            let node = XMLNode(name: elementName)
             node.attributes = attributeDict
             if let parentNode = workingTree.popLast() {
                 workingTree.append(parentNode)
@@ -105,7 +102,7 @@ extension XML {
         }
 
         func parser(_ parser: XMLParser, foundCharacters string: String) {
-            if var activeNode = workingTree.popLast() {
+            if let activeNode = workingTree.popLast() {
                 let text = activeNode.text ?? ""
                 activeNode.text = text + string
                 workingTree.append(activeNode)
@@ -115,7 +112,7 @@ extension XML {
         func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
             let finishedNode = workingTree.popLast()
             let parentNode = workingTree.popLast()
-            if var parentNode = parentNode {
+            if let parentNode = parentNode {
                 if let finishedNode = finishedNode {
                     var children = parentNode.children
                     children.append(finishedNode)

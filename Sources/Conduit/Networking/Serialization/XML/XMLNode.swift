@@ -12,7 +12,7 @@ import Foundation
 public typealias XMLDictionary = [String: CustomStringConvertible]
 
 /// Represents a single node in an XML document
-public struct XMLNode {
+public final class XMLNode {
 
     /// Not technically a PI, but it follows the same formatting rules
     static var versionInstruction: XMLNode = {
@@ -181,11 +181,11 @@ extension XMLNode: LosslessStringConvertible {
     /// Attempts to produce an XMLNode with the provided XML string
     ///
     /// - Parameter description: The XML string to deserialize
-    public init?(_ description: String) {
-        guard let node = XML(description)?.root else {
+    public convenience init?(_ description: String) {
+        guard let root = XML(description)?.root else {
             return nil
         }
-        self = node
+        self.init(name: root.name, value: root.getValue() as String?, attributes: root.attributes, children: root.children)
     }
 
 }
