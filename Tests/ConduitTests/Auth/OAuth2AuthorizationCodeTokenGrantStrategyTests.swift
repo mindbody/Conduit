@@ -12,7 +12,7 @@ import XCTest
 class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
 
     let authCode = "hunter2"
-    let redirectURI = "x-oauth2-myapp://authorize?scope=read,write"
+    let redirectURI = "x-oauth2-myapp://authorize"
     let authorizationCodeGrantType = "authorization_code"
     let customParameters: [String: String] = ["some_id": "123abc"]
 
@@ -45,7 +45,6 @@ class OAuth2AuthorizationCodeTokenGrantStrategyTests: XCTestCase {
         }
         XCTAssert(request.httpMethod == "POST")
         XCTAssert(headers["Authorization"]?.contains("Basic") == true)
-        XCTAssert(bodyParameters["redirect_uri"]?.contains("read,write") == true)
     }
 
     func testIssuesTokenWithCorrectSessionClient() throws {

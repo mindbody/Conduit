@@ -20,17 +20,17 @@ public struct OAuth2AuthorizationResponse {
 
     /// The acess the user has given to the consuming application.
     /// This value is returned as a comma separated list in the query string.
-    public let scope: [String]?
+    public let queryItems: [String: String]?
 
     /// Creates a new OAuth2AuthorizationResponse
     /// - Parameters:
     ///   - code: The authorization code to be supplied to the authorization_code grant
     ///   - state: (Optional) An opaque value used by the client to maintain state between request and the
     ///            callback. This is primarily used to prevent CSRF attacks.
-    public init(code: String, state: String? = nil, scope: [String]? = nil) {
+    public init(code: String, state: String? = nil, queryItems: [String: String]? = nil) {
         self.code = code
         self.state = state
-        self.scope = scope
+        self.queryItems = queryItems
     }
 
 }
