@@ -18,16 +18,16 @@ public struct OAuth2AuthorizationResponse {
     /// callback. This is primarily used to prevent CSRF attacks.
     public let state: String?
 
-    /// The acess the user has given to the consuming application.
-    /// This value is returned as a comma separated list in the query string.
-    public let customParameters: [String: String]?
+    /// Any additional or custom parameters not explicitly stated in the OAuth2 Spec.
+    /// This could include accepted scope or granted permissions.
+    public let customParameters: [String: String]
 
     /// Creates a new OAuth2AuthorizationResponse
     /// - Parameters:
     ///   - code: The authorization code to be supplied to the authorization_code grant
     ///   - state: (Optional) An opaque value used by the client to maintain state between request and the
     ///            callback. This is primarily used to prevent CSRF attacks.
-    public init(code: String, state: String? = nil, customParameters: [String: String]? = nil) {
+    public init(code: String, state: String? = nil, customParameters: [String: String] = [:]) {
         self.code = code
         self.state = state
         self.customParameters = customParameters

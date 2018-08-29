@@ -51,8 +51,8 @@ class MockSafariAuthorizationStrategy: NSObject, OAuth2AuthorizationStrategy {
     func authorize(request: OAuth2AuthorizationRequest, completion: @escaping (Result<OAuth2AuthorizationResponse>) -> Void) {
         let state = request.state
         let code = AuthTestUtilities.makeSecureRandom(length: 32)
-        var params = request.additionalParameters
-        params?["scope"] = request.scope
+        var params = request.additionalParameters ?? [:]
+        params["scope"] = request.scope
         let response = OAuth2AuthorizationResponse(code: code, state: state, customParameters: params)
         completion(.value(response))
     }
