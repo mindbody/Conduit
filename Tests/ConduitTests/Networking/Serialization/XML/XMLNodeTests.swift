@@ -235,16 +235,19 @@ class XMLNodeTests: XCTestCase {
         let bar = XMLNode(name: "", value: 25.99)
         let baz = XMLNode(name: "", value: "Lorem Ipsum")
         let qux = XMLNode(name: "", value: true)
+        let paz = XMLNode(name: "", value: Decimal(25.99))
 
         XCTAssertEqual(try foo.getValue(), 1)
         XCTAssertEqual(try bar.getValue(), 25.99)
         XCTAssertEqual(try baz.getValue(), "Lorem Ipsum")
         XCTAssertEqual(try qux.getValue(), true)
+        XCTAssertEqual(try paz.getValue(), Decimal(25.99))
 
         XCTAssertEqual(foo.getValue(), Optional(1))
         XCTAssertEqual(bar.getValue(), Optional(25.99))
         XCTAssertEqual(baz.getValue(), Optional("Lorem Ipsum"))
         XCTAssertEqual(qux.getValue(), Optional(true))
+        XCTAssertEqual(paz.getValue(), Optional(Decimal(25.99)))
     }
 
     func testXMLNodeValueGetterFailure() {
@@ -273,4 +276,57 @@ class XMLNodeTests: XCTestCase {
             XCTAssertEqual(name, "bar")
         }
     }
+
+    func testLosslessStringConvertible() {
+        let xml = "<Node/>"
+        XCTAssertEqual(XMLNode(xml)?.description, xml)
+    }
+
+    func testLosslessStringConvertibleWithValueAndAttributes() {
+        let xml = """
+            <Node Identifier="ID">Value</Node>
+            """
+        XCTAssertEqual(XMLNode(xml)?.description, xml)
+    }
+
+    func testLosslessStringConvertibleEmpty() {
+        let xml = ""
+        XCTAssertNil(XMLNode(xml))
+    }
+
+    func testFindValue() {
+        let xml = "<Node><Child>Foo</Child></Node>"
+        XCTAssertEqual(XMLNode(xml)?.findValue("Child", traversal: .firstLevel), "Foo")
+    }
+
+    func testFindValueTry() {
+        let xml = "<Node><Child>Foo</Child></Node>"
+        let node = XMLNode(xml) ?? XMLNode(name: "Node")
+        XCTAssertNoThrow(try node.findValue("Child", traversal: .firstLevel) as String)
+    }
+
+    func testXMLNodeInjection() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XMLNode(xml)
+        let parent = node?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children.append(XMLNode(name: "Child", value: "Bar"))
+        XCTAssertEqual(node?.description, "<Node><Parent><Child>Foo</Child><Child>Bar</Child></Parent></Node>")
+    }
+
+    func testXMLNodeReplacement() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XMLNode(xml)
+        let parent = node?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children = [XMLNode(name: "Child", value: "Bar")]
+        XCTAssertEqual(node?.description, "<Node><Parent><Child>Bar</Child></Parent></Node>")
+    }
+
+    func testXMLNodeDeletion() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XMLNode(xml)
+        let parent = node?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children = []
+        XCTAssertEqual(node?.description, "<Node><Parent/></Node>")
+    }
+
 }

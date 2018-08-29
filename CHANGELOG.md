@@ -1,7 +1,7 @@
 ## master
 
 #### Breaking
-- None
+- Allow direct manipulation of XML trees by converting XML and XMLNode from struct to class. 
 
 #### Enhancements
 - None
