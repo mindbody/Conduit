@@ -42,17 +42,17 @@ class XMLTests: XCTestCase {
     }
 
     func testXMLNodeConstruction() {
-        var node4 = XMLNode(name: "N")
+        let node4 = XMLNode(name: "N")
         node4.attributes = ["testKey": "testValue"]
         let node5 = XMLNode(name: "LastNode")
 
         let node1 = XMLNode(name: "N")
-        var node2 = XMLNode(name: "N")
+        let node2 = XMLNode(name: "N")
         node2.text = "test 🙂 value"
-        var node3 = XMLNode(name: "N")
+        let node3 = XMLNode(name: "N")
         node3.children = [node4, node5]
 
-        var root = XMLNode(name: "Root")
+        let root = XMLNode(name: "Root")
         root.children = [node1, node2, node3]
 
         let xml = XML(root: root)
@@ -91,6 +91,35 @@ class XMLTests: XCTestCase {
         XCTAssertEqual(node?.getValue("int"), 1)
         XCTAssertEqual(node?.getValue("double"), 12.34)
         XCTAssertEqual(node?.getValue("bool"), true)
+    }
+
+    func testLosslessStringConvertibleEmpty() {
+        let xml = ""
+        XCTAssertNil(XML(xml))
+    }
+
+    func testXMLInjection() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XML(xml)
+        let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children.append(XMLNode(name: "Child", value: "Bar"))
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent><Child>Foo</Child><Child>Bar</Child></Parent></Node>")
+    }
+
+    func testXMLReplacement() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XML(xml)
+        let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children = [XMLNode(name: "Child", value: "Bar")]
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent><Child>Bar</Child></Parent></Node>")
+    }
+
+    func testXMLDeletion() {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XML(xml)
+        let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
+        parent?.children = []
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent/></Node>")
     }
 
 }

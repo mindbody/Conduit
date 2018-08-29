@@ -28,7 +28,7 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
     }
 
     private func bodyData(bodyParameters: Any? = nil) throws -> Data? {
-        var bodyData: Data? = nil
+        var bodyData: Data?
         if bodyParameters != nil {
             guard let bodyParameters = bodyParameters as? XML else {
                 throw RequestSerializerError.serializationFailure
