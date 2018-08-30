@@ -135,28 +135,22 @@ public struct URLSessionClient: URLSessionClientType {
 
         serialQueue.async {
 
-            // First, check if the queue needs to be evicted and frozen
-
-            logger.verbose("About to scan middlware options")
+            logger.verbose("Scanning middlware options ⌛︎")
 
             for middleware in self.requestMiddleware {
                 if middleware.pipelineBehaviorOptions.contains(.awaitsOutgoingCompletion) {
-                    logger.verbose("=============== WAIT ===============")
-                    logger.verbose("Pausing session queue")
-
+                    logger.verbose("Paused session queue ⏸")
                     _ = self.activeTaskQueueDispatchGroup.wait(timeout: DispatchTime.distantFuture)
-
-                    logger.verbose("Resuming session queue")
-                    logger.verbose("--------------- RESUME -------------")
+                    logger.verbose("Resumed session queue ▶️")
                 }
             }
 
-            logger.verbose("Finshed scanning middleware options")
+            logger.verbose("Finished scanning middleware options ✓")
 
             // Next, allow each middleware component to have its way with the original URLRequest
             // This is done synchronously on the serial queue since the pipeline itself shouldn't allow for concurrency
 
-            logger.verbose("About to process request through middleware pipeline")
+            logger.verbose("Processing request through middleware pipeline ⌛︎")
 
             let middlewareProcessingResult = self.synchronouslyPrepareForTransport(request: request)
 
@@ -176,7 +170,7 @@ public struct URLSessionClient: URLSessionClientType {
                 modifiedRequest = request
             }
 
-            logger.verbose("Finished processing request through middleware pipeline")
+            logger.verbose("Finished processing request through middleware pipeline ✓")
 
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
