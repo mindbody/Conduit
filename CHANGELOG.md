@@ -12,6 +12,19 @@
 #### Other
 - None
 
+## 0.12.0
+
+#### Breaking
+- None
+
+#### Enhancements
+- Add scope to OAuth2AuthorizationResponse
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
 
 ## 0.11.0
 
