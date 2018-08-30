@@ -27,19 +27,40 @@ public final class XMLNode {
 
     /// The name of the element
     public var name: String
+
     /// The child nodes
-    public var children: [XMLNode]
+    public var children: [XMLNode] {
+        didSet {
+            resetChildrenParent()
+        }
+    }
+
+    /// Parent node. Set when node is added as children to another node.
+    public var parent: XMLNode?
+
+    /// Parent nodes all the way to the root node in the XML tree.
+    public var parents: [XMLNode] {
+        guard let parent = parent else {
+            return []
+        }
+        return [parent] + parent.parents
+    }
+
     /// The element attributes
     public var attributes = [String: String]()
+
     /// The contained text node (value) of the element
     public var text: String?
+
     /// Determines whether or not the element is a processing instruction
     public var isProcessingInstruction = false
+
     /// Determines whether or not the element is a leaf (no children)
     public var isLeaf: Bool {
         return children.isEmpty
     }
 
+    /// A node is considered empty if it has no children and no value
     private var isEmpty: Bool {
         return isLeaf && text == nil
     }
@@ -56,6 +77,7 @@ public final class XMLNode {
         self.text = value?.description
         self.attributes = attributes
         self.children = children
+        resetChildrenParent()
     }
 
     /// Construct XML node from a dictionary of [String: CustomStringConvertible]
@@ -83,6 +105,11 @@ public final class XMLNode {
             }
             return XMLNode(name: key, value: String(describing: value))
         }
+        resetChildrenParent()
+    }
+
+    private func resetChildrenParent() {
+        children.forEach { $0.parent = self }
     }
 
     /// Retrieve a list of all descendant nodes matching the given function
