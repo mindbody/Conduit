@@ -4,7 +4,7 @@
 - Allow direct manipulation of XML trees by converting XML and XMLNode from struct to class. 
 
 #### Enhancements
-- None
+- Improved verbose logging for middleware pipeline.
 
 #### Bug Fixes
 - None
