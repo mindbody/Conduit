@@ -329,4 +329,43 @@ class XMLNodeTests: XCTestCase {
         XCTAssertEqual(node?.description, "<Node><Parent/></Node>")
     }
 
+    func testMatchingPartialName() {
+        let xml = """
+            <Parent>
+                <Child Identifier="Child1">Foo</Child>
+                <Child Identifier="Child2">Bar</Child>
+                <Child Identifier="Child3">Baz</Child>
+            </Parent>
+            """
+        let matches = XMLNode(xml)?.nodes(matching: { $0.name.hasPrefix("Chi") }, traversal: .breadthFirst)
+        XCTAssertEqual(matches?.count, 3)
+        XCTAssertEqual(matches?.first?.getValue(), "Foo")
+    }
+
+    func testMatchingId() {
+        let xml = """
+            <Parent>
+                <Child Identifier="Child1">Foo</Child>
+                <Child Identifier="Child2">Bar</Child>
+                <Child Identifier="Child3">Baz</Child>
+            </Parent>
+            """
+        let matches = XMLNode(xml)?.nodes(matching: { $0.attributes["Identifier"] == "Child2" }, traversal: .breadthFirst)
+        XCTAssertEqual(matches?.count, 1)
+        XCTAssertEqual(matches?.first?.getValue(), "Bar")
+    }
+
+    func testMatchingValue() {
+        let xml = """
+            <Parent>
+                <Child Identifier="Child1">Foo</Child>
+                <Child Identifier="Child2">Bar</Child>
+                <Child Identifier="Child3">Baz</Child>
+            </Parent>
+            """
+        let matches = XMLNode(xml)?.nodes(matching: { $0.getValue() as String? == "Baz" }, traversal: .breadthFirst)
+        XCTAssertEqual(matches?.count, 1)
+        XCTAssertEqual(matches?.first?.attributes["Identifier"], "Child3")
+    }
+
 }
