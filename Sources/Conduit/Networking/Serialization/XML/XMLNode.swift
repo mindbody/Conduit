@@ -36,7 +36,7 @@ public final class XMLNode {
     }
 
     /// Parent node. Set when node is added as children to another node.
-    public var parent: XMLNode?
+    public weak var parent: XMLNode?
 
     /// Parent nodes all the way to the root node in the XML tree.
     public var parents: [XMLNode] {
