@@ -85,25 +85,34 @@ public final class XMLNode {
         }
     }
 
+    /// Retrieve a list of all descendant nodes matching the given function
+    ///
+    /// - Parameter matching: Matching function to apply to each node
+    /// - Parameter traversal: Node Traversal technique.
+    /// - Returns: Array of descendant nodes
+    public func nodes(matching function: (XMLNode) -> Bool, traversal: XMLNodeTraversal) -> [XMLNode] {
+        if isLeaf {
+            return []
+        }
+
+        let matches = children.filter { function($0) }
+        if traversal == .firstLevel {
+            return matches
+        }
+
+        let breadth = traversal == .breadthFirst ? matches : []
+        let descendants = children.flatMap { $0.nodes(matching: function, traversal: traversal) }
+        let depth = traversal == .depthFirst ? matches : []
+        return breadth + descendants + depth
+    }
+
     /// Retrieve a list of all descendant nodes with the given name
     ///
     /// - Parameter name: Node name to retrieve
     /// - Parameter traversal: Node Traversal technique.
     /// - Returns: Array of descendant nodes
     public func nodes(named name: String, traversal: XMLNodeTraversal) -> [XMLNode] {
-        if isLeaf {
-            return []
-        }
-
-        let matches = children.filter { $0.name == name }
-        if traversal == .firstLevel {
-            return matches
-        }
-
-        let breadth = traversal == .breadthFirst ? matches : []
-        let descendants = children.flatMap { $0.nodes(named: name, traversal: traversal) }
-        let depth = traversal == .depthFirst ? matches : []
-        return breadth + descendants + depth
+        return nodes(matching: { $0.name == name }, traversal: traversal)
     }
 
     /// Retrieve the first descendant node with the given name
