@@ -1,10 +1,11 @@
 ## master
 
 #### Breaking
-- Allow direct manipulation of XML trees by converting XML and XMLNode from struct to class. 
+- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types. 
 
 #### Enhancements
 - Improved verbose logging for middleware pipeline.
+- Find XML nodes matching a given function.
 
 #### Bug Fixes
 - None
