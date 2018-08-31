@@ -389,6 +389,9 @@
 		95CC71D31F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
 		95CC71D41F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
 		95CC71D51F797B0D003B4E31 /* video.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C61F797B0D003B4E31 /* video.txt */; };
+		95D9484E2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */; };
+		95D9484F2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */; };
+		95D948502138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */; };
 		95E26BA81F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BA91F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
 		95E26BAA1F29649600804900 /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E26BA71F29649600804900 /* XMLNode.swift */; };
@@ -575,6 +578,7 @@
 		95CC71C41F797B0C003B4E31 /* evilspaceship.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = evilspaceship.txt; sourceTree = "<group>"; };
 		95CC71C51F797B0D003B4E31 /* validcertificate1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = validcertificate1.txt; sourceTree = "<group>"; };
 		95CC71C61F797B0D003B4E31 /* video.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = video.txt; sourceTree = "<group>"; };
+		95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTestsSubjects.swift; sourceTree = "<group>"; };
 		95E26BA71F29649600804900 /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNode.swift; sourceTree = "<group>"; };
 		95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 		95F04E761F7C3B21003E9700 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
@@ -1024,8 +1028,9 @@
 			isa = PBXGroup;
 			children = (
 				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
-				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
+				95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */,
 				1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */,
+				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
 			path = XML;
@@ -1757,6 +1762,7 @@
 			files = (
 				1BD5559A1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
 				1BF8E56120CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
+				95D9484E2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555851F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDA1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD41F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
@@ -1799,6 +1805,7 @@
 			files = (
 				1BD5559B1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
 				1BF8E56220CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
+				95D9484F2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555861F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDB1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD51F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
@@ -1841,6 +1848,7 @@
 			files = (
 				1BD5559C1F17DC81004B1172 /* SOAPEnvelopeFactoryTests.swift in Sources */,
 				1BF8E56320CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
+				95D948502138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555871F17DC81004B1172 /* ResultTests.swift in Sources */,
 				1B279CDC1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD61F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
