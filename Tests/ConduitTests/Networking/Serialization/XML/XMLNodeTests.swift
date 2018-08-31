@@ -14,14 +14,14 @@ typealias XMLNode = Conduit.XMLNode
 class XMLNodeTests: XCTestCase {
 
     func testSubscripting() {
-        for subject in testSubjects {
+        for subject in XMLNodeTests.testSubjects {
             XCTAssertEqual(subject["id"]?.getValue(), "root1")
             XCTAssertNotNil(subject["clients"]?["client"]?["id"])
         }
     }
 
     func testXMLTreeSearch() {
-        for subject in testSubjects {
+        for subject in XMLNodeTests.testSubjects {
             XCTAssertEqual(subject.name, "xml")
             XCTAssertEqual(subject.nodes(named: "clients", traversal: .breadthFirst).count, 1)
             XCTAssertEqual(subject.nodes(named: "client", traversal: .breadthFirst).count, 3)
@@ -32,7 +32,7 @@ class XMLNodeTests: XCTestCase {
     }
 
     func testXMLFirstLevelSearch() throws {
-        for subject in testSubjects {
+        for subject in XMLNodeTests.testSubjects {
             XCTAssertEqual(subject.nodes(named: "id", traversal: .firstLevel).first?.getValue(), "root1")
             XCTAssertEqual(try subject.getValue("name"), "I'm Root")
             XCTAssertEqual(try subject.getValue("rootonly"), "Root only")
@@ -44,7 +44,7 @@ class XMLNodeTests: XCTestCase {
     }
 
     func testXMLDepthTraversal() throws {
-        for subject in testSubjects {
+        for subject in XMLNodeTests.testSubjects {
             XCTAssertEqual(subject.nodes(named: "id", traversal: .depthFirst).first?.getValue(), "customer1")
             XCTAssertEqual(try subject.findValue("name", traversal: .depthFirst), "Customer Awesome")
             XCTAssertEqual(try subject.findValue("rootonly", traversal: .depthFirst), "Root only")
@@ -53,7 +53,7 @@ class XMLNodeTests: XCTestCase {
     }
 
     func testXMLBreadthTraversal() throws {
-        for subject in testSubjects {
+        for subject in XMLNodeTests.testSubjects {
             XCTAssertEqual(subject.nodes(named: "id", traversal: .breadthFirst).first?.getValue(), "root1")
             XCTAssertEqual(try subject.findValue("name", traversal: .breadthFirst), "I'm Root")
             XCTAssertEqual(try subject.findValue("rootonly", traversal: .breadthFirst), "Root only")
@@ -64,7 +64,7 @@ class XMLNodeTests: XCTestCase {
     // swiftlint:disable line_length
     func testXMLOutput() {
         let output = "<xml><clients><client><id>client1</id><name>Bob</name><clientonly>Foo</clientonly><customers><customer><id>customer1</id><name>Customer Awesome</name></customer><customer><id>customer2</id><name>Another Customer</name></customer></customers></client><client><id>client2</id><name>Job</name><clientonly>Bar</clientonly><customers><customer><id>customer3</id><name>Yet Another Customer</name></customer></customers></client><client><id>client3</id><name>Joe</name><clientonly>Baz</clientonly></client></clients><id>root1</id><name>I'm Root</name><rootonly>Root only</rootonly></xml>"
-        XCTAssertEqual(xml.description, output)
+        XCTAssertEqual(XMLNodeTests.xml.description, output)
     }
     // swiftlint:enable line_length
 
@@ -236,36 +236,54 @@ class XMLNodeTests: XCTestCase {
     }
 
     func testMatchingPartialName() {
-        let matches = XMLNode(xmlWithIdentifiers)?.nodes(matching: { $0.name.hasPrefix("Chi") }, traversal: .breadthFirst)
+        let matches = XMLNode(XMLNodeTests.xmlWithIdentifiers)?.nodes(matching: { $0.name.hasPrefix("Chi") }, traversal: .breadthFirst)
         XCTAssertEqual(matches?.count, 3)
         XCTAssertEqual(matches?.first?.getValue(), "Foo")
     }
 
     func testMatchingId() {
-        let matches = XMLNode(xmlWithIdentifiers)?.nodes(matching: { $0.attributes["Identifier"] == "Child2" }, traversal: .breadthFirst)
+        let matches = XMLNode(XMLNodeTests.xmlWithIdentifiers)?.nodes(matching: { $0.attributes["Identifier"] == "Child2" }, traversal: .breadthFirst)
         XCTAssertEqual(matches?.count, 1)
         XCTAssertEqual(matches?.first?.getValue(), "Bar")
     }
 
     func testMatchingValue() {
-        let matches = XMLNode(xmlWithIdentifiers)?.nodes(matching: { $0.getValue() as String? == "Baz" }, traversal: .breadthFirst)
+        let matches = XMLNode(XMLNodeTests.xmlWithIdentifiers)?.nodes(matching: { $0.getValue() as String? == "Baz" }, traversal: .breadthFirst)
         XCTAssertEqual(matches?.count, 1)
         XCTAssertEqual(matches?.first?.attributes["Identifier"], "Child3")
     }
 
+    func testMatchingAllNodes() {
+        for subject in XMLNodeTests.testSubjects {
+            let matches = subject.nodes(matching: { _ in true }, traversal: .breadthFirst)
+            XCTAssertEqual(matches.count, 27)
+        }
+    }
+
     func testParent() {
-        let matches = xml.nodes(named: "client", traversal: .breadthFirst)
-        XCTAssertEqual(matches.count, 3)
-        for match in matches {
-            XCTAssertEqual(match.parent?.name, "clients")
+        for subject in XMLNodeTests.testSubjects {
+            let matches = subject.nodes(named: "client", traversal: .breadthFirst)
+            XCTAssertEqual(matches.count, 3)
+            for match in matches {
+                XCTAssertEqual(match.parent?.name, "clients")
+            }
         }
     }
 
     func testParents() {
-        let matches = xml.nodes(named: "customer", traversal: .breadthFirst)
-        XCTAssertEqual(matches.count, 3)
-        for match in matches {
-            XCTAssertEqual(match.parents.map { $0.name }, ["customers", "client", "clients", "xml"])
+        for subject in XMLNodeTests.testSubjects {
+            let matches = subject.nodes(named: "customer", traversal: .breadthFirst)
+            XCTAssertEqual(matches.count, 3)
+            for match in matches {
+                XCTAssertEqual(match.parents.map { $0.name }, ["customers", "client", "clients", "xml"])
+            }
+        }
+    }
+
+    func testAllDescendantHaveParent() {
+        for subject in XMLNodeTests.testSubjects {
+            let matches = subject.nodes(matching: { $0.parent != nil }, traversal: .breadthFirst)
+            XCTAssertEqual(matches.count, 27)
         }
     }
 
