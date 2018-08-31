@@ -269,4 +269,11 @@ class XMLNodeTests: XCTestCase {
         }
     }
 
+    func testParentsDirect() throws {
+        let xml = "<Node><Parent><Child>Foo</Child></Parent></Node>"
+        let node = XMLNode(xml)
+        let child = node?.nodes(named: "Child", traversal: .breadthFirst).first
+        XCTAssertEqual(child?.parents.map { $0.name }, ["Parent", "Node"])
+    }
+
 }
