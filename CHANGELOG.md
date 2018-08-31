@@ -6,12 +6,14 @@
 #### Enhancements
 - Improved verbose logging for middleware pipeline.
 - Find XML nodes matching a given function.
+- Traverse XML tree upwards with `parent` property.
 
 #### Bug Fixes
 - None
 
 #### Other
 - None
+
 
 ## 0.12.0
 
@@ -26,6 +28,7 @@
 
 #### Other
 - None
+
 
 ## 0.11.0
 
