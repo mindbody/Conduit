@@ -1023,9 +1023,9 @@
 			isa = PBXGroup;
 			children = (
 				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
-				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */,
 				1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */,
+				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
 			);
 			path = XML;
