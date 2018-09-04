@@ -1,10 +1,24 @@
 ## master
 
+
 #### Breaking
-- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types. 
+- None.
 
 #### Enhancements
-- Improved verbose logging for middleware pipeline.
+- None.
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.13.0
+
+#### Breaking
+
+#### Enhancements
 - Find XML nodes matching a given function.
 - Traverse XML tree upwards with `parent` property.
 
@@ -18,10 +32,11 @@
 ## 0.12.0
 
 #### Breaking
-- None
+- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types. 
 
 #### Enhancements
 - Add scope to OAuth2AuthorizationResponse
+- Improved verbose logging for middleware pipeline.
 
 #### Bug Fixes
 - None
