@@ -67,6 +67,7 @@ class XMLPrettyPrintTests: XCTestCase {
                     <Child>Bar</Child>
                 </Parent>
             </Node>
+
             """
 
         let xml = XML(string)
