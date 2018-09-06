@@ -40,12 +40,7 @@ extension XML: CustomStringConvertible {
 
     /// Serialized XML string output
     public var description: String {
-        var nodes = [XMLNode.versionInstruction]
-        nodes.append(contentsOf: processingInstructions)
-        if let root = root {
-            nodes.append(root)
-        }
-        return nodes.map { $0.description }.joined()
+        return xmlString(format: .condensed)
     }
 
 }

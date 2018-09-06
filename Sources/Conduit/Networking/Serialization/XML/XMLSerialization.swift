@@ -8,19 +8,22 @@
 
 import Foundation
 
+/// XML Serialization format
+///
+/// - condensed: single-line XML output
+/// - prettyPrinted: human-readable format with proper indentation
 public enum XMLSerialization {
     case condensed
     case prettyPrinted(spaces: Int)
 }
 
-extension Array where Element: XMLNode {
-    public func xmlString(format: XMLSerialization = .condensed) -> String {
-        return ""
-    }
-}
-
 extension XMLNode {
-    public func xmlString(format: XMLSerialization = .condensed) -> String {
+
+    /// Serialize an XMLNode and descendants into a String
+    ///
+    /// - Parameter format: Serialization format (.condensed or .prettyPrinted)
+    /// - Returns: Serialized String
+    public func xmlString(format: XMLSerialization) -> String {
         switch format {
         case .condensed:
             return xmlString(spaces: 0, increment: 0, terminator: "")
@@ -37,24 +40,52 @@ extension XMLNode {
         if isProcessingInstruction {
             return "<?\(nameAndAttributes)?>\(terminator)"
         }
-        else if children.isEmpty == false {
-            let body = children.map {
-                $0.xmlString(spaces: spaces + increment, increment: increment, terminator: terminator)
-            }.joined()
+
+        if children.isEmpty == false {
+            let body = children.xmlString(spaces: spaces + increment, increment: increment, terminator: terminator)
             return "\(indentation)<\(nameAndAttributes)>\(terminator)\(body)\(indentation)</\(name)>\(terminator)"
         }
-        else if let value = text {
+
+        if let value = text {
             return "\(indentation)<\(nameAndAttributes)>\(value)</\(name)>\(terminator)"
         }
-        else {
-            return "\(indentation)<\(nameAndAttributes)/>\(terminator)"
-        }
-    }
 
+        return "\(indentation)<\(nameAndAttributes)/>\(terminator)"
+    }
 }
 
 extension XML {
-    public func xmlString(format: XMLSerialization = .condensed) -> String {
-        return ""
+
+    /// Serialize an XML document into a String
+    ///
+    /// - Parameter format: Serialization format (.condensed or .prettyPrinted)
+    /// - Returns: Serialized String
+    public func xmlString(format: XMLSerialization) -> String {
+        var nodes = [XMLNode.versionInstruction]
+        nodes.append(contentsOf: processingInstructions)
+        if let root = root {
+            nodes.append(root)
+        }
+        return nodes.xmlString(format: format)
+    }
+}
+
+extension Array where Element: XMLNode {
+
+    /// Serialize a collection of XMLNode and descendants into a String
+    ///
+    /// - Parameter format: Serialization format (.condensed or .prettyPrinted)
+    /// - Returns: Serialized String
+    public func xmlString(format: XMLSerialization) -> String {
+        switch format {
+        case .condensed:
+            return xmlString(spaces: 0, increment: 0, terminator: "")
+        case let .prettyPrinted(increment):
+            return xmlString(spaces: 0, increment: increment, terminator: "\n")
+        }
+    }
+
+    func xmlString(spaces: Int, increment: Int, terminator: String) -> String {
+        return map { $0.xmlString(spaces: spaces, increment: increment, terminator: terminator) }.joined()
     }
 }

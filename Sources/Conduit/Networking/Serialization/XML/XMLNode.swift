@@ -60,11 +60,6 @@ public final class XMLNode {
         return children.isEmpty
     }
 
-//    /// A node is considered empty if it has no children and no value
-//    private var isEmpty: Bool {
-//        return isLeaf && text == nil
-//    }
-
     /// Construct XMLNode with optional value, attributes and children
     ///
     /// - Parameters:
