@@ -34,8 +34,6 @@ extension XMLNode {
 
     func xmlString(spaces: Int, increment: Int, terminator: String) -> String {
         let indentation = repeatElement(" ", count: spaces).joined()
-        let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
-        let nameAndAttributes = describedAttributes.isEmpty ? name : "\(name) \(describedAttributes)"
 
         if isProcessingInstruction {
             return "<?\(nameAndAttributes)?>\(terminator)"
@@ -51,6 +49,11 @@ extension XMLNode {
         }
 
         return "\(indentation)<\(nameAndAttributes)/>\(terminator)"
+    }
+
+    var nameAndAttributes: String {
+        let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
+        return attributes.isEmpty ? name : "\(name) \(describedAttributes)"
     }
 }
 
