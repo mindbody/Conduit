@@ -5,7 +5,9 @@
 - None.
 
 #### Enhancements
-- None.
+- Add new `xmlString(format:)` method to `XML` and `XMLNode`. `XMLSerialization` format options are:
+  - `.condensed` -> same single-line condensed output as before.
+  - `.prettyPrinted(spaces: Int)` -> human-readable format with flexible indentation level (number of spaces). 
 
 #### Bug Fixes
 - None
