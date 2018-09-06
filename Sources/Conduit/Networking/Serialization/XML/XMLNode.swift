@@ -60,11 +60,6 @@ public final class XMLNode {
         return children.isEmpty
     }
 
-    /// A node is considered empty if it has no children and no value
-    private var isEmpty: Bool {
-        return isLeaf && text == nil
-    }
-
     /// Construct XMLNode with optional value, attributes and children
     ///
     /// - Parameters:
@@ -176,36 +171,7 @@ extension XMLNode: CustomStringConvertible {
 
     /// Serialized XML string output
     public var description: String {
-        let leftDelimiter = isProcessingInstruction ? "<?" : "<"
-        let rightDelimiter = isProcessingInstruction ? "?>" : (isEmpty ? "/>" : ">")
-
-        let hasAttributes = attributes.isEmpty == false
-        let startTag: String
-
-        if hasAttributes {
-            let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
-            startTag = "\(leftDelimiter)\(name) \(describedAttributes)\(rightDelimiter)"
-        }
-        else {
-            startTag = "\(leftDelimiter)\(name)\(rightDelimiter)"
-        }
-
-        let endTag = "\(leftDelimiter)/\(name)\(rightDelimiter)"
-
-        if isProcessingInstruction || isEmpty {
-            return startTag
-        }
-
-        if children.isEmpty == false {
-            let body = children.map { $0.description }.joined()
-            return "\(startTag)\(body)\(endTag)"
-        }
-
-        if let value = text {
-            return "\(startTag)\(value)\(endTag)"
-        }
-
-        return startTag
+        return xmlString(format: .condensed)
     }
 
 }

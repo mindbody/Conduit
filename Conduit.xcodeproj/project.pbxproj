@@ -374,6 +374,13 @@
 		956D7E481FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */; };
 		956D7E491FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */; };
 		956D7E4A1FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */; };
+		95BF755C21408E25006212AC /* XMLSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF755B21408E25006212AC /* XMLSerialization.swift */; };
+		95BF755D21408E25006212AC /* XMLSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF755B21408E25006212AC /* XMLSerialization.swift */; };
+		95BF755E21408E25006212AC /* XMLSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF755B21408E25006212AC /* XMLSerialization.swift */; };
+		95BF755F21408E25006212AC /* XMLSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF755B21408E25006212AC /* XMLSerialization.swift */; };
+		95BF7565214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF7564214095E1006212AC /* XMLPrettyPrintTests.swift */; };
+		95BF7566214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF7564214095E1006212AC /* XMLPrettyPrintTests.swift */; };
+		95BF7567214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BF7564214095E1006212AC /* XMLPrettyPrintTests.swift */; };
 		95CC71C71F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
 		95CC71C81F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
 		95CC71C91F797B0D003B4E31 /* badcertificate.txt in Resources */ = {isa = PBXBuildFile; fileRef = 95CC71C21F797B0C003B4E31 /* badcertificate.txt */; };
@@ -573,6 +580,8 @@
 		1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshStrategyFactory.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
 		956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringDictionaryTests.swift; sourceTree = "<group>"; };
+		95BF755B21408E25006212AC /* XMLSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLSerialization.swift; sourceTree = "<group>"; };
+		95BF7564214095E1006212AC /* XMLPrettyPrintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLPrettyPrintTests.swift; sourceTree = "<group>"; };
 		95CC71C21F797B0C003B4E31 /* badcertificate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = badcertificate.txt; sourceTree = "<group>"; };
 		95CC71C31F797B0C003B4E31 /* celltowers.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = celltowers.txt; sourceTree = "<group>"; };
 		95CC71C41F797B0C003B4E31 /* evilspaceship.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = evilspaceship.txt; sourceTree = "<group>"; };
@@ -868,6 +877,7 @@
 				95E26BA71F29649600804900 /* XMLNode.swift */,
 				1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */,
 				1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */,
+				95BF755B21408E25006212AC /* XMLSerialization.swift */,
 			);
 			path = XML;
 			sourceTree = "<group>";
@@ -1029,6 +1039,7 @@
 			children = (
 				95E26BB11F29A2FE00804900 /* XMLNodeTests.swift */,
 				95D9484D2138A34D0028B075 /* XMLNodeTestsSubjects.swift */,
+				95BF7564214095E1006212AC /* XMLPrettyPrintTests.swift */,
 				1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */,
 				1BD555591F17DC81004B1172 /* XMLResponseDeserializerTests.swift */,
 				1BD5555A1F17DC81004B1172 /* XMLTests.swift */,
@@ -1598,6 +1609,7 @@
 				1B88B2F81F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
 				1B88B25C1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B88B2501F268C220022A69D /* OAuth2Error.swift in Sources */,
+				95BF755D21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B2701F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2841F268C220022A69D /* KeychainOptions.swift in Sources */,
@@ -1662,6 +1674,7 @@
 				1B88B2311F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2951F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2651F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
+				95BF755E21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B2D51F268C220022A69D /* RequestSerializer.swift in Sources */,
 				1B88B2C91F268C220022A69D /* JSONResponseDeserializer.swift in Sources */,
 				1B88B3011F268C220022A69D /* URLSessionClient.swift in Sources */,
@@ -1733,6 +1746,7 @@
 				1B88B2321F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2961F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2661F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
+				95BF755F21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B2D61F268C220022A69D /* RequestSerializer.swift in Sources */,
 				1B88B2CA1F268C220022A69D /* JSONResponseDeserializer.swift in Sources */,
 				1B88B3021F268C220022A69D /* URLSessionClient.swift in Sources */,
@@ -1764,6 +1778,7 @@
 				1BF8E56120CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				95D9484E2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555851F17DC81004B1172 /* ResultTests.swift in Sources */,
+				95BF7565214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */,
 				1B279CDA1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD41F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
@@ -1807,6 +1822,7 @@
 				1BF8E56220CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				95D9484F2138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555861F17DC81004B1172 /* ResultTests.swift in Sources */,
+				95BF7566214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */,
 				1B279CDB1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD51F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
 				1BD5558F1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
@@ -1850,6 +1866,7 @@
 				1BF8E56320CF1760002D8AF1 /* XMLRequestSerializerTests.swift in Sources */,
 				95D948502138A34D0028B075 /* XMLNodeTestsSubjects.swift in Sources */,
 				1BD555871F17DC81004B1172 /* ResultTests.swift in Sources */,
+				95BF7567214095E1006212AC /* XMLPrettyPrintTests.swift in Sources */,
 				1B279CDC1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				1B279CD61F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
@@ -1907,6 +1924,7 @@
 				1B88B2771F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
 				1B88B26B1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
 				1B88B22B1F268C220022A69D /* OAuth2SafariAuthorizationStrategy.swift in Sources */,
+				95BF755C21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B27B1F268C220022A69D /* OAuth2TokenMemoryStore.swift in Sources */,
 				1B6E186B1F461FF600E651DA /* DataConvertible.swift in Sources */,
 				1B88B2371F268C220022A69D /* OAuth2AuthorizationResponse.swift in Sources */,
