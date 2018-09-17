@@ -365,6 +365,10 @@
 		1BFD2F3420C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
 		1BFD2F3520C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
 		1BFD2F3620C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
+		95272C2D2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
+		95272C2E2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
+		95272C2F2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
+		95272C302150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
 		9549B2521F799DA9005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2531F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
 		9549B2541F799DAA005F0038 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC229A31F1D6BE4000DAF62 /* Resource.swift */; };
@@ -578,6 +582,7 @@
 		1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializerTests.swift; sourceTree = "<group>"; };
 		1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshTokenGrantStrategy.swift; sourceTree = "<group>"; };
 		1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshStrategyFactory.swift; sourceTree = "<group>"; };
+		95272C2C2150688400F18189 /* XMLNodeAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeAttributes.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
 		956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringDictionaryTests.swift; sourceTree = "<group>"; };
 		95BF755B21408E25006212AC /* XMLSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLSerialization.swift; sourceTree = "<group>"; };
@@ -875,6 +880,7 @@
 				1B88B2191F268C220022A69D /* SOAPEnvelopeFactory.swift */,
 				1B88B21A1F268C220022A69D /* XML.swift */,
 				95E26BA71F29649600804900 /* XMLNode.swift */,
+				95272C2C2150688400F18189 /* XMLNodeAttributes.swift */,
 				1B88B21C1F268C220022A69D /* XMLRequestSerializer.swift */,
 				1B88B21D1F268C220022A69D /* XMLResponseDeserializer.swift */,
 				95BF755B21408E25006212AC /* XMLSerialization.swift */,
@@ -1603,6 +1609,7 @@
 				1B88B3001F268C220022A69D /* URLSessionClient.swift in Sources */,
 				1B88B2A41F268C220022A69D /* URLImageCache.swift in Sources */,
 				1B88B2901F268C220022A69D /* ConduitLogger.swift in Sources */,
+				95272C2E2150688400F18189 /* XMLNodeAttributes.swift in Sources */,
 				1BA7C28020D04DB0005AA024 /* OAuth2TokenRefreshCoordinator.swift in Sources */,
 				1B88B2C41F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
 				1B88B2E01F268C220022A69D /* XML.swift in Sources */,
@@ -1630,6 +1637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95272C2F2150688400F18189 /* XMLNodeAttributes.swift in Sources */,
 				1B88B2751F268C220022A69D /* OAuth2TokenDiskStore.swift in Sources */,
 				1B88B2251F268C220022A69D /* Auth.swift in Sources */,
 				1B88B2B91F268C220022A69D /* Result.swift in Sources */,
@@ -1702,6 +1710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95272C302150688400F18189 /* XMLNodeAttributes.swift in Sources */,
 				1B88B2761F268C220022A69D /* OAuth2TokenDiskStore.swift in Sources */,
 				1B88B2261F268C220022A69D /* Auth.swift in Sources */,
 				1B88B2BA1F268C220022A69D /* Result.swift in Sources */,
@@ -1938,6 +1947,7 @@
 				1B88B2571F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2CF1F268C220022A69D /* QueryString.swift in Sources */,
 				1B88B2FB1F268C220022A69D /* URL.swift in Sources */,
+				95272C2D2150688400F18189 /* XMLNodeAttributes.swift in Sources */,
 				1B88B2F31F268C220022A69D /* SessionTaskProxy.swift in Sources */,
 				1B88B28B1F268C220022A69D /* Conduit.swift in Sources */,
 				1B88B29B1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,

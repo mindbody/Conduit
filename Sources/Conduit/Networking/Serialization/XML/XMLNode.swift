@@ -17,10 +17,8 @@ public final class XMLNode {
     /// Not technically a PI, but it follows the same formatting rules
     static var versionInstruction: XMLNode = {
         var node = XMLNode(name: "xml")
-        node.attributes = [
-            "version": "1.0",
-            "encoding": "utf-8"
-        ]
+        node.attributes["version"] = "1.0"
+        node.attributes["encoding"] = "utf-8"
         node.isProcessingInstruction = true
         return node
     }()
@@ -46,8 +44,8 @@ public final class XMLNode {
         return [parent] + parent.parents
     }
 
-    /// The element attributes
-    public var attributes = [String: String]()
+    /// Collection of element attributes (preserves order)
+    public var attributes = XMLNodeAttributes()
 
     /// The contained text node (value) of the element
     public var text: String?
@@ -67,7 +65,7 @@ public final class XMLNode {
     ///   - value: String value (text node)
     ///   - attributes: Node attributes dictionary
     ///   - children: Array of child nodes
-    public init(name: String, value: CustomStringConvertible? = nil, attributes: [String: String] = [:], children: [XMLNode] = []) {
+    public init(name: String, value: CustomStringConvertible? = nil, attributes: XMLNodeAttributes = XMLNodeAttributes(), children: [XMLNode] = []) {
         self.name = name
         self.text = value?.description
         self.attributes = attributes

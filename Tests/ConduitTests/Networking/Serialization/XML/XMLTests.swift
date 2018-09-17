@@ -37,13 +37,13 @@ class XMLTests: XCTestCase {
             XCTFail("No attributes")
             return
         }
-        XCTAssert(attributes == ["testKey": "testValue"])
-        XCTAssert(xml.root?.children.last?.children.last?.name == "LastNode")
+        XCTAssertEqual(attributes["testKey"], "testValue")
+        XCTAssertEqual(xml.root?.children.last?.children.last?.name, "LastNode")
     }
 
     func testXMLNodeConstruction() {
         let node4 = XMLNode(name: "N")
-        node4.attributes = ["testKey": "testValue"]
+        node4.attributes["testKey"] = "testValue"
         let node5 = XMLNode(name: "LastNode")
 
         let node1 = XMLNode(name: "N")
