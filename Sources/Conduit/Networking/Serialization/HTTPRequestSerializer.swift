@@ -109,7 +109,7 @@ open class HTTPRequestSerializer: RequestSerializer {
     static let httpMethodsWithNoBody: Set<HTTPRequestBuilder.Method> = [.GET, .HEAD]
 
     /// Required request headers for HTTP transport according to the W3 spec
-    open static let defaultHTTPHeaders: [(String, String)] = {
+    public static let defaultHTTPHeaders: [(String, String)] = {
         return [HTTPRequestSerializer.acceptLanguageHeader, HTTPRequestSerializer.userAgentHeader].compactMap { header in
             guard let header = header else {
                 return nil
