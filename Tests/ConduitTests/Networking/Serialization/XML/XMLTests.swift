@@ -103,7 +103,7 @@ class XMLTests: XCTestCase {
         let node = XML(xml)
         let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
         parent?.children.append(XMLNode(name: "Child", value: "Bar"))
-        XCTAssertEqual(node?.root?.description, "<Node><Parent><Child>Foo</Child><Child>Bar</Child></Parent></Node>")
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent><Child>Foo</Child><Child>Bar</Child></Parent></Node>")
     }
 
     func testXMLReplacement() {
@@ -111,7 +111,7 @@ class XMLTests: XCTestCase {
         let node = XML(xml)
         let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
         parent?.children = [XMLNode(name: "Child", value: "Bar")]
-        XCTAssertEqual(node?.root?.description, "<Node><Parent><Child>Bar</Child></Parent></Node>")
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent><Child>Bar</Child></Parent></Node>")
     }
 
     func testXMLDeletion() {
@@ -119,7 +119,7 @@ class XMLTests: XCTestCase {
         let node = XML(xml)
         let parent = node?.root?.nodes(named: "Parent", traversal: .breadthFirst).first
         parent?.children = []
-        XCTAssertEqual(node?.root?.description, "<Node><Parent/></Node>")
+        XCTAssertEqual(node?.description, "<?xml version=\"1.0\" encoding=\"utf-8\"?><Node><Parent/></Node>")
     }
 
 }

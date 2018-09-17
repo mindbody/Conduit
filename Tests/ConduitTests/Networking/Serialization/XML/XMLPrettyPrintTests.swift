@@ -60,6 +60,7 @@ class XMLPrettyPrintTests: XCTestCase {
     func testXMLPrettyPrint() {
         let string = "<Node><Parent><Child>Foo</Child><Child>Bar</Child></Parent></Node>"
         let expectation = """
+            <?xml version="1.0" encoding="utf-8"?>
             <Node>
                 <Parent>
                     <Child>Foo</Child>
@@ -70,7 +71,7 @@ class XMLPrettyPrintTests: XCTestCase {
             """
 
         let xml = XML(string)
-        XCTAssertEqual(xml?.root?.xmlString(format: .prettyPrinted(spaces: 4)), expectation)
+        XCTAssertEqual(xml?.xmlString(format: .prettyPrinted(spaces: 4)), expectation)
     }
 
 }
