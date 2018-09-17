@@ -2,7 +2,8 @@
 
 
 #### Breaking
-- None.
+- `serialize(request:bodyParameters:)` is now `public` since `FormEncodedRequestSerializer` is a `final` class.
+- `defaultHTTPHeaders` is now `public` since `static` properties cannot be `open`.
 
 #### Enhancements
 - Add new `xmlString(format:)` method to `XML` and `XMLNode`. `XMLSerialization` format options are:
