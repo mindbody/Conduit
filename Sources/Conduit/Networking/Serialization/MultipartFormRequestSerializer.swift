@@ -206,10 +206,10 @@ public struct FormPart {
     #if os(iOS) || os(tvOS) || os(watchOS)
     private func dataFrom(image: UIImage, type: ImageFormat) -> Data? {
         if case .jpeg(let compressionQuality) = type {
-            return UIImageJPEGRepresentation(image, compressionQuality)
+            return image.jpegData(compressionQuality: compressionQuality)
         }
         else {
-            return UIImagePNGRepresentation(image)
+            return image.pngData()
         }
     }
     #endif

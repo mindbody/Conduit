@@ -8,6 +8,8 @@
 ## Build generated
 build/
 DerivedData/
+*.zip
+*.tar.gz
 
 ## Various settings
 *.pbxuser
