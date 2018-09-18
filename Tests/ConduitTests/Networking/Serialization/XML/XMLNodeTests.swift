@@ -73,7 +73,10 @@ class XMLNodeTests: XCTestCase {
         let bar = "foo"
         let baz = 3
         let node = XMLNode(name: "FooBar", children: ["Foo": foo, "Bar": bar, "Baz": baz])
-        XCTAssertEqual(node.description, "<FooBar><Foo>bar</Foo><Bar>foo</Bar><Baz>3</Baz></FooBar>")
+        XCTAssertEqual(try node.findValue("Foo", traversal: .breadthFirst), "bar")
+        XCTAssertEqual(try node.findValue("Bar", traversal: .breadthFirst), "foo")
+        XCTAssertEqual(try node.findValue("Baz", traversal: .breadthFirst), 3)
+        XCTAssertEqual(node.children.count, 3)
     }
 
     func testXMLNodeValueSearch() throws {

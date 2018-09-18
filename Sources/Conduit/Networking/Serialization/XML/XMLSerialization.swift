@@ -52,8 +52,7 @@ extension XMLNode {
     }
 
     var nameAndAttributes: String {
-        let describedAttributes = attributes.map { "\($0.key)=\"\($0.value)\"" }.joined(separator: " ")
-        return attributes.isEmpty ? name : "\(name) \(describedAttributes)"
+        return attributes.isEmpty ? name : "\(name) \(attributes.description)"
     }
 }
 

@@ -60,7 +60,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
     func testStandardUserDefaultsStorageOperations() throws {
-        let sut = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+        let sut = OAuth2TokenUserDefaultsStore(userDefaults: UserDefaults())
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
     }
@@ -124,7 +124,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     }
 
     func testLegacyUserDefaultsStorageOperations() throws {
-        let sut = OAuth2TokenUserDefaultsStore(userDefaults: .standard)
+        let sut = OAuth2TokenUserDefaultsStore(userDefaults: UserDefaults())
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockLegacyToken)
     }
