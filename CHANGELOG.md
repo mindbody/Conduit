@@ -1,5 +1,15 @@
 ## master
 
+#### Breaking
+
+#### Enhancements
+
+#### Bug Fixes
+
+#### Other
+
+
+## 0.14.0
 
 #### Breaking
 - `serialize(request:bodyParameters:)` is now `public` since `FormEncodedRequestSerializer` is a `final` class.
