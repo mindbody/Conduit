@@ -1,12 +1,16 @@
 ## master
 
 #### Breaking
+- None
 
 #### Enhancements
+- None
 
 #### Bug Fixes
+- Update SOAP envelope `encodingStyle` property to non-optional.
 
 #### Other
+- None
 
 
 ## 0.14.0
