@@ -16,8 +16,8 @@ public struct SOAPEnvelopeFactory {
     public var soapEnvelopeNamespace: String = "soap"
     /// The schema in which all non-prefixed elements are bound to (i.e. http://clients.mindbodyonline.com/api/0_5)
     public var rootNamespaceSchema: String?
-    /// The SOAP encoding style. Defaults to nil.
-    public var encodingStyle: String?
+    /// The SOAP encoding style. Defaults to empty string.
+    public var encodingStyle: String = ""
 
     /// Produces a SOAPEnvelopeFactory
     public init() {}
