@@ -4,7 +4,7 @@
 - None
 
 #### Enhancements
-- None
+- Add context support to `OAuth2TokenUserDefaultsStore` to enable sandboxing at key level.
 
 #### Bug Fixes
 - Update SOAP envelope `encodingStyle` property to non-optional.
