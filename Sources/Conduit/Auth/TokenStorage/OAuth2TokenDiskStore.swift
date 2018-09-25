@@ -9,6 +9,7 @@
 import Foundation
 
 /// Stores and retrieves OAuth2 tokens from local storage (unencrypted)
+@available(*, deprecated, message: "OAuth2TokenDiskStore is no longer supported. Please migrate to OAuth2TokenUserDefaultsStore or OAuth2TokenFileStore.")
 public class OAuth2TokenDiskStore: OAuth2TokenStore {
 
     /// The strategy by which the token is stored locally
