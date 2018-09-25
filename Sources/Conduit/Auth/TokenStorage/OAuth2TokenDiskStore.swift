@@ -9,7 +9,6 @@
 import Foundation
 
 /// Stores and retrieves OAuth2 tokens from local storage (unencrypted)
-@available(*, deprecated, message: "OAuth2TokenDiskStore is no longer supported. Please migrate to OAuth2TokenUserDefaultsStore or OAuth2TokenFileStore.")
 public class OAuth2TokenDiskStore: OAuth2TokenStore {
 
     /// The strategy by which the token is stored locally
@@ -17,7 +16,6 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         /// Stores the token to NSUserDefaults
         case userDefaults
         /// Stores the token to the provided local file URL
-        @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
         case url(URL)
     }
 
@@ -49,6 +47,8 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         case .url(let storageURL):
             if let tokenData = tokenData {
                 do {
+                    let directoryPath = storageURL.deletingLastPathComponent()
+                    try FileManager.default.createDirectory(at: directoryPath, withIntermediateDirectories: true, attributes: [:])
                     try tokenData.write(to: storageURL, options: [.atomic])
                     return true
                 }
