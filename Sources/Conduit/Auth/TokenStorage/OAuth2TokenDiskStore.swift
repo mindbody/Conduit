@@ -17,6 +17,7 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         /// Stores the token to NSUserDefaults
         case userDefaults
         /// Stores the token to the provided local file URL
+        @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
         case url(URL)
     }
 

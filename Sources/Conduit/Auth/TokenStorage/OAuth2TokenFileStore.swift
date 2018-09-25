@@ -9,6 +9,7 @@
 import Foundation
 
 /// I/O options for `OAuth2TokenFileStore`
+@available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
 public struct OAuth2TokenFileStoreOptions {
 
     let storageDirectory: URL
@@ -32,6 +33,7 @@ public struct OAuth2TokenFileStoreOptions {
 }
 
 /// Stores and retrieves OAuth2 tokens from local storage
+@available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
 public class OAuth2TokenFileStore: OAuth2TokenStore {
 
     private let options: OAuth2TokenFileStoreOptions

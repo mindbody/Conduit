@@ -76,6 +76,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
     }
 
+    #if !os(tvOS)
     func testFileStorageOperations() throws {
         let storagePath = NSTemporaryDirectory().appending(UUID().uuidString)
         let storageURL = URL(fileURLWithPath: storagePath)
@@ -97,12 +98,14 @@ class OAuth2TokenStorageTests: XCTestCase {
         try FileManager.default.removeItem(at: storageURL)
         XCTAssertFalse(FileManager.default.fileExists(atPath: storagePath))
     }
+    #endif
 
     func testLegacyDiskStorageOperations() throws {
         var sut = OAuth2TokenDiskStore(storageMethod: .userDefaults)
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
 
+        #if !os(tvOS)
         let storagePath = NSTemporaryDirectory().appending(UUID().uuidString)
         let storageURL = URL(fileURLWithPath: storagePath)
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL.appendingPathComponent("oauth-token.bin")))
@@ -111,6 +114,7 @@ class OAuth2TokenStorageTests: XCTestCase {
 
         try FileManager.default.removeItem(at: storageURL)
         XCTAssertFalse(FileManager.default.fileExists(atPath: storagePath))
+        #endif
     }
 
     func testMemoryStorageOperations() throws {
@@ -131,8 +135,9 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyRefreshTokenLockOperations(sut: sut, with: mockLegacyToken)
     }
 
+    #if !os(tvOS)
     func testLegacyFileStorageOperations() throws {
-        let storagePath = NSTemporaryDirectory()
+        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString)
         let storageURL = URL(fileURLWithPath: storagePath)
         var sut = OAuth2TokenFileStore(options: OAuth2TokenFileStoreOptions(storageDirectory: storageURL))
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
@@ -149,6 +154,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockLegacyToken)
     }
+    #endif
 
     func testLegacyMemoryStorageOperations() throws {
         let sut = OAuth2TokenMemoryStore()
@@ -187,12 +193,17 @@ class OAuth2TokenStorageTests: XCTestCase {
         try validateLegacyTokenMigration(sut: sut)
     }
 
+    #if !os(tvOS)
     func testLegacyFileStorageTokenMigration() throws {
-        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString + ".oauth-token.bin")
+        let storagePath = NSTemporaryDirectory().appending(UUID().uuidString)
         let storageURL = URL(fileURLWithPath: storagePath)
-        let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL))
+        let sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL.appendingPathComponent(".oauth-token.bin")))
         try validateLegacyTokenMigration(sut: sut)
+
+        try FileManager.default.removeItem(at: storageURL)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: storagePath))
     }
+    #endif
 
     func testLegacyMemoryStorageTokenMigration() throws {
         let sut = OAuth2TokenMemoryStore()
