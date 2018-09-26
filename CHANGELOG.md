@@ -4,6 +4,21 @@
 - None
 
 #### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.15.0
+
+#### Breaking
+- None
+
+#### Enhancements
 - Add context support to `OAuth2TokenUserDefaultsStore` to enable sandboxing at key level.
 
 #### Bug Fixes
