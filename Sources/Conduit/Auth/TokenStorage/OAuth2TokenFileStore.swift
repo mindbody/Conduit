@@ -112,6 +112,7 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
         if let tokenData = tokenData {
             return prepareForWriting(destination: storageURL) { url in
                 do {
+                    try FileManager.default.createDirectory(at: options.storageDirectory, withIntermediateDirectories: true, attributes: [:])
                     try tokenData.write(to: url, options: self.options.tokenWritingOptions)
                     return true
                 }
@@ -140,7 +141,7 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
             guard let data = FileManager.default.contents(atPath: url.path) else {
                 return nil
             }
-             return try? Token(serializedData: data)
+            return try? Token(serializedData: data)
         }
     }
 

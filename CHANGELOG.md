@@ -8,6 +8,7 @@
 
 #### Bug Fixes
 - Update SOAP envelope `encodingStyle` property to non-optional.
+- Fix file-based token store when path does not exist.
 
 #### Other
 - None
