@@ -28,7 +28,7 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
     }
 
     private func bodyData(bodyParameters: Any? = nil) throws -> Data? {
-        var bodyData: Data? = nil
+        var bodyData: Data?
         if bodyParameters != nil {
             guard let bodyParameters = bodyParameters as? XML else {
                 throw RequestSerializerError.serializationFailure
@@ -42,7 +42,7 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
         }
         return bodyData
     }
-    
+
     /**
      These Predefined Entities must be escaped in XML for correct operation.
      
@@ -52,7 +52,7 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
      This defines the requirements in a much more readable manner -
      https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Predefined_entities_in_XML
      */
-    
+
     private func escapePredefinedXMLEntityCharacters(_ bodyString: String) -> String {
         var validXMLBodyString = bodyString.replacingOccurrences(of: "&", with: "&amp;")
         validXMLBodyString = validXMLBodyString.replacingOccurrences(of: "'", with: "&apos;")

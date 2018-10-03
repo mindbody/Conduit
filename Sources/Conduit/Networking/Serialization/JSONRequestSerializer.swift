@@ -25,7 +25,7 @@ public final class JSONRequestSerializer: HTTPRequestSerializer {
 
         var request = try super.serialize(request: request, bodyParameters: bodyParameters)
 
-        var JSONData: Data? = nil
+        var JSONData: Data?
         if let bodyParameters = bodyParameters {
             do {
                 if let fragmentData = JSONRequestSerializer.fragmentedDataFrom(jsonObject: bodyParameters) {
