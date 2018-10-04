@@ -27,7 +27,7 @@ class XMLRequestSerializerTests: XCTestCase {
                 XMLNode(name: "id", value: "client1"),
                 XMLNode(name: "name", value: "Bob"),
                 XMLNode(name: "clientonly", value: "Foo"),
-                XMLNode(name: "malformed", value: "&-'")
+                XMLNode(name: "malformed", value: "&-\\-<->-'")
                 ])
             ])
         ])
