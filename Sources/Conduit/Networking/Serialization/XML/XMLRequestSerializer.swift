@@ -56,9 +56,6 @@ public final class XMLRequestSerializer: HTTPRequestSerializer {
     private func escapePredefinedXMLEntityCharacters(_ bodyString: String) -> String {
         var validXMLBodyString = bodyString.replacingOccurrences(of: "&", with: "&amp;")
         validXMLBodyString = validXMLBodyString.replacingOccurrences(of: "'", with: "&apos;")
-        validXMLBodyString = validXMLBodyString.replacingOccurrences(of: "\"", with: "&quot;")
-        validXMLBodyString = validXMLBodyString.replacingOccurrences(of: "<", with: "&lt;")
-        validXMLBodyString = validXMLBodyString.replacingOccurrences(of: ">", with: "&gt;")
         return validXMLBodyString
     }
 
