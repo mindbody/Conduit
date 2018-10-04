@@ -53,8 +53,8 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 |------------------|---------------|
 | 0.4.x            | 3.x           |
 | 0.5 - 0.7.x      | 4.0           |
-| 0.8.x+           | 4.1           |
-| 0.14.0           | 4.2           |
+| 0.8 - 0.13.x     | 4.1           |
+| 0.14.0+          | 4.2           |
 
 ## Installation
 
