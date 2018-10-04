@@ -26,7 +26,7 @@ build_configurations = [
 		:scheme => "Conduit-watchOS",
 		:run_tests => false,
 		:destinations => [
-			"OS=latest,name=Apple Watch - 42mm"
+			"OS=latest,name=Apple Watch Series 2 - 38mm"
 		]
 	},
 	{
@@ -57,7 +57,7 @@ task :test do
 
     if config[:run_tests] then
       execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build-for-testing analyze"
-      execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet test-without-building"
+      execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet -disable-concurrent-destination-testing test-without-building"
     else
       execute "set -o pipefail && xcodebuild -workspace Conduit.xcworkspace -scheme #{scheme} #{destinations} -configuration Debug -quiet build analyze"
     end

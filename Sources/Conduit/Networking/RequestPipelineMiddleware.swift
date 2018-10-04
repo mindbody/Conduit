@@ -24,6 +24,7 @@ public struct RequestPipelineBehaviorOptions: OptionSet {
     public static let awaitsOutgoingCompletion = RequestPipelineBehaviorOptions(rawValue: 1 << 0)
 }
 
+/// Intercepts and potentially transforms a request from a session exchange
 public protocol RequestPipelineMiddleware {
 
     /// Represents options specific to the behavior of the request pipeline. Does not need to be constant.

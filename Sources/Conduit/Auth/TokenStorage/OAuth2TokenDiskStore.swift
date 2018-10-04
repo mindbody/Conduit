@@ -49,6 +49,8 @@ public class OAuth2TokenDiskStore: OAuth2TokenStore {
         case .url(let storageURL):
             if let tokenData = tokenData {
                 do {
+                    let directoryPath = storageURL.deletingLastPathComponent()
+                    try FileManager.default.createDirectory(at: directoryPath, withIntermediateDirectories: true, attributes: [:])
                     try tokenData.write(to: storageURL, options: [.atomic])
                     return true
                 }

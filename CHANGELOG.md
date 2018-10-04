@@ -13,6 +13,88 @@
 - None
 
 
+## 0.15.0
+
+#### Breaking
+- None
+
+#### Enhancements
+- Add context support to `OAuth2TokenUserDefaultsStore` to enable sandboxing at key level.
+
+#### Bug Fixes
+- Update SOAP envelope `encodingStyle` property to non-optional.
+- Fix file-based token store when path does not exist.
+
+#### Other
+- None
+
+
+## 0.14.0
+
+#### Breaking
+- `serialize(request:bodyParameters:)` is now `public` since `FormEncodedRequestSerializer` is a `final` class.
+- `defaultHTTPHeaders` is now `public` since `static` properties cannot be `open`.
+- Add `XMLNodeAttributes` to preserve order of attributes on serialized XML nodes
+
+#### Enhancements
+- Add new `xmlString(format:)` method to `XML` and `XMLNode`. `XMLSerialization` format options are:
+  - `.condensed` -> same single-line condensed output as before.
+  - `.prettyPrinted(spaces: Int)` -> human-readable format with flexible indentation level (number of spaces). 
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.13.0
+
+#### Breaking
+
+#### Enhancements
+- Find XML nodes matching a given function.
+- Traverse XML tree upwards with `parent` property.
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.12.0
+
+#### Breaking
+- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types. 
+
+#### Enhancements
+- Add scope to OAuth2AuthorizationResponse
+- Improved verbose logging for middleware pipeline.
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.11.0
+
+#### Breaking
+- `middleware` has been replaced by `requestMiddleware`
+
+#### Enhancements
+- `ResponsePipelineMiddleware` added
+- `URLSessionClient` now accepts both request and response middleware
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
 ## 0.10.3
 
 #### Breaking

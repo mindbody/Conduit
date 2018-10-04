@@ -29,6 +29,7 @@ class SOAPEnvelopeFactoryTests: XCTestCase {
         XCTAssertEqual(envelope.attributes["xmlns:xsi"], "http://www.w3.org/2001/XMLSchema-instance")
         XCTAssertEqual(envelope.attributes["xmlns:xsd"], "http://www.w3.org/2001/XMLSchema")
         XCTAssertEqual(envelope.attributes["xmlns:soap"], "http://schemas.xmlsoap.org/soap/envelope/")
+        XCTAssertEqual(envelope.attributes["soap:encodingStyle"], "")
     }
 
     func testProducesFormattedSOAPXML() {

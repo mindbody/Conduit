@@ -41,6 +41,7 @@ public class Auth {
     ///     }
     public class Migrator {
 
+        // swiftlint:disable nesting
         /// A hook that fires when Conduit is about to refresh a bearer token for a given client and authorization level
         public typealias TokenPreFetchHook = (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel) -> Void
 
@@ -48,6 +49,7 @@ public class Auth {
         /// client and authorization level
         public typealias TokenPostFetchHook =
             (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel, Result<BearerToken>) -> Void
+        // swiftlint:enable nesting
 
         private static var externalTokenPreFetchHooks: [TokenPreFetchHook] = []
         private static var externalTokenPostFetchHooks: [TokenPostFetchHook] = []
@@ -61,7 +63,7 @@ public class Auth {
                                                     middleware: OAuth2RequestPipelineMiddleware,
                                                     completion: @escaping Result<BearerToken>.Block) {
             var sessionClient = sessionClient
-            sessionClient.middleware = [middleware]
+            sessionClient.requestMiddleware = [middleware]
             guard let noOpURL = URL(string: "https://mindbodyonline.com") else {
                 completion(.error(OAuth2Error.internalFailure))
                 return

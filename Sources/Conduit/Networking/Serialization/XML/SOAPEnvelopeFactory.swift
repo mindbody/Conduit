@@ -16,14 +16,14 @@ public struct SOAPEnvelopeFactory {
     public var soapEnvelopeNamespace: String = "soap"
     /// The schema in which all non-prefixed elements are bound to (i.e. http://clients.mindbodyonline.com/api/0_5)
     public var rootNamespaceSchema: String?
-    /// The SOAP encoding style. Defaults to nil.
-    public var encodingStyle: String?
+    /// The SOAP encoding style. Defaults to empty string.
+    public var encodingStyle: String = ""
 
     /// Produces a SOAPEnvelopeFactory
     public init() {}
 
     func makeSOAPEnvelope() -> XMLNode {
-        var node = XMLNode(name: "\(soapEnvelopeNamespace):Envelope")
+        let node = XMLNode(name: "\(soapEnvelopeNamespace):Envelope")
         node.attributes["xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
         node.attributes["xmlns:xsd"] = "http://www.w3.org/2001/XMLSchema"
         node.attributes["xmlns:\(soapEnvelopeNamespace)"] = "http://schemas.xmlsoap.org/soap/envelope/"
@@ -33,7 +33,7 @@ public struct SOAPEnvelopeFactory {
     }
 
     func makeSOAPBody(root: XMLNode) -> XMLNode {
-        var node = XMLNode(name: "\(soapEnvelopeNamespace):Body")
+        let node = XMLNode(name: "\(soapEnvelopeNamespace):Body")
         node.children = [root]
         return node
     }
@@ -44,7 +44,7 @@ public struct SOAPEnvelopeFactory {
     /// - Returns: A formatted SOAP XML document
     public func makeXML(soapBody: XMLNode) -> XML {
         let soapBody = makeSOAPBody(root: soapBody)
-        var envelope = makeSOAPEnvelope()
+        let envelope = makeSOAPEnvelope()
         envelope.children = [soapBody]
         return XML(root: envelope)
     }
