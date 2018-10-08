@@ -27,7 +27,7 @@ class XMLRequestSerializerTests: XCTestCase {
                 XMLNode(name: "id", value: "client1"),
                 XMLNode(name: "name", value: "Bob"),
                 XMLNode(name: "clientonly", value: "Foo"),
-                XMLNode(name: "malformed", value: "&-\\-<->-'")
+                XMLNode(name: "malformed", value: "&-\"-<->-'")
                 ])
             ])
         ])
@@ -74,6 +74,9 @@ class XMLRequestSerializerTests: XCTestCase {
         }
 
         let xml = XML(xmlString)
+        let malformedNode = try xml?.root?.node(named: "malformed", traversal: .depthFirst)
+        XCTAssertTrue(malformedNode?.xmlString(format: .condensed) == "<malformed>&amp;-&quot;-&lt;-&gt;-&apos;</malformed>")
+
         XCTAssert(xml != nil)
     }
 

@@ -45,8 +45,8 @@ extension XMLNode {
         }
 
         if let value = text {
-            let xmlValue = escapePredefinedEntities(value)
-            return "\(indentation)<\(nameAndAttributes)>\(xmlValue)</\(name)>\(terminator)"
+            let escapedValue = escapePredefinedEntities(value)
+            return "\(indentation)<\(nameAndAttributes)>\(escapedValue)</\(name)>\(terminator)"
         }
 
         return "\(indentation)<\(nameAndAttributes)/>\(terminator)"
@@ -69,7 +69,7 @@ extension XMLNode {
     private func escapePredefinedEntities(_ text: String) -> String {
         var validXMLText = text.replacingOccurrences(of: "&", with: "&amp;")
         validXMLText = validXMLText.replacingOccurrences(of: "'", with: "&apos;")
-        validXMLText = validXMLText.replacingOccurrences(of: "\\", with: "&quot;")
+        validXMLText = validXMLText.replacingOccurrences(of: "\"", with: "&quot;")
         validXMLText = validXMLText.replacingOccurrences(of: "<", with: "&lt;")
         validXMLText = validXMLText.replacingOccurrences(of: ">", with: "&gt;")
         return validXMLText

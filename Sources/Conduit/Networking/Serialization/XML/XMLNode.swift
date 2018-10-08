@@ -163,10 +163,6 @@ public enum XMLNodeTraversal {
     case breadthFirst
 }
 
-extension XMLNode {
-
-}
-
 // MARK: CustomStringConvertible
 
 extension XMLNode: CustomStringConvertible {
