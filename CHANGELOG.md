@@ -4,6 +4,20 @@
 - None
 
 #### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+## 0.15.1
+
+#### Breaking
+- None
+
+#### Enhancements
 - Correct XML Serialization for Predefined Escape characters
 
 #### Bug Fixes
