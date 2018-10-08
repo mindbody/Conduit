@@ -4,10 +4,10 @@
 - None
 
 #### Enhancements
-- None
+- Correct XML Serialization for Predefined Escape characters
 
 #### Bug Fixes
-- None
+- Update XML Serialziation to correctly escape Predefined Escape characters disallowed in XML Requests
 
 #### Other
 - None
