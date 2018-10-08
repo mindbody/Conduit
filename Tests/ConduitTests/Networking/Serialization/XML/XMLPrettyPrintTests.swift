@@ -47,7 +47,7 @@ class XMLPrettyPrintTests: XCTestCase {
                     </client>
                 </clients>
                 <id>root1</id>
-                <name>I'm Root</name>
+                <name>I&apos;m Root</name>
                 <rootonly>Root only</rootonly>
             </xml>
 

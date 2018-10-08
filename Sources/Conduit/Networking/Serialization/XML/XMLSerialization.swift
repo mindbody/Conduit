@@ -45,7 +45,8 @@ extension XMLNode {
         }
 
         if let value = text {
-            return "\(indentation)<\(nameAndAttributes)>\(value)</\(name)>\(terminator)"
+            let escapedValue = escapePredefinedEntities(value)
+            return "\(indentation)<\(nameAndAttributes)>\(escapedValue)</\(name)>\(terminator)"
         }
 
         return "\(indentation)<\(nameAndAttributes)/>\(terminator)"
@@ -53,6 +54,25 @@ extension XMLNode {
 
     var nameAndAttributes: String {
         return attributes.isEmpty ? name : "\(name) \(attributes.description)"
+    }
+
+    /**
+     These Predefined Entities must be escaped in XML for correct operation.
+     
+     They are defined in the below documentation -
+     https://www.w3.org/TR/xml/#sec-predefined-ent
+     
+     This defines the requirements in a much more readable manner -
+     https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Predefined_entities_in_XML
+     */
+
+    private func escapePredefinedEntities(_ text: String) -> String {
+        var validXMLText = text.replacingOccurrences(of: "&", with: "&amp;")
+        validXMLText = validXMLText.replacingOccurrences(of: "'", with: "&apos;")
+        validXMLText = validXMLText.replacingOccurrences(of: "\"", with: "&quot;")
+        validXMLText = validXMLText.replacingOccurrences(of: "<", with: "&lt;")
+        validXMLText = validXMLText.replacingOccurrences(of: ">", with: "&gt;")
+        return validXMLText
     }
 }
 
