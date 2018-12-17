@@ -1,14 +1,17 @@
 language: objective-c
 osx_image: xcode10
+addons:
+  homebrew:
+    update: true
+    brewfile: true
+env:
+  - PATH=$HOME/Library/Python/2.7/bin:$PATH
 cache:
 - bundler: true
 install:
-- export PATH=$HOME/Library/Python/2.7/bin:$PATH
 - bundle install
 - bundle exec danger
 - pip install --user -r requirements.txt
-- brew update
-- brew bundle
 script:
 - rake test
 after_success:
