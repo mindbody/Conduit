@@ -7,7 +7,7 @@
 - None
 
 #### Bug Fixes
-- None
+- `FormEncodedRequestSerializer` can once again be created publicly
 
 #### Other
 - None

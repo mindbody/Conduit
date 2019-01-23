@@ -11,6 +11,8 @@ import Foundation
 /// An HTTPRequestSerialzer that url-encodes body parameters
 public final class FormEncodedRequestSerializer: HTTPRequestSerializer {
 
+    public override init() {}
+
     /// Defines how parameters should be encoded within the HTTP body.
     public var formattingOptions = QueryStringFormattingOptions()
 
