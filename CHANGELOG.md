@@ -7,10 +7,26 @@
 - None
 
 #### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.15.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
 - `FormEncodedRequestSerializer` can once again be created publicly
 
 #### Other
 - None
+
 
 ## 0.15.1
 
@@ -53,7 +69,7 @@
 #### Enhancements
 - Add new `xmlString(format:)` method to `XML` and `XMLNode`. `XMLSerialization` format options are:
   - `.condensed` -> same single-line condensed output as before.
-  - `.prettyPrinted(spaces: Int)` -> human-readable format with flexible indentation level (number of spaces). 
+  - `.prettyPrinted(spaces: Int)` -> human-readable format with flexible indentation level (number of spaces).
 
 #### Bug Fixes
 - None
@@ -80,7 +96,7 @@
 ## 0.12.0
 
 #### Breaking
-- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types. 
+- Allow direct manipulation of XML trees by converting XML and XMLNode to reference types.
 
 #### Enhancements
 - Add scope to OAuth2AuthorizationResponse
