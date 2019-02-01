@@ -43,7 +43,7 @@ public class Auth {
 
         // swiftlint:disable nesting
         /// A hook that fires when Conduit is about to refresh a bearer token for a given client and authorization level
-        public typealias TokenPreFetchHook = (OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel) -> Void
+        public typealias TokenPreFetchHook = (BearerToken?, OAuth2ClientConfiguration, OAuth2Authorization.AuthorizationLevel) -> Void
 
         /// A hook that fires when Conduit has finished or failed to refresh a token for a given
         /// client and authorization level
@@ -111,10 +111,11 @@ public class Auth {
             externalTokenPostFetchHooks.append(hook)
         }
 
-        static func notifyTokenPreFetchHooksWith(client: OAuth2ClientConfiguration,
+        static func notifyTokenPreFetchHooksWith(token: BearerToken?,
+                                                 client: OAuth2ClientConfiguration,
                                                  authorizationLevel: OAuth2Authorization.AuthorizationLevel) {
             for hook in externalTokenPreFetchHooks {
-                hook(client, authorizationLevel)
+                hook(token, client, authorizationLevel)
             }
         }
 
