@@ -151,7 +151,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Guest user credentials do not exist. Attempting client_credentials grant...")
             authenticationStrategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: clientConfiguration)
         }
-        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration, authorizationLevel: authorization.level)
+        Auth.Migrator.notifyTokenPreFetchHooksWith(token: nil, client: clientConfiguration, authorizationLevel: authorization.level)
 
         authenticationStrategy.issueToken(completion: completion)
     }
@@ -173,8 +173,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     }
 
     private func refresh(token: BearerToken, completion: @escaping Result<BearerToken>.Block) {
-        Auth.Migrator.notifyTokenPreFetchHooksWith(client: clientConfiguration,
-                                                   authorizationLevel: authorization.level)
+        Auth.Migrator.notifyTokenPreFetchHooksWith(token: token, client: clientConfiguration, authorizationLevel: authorization.level)
         guard let refreshToken = token.refreshToken else {
             logger.warn([
                 "A request required Bearer authorization, but the expired token",

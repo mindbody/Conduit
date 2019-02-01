@@ -294,7 +294,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         calledPreFetchHookExpectation.assertForOverFulfill = false
         calledPostFetchHookExpectation.assertForOverFulfill = false
 
-        Auth.Migrator.registerPreFetchHook { _, _  in
+        Auth.Migrator.registerPreFetchHook { _, _, _  in
             calledPreFetchHookExpectation.fulfill()
         }
 
