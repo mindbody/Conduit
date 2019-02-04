@@ -12,6 +12,19 @@
 #### Other
 - None
 
+## 0.16.0
+
+#### Breaking
+- None
+
+#### Enhancements
+-  Include expiring token in pre-fetch hook of `Migrator`
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
 
 ## 0.15.2
 
