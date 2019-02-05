@@ -90,7 +90,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.15.2")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.16.0")
     ]
 )
 ```
