@@ -135,17 +135,7 @@ public struct URLSessionClient: URLSessionClientType {
 
         serialQueue.async {
 
-            logger.verbose("Scanning middlware options ⌛︎")
-
-            for middleware in self.requestMiddleware {
-                if middleware.pipelineBehaviorOptions.contains(.awaitsOutgoingCompletion) {
-                    logger.verbose("Paused session queue ⏸")
-                    _ = self.activeTaskQueueDispatchGroup.wait(timeout: DispatchTime.distantFuture)
-                    logger.verbose("Resumed session queue ▶️")
-                }
-            }
-
-            logger.verbose("Finished scanning middleware options ✓")
+            self.synchronouslyWaitForMiddleware()
 
             // Next, allow each middleware component to have its way with the original URLRequest
             // This is done synchronously on the serial queue since the pipeline itself shouldn't allow for concurrency
@@ -204,6 +194,18 @@ public struct URLSessionClient: URLSessionClientType {
         }
 
         return sessionTaskProxy
+    }
+
+    private func synchronouslyWaitForMiddleware() {
+        logger.verbose("Scanning middlware options ⌛︎")
+        for middleware in self.requestMiddleware {
+            if middleware.pipelineBehaviorOptions.contains(.awaitsOutgoingCompletion) {
+                logger.verbose("Paused session queue ⏸")
+                _ = self.activeTaskQueueDispatchGroup.wait(timeout: DispatchTime.distantFuture)
+                logger.verbose("Resumed session queue ▶️")
+            }
+        }
+        logger.verbose("Finished scanning middleware options ✓")
     }
 
     private func synchronouslyPrepareForTransport(request: URLRequest) -> Result<URLRequest> {
