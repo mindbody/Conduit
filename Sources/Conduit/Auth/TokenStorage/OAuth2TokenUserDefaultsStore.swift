@@ -9,10 +9,13 @@
 import Foundation
 
 /// Stores and retrieves OAuth2 tokens from UserDefaults
-public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
+public class OAuth2TokenUserDefaultsStore: OAuth2TokenEncryptedStore {
 
     private let userDefaults: UserDefaults
     private let context: String
+
+    /// Optional token cipher to be used when persisting and retrieving tokens
+    public var tokenCipher: OAuth2TokenCipher?
 
     /// Creates a new OAuth2TokenUserDefaultsStore
     ///
@@ -26,14 +29,7 @@ public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
 
     public func store<Token>(token: Token?, for client: OAuth2ClientConfiguration,
                              with authorization: OAuth2Authorization) -> Bool where Token: DataConvertible, Token: OAuth2Token {
-        let tokenData: Data?
-        if let token = token {
-            tokenData = try? token.serialized()
-        }
-        else {
-            tokenData = nil
-        }
-
+        let tokenData = self.tokenData(from: token)
         let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
         userDefaults.set(tokenData, forKey: sandboxedIdentifier(identifier: identifier))
         return userDefaults.synchronize()
@@ -41,11 +37,11 @@ public class OAuth2TokenUserDefaultsStore: OAuth2TokenStore {
 
     public func tokenFor<Token>(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization)
         -> Token? where Token: DataConvertible, Token: OAuth2Token {
-        let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
-        guard let data = userDefaults.object(forKey: sandboxedIdentifier(identifier: identifier)) as? Data else {
-            return nil
-        }
-        return try? Token(serializedData: data)
+            let identifier = tokenIdentifierFor(clientConfiguration: client, authorization: authorization)
+            guard let data = userDefaults.object(forKey: sandboxedIdentifier(identifier: identifier)) as? Data else {
+                return nil
+            }
+            return token(from: data)
     }
 
     public func lockRefreshToken(timeout: TimeInterval, client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
