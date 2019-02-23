@@ -18,7 +18,6 @@ public protocol OAuth2TokenCipher {
     /// - Throws: Exception if token encryption failed
     func encrypt<Token>(token: Token) throws -> Data where Token: DataConvertible, Token: OAuth2Token
 
-
     /// Token decryption
     ///
     /// - Parameter data: Ciphertext containing the token to be decrypted

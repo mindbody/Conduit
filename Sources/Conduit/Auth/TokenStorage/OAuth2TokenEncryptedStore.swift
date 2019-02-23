@@ -18,6 +18,10 @@ public protocol OAuth2TokenEncryptedStore: OAuth2TokenStore {
 
 extension OAuth2TokenEncryptedStore {
 
+    /// Serialize data using encryption if a cipher has been provided
+    ///
+    /// - Parameter token: Token to serialize
+    /// - Returns: Serialized/encrypted token
     func tokenData<Token>(from token: Token?) -> Data? where Token: DataConvertible, Token: OAuth2Token {
         guard let token = token else {
             return nil
@@ -28,12 +32,15 @@ extension OAuth2TokenEncryptedStore {
         return try? token.serialized()
     }
 
+    /// Deserialize token using decryption if a cipher has been provided
+    ///
+    /// - Parameter data: Serialized token
+    /// - Returns: Deserialized/decrypted token
     func token<Token>(from data: Data) -> Token? where Token: DataConvertible, Token: OAuth2Token {
-        if let cipher = tokenCipher {
-            return try? cipher.decrypt(data: data)
+        if let cipher = tokenCipher, let token: Token = try? cipher.decrypt(data: data) {
+            return token
         }
         return try? Token(serializedData: data)
-
     }
 
 }
