@@ -24,14 +24,34 @@ class OAuth2TokenEncryptedStoreTests: XCTestCase {
         let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
                                                environment: environment)
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
-        let store = ACMEEncryptedStore()
+        let sut = ACMEEncryptedStore()
 
         // 1. Store token
         let token = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)
-        XCTAssertTrue(store.store(token: token, for: client, with: authorization))
+        XCTAssertTrue(sut.store(token: token, for: client, with: authorization))
 
         // 2. Retrieve token
-        let retrieved: BearerToken? = store.tokenFor(client: client, authorization: authorization)
+        let retrieved: BearerToken? = sut.tokenFor(client: client, authorization: authorization)
+        XCTAssertEqual(token, retrieved)
+    }
+
+    /// Test tokens stores unencrypted in UserDefaults can be retrieved without decryption
+    func testTokenEncryptedMigration() {
+        let environment = OAuth2ServerEnvironment(tokenGrantURL: URL(fileURLWithPath: "local"))
+        let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
+                                               environment: environment)
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let sut = OAuth2TokenUserDefaultsStore(userDefaults: UserDefaults(), context: "")
+
+        // 1. Store unencrypted token
+        let token = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)
+        XCTAssertTrue(sut.store(token: token, for: client, with: authorization))
+
+        // 2. Configure cypher
+        sut.tokenCipher = ACMECipher()
+
+        // 3. Retrieve token & validate
+        let retrieved: BearerToken? = sut.tokenFor(client: client, authorization: authorization)
         XCTAssertEqual(token, retrieved)
     }
 
