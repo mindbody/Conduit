@@ -35,7 +35,7 @@ class OAuth2TokenEncryptedStoreTests: XCTestCase {
         XCTAssertEqual(token, retrieved)
     }
 
-    /// Test tokens stores unencrypted in UserDefaults can be retrieved without decryption
+    /// Test tokens stored unencrypted in UserDefaults can be retrieved without decryption
     func testTokenEncryptedMigration() {
         let environment = OAuth2ServerEnvironment(tokenGrantURL: URL(fileURLWithPath: "local"))
         let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
