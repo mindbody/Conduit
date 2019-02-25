@@ -9,7 +9,7 @@
 import Foundation
 
 /// Describes the configuration of an OAuth2 client, which is usually an app or app extension
-public struct OAuth2ClientConfiguration {
+public struct OAuth2ClientConfiguration: Equatable {
 
     /// The OAuth2 client identifier
     public var clientIdentifier: String

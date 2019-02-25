@@ -1,16 +1,25 @@
 ## master
 
 #### Breaking
-- None
+- `OAuth2TokenUserDefaultsStore` conformance to `OAuth2TokenEncryptedStore`.
+- `OAuth2Authorization` conformance to `Equatable`.
+- `OAuth2Authorization` now exposes read-only `type` and `level` properties.
+- `OAuth2ClientConfiguration` conformance to `Equatable`.
+- `OAuth2ServerEnvironment` conformance to `Equatable`.
+- `OAuth2TokenStore` protocol now exposes  `isRefreshTokenLockedFor`, `tokenIdentifierFor` and `tokenLockIdentifierFor`.
+- `BearerToken` conformance to `Equatable`.
 
 #### Enhancements
-- None
+- Introduce `OAuth2TokenCipher` and `OAuth2TokenEncryptedStore` protocols to allow for token encryption/decryption.
+- User Defaults token store now supports token encryption.
+- Fully support application-side custom token stores.
 
 #### Bug Fixes
 - None
 
 #### Other
 - None
+
 
 ## 0.16.0
 
@@ -25,6 +34,7 @@
 
 #### Other
 - None
+
 
 ## 0.15.2
 

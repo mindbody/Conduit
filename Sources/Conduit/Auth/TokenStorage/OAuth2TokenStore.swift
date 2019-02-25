@@ -93,15 +93,21 @@ extension OAuth2TokenStore {
     ///   - client: Describes the token's OAuth2 client
     ///   - authorization: The type and level of authorization that the token is used for
     /// - Returns: A Bool indicating if the refresh token is locked
-    func isRefreshTokenLockedFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
+    public func isRefreshTokenLockedFor(client: OAuth2ClientConfiguration, authorization: OAuth2Authorization) -> Bool {
         guard let expiration = refreshTokenLockExpirationFor(client: client, authorization: authorization) else {
             return false
         }
         return Date() < expiration
     }
 
-    func tokenIdentifierFor(clientConfiguration: OAuth2ClientConfiguration,
-                            authorization: OAuth2Authorization) -> String {
+    /// Produces unique identifier for a given client configuration and authorization.
+    ///
+    /// - Parameters:
+    ///   - clientConfiguration: Client configuration associated with the token
+    ///   - authorization: Authorization associated with the token
+    /// - Returns: Unique token identifier
+    public func tokenIdentifierFor(clientConfiguration: OAuth2ClientConfiguration,
+                                   authorization: OAuth2Authorization) -> String {
         let authorizationLevel = authorization.level == .user ? "user-token" : "client-token"
         return [
             "com.mindbodyonline.connect.oauth-client",
@@ -111,8 +117,14 @@ extension OAuth2TokenStore {
             ].joined(separator: ".")
     }
 
-    func tokenLockIdentifierFor(clientConfiguration: OAuth2ClientConfiguration,
-                                authorization: OAuth2Authorization) -> String {
+    /// Produces unique lock identifier for a given client configuration and authorization.
+    ///
+    /// - Parameters:
+    ///   - clientConfiguration: Client configuration associated with the token
+    ///   - authorization: Authorization associated with the token
+    /// - Returns: Unique token lock identifier
+    public func tokenLockIdentifierFor(clientConfiguration: OAuth2ClientConfiguration,
+                                       authorization: OAuth2Authorization) -> String {
         let tokenIdentifier = tokenIdentifierFor(clientConfiguration: clientConfiguration, authorization: authorization)
         return [
             tokenIdentifier,

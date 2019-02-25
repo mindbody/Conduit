@@ -16,7 +16,7 @@ public protocol OAuth2Token {
 
 /// A token issued from an OAuth2 server application that represents
 /// a possession factor (hence "bearer") for a specific user
-public struct BearerToken: OAuth2Token, DataConvertible, Codable {
+public struct BearerToken: OAuth2Token, DataConvertible, Codable, Equatable {
 
     /// The access token
     public let accessToken: String

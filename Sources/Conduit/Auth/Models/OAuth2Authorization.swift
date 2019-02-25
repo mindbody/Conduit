@@ -9,7 +9,7 @@
 import Foundation
 
 /// Describes the type and level of authorization needed for a request
-public struct OAuth2Authorization {
+public struct OAuth2Authorization: Equatable {
 
     /// The authorization token type
     /// - Bearer: An access token issued from a server application
@@ -27,8 +27,11 @@ public struct OAuth2Authorization {
         case client
     }
 
-    let type: AuthorizationType
-    let level: AuthorizationLevel
+    /// The authorization token type
+    public let type: AuthorizationType
+
+    /// The level of authorization needed for the request
+    public let level: AuthorizationLevel
 
     /// Creats a new OAuth2Authorization
     /// - Parameters:

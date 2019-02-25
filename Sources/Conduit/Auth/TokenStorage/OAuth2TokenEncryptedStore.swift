@@ -13,7 +13,6 @@ public protocol OAuth2TokenEncryptedStore: OAuth2TokenStore {
 
     /// Optional token cipher to be used when persisting and retrieving tokens
     var tokenCipher: OAuth2TokenCipher? { get set }
-
 }
 
 extension OAuth2TokenEncryptedStore {
@@ -22,7 +21,7 @@ extension OAuth2TokenEncryptedStore {
     ///
     /// - Parameter token: Token to serialize
     /// - Returns: Serialized/encrypted token
-    func tokenData<Token>(from token: Token?) -> Data? where Token: DataConvertible, Token: OAuth2Token {
+    public func tokenData<Token>(from token: Token?) -> Data? where Token: DataConvertible, Token: OAuth2Token {
         guard let token = token else {
             return nil
         }
@@ -36,11 +35,10 @@ extension OAuth2TokenEncryptedStore {
     ///
     /// - Parameter data: Serialized token
     /// - Returns: Deserialized/decrypted token
-    func token<Token>(from data: Data) -> Token? where Token: DataConvertible, Token: OAuth2Token {
+    public func token<Token>(from data: Data) -> Token? where Token: DataConvertible, Token: OAuth2Token {
         if let cipher = tokenCipher, let token: Token = try? cipher.decrypt(data: data) {
             return token
         }
         return try? Token(serializedData: data)
     }
-
 }
