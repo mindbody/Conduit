@@ -24,7 +24,6 @@ public final class PBKDF2Derivator {
 
     /// Generate a 256bit (32 byte) encryption key derivated from the given
     /// passphrase, using `kCCPBKDF2` and pseudo-random `kCCPRFHmacAlgSHA1` algorithms.
-    /// Salt is generated from reversed passphrase.
     ///
     /// - Parameters:
     ///   - passphrase: Given passphrase to derivate the key from

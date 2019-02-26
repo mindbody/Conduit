@@ -43,9 +43,10 @@ class AES256CBCCipherTests: XCTestCase {
     }
 
     func testEncryptionWithInvalidIV() {
-        let key = "12345678901234567890123456789012"
+        let key = UUID().uuidString
+        let salt = UUID().uuidString
         do {
-            let cipher = try AES256CBCCipher(passphrase: key)
+            let cipher = try AES256CBCCipher(passphrase: key, salt: salt)
             _ = try cipher.encrypt(data: Data(count: 32), iv: Data())
             XCTFail("Expected to throw")
         }
@@ -58,9 +59,10 @@ class AES256CBCCipherTests: XCTestCase {
     }
 
     func testInvalidDecryption() {
-        let key = "12345678901234567890123456789012"
+        let key = UUID().uuidString
+        let salt = UUID().uuidString
         do {
-            let cipher = try AES256CBCCipher(passphrase: key)
+            let cipher = try AES256CBCCipher(passphrase: key, salt: salt)
             _ = try cipher.decrypt(data: Data(count: 8))
             XCTFail("Expected to throw")
         }

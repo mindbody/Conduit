@@ -31,12 +31,14 @@ public final class OAuth2TokenAES256CBCCipher: OAuth2TokenCipher {
 
     let cipher: AES256CBCCipher
 
-    /// Initialize token cipher with a give passphrase
+    /// Initialize token cipher with a give passphrase.
     ///
-    /// - Parameter passphrase: Passphrase used for encryption
+    /// - Parameters:
+    ///   - passphrase: Passphrase used for encryption
+    ///   - salt: Salt used for encryption
     /// - Throws: Exception if derivated key cannot be generated from passphrase
-    public init(passphrase: String) throws {
-        cipher = try AES256CBCCipher(passphrase: passphrase)
+    public init(passphrase: String, salt: String) throws {
+        cipher = try AES256CBCCipher(passphrase: passphrase, salt: salt)
     }
 
     /// Securely encrypt an `OAuth2Token` with AES-256 CBC

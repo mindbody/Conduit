@@ -12,8 +12,9 @@ import Conduit
 class OAuth2TokenAES256CBCCipherTests: XCTestCase {
 
     func testTokenCipher() throws {
-        let encryptionKey = "12345678901234567890123456789012"
-        let tokenCipher = try OAuth2TokenAES256CBCCipher(passphrase: encryptionKey)
+        let encryptionKey = UUID().uuidString
+        let salt = UUID().uuidString
+        let tokenCipher = try OAuth2TokenAES256CBCCipher(passphrase: encryptionKey, salt: salt)
 
         let token = BearerToken(accessToken: "foo", expiration: Date.distantFuture)
         let cipherText = try tokenCipher.encrypt(token: token)
