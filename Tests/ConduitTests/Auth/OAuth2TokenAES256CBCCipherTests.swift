@@ -13,7 +13,7 @@ class OAuth2TokenAES256CBCCipherTests: XCTestCase {
 
     func testTokenCipher() throws {
         let encryptionKey = "12345678901234567890123456789012"
-        let tokenCipher = try OAuth2TokenAES256CBCCipher(key: encryptionKey)
+        let tokenCipher = try OAuth2TokenAES256CBCCipher(passphrase: encryptionKey)
 
         let token = BearerToken(accessToken: "foo", expiration: Date.distantFuture)
         let cipherText = try tokenCipher.encrypt(token: token)

@@ -451,6 +451,13 @@
 		95F806B52224EA2A004BDC02 /* AES256CBCCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */; };
 		95F806B62224EA2A004BDC02 /* AES256CBCCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */; };
 		95F806B72224EA2A004BDC02 /* AES256CBCCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */; };
+		95F806BA2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */; };
+		95F806BB2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */; };
+		95F806BC2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */; };
+		95F806BD2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */; };
+		95F806C02225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
+		95F806C12225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
+		95F806C22225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
 		D2418216213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
 		D2418217213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
 		D2418218213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
@@ -652,6 +659,8 @@
 		95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenAES256CBCCipherTests.swift; sourceTree = "<group>"; };
 		95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES256CBCCipher.swift; sourceTree = "<group>"; };
 		95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES256CBCCipherTests.swift; sourceTree = "<group>"; };
+		95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBKDF2Derivator.swift; sourceTree = "<group>"; };
+		95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBKDF2DerivatorTests.swift; sourceTree = "<group>"; };
 		D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationStrategyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -791,11 +800,11 @@
 			isa = PBXGroup;
 			children = (
 				1B88B1E01F268C220022A69D /* AuthorizationCodeGrant */,
+				95F806B82225C62E004BDC02 /* Cryptography */,
 				1B88B1E81F268C220022A69D /* Models */,
 				1B88B1F21F268C220022A69D /* TokenGrants */,
 				1B88B1F81F268C220022A69D /* TokenStorage */,
 				1B88B1FD1F268C220022A69D /* Vendor */,
-				95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */,
 				1B88B1DF1F268C220022A69D /* Auth.swift */,
 				1B88B1EE1F268C220022A69D /* OAuth2Error.swift */,
 				1B88B1EF1F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift */,
@@ -979,6 +988,7 @@
 			children = (
 				1B279CB11F19558100C0005E /* Auth */,
 				1BE3774C20D1AFA9005F2CEB /* Core */,
+				95F806BE2225CE48004BDC02 /* Cryptography */,
 				1BD5553F1F17DC81004B1172 /* Networking */,
 				95CC71C11F797ACB003B4E31 /* Resources */,
 				1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */,
@@ -1106,7 +1116,6 @@
 		1BE3774C20D1AFA9005F2CEB /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */,
 				1BE3774D20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift */,
 			);
 			path = Core;
@@ -1147,6 +1156,24 @@
 				95F806A32224C430004BDC02 /* Security.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95F806B82225C62E004BDC02 /* Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */,
+				95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */,
+			);
+			path = Cryptography;
+			sourceTree = "<group>";
+		};
+		95F806BE2225CE48004BDC02 /* Cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */,
+				95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */,
+			);
+			path = Cryptography;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1703,6 +1730,7 @@
 				1B88B2F81F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
 				1B88B25C1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B88B2501F268C220022A69D /* OAuth2Error.swift in Sources */,
+				95F806BB2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				95BF755D21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B2701F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
@@ -1781,6 +1809,7 @@
 				1B88B2911F268C220022A69D /* ConduitLogger.swift in Sources */,
 				1B88B2B11F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C51F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
+				95F806BC2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				1B88B2E11F268C220022A69D /* XML.swift in Sources */,
 				1B88B2F91F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
 				1B88B25D1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
@@ -1858,6 +1887,7 @@
 				1B88B2921F268C220022A69D /* ConduitLogger.swift in Sources */,
 				1B88B2B21F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C61F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
+				95F806BD2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				1B88B2E21F268C220022A69D /* XML.swift in Sources */,
 				1B88B2FA1F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
 				1B88B25E1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
@@ -1901,6 +1931,7 @@
 				1BD5559D1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BE3774E20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1BD555A31F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
+				95F806C02225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */,
 				1B279CCE1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555671F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
 				1BF8E55D20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
@@ -1952,6 +1983,7 @@
 				1BD5559E1F17DC81004B1172 /* XMLResponseDeserializerTests.swift in Sources */,
 				1BE3774F20D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1BD555A41F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
+				95F806C12225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */,
 				1B279CCF1F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555681F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
 				1BF8E55E20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
@@ -2003,6 +2035,7 @@
 				1BD555A51F17DC81004B1172 /* SSLPinningServerAuthenticationPolicyTests.swift in Sources */,
 				1BE3775020D1AFC1005F2CEB /* DarwinNotificationCenterTests.swift in Sources */,
 				1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */,
+				95F806C22225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */,
 				1B279CD01F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift in Sources */,
 				1BD555691F17DC81004B1172 /* HTTPRequestBuilderTests.swift in Sources */,
 				1BF8E55F20CF103E002D8AF1 /* AuthMigratorTests.swift in Sources */,
@@ -2062,6 +2095,7 @@
 				1B88B23B1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
 				95C9C7962220BBC800C89DB2 /* OAuth2TokenCipher.swift in Sources */,
 				1B88B2471F268C220022A69D /* OAuth2Authorization.swift in Sources */,
+				95F806BA2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				1B88B2571F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2CF1F268C220022A69D /* QueryString.swift in Sources */,
 				95F806B02224CE19004BDC02 /* AES256CBCCipher.swift in Sources */,

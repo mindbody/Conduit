@@ -12,8 +12,8 @@ public final class OAuth2TokenAES256CBCCipher: OAuth2TokenCipher {
 
     let cipher: AES256CBCCipher
 
-    public init(key: String) throws {
-        cipher = try AES256CBCCipher(key: key)
+    public init(passphrase: String) throws {
+        cipher = try AES256CBCCipher(passphrase: passphrase)
     }
 
     public func encrypt<Token>(token: Token) throws -> Data where Token: DataConvertible, Token: OAuth2Token {
