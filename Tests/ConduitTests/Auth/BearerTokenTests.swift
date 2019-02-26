@@ -97,4 +97,28 @@ class BearerTokenTests: XCTestCase {
 
         XCTAssertEqual(token.authorizationHeaderValue, "Bearer \(token.accessToken)")
     }
+
+    func testEquality() {
+        let tokenA = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)
+        let tokenB = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)
+        XCTAssertEqual(tokenA, tokenB)
+    }
+
+    func testInequalityForAccessToken() {
+        let tokenA = BearerToken(accessToken: "foo1", refreshToken: "bar", expiration: Date.distantFuture)
+        let tokenB = BearerToken(accessToken: "foo2", refreshToken: "bar", expiration: Date.distantFuture)
+        XCTAssertNotEqual(tokenA, tokenB)
+    }
+
+    func testInequalityForRefreshToken() {
+        let tokenA = BearerToken(accessToken: "foo", refreshToken: "bar1", expiration: Date.distantFuture)
+        let tokenB = BearerToken(accessToken: "foo", refreshToken: "bar2", expiration: Date.distantFuture)
+        XCTAssertNotEqual(tokenA, tokenB)
+    }
+
+    func testInequalityForExpirationDate() {
+        let tokenA = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date().addingTimeInterval(1))
+        let tokenB = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date().addingTimeInterval(2))
+        XCTAssertNotEqual(tokenA, tokenB)
+    }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Describes an OAuth2 server application environment
-public struct OAuth2ServerEnvironment {
+public struct OAuth2ServerEnvironment: Equatable {
 
     /// The scope of access for which tokens should be granted
     public var scope: String?
