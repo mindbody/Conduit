@@ -365,6 +365,9 @@
 		1BFD2F3420C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
 		1BFD2F3520C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
 		1BFD2F3620C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */; };
+		951241132225EFFE00EC9F0C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 951241122225EFFE00EC9F0C /* Security.framework */; };
+		951241152225F00600EC9F0C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 951241142225F00600EC9F0C /* Security.framework */; };
+		951241172225F00D00EC9F0C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 951241162225F00D00EC9F0C /* Security.framework */; };
 		95272C2D2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
 		95272C2E2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
 		95272C2F2150688400F18189 /* XMLNodeAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95272C2C2150688400F18189 /* XMLNodeAttributes.swift */; };
@@ -437,9 +440,6 @@
 		95F8069F2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */; };
 		95F806A02224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */; };
 		95F806A12224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */; };
-		95F806A42224C430004BDC02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F806A32224C430004BDC02 /* Security.framework */; };
-		95F806A62224C437004BDC02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F806A52224C436004BDC02 /* Security.framework */; };
-		95F806A82224C43D004BDC02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F806A72224C43C004BDC02 /* Security.framework */; };
 		95F806AA2224C443004BDC02 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95F806A92224C443004BDC02 /* Security.framework */; };
 		95F806AC2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */; };
 		95F806AD2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */; };
@@ -630,6 +630,9 @@
 		1BF8E56020CF1760002D8AF1 /* XMLRequestSerializerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLRequestSerializerTests.swift; sourceTree = "<group>"; };
 		1BFD2F2D20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshTokenGrantStrategy.swift; sourceTree = "<group>"; };
 		1BFD2F3220C85479005BB791 /* OAuth2RefreshStrategyFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2RefreshStrategyFactory.swift; sourceTree = "<group>"; };
+		951241122225EFFE00EC9F0C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		951241142225F00600EC9F0C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		951241162225F00D00EC9F0C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		95272C2C2150688400F18189 /* XMLNodeAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLNodeAttributes.swift; sourceTree = "<group>"; };
 		956D7E431FA1332E002FB4D3 /* QueryStringArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringArrayTests.swift; sourceTree = "<group>"; };
 		956D7E471FA13387002FB4D3 /* QueryStringDictionaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryStringDictionaryTests.swift; sourceTree = "<group>"; };
@@ -652,9 +655,6 @@
 		95F8069522244D32004BDC02 /* OAuth2TokenStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStoreTests.swift; sourceTree = "<group>"; };
 		95F8069922245B59004BDC02 /* OAuth2TokenEncryptedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenEncryptedStoreTests.swift; sourceTree = "<group>"; };
 		95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenAES256CBCCipher.swift; sourceTree = "<group>"; };
-		95F806A32224C430004BDC02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		95F806A52224C436004BDC02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS5.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		95F806A72224C43C004BDC02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		95F806A92224C443004BDC02 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenAES256CBCCipherTests.swift; sourceTree = "<group>"; };
 		95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES256CBCCipher.swift; sourceTree = "<group>"; };
@@ -683,7 +683,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95F806A62224C437004BDC02 /* Security.framework in Frameworks */,
+				951241152225F00600EC9F0C /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95F806A82224C43D004BDC02 /* Security.framework in Frameworks */,
+				951241172225F00D00EC9F0C /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +731,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95F806A42224C430004BDC02 /* Security.framework in Frameworks */,
+				951241132225EFFE00EC9F0C /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,10 +1150,10 @@
 		95F806A22224C42F004BDC02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				951241162225F00D00EC9F0C /* Security.framework */,
+				951241142225F00600EC9F0C /* Security.framework */,
+				951241122225EFFE00EC9F0C /* Security.framework */,
 				95F806A92224C443004BDC02 /* Security.framework */,
-				95F806A72224C43C004BDC02 /* Security.framework */,
-				95F806A52224C436004BDC02 /* Security.framework */,
-				95F806A32224C430004BDC02 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1566,7 +1566,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi";
+			shellScript = "\"${SRCROOT}/Tests/ConduitTests/ping-test-webserver\"\nif [ $? -ne 0 ]; then\n    echo \"Test webserver must be started:\"\n    echo \"$ ./Tests/ConduitTests/start-test-webserver\"\n    exit 1\nfi\n";
 		};
 		1BB5D9791F1E875C009235DC /* Check Webservers Running */ = {
 			isa = PBXShellScriptBuildPhase;
