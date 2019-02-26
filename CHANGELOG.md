@@ -8,11 +8,13 @@
 - `OAuth2ServerEnvironment` conformance to `Equatable`.
 - `OAuth2TokenStore` protocol now exposes  `isRefreshTokenLockedFor`, `tokenIdentifierFor` and `tokenLockIdentifierFor`.
 - `BearerToken` conformance to `Equatable`.
+- Add dependency to `Security.framework`
 
 #### Enhancements
 - Introduce `OAuth2TokenCipher` and `OAuth2TokenEncryptedStore` protocols to allow for token encryption/decryption.
 - User Defaults token store now supports token encryption.
 - Fully support application-side custom token stores.
+- Introduce `OAuth2TokenAES256CBCCipher` cipher for AES 256bit CBC token encryption. 
 
 #### Bug Fixes
 - None
