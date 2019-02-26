@@ -24,22 +24,23 @@ public final class PBKDF2Derivator {
 
     /// Generate a 256bit (32 byte) encryption key derivated from the given
     /// passphrase, using `kCCPBKDF2` and pseudo-random `kCCPRFHmacAlgSHA1` algorithms.
+    /// Salt is generated from reversed passphrase.
     ///
-    /// - Parameter passphrase: Given passphrase to derivate the key from
+    /// - Parameters:
+    ///   - passphrase: Given passphrase to derivate the key from
+    ///   - salt: Salt to further randomize the derived key
     /// - Returns: Derivated 256bit key
     /// - Throws: Exception if key derivation failed
-    public func derivateKey(from passphrase: String) throws -> Data {
-        let passphraseData = Data(passphrase.utf8)
-        let passphraseBytes = Array(passphraseData).map(Int8.init)
+    public func derivateKey(from passphrase: String, salt: String) throws -> Data {
         let rounds = UInt32(45_000)
-
         var outputData = Data(count: kCCKeySizeAES256)
+
         try outputData.withUnsafeMutableBytes { (outputBytes: UnsafeMutablePointer<UInt8>) in
             let status = CCKeyDerivationPBKDF(CCPBKDFAlgorithm(kCCPBKDF2),
-                                              passphraseBytes,
-                                              passphraseBytes.count,
-                                              nil,
-                                              0,
+                                              passphrase,
+                                              passphrase.utf8.count,
+                                              salt,
+                                              salt.utf8.count,
                                               CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
                                               rounds,
                                               outputBytes,

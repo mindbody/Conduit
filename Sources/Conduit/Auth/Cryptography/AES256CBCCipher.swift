@@ -31,10 +31,12 @@ public final class AES256CBCCipher {
 
     /// Initialize AES-256 CBC cipher with a given pass phrase
     ///
-    /// - Parameter passphrase: Passphrase string to use for encryption key derivation
+    /// - Parameter passphrase: Passphrase string to use for encryption key derivation.
+    ///                         Salt is derived from passphrase by reversing it.
     /// - Throws: Exception if key derivation failed
     public convenience init(passphrase: String) throws {
-        let derivatedKey = try PBKDF2Derivator().derivateKey(from: passphrase)
+        let salt = String(passphrase.reversed())
+        let derivatedKey = try PBKDF2Derivator().derivateKey(from: passphrase, salt: salt)
         try self.init(key: derivatedKey)
     }
 
