@@ -13,9 +13,9 @@ import Foundation
 /// Use in conjunction with `OAuth2TokenEncryptedStore` as follows:
 ///
 ///     let store = OAuth2TokenUserDefaultsStore()
-///     store.tokenCipher = OAuth2TokenAES256CBCCipher(passphrase: encryptionPassphrase)
+///     store.tokenCipher = OAuth2TokenAES256CBCCipher(passphrase: passphrase, salt: salt)
 ///
-/// A secure encryption key is generated from the given passphrase. The CBC IV is
+/// A secure encryption key is generated from the given passphrase and salt. The CBC IV is
 /// automatically generated and persisted together with the encrypted token.
 ///
 /// Once the store token cipher has been set up, all stored tokens will be
