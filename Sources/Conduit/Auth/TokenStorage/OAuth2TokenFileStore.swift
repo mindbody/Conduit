@@ -34,7 +34,10 @@ public struct OAuth2TokenFileStoreOptions {
 
 /// Stores and retrieves OAuth2 tokens from local storage
 @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
-public class OAuth2TokenFileStore: OAuth2TokenStore {
+public class OAuth2TokenFileStore: OAuth2TokenEncryptedStore {
+
+    /// Optional token cipher to be used when persisting and retrieving tokens
+    public var tokenCipher: OAuth2TokenCipher?
 
     private let options: OAuth2TokenFileStoreOptions
     private lazy var fileCoordinator: NSFileCoordinator = {
@@ -101,13 +104,7 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
 
     public func store<Token>(token: Token?, for client: OAuth2ClientConfiguration,
                              with authorization: OAuth2Authorization) -> Bool where Token: DataConvertible, Token: OAuth2Token {
-        let tokenData: Data?
-        if let token = token {
-            tokenData = try? token.serialized()
-        }
-        else {
-            tokenData = nil
-        }
+        let tokenData = self.tokenData(from: token)
         let storageURL = tokenFileURLFor(client: client, with: authorization)
         if let tokenData = tokenData {
             return prepareForWriting(destination: storageURL) { url in
@@ -141,7 +138,7 @@ public class OAuth2TokenFileStore: OAuth2TokenStore {
             guard let data = FileManager.default.contents(atPath: url.path) else {
                 return nil
             }
-            return try? Token(serializedData: data)
+            return token(from: data)
         }
     }
 
