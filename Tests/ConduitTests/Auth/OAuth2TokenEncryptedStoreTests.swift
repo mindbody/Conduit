@@ -36,12 +36,34 @@ class OAuth2TokenEncryptedStoreTests: XCTestCase {
     }
 
     /// Test tokens stored unencrypted in UserDefaults can be retrieved without decryption
-    func testTokenEncryptedMigration() {
+    func testUserDefaultsEncryptedMigration() {
         let environment = OAuth2ServerEnvironment(tokenGrantURL: URL(fileURLWithPath: "local"))
         let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
                                                environment: environment)
         let authorization = OAuth2Authorization(type: .bearer, level: .user)
         let sut = OAuth2TokenUserDefaultsStore(userDefaults: UserDefaults(), context: "")
+
+        // 1. Store unencrypted token
+        let token = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)
+        XCTAssertTrue(sut.store(token: token, for: client, with: authorization))
+
+        // 2. Configure cypher
+        sut.tokenCipher = ACMECipher()
+
+        // 3. Retrieve token & validate
+        let retrieved: BearerToken? = sut.tokenFor(client: client, authorization: authorization)
+        XCTAssertEqual(token, retrieved)
+    }
+
+    /// Test tokens stored unencrypted on File store can be retrieved without decryption
+    @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
+    func testFileStoreEncryptedMigration() {
+        let environment = OAuth2ServerEnvironment(tokenGrantURL: URL(fileURLWithPath: "local"))
+        let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
+                                               environment: environment)
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString)
+        let sut = OAuth2TokenFileStore(options: OAuth2TokenFileStoreOptions(storageDirectory: url))
 
         // 1. Store unencrypted token
         let token = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date.distantFuture)

@@ -2,6 +2,7 @@
 
 #### Breaking
 - `OAuth2TokenUserDefaultsStore` conformance to `OAuth2TokenEncryptedStore`.
+- `OAuth2TokenFileStore` conformance to `OAuth2TokenEncryptedStore`.
 - `OAuth2Authorization` conformance to `Equatable`.
 - `OAuth2Authorization` now exposes read-only `type` and `level` properties.
 - `OAuth2ClientConfiguration` conformance to `Equatable`.
@@ -13,6 +14,7 @@
 #### Enhancements
 - Introduce `OAuth2TokenCipher` and `OAuth2TokenEncryptedStore` protocols to allow for token encryption/decryption.
 - User Defaults token store now supports token encryption.
+- File token store now supports token encryption.
 - Fully support application-side custom token stores.
 - Introduce `OAuth2TokenAES256CBCCipher` cipher for AES 256bit CBC token encryption. 
 
