@@ -56,6 +56,7 @@ class OAuth2TokenEncryptedStoreTests: XCTestCase {
     }
 
     /// Test tokens stored unencrypted on File store can be retrieved without decryption
+    @available(tvOS, unavailable, message: "Persistent file storage is unavailable in tvOS")
     func testFileStoreEncryptedMigration() {
         let environment = OAuth2ServerEnvironment(tokenGrantURL: URL(fileURLWithPath: "local"))
         let client = OAuth2ClientConfiguration(clientIdentifier: "client", clientSecret: "secret",
