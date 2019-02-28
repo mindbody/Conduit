@@ -1,7 +1,7 @@
 # Conduit
 
 [![Release](https://img.shields.io/github/release/mindbody/conduit.svg)](https://github.com/mindbody/Conduit/releases)
-[![Build Status](https://travis-ci.org/mindbody/Conduit.svg?branch=master)](https://travis-ci.com/mindbody/Conduit)
+[![Build Status](https://travis-ci.org/mindbody/Conduit.svg?branch=master)](https://travis-ci.org/mindbody/Conduit)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Conduit.svg)](https://cocoapods.org/pods/Conduit)
 [![Platform](https://img.shields.io/cocoapods/p/Conduit.svg?style=flat)](http://cocoadocs.org/docsets/Conduit)
@@ -39,6 +39,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 - [x] Network Reachability
 - [x] OAuth2 client management
 - [x] Automatic token refreshes, client_credential grants, and token storage
+- [x] Secure token storage with AES-256 CBC encryption
 - [x] Full manual control over all token grants within RFC 6749
 - [x] Automatic bearer/basic token application
 - [x] Embedded authorization page / authorization code grant strategies
@@ -90,7 +91,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.16.0")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.17.0")
     ]
 )
 ```
