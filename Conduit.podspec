@@ -9,9 +9,9 @@ Pod::Spec.new do |spec|
 	spec.summary = 'Robust Swift networking for web APIs'
 	spec.source = { :git => 'https://github.com/mindbody/Conduit.git', :tag => $version }
 	spec.source_files = 'Sources/**/*.swift'
-	spec.ios.framework = 'SystemConfiguration'
-	spec.tvos.framework = 'SystemConfiguration'
-	spec.osx.framework = 'SystemConfiguration'
+	spec.ios.frameworks = 'Security', 'SystemConfiguration'
+	spec.tvos.frameworks = 'Security', 'SystemConfiguration'
+	spec.osx.frameworks = 'Security', 'SystemConfiguration'
 	spec.ios.deployment_target = '8.0'
 	spec.watchos.deployment_target = '2.0'
 	spec.tvos.deployment_target = '9.0'

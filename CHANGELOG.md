@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.17.0
+
+#### Breaking
 - `OAuth2TokenUserDefaultsStore` conformance to `OAuth2TokenEncryptedStore`.
 - `OAuth2TokenFileStore` conformance to `OAuth2TokenEncryptedStore`.
 - `OAuth2Authorization` conformance to `Equatable`.
