@@ -113,12 +113,12 @@ class OAuth2TokenEncryptedStoreTests: XCTestCase {
     private class ACMECipher: OAuth2TokenCipher {
         func encrypt<Token>(token: Token) throws -> Data where Token: DataConvertible, Token: OAuth2Token {
             let superEncryptedToken = try token.serialized().reversed() // Super-secret encryption :D
-            return Data(bytes: superEncryptedToken)
+            return Data(superEncryptedToken)
         }
 
         func decrypt<Token>(data: Data) throws -> Token where Token: DataConvertible, Token: OAuth2Token {
             let decryptedToken = data.reversed()
-            return try Token(serializedData: Data(bytes: decryptedToken))
+            return try Token(serializedData: Data(decryptedToken))
         }
     }
 

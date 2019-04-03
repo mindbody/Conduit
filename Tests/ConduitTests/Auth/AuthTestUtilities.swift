@@ -34,7 +34,7 @@ class AuthTestUtilities {
     static func makeSecureRandom(length: Int) -> String {
         var buffer = [UInt8](repeating: 0, count: length)
         _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
-        return base64URLEncode(Data(bytes: buffer))
+        return base64URLEncode(Data(buffer))
     }
 
     private static func base64URLEncode(_ input: Data) -> String {

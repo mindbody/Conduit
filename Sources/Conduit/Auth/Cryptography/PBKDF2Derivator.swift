@@ -34,7 +34,7 @@ public final class PBKDF2Derivator {
         let rounds = UInt32(45_000)
         var outputData = Data(count: kCCKeySizeAES256)
 
-        try outputData.withUnsafeMutableBytes { (outputBytes: UnsafeMutablePointer<UInt8>) in
+        try outputData.withUnsafeMutableBytes { (outputBytes: UnsafeMutableRawBufferPointer) in
             let status = CCKeyDerivationPBKDF(CCPBKDFAlgorithm(kCCPBKDF2),
                                               passphrase,
                                               passphrase.utf8.count,
@@ -42,7 +42,7 @@ public final class PBKDF2Derivator {
                                               salt.utf8.count,
                                               CCPseudoRandomAlgorithm(kCCPRFHmacAlgSHA1),
                                               rounds,
-                                              outputBytes,
+                                              outputBytes.baseAddress?.assumingMemoryBound(to: UInt8.self),
                                               kCCKeySizeAES256)
             guard status == kCCSuccess else {
                 throw Error.keyDerivationError

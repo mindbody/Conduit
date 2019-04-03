@@ -88,7 +88,7 @@ public final class AES256CBCCipher {
                     initializationVector,
                     Array(data),
                     data.count,
-                    cipherTextBytes,
+                    cipherTextBytes.baseAddress?.assumingMemoryBound(to: UInt8.self),
                     cipherTextLength,
                     &numBytesEncrypted)
         }
@@ -97,7 +97,7 @@ public final class AES256CBCCipher {
         }
 
         cipherTextData.count = numBytesEncrypted
-        return Data(bytes: initializationVector) + cipherTextData
+        return Data(initializationVector) + cipherTextData
     }
 
     /// AES 256-bit CBC decryption
@@ -139,7 +139,7 @@ public final class AES256CBCCipher {
                     initializationVector,
                     cipherTextBytes,
                     outputLength,
-                    outputBytes,
+                    outputBytes.baseAddress?.assumingMemoryBound(to: UInt8.self),
                     outputLength,
                     &numBytesDecrypted)
         }

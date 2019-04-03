@@ -416,7 +416,7 @@ extension KeychainWrapper {
         get {
             return sharedKeychainWrapper.serviceName
         }
-        @available(*, deprecated: 2.0, message: "Changing serviceName will not be supported in the future. Instead create a new KeychainWrapper instance with a custom service name.")
+        @available(*, deprecated, message: "Changing serviceName will not be supported in the future. Instead create a new KeychainWrapper instance with a custom service name.")
         set(newServiceName) {
             sharedKeychainWrapper.serviceName = newServiceName
         }
@@ -434,7 +434,7 @@ extension KeychainWrapper {
         get {
             return sharedKeychainWrapper.accessGroup
         }
-        @available(*, deprecated: 2.0, message: "Changing accessGroup will not be supported in the future. Instead create a new KeychainWrapper instance with a custom accessGroup.")
+        @available(*, deprecated, message: "Changing accessGroup will not be supported in the future. Instead create a new KeychainWrapper instance with a custom accessGroup.")
         set(newAccessGroup) {
             sharedKeychainWrapper.accessGroup = newAccessGroup
         }
