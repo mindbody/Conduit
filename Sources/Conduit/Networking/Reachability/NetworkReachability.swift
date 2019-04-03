@@ -43,8 +43,11 @@ public class NetworkReachability {
             return nil
         }
         var reachability: SCNetworkReachability?
-        data.withUnsafeBytes { (ptr: UnsafePointer<Int8>) in
-            reachability = SCNetworkReachabilityCreateWithName(nil, ptr)
+        data.withUnsafeBytes { ptr in
+            guard let bytes = ptr.baseAddress?.assumingMemoryBound(to: Int8.self) else {
+                return
+            }
+            reachability = SCNetworkReachabilityCreateWithName(nil, bytes)
         }
         guard let systemReachability = reachability else {
             return nil
@@ -114,7 +117,7 @@ public class NetworkReachability {
     ///
     /// - Parameter observer: The observer to unregister
     public func unregister(observer: NetworkReachabilityObserver) {
-        if let idx = observers.index(where: { $0 === observer }) {
+        if let idx = observers.firstIndex(where: { $0 === observer }) {
             observers.remove(at: idx)
         }
     }

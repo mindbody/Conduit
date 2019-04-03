@@ -13,6 +13,21 @@
 - None
 
 
+## 0.18.0
+
+#### Breaking
+- Update to Swift 5.0
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
 ## 0.17.0
 
 #### Breaking

@@ -87,7 +87,7 @@ class DarwinNotificationCenter {
             guard var observers = self.observerMap[observer.notificationName] else {
                 return
             }
-            guard let index = observers.index(where: { $0 === observer }) else {
+            guard let index = observers.firstIndex(where: { $0 === observer }) else {
                 return
             }
 
