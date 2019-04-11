@@ -1,4 +1,4 @@
-// swift-tools-version:4.2
+// swift-tools-version:5.0
 //
 //  Package.swift
 //  Conduit
@@ -11,18 +11,18 @@ import PackageDescription
 
 let package = Package(
     name: "Conduit",
+    platforms: [
+        .macOS(.v10_11),
+        .iOS(.v8),
+        .tvOS(.v9),
+        .watchOS(.v2),
+    ],
     products: [
-        .library(
-            name: "Conduit",
-            targets: ["Conduit"]),
+        .library(name: "Conduit", targets: ["Conduit"]),
     ],
     dependencies : [],
     targets: [
-        .target(
-            name: "Conduit",
-            dependencies: []),
-        .testTarget(
-            name: "ConduitTests",
-            dependencies: ["Conduit"]),
+        .target(name: "Conduit", dependencies: []),
+        .testTarget(name: "ConduitTests", dependencies: ["Conduit"]),
     ]
 )
