@@ -13,6 +13,21 @@
 - None
 
 
+## 0.18.1
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- Restrict plaforms in Package.swift
+
+
 ## 0.18.0
 
 #### Breaking
