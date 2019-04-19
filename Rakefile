@@ -3,7 +3,7 @@ build_configurations = [
 		:scheme => "Conduit-iOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=9.3,name=iPhone 5S",
+			"OS=10.3.1,name=iPhone 5S",
 			"OS=latest,name=iPhone X"
 		]
 	},
@@ -18,7 +18,7 @@ build_configurations = [
 		:scheme => "Conduit-tvOS",
 		:run_tests => true,
 		:destinations => [
-			"OS=9.2,name=Apple TV 1080p",
+			"OS=10.2,name=Apple TV 1080p",
 			"OS=latest,name=Apple TV 4K"
 		]
 	},
