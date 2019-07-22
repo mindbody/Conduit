@@ -249,6 +249,8 @@ public struct FormPart {
     /// A structure containing form part content information
     public enum Content {
 
+        /// Reasoning for SwiftLint exception (false-positive): https://github.com/realm/SwiftLint/issues/2782
+        // swiftlint:disable duplicate_enum_cases
         #if os(OSX)
         /// An image with an associated compression format
         case image(NSImage, ImageFormat)
@@ -256,6 +258,7 @@ public struct FormPart {
         /// An image with an associated compression format
         case image(UIImage, ImageFormat)
         #endif
+        // swiftlint:enable duplicate_enum_cases
 
         /// A video with an associated media container format
         case video(Data, VideoFormat)
