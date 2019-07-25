@@ -343,9 +343,10 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         let taskResponse = taskResponseFor(taskIdentifier: task.taskIdentifier)
         taskResponse.error = error
-        let completionHandler = taskCompletionHandlers[task.taskIdentifier]
+        var completionHandler: SessionTaskCompletion?
 
         serialQueue.sync {
+            completionHandler = taskCompletionHandlers[task.taskIdentifier]
             taskCompletionHandlers[task.taskIdentifier] = nil
             taskDownloadProgressHandlers[task.taskIdentifier] = nil
             taskUploadProgressHandlers[task.taskIdentifier] = nil
