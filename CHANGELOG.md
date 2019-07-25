@@ -13,6 +13,20 @@
 - None
 
 
+## 0.18.2
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+-  Issue #137 | `Crash in URLSessionClient`
+
+#### Other
+- None
+
 ## 0.18.1
 
 #### Breaking
