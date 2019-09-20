@@ -68,7 +68,7 @@ public struct URLSessionClient: URLSessionClientType {
         set { sessionDelegate.serverAuthenticationPolicies = newValue }
     }
     private let urlSession: URLSession
-    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.URLSessionClient-\(Date.timeIntervalSinceReferenceDate)", attributes: [])
+    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.URLSessionClient-\(UUID().uuidString)", attributes: [])
     private let activeTaskQueueDispatchGroup = DispatchGroup()
     // swiftlint:disable weak_delegate
     private let sessionDelegate = SessionDelegate()
@@ -277,7 +277,7 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     private var taskUploadProgressHandlers: [Int: SessionTaskProgressHandler] = [:]
     private var taskUploadProgresses: [Int: Progress] = [:]
     private var taskResponses: [Int: TaskResponse] = [:]
-    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(Date.timeIntervalSinceReferenceDate)")
+    private let serialQueue = DispatchQueue(label: "com.mindbodyonline.Conduit.SessionDelegate-\(UUID().uuidString)")
 
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping SessionCompletionHandler) {
         for policy in serverAuthenticationPolicies {
@@ -295,38 +295,40 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
 
     /// Reports upload progress
     func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
-        if let progressHandler = taskUploadProgressHandlers[task.taskIdentifier] {
-            let currentProgress = taskUploadProgresses[task.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
-            if currentProgress == nil {
-                serialQueue.sync {
-                    taskUploadProgresses[task.taskIdentifier] = newProgress
-                }
-            }
-            newProgress.completedUnitCount = totalBytesSent
-            newProgress.totalUnitCount = totalBytesExpectedToSend
-            progressHandler(newProgress)
+        var progressHandler: SessionTaskProgressHandler?
+        var uploadProgress: Progress?
+        serialQueue.sync {
+            progressHandler = taskUploadProgressHandlers[task.taskIdentifier]
+            uploadProgress = taskUploadProgresses[task.taskIdentifier] ?? Progress()
+            uploadProgress?.completedUnitCount = totalBytesSent
+            uploadProgress?.totalUnitCount = totalBytesExpectedToSend
+            taskUploadProgresses[task.taskIdentifier] = uploadProgress
+        }
+        if let progress = uploadProgress {
+            progressHandler?(progress)
         }
     }
 
     /// Reports download progress and appends response data
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        var progressHandler: SessionTaskProgressHandler?
+        var downloadProgress: Progress?
         let taskResponse = taskResponseFor(taskIdentifier: dataTask.taskIdentifier)
         var responseData = taskResponse.data ?? Data()
         responseData.append(data)
         taskResponse.data = responseData
-        if let expectedContentLength = taskResponse.expectedContentLength,
-            let progressHandler = taskDownloadProgressHandlers[dataTask.taskIdentifier] {
-            let currentProgress = taskDownloadProgresses[dataTask.taskIdentifier]
-            let newProgress = currentProgress ?? Progress()
-            if currentProgress == nil {
-                serialQueue.sync {
-                    taskDownloadProgresses[dataTask.taskIdentifier] = newProgress
-                }
-            }
-            newProgress.completedUnitCount = Int64(responseData.count)
-            newProgress.totalUnitCount = expectedContentLength
-            progressHandler(newProgress)
+        guard let expectedContentLength = taskResponse.expectedContentLength else {
+            return
+        }
+        serialQueue.sync {
+            progressHandler = taskDownloadProgressHandlers[dataTask.taskIdentifier]
+            downloadProgress = taskDownloadProgresses[dataTask.taskIdentifier] ?? Progress()
+            downloadProgress?.completedUnitCount = Int64(responseData.count)
+            downloadProgress?.totalUnitCount = expectedContentLength
+            taskDownloadProgresses[dataTask.taskIdentifier] = downloadProgress
+        }
+        if let progress = downloadProgress {
+            progressHandler?(progress)
         }
     }
 
@@ -376,13 +378,14 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
     }
 
     private func taskResponseFor(taskIdentifier: Int) -> TaskResponse {
-        if let taskResponse = taskResponses[taskIdentifier] {
-            return taskResponse
+        return serialQueue.sync {
+            return taskResponses[taskIdentifier] ?? makeTaskResponseFor(taskIdentifier: taskIdentifier)
         }
+    }
+
+    private func makeTaskResponseFor(taskIdentifier: Int) -> TaskResponse {
         let taskResponse = TaskResponse()
-        serialQueue.sync {
-            taskResponses[taskIdentifier] = taskResponse
-        }
+        taskResponses[taskIdentifier] = taskResponse
         return taskResponse
     }
 

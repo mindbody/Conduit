@@ -13,6 +13,21 @@
 - None
 
 
+## 0.18.3
+
+#### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- Fix concurrency issues in `URLSessionClient`
+
+#### Other
+- None
+
+
 ## 0.18.2
 
 #### Breaking
