@@ -251,7 +251,7 @@ public struct FormPart {
 
         /// Reasoning for SwiftLint exception (false-positive): https://github.com/realm/SwiftLint/issues/2782
         // swiftlint:disable duplicate_enum_cases
-        #if os(OSX)
+        #if os(macOS)
         /// An image with an associated compression format
         case image(NSImage, ImageFormat)
         #elseif os(iOS) || os(tvOS) || os(watchOS)

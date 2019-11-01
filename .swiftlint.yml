@@ -15,6 +15,9 @@ identifier_name:
   min_length: 3
   max_length: 60
 
+disabled_rules:
+  - duplicate_enum_cases
+
 opt_in_rules:
   - attributes
   - closure_end_indentation
