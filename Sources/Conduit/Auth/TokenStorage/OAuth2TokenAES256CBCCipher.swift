@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// AES-256 Cipher Block Chaining OAuth2 token dipher
+/// AES-256 Cipher Block Chaining OAuth2 token cipher
 ///
 /// Use in conjunction with `OAuth2TokenEncryptedStore` as follows:
 ///
@@ -23,7 +23,7 @@ import Foundation
 ///
 ///     store.store(token: myToken, ...) // automatic encryption
 ///
-/// Retrieved tokens will be autimatically decrypted by the store via `decrypt(token:)`:
+/// Retrieved tokens will be automatically decrypted by the store via `decrypt(token:)`:
 ///
 ///     let token: BearerToken? = store.token(for: ...) // automatic decryption
 ///
