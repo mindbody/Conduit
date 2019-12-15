@@ -5,8 +5,6 @@
 //  Created by John Hammerlund on 12/10/19.
 //
 
-//#if XCFRAMEWORK
-
 import Foundation
 import Security
 #if !os(watchOS) && !os(tvOS)
@@ -181,5 +179,3 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
     }
 
 }
-
-//#endif
