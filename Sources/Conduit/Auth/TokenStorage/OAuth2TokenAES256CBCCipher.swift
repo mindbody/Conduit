@@ -27,6 +27,7 @@ import Foundation
 ///
 ///     let token: BearerToken? = store.token(for: ...) // automatic decryption
 ///
+@available(*, deprecated, message: "Use OAuth2TokenCryptoCipher with an AES256CBCCipher instead")
 public final class OAuth2TokenAES256CBCCipher: OAuth2TokenCipher {
 
     let cipher: AES256CBCCipher

@@ -18,7 +18,7 @@ import CommonCrypto
 /// encryption method. If no IV is passed, a random IV will be generated.
 /// IV is stored in the encryption data, together with the ciphertext and it
 /// is not required to be passed in for decryption.
-public final class AES256CBCCipher: CipherType {
+public final class AES256CBCCipher: Cipher {
 
     let encryptionKey: Data
 

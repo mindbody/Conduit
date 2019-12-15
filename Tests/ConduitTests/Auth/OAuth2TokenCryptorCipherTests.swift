@@ -12,8 +12,8 @@ import Conduit
 final class OAuth2TokenCryptorCipherTests: XCTestCase {
 
     func testEncryptsAndDecryptsTokens() throws {
-        let cryptor = MockCryptor()
-        let tokenCipher = OAuth2TokenCryptorCipher(cryptor: cryptor)
+        let cipher = MockCipher()
+        let tokenCipher = OAuth2TokenCryptoCipher(cipher: cipher)
 
         let token = BearerToken(accessToken: "foo", expiration: Date.distantFuture)
         let cipherText = try tokenCipher.encrypt(token: token)
@@ -23,8 +23,8 @@ final class OAuth2TokenCryptorCipherTests: XCTestCase {
     }
 
     func testProvidesTokensStoredInPlaintext() throws {
-        let cryptor = MockCryptor()
-        let tokenCipher = OAuth2TokenCryptorCipher(cryptor: cryptor)
+        let cipher = MockCipher()
+        let tokenCipher = OAuth2TokenCryptoCipher(cipher: cipher)
 
         let token = BearerToken(accessToken: "bar", expiration: Date.distantFuture)
 
@@ -33,11 +33,11 @@ final class OAuth2TokenCryptorCipherTests: XCTestCase {
     }
 
     func testThrowsErrorOnBadDecryption() throws {
-        let cryptor1 = MockCryptor()
-        let cryptor2 = MockCryptor()
+        let cipher1 = MockCipher()
+        let cipher2 = MockCipher()
 
-        let tokenCipher1 = OAuth2TokenCryptorCipher(cryptor: cryptor1)
-        let tokenCipher2 = OAuth2TokenCryptorCipher(cryptor: cryptor2)
+        let tokenCipher1 = OAuth2TokenCryptoCipher(cipher: cipher1)
+        let tokenCipher2 = OAuth2TokenCryptoCipher(cipher: cipher2)
 
         let token = BearerToken(accessToken: "baz", expiration: Date.distantFuture)
         let cipherText = try tokenCipher1.encrypt(token: token)

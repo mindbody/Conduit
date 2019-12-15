@@ -233,7 +233,7 @@ final class KeychainHybridKeyProviderTests: XCTestCase {
         sut.prefersSecureEnclaveStorage = prefersSecureEnclaveStorage
         sut.deleteKey()
 
-        let cryptor = HybridCryptor(keyProvider: sut)
+        let cryptor = HybridCipher(keyProvider: sut)
 
         let encryptedData = try cryptor.encrypt(data: plaintextData)
         let decryptedData = try cryptor.decrypt(data: encryptedData)
@@ -244,7 +244,7 @@ final class KeychainHybridKeyProviderTests: XCTestCase {
         let sut = KeychainHybridKeyProvider(context: #function, encryptionType: .rsaAESGCM)
         sut.deleteKey()
 
-        let cryptor = HybridCryptor(keyProvider: sut)
+        let cryptor = HybridCipher(keyProvider: sut)
 
         let encryptedData = try cryptor.encrypt(data: plaintextData)
         let decryptedData = try cryptor.decrypt(data: encryptedData)

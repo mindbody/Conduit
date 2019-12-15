@@ -1,5 +1,5 @@
 //
-//  MockCryptor.swift
+//  MockCipher.swift
 //  Conduit
 //
 //  Created by John Hammerlund on 12/13/19.
@@ -10,7 +10,7 @@ import XCTest
 import Security
 import Conduit
 
-final class MockCryptor: Encryptor, Decryptor {
+final class MockCipher: Cipher {
 
     private lazy var key: Data = {
         var bytes = [UInt8](repeating: 0, count: 32)

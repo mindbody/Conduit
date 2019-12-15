@@ -12,11 +12,11 @@ import Security
 /// resulting ciphertext includes blocks for the the encrypted symmetric key and the encrypted data.
 /// This gives us the power and security of asymmetric algorithms with the speed of symmetric encryption/decryption.
 @available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
-public final class HybridCryptor: Encryptor, Decryptor {
+public final class HybridCipher: Cipher {
 
     private let keyProvider: HybridKeyProvider
 
-    /// Creates a new `HybridCryptor`
+    /// Creates a new `HybridCipher`
     ///
     /// - Parameters:
     ///   - keyProvider: Provides an asymmetric key-pair for encrypting/decrypting the symmetric session key
