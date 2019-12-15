@@ -18,7 +18,7 @@ public class AsymmetricKeyPair {
     /// Creates a new `AsymmetricKeyPair`
     /// - Parameter publicKey: The PKE public key
     /// - Parameter privateKey: The PKE private key
-    init(publicKey: SecKey, privateKey: SecKey) {
+    public init(publicKey: SecKey, privateKey: SecKey) {
         self.publicKey = publicKey
         self.privateKey = privateKey
     }
