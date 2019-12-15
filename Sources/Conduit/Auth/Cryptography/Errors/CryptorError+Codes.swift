@@ -1,5 +1,5 @@
 //
-//  CryptorError+Codes.swift
+//  CryptoError+Codes.swift
 //  Conduit
 //
 //  Created by John Hammerlund on 12/10/19.

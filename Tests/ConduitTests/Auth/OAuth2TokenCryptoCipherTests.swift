@@ -1,5 +1,5 @@
 //
-//  OAuth2TokenCryptorCipherTests.swift
+//  OAuth2TokenCryptoCipherTests.swift
 //  Conduit
 //
 //  Created by John Hammerlund on 12/13/19.
@@ -9,7 +9,7 @@
 import XCTest
 import Conduit
 
-final class OAuth2TokenCryptorCipherTests: XCTestCase {
+final class OAuth2TokenCryptoCipherTests: XCTestCase {
 
     func testEncryptsAndDecryptsTokens() throws {
         let cipher = MockCipher()

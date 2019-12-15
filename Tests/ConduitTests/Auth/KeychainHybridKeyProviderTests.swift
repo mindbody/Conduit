@@ -228,26 +228,26 @@ final class KeychainHybridKeyProviderTests: XCTestCase {
 
     // - MARK: Integration Tests
 
-    func testHybridCryptorEncryptsAndDecryptsDataWithEllipticCurveKeys() throws {
+    func testHybridCipherEncryptsAndDecryptsDataWithEllipticCurveKeys() throws {
         let sut = KeychainHybridKeyProvider(context: #function, encryptionType: .eceisAESGCM)
         sut.prefersSecureEnclaveStorage = prefersSecureEnclaveStorage
         sut.deleteKey()
 
-        let cryptor = HybridCipher(keyProvider: sut)
+        let cipher = HybridCipher(keyProvider: sut)
 
-        let encryptedData = try cryptor.encrypt(data: plaintextData)
-        let decryptedData = try cryptor.decrypt(data: encryptedData)
+        let encryptedData = try cipher.encrypt(data: plaintextData)
+        let decryptedData = try cipher.decrypt(data: encryptedData)
         XCTAssertEqual(plaintextData, decryptedData)
     }
 
-    func testHybridCryptorEncryptsAndDecryptsDataWithRSAKeys() throws {
+    func testHybridCipherEncryptsAndDecryptsDataWithRSAKeys() throws {
         let sut = KeychainHybridKeyProvider(context: #function, encryptionType: .rsaAESGCM)
         sut.deleteKey()
 
-        let cryptor = HybridCipher(keyProvider: sut)
+        let cipher = HybridCipher(keyProvider: sut)
 
-        let encryptedData = try cryptor.encrypt(data: plaintextData)
-        let decryptedData = try cryptor.decrypt(data: encryptedData)
+        let encryptedData = try cipher.encrypt(data: plaintextData)
+        let decryptedData = try cipher.decrypt(data: encryptedData)
         XCTAssertEqual(plaintextData, decryptedData)
     }
 

@@ -57,7 +57,7 @@ public final class OAuth2TokenCryptoCipher: OAuth2TokenCipher {
         }
         catch {
             if let token = try? Token(serializedData: data) {
-                logger.warn("OAuth2TokenCryptorCipher: Token data not decrypted (possible migration)")
+                logger.warn("OAuth2TokenCryptoCipher: Token data not decrypted (possible migration)")
                 return token
             }
             throw error
