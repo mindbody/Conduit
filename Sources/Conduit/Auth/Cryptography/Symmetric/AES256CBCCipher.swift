@@ -110,7 +110,7 @@ public final class AES256CBCCipher: Cipher {
     /// - Returns: Encrypted data prefixed with IV
     /// - Throws: Exception if encryption failed
     public func encrypt(data: Data) throws -> Data {
-        try encrypt(data: data, iv: nil)
+        return try encrypt(data: data, iv: nil)
     }
 
     /// AES 256-bit CBC decryption
