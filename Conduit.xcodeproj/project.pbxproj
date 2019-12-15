@@ -848,13 +848,6 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		1B00AB8823A4442000E4DF3C /* ConduitTestHost-macOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "ConduitTestHost-macOS";
-			sourceTree = "<group>";
-		};
 		1B00AB9723A4444D00E4DF3C /* macOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1254,7 +1247,6 @@
 			isa = PBXGroup;
 			children = (
 				95F04E761F7C3B21003E9700 /* CHANGELOG.md */,
-				1B00AB8823A4442000E4DF3C /* ConduitTestHost-macOS */,
 				1BD8FFFF1F167E7800481DC9 /* Products */,
 				1BD8002E1F167EEE00481DC9 /* Sources */,
 				1B49462E1F71AF6D00754C58 /* TestHosts */,

@@ -19,7 +19,14 @@ final class KeychainHybridKeyProviderTests: XCTestCase {
     }()
 
     private var prefersSecureEnclaveStorage: Bool = {
-        // SEP access requires codesigning on Mac apps & therefore will fail unit tests
+        // SEP access requires codesigning on Mac apps & therefore will fail unit tests. Specifically,
+        // without application entitlements, SEP operations will fail with errSecMissingEntitlements (-34018)
+        // To test this:
+        // 1. Update this property to always be 'true'
+        // 2. Update ConduitTests-macOS and ConduitTestHost-macOS with Automatic development signing
+        // 3. Add Conduit.framework to the ConduitTestHost-macOS embedded frameworks (needed to codesign)
+        // 4. Add any Capability to ConduitTestHost-macOS in order to trigger generation of entitlements file
+        // 5. Clean & run tests
         #if os(iOS)
         return true
         #else
