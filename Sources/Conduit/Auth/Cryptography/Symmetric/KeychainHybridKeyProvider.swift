@@ -7,7 +7,7 @@
 
 import Foundation
 import Security
-#if !os(watchOS) && !os(tvOS)
+#if os(iOS) || os(macOS)
 import LocalAuthentication
 #endif
 
