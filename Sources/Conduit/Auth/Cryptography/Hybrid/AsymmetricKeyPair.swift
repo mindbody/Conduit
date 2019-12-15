@@ -8,7 +8,7 @@
 import Foundation
 
 /// A PKE key-pair
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public class AsymmetricKeyPair {
     /// The PKE public key
     public let publicKey: SecKey

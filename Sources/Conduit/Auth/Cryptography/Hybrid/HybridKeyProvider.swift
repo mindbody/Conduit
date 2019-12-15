@@ -5,13 +5,11 @@
 //  Created by John Hammerlund on 12/10/19.
 //
 
-#if XCFRAMEWORK
-
 import Foundation
 import Security
 
 /// A type that provides a hybrid-encryption key-pair (symmetric encryption supported by asymmetric keys).
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public protocol HybridKeyProvider {
 
     /// The algorithm used by provided hybrid keys
@@ -21,5 +19,3 @@ public protocol HybridKeyProvider {
     func makeKeyPair() throws -> AsymmetricKeyPair
 
 }
-
-#endif

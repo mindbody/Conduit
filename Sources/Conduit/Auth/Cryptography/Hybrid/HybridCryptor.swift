@@ -5,15 +5,13 @@
 //  Created by John Hammerlund on 12/10/19.
 //
 
-#if XCFRAMEWORK
-
 import Foundation
 import Security
 
 /// Encrypts / decrypts data with a symmetric key and encrypts the symmetric key with PKE. The
 /// resulting ciphertext includes blocks for the the encrypted symmetric key and the encrypted data.
 /// This gives us the power and security of asymmetric algorithms with the speed of symmetric encryption/decryption.
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public final class HybridCryptor: Encryptor, Decryptor {
 
     private let keyProvider: HybridKeyProvider
@@ -57,5 +55,3 @@ public final class HybridCryptor: Encryptor, Decryptor {
     }
 
 }
-
-#endif

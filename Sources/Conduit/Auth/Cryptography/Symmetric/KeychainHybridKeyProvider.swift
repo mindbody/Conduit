@@ -5,7 +5,7 @@
 //  Created by John Hammerlund on 12/10/19.
 //
 
-#if XCFRAMEWORK
+//#if XCFRAMEWORK
 
 import Foundation
 import Security
@@ -15,7 +15,7 @@ import LocalAuthentication
 
 /// Provides contextual hybrid-encryption keys via Keychain queries. On supported devices, elliptic-curve keys are stored
 /// on the Secure Enclave, providing the maximum application security for key management.
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public final class KeychainHybridKeyProvider: HybridKeyProvider {
 
     private static let itemPrefix = "com.mindbodyonline.Conduit.hybrid-key.secret"
@@ -30,6 +30,7 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
     }()
     private let encryptionType: HybridEncryptionType
     public private(set) lazy var keyAlgorithm: SecKeyAlgorithm = encryptionType.algorithm
+    public var prefersSecureEnclaveStorage: Bool = true
 
     private lazy var itemQuery: [String: Any] = {
         var query: [String: Any] = [
@@ -41,6 +42,9 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
         return query
     }()
     private lazy var canUseSecureEnclave: Bool = {
+        guard prefersSecureEnclaveStorage else {
+            return false
+        }
         #if !targetEnvironment(simulator) && !os(watchOS) && !os(tvOS)
         if encryptionType.supportsSecureEnclaveStorage, #available(OSX 10.12.2, *) {
             // Unfortunately, the only way to determine if the secure enclave is available is via determining biometric capabilities.
@@ -178,4 +182,4 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
 
 }
 
-#endif
+//#endif

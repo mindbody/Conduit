@@ -5,8 +5,6 @@
 //  Created by John Hammerlund on 12/10/19.
 //
 
-#if XCFRAMEWORK
-
 import Foundation
 import Security
 
@@ -16,13 +14,13 @@ import Security
 ///   the Secure Enclave on applicable devices.
 /// - rsaAESGCM: Block data is encrypted with AES-GCM, and the AES key is encrypted with an RSA key. RSA is more applicable
 ///   for wider system support & generally easier to test / debug due to wider adoption.
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 public enum HybridEncryptionType {
     case eceisAESGCM
     case rsaAESGCM
 }
 
-@available(OSXApplicationExtension 10.12.1, iOSApplicationExtension 10.0, tvOSApplicationExtension 10.0, watchOSApplicationExtension 3.0, *)
+@available(macOS 10.12.1, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 extension HybridEncryptionType {
 
     var keySize: Int {
@@ -58,5 +56,3 @@ extension HybridEncryptionType {
     }
 
 }
-
-#endif

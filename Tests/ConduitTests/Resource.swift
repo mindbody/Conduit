@@ -21,6 +21,7 @@ struct MockResource {
     static let sampleVideo = Resource(name: "video", type: "txt")
     static let evilSpaceshipImage = Resource(name: "evilspaceship", type: "txt")
     static let cellTowersImage = Resource(name: "celltowers", type: "txt")
+    static let json = Resource(name: "TestData", type: "json")
 }
 
 class Resource {
@@ -46,6 +47,11 @@ class Resource {
 extension Resource {
     var content: String? {
         return try? String(contentsOfFile: path).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
+
+    var data: Data? {
+        let url = URL(fileURLWithPath: path)
+        return try? Data(contentsOf: url)
     }
 
     var base64EncodedData: Data? {
