@@ -28,6 +28,9 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
     }()
     private let encryptionType: HybridEncryptionType
     public private(set) lazy var keyAlgorithm: SecKeyAlgorithm = encryptionType.algorithm
+    /// If true, then applicable keys will be stored on the Secure Enclave on supported devices. Defaults to `true`
+    /// - Important: Mac applications require entitlements (and therefore, valid codesigning) in order to support this.
+    ///   Otherwise, this will trigger an `errSecMissingEntitlements`.
     public var prefersSecureEnclaveStorage: Bool = true
 
     private lazy var itemQuery: [String: Any] = {

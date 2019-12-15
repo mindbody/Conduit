@@ -1,10 +1,16 @@
 ## master
 
 #### Breaking
-- None
+- `AES256CBCCipher.Error` has been completely removed in favor of `CryptoError`
 
 #### Enhancements
-- None
+- `Encryptor` and `Decryptor` protocols have been added to genericize crypto operations
+- `Cipher` is a typealias for a type that is both an `Encryptor` and `Decryptor`
+- `AES256CBCCipher` now implements `Cipher`
+- `HybridCipher` has been added to support [hybrid encryption](https://en.wikipedia.org/wiki/Hybrid_cryptosystem), which delegates asymmetric key generation to a `HybridKeyProvider`
+- `KeychainHybridKeyProvider` uses keychain queries to provide either RSA or ECC key pairs. ECC keys are stored on the Secure Enclave if possible. More details [here](https://developer.apple.com/documentation/security/certificate_key_and_trust_services/keys/using_keys_for_encryption).
+- `OAuth2TokenCryptoCipher` delegates token data encryption / decryption to an underlying `Encryptor` and `Decryptor`
+- `OAuth2TokenAES256CBCCipher` has been deprecated in favor of `OAuth2TokenCryptoCipher` provided with an `AES256CBCCipher`
 
 #### Bug Fixes
 - None
@@ -90,7 +96,7 @@
 - User Defaults token store now supports token encryption.
 - File token store now supports token encryption.
 - Fully support application-side custom token stores.
-- Introduce `OAuth2TokenAES256CBCCipher` cipher for AES 256bit CBC token encryption. 
+- Introduce `OAuth2TokenAES256CBCCipher` cipher for AES 256bit CBC token encryption.
 
 #### Bug Fixes
 - None
