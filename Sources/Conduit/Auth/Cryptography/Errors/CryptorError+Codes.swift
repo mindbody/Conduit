@@ -18,6 +18,8 @@ extension CryptoError.Code {
     public static let cryptoOperationUnsupported = CryptoError.Code(rawValue: -103)
     /// An error occured while attempting to generate a crypto key
     public static let keyGenerationFailed = CryptoError.Code(rawValue: -104)
+    /// The crypto operation was supplied insufficient or invalid parameters
+    public static let invalidParameters = CryptoError.Code(rawValue: -105)
 }
 
 extension CryptoError.Code {
@@ -33,6 +35,8 @@ extension CryptoError.Code {
             return "The requested crypto operation / algorithm is not supported on this device."
         case .keyGenerationFailed:
             return "An error occured while attempting to generate a crypto key."
+        case .invalidParameters:
+            return "The crypto operation was supplied insufficient or invalid parameters"
         default:
             return "An unknown error occurred during the crypto operation."
         }

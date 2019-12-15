@@ -18,16 +18,9 @@ import CommonCrypto
 /// encryption method. If no IV is passed, a random IV will be generated.
 /// IV is stored in the encryption data, together with the ciphertext and it
 /// is not required to be passed in for decryption.
-public final class AES256CBCCipher {
+public final class AES256CBCCipher: CipherType {
 
     let encryptionKey: Data
-
-    public enum Error: Swift.Error {
-        case invalidKey
-        case invalidInitializationVector
-        case encryptionError
-        case decryptionError
-    }
 
     /// Initialize AES-256 CBC cipher with a given pass phrase
     ///
@@ -46,7 +39,7 @@ public final class AES256CBCCipher {
     /// - Throws: Exception if key is invalid
     public init(key: Data) throws {
         guard key.count == kCCKeySizeAES256 else {
-            throw Error.invalidKey
+            throw CryptoError(code: .invalidParameters, detail: "Provided AES key is not 256-bit")
         }
         encryptionKey = key
     }
@@ -68,10 +61,10 @@ public final class AES256CBCCipher {
     ///   - vector: Optional initialization vector (defaults to random vector)
     /// - Returns: Encrypted data prefixed with IV
     /// - Throws: Exception if encryption failed
-    public func encrypt(data: Data, iv vector: Data? = nil) throws -> Data {
+    public func encrypt(data: Data, iv vector: Data?) throws -> Data {
         let initializationVector = vector.flatMap(Array.init) ?? randomInitializationVector
         guard initializationVector.count == kCCBlockSizeAES128 else {
-            throw Error.invalidInitializationVector
+            throw CryptoError(code: .invalidParameters, detail: "Invalid initialization vector data provided")
         }
 
         // Output buffer
@@ -93,11 +86,31 @@ public final class AES256CBCCipher {
                     &numBytesEncrypted)
         }
         guard status == kCCSuccess else {
-            throw Error.encryptionError
+            throw CryptoError(code: .encryptionFailed)
         }
 
         cipherTextData.count = numBytesEncrypted
         return Data(initializationVector) + cipherTextData
+    }
+
+    /// AES 256-bit CBC encryption
+    ///
+    /// Encrypt data with AES 256 CBC.
+    /// Cipher data is prefixed with the initialization vector:
+    ///
+    ///     VVVV VVVV VVVV VVVV DDDD DDDD DDDD DDDD DDDD DDDD DDDD DDDD ...
+    ///     \_______ IV ______/ \_ Cipher Block 1_/ \_ Cipher Block 2_/
+    ///
+    /// Initialization vector (IV) length is equivalent to a cipher
+    /// block (`kCCBlockSizeAES128` == 16 bytes). This length is
+    /// independent of the key length (`kCCKeySizeAES256` == 32 bytes).
+    ///
+    /// - Parameters:
+    ///   - data: Data to be encrypted
+    /// - Returns: Encrypted data prefixed with IV
+    /// - Throws: Exception if encryption failed
+    public func encrypt(data: Data) throws -> Data {
+        try encrypt(data: data, iv: nil)
     }
 
     /// AES 256-bit CBC decryption
@@ -117,12 +130,12 @@ public final class AES256CBCCipher {
     public func decrypt(data cipherData: Data) throws -> Data {
         let initializationVector = Array(cipherData.prefix(kCCBlockSizeAES128))
         guard initializationVector.count == kCCBlockSizeAES128 else {
-            throw Error.invalidInitializationVector
+            throw CryptoError(code: .invalidParameters, detail: "Invalid initialization vector data provided")
         }
 
         let cipherTextBytes = Array(cipherData.suffix(from: kCCBlockSizeAES128))
         guard cipherTextBytes.count >= kCCBlockSizeAES128 else {
-            throw Error.decryptionError
+            throw CryptoError(code: .decryptionFailed, detail: "Full ciphertext length is less than single block size")
         }
 
         // Output buffer
@@ -144,7 +157,7 @@ public final class AES256CBCCipher {
                     &numBytesDecrypted)
         }
         guard status == kCCSuccess else {
-            throw Error.decryptionError
+            throw CryptoError(code: .decryptionFailed, detail: "CCCryptorStatus=\(status)")
         }
 
         outputData.count = numBytesDecrypted // Discard any padding
