@@ -152,6 +152,8 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
         return try makeNewKeyPair()
     }
 
+    /// Deletes the stored key-pair, if one exists
+    /// - Returns: A `Bool` indicating whether the deletion was successful
     @discardableResult
     public func deleteKey() -> Bool {
         guard tagData != nil else {
