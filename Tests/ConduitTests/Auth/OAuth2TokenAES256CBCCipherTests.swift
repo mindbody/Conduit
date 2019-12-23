@@ -22,4 +22,25 @@ class OAuth2TokenAES256CBCCipherTests: XCTestCase {
         XCTAssertEqual(token, decrypted)
     }
 
+    func testForwardsCompatibility() throws {
+        let encryptionKey = UUID().uuidString
+        let salt = UUID().uuidString
+        let sut = try OAuth2TokenAES256CBCCipher(passphrase: encryptionKey, salt: salt)
+
+        let cipher = try AES256CBCCipher(passphrase: encryptionKey, salt: salt)
+        let cryptoTokenCipher = OAuth2TokenCryptoCipher(cipher: cipher)
+
+        let token1 = BearerToken(accessToken: UUID().uuidString, expiration: Date.distantFuture)
+        let token2 = BearerToken(accessToken: UUID().uuidString, expiration: Date.distantFuture)
+
+        let cipherText1 = try sut.encrypt(token: token1)
+        let cipherText2 = try cryptoTokenCipher.encrypt(token: token2)
+
+        let decryptedToken1: BearerToken = try cryptoTokenCipher.decrypt(data: cipherText1)
+        let decryptedToken2: BearerToken = try sut.decrypt(data: cipherText2)
+
+        XCTAssertEqual(decryptedToken1, token1)
+        XCTAssertEqual(decryptedToken2, token2)
+    }
+
 }

@@ -34,8 +34,8 @@ class AES256CBCCipherTests: XCTestCase {
             _ = try AES256CBCCipher(key: Data())
             XCTFail("Expected to throw")
         }
-        catch AES256CBCCipher.Error.invalidKey {
-            // Pass
+        catch let error as CryptoError {
+            XCTAssertEqual(error.code, .invalidParameters)
         }
         catch {
             XCTFail("Unknown error")
@@ -50,8 +50,8 @@ class AES256CBCCipherTests: XCTestCase {
             _ = try cipher.encrypt(data: Data(count: 32), iv: Data())
             XCTFail("Expected to throw")
         }
-        catch AES256CBCCipher.Error.invalidInitializationVector {
-            // Pass
+        catch let error as CryptoError {
+            XCTAssertEqual(error.code, .invalidParameters)
         }
         catch {
             XCTFail("Unknown error")
@@ -66,8 +66,8 @@ class AES256CBCCipherTests: XCTestCase {
             _ = try cipher.decrypt(data: Data(count: 8))
             XCTFail("Expected to throw")
         }
-        catch AES256CBCCipher.Error.invalidInitializationVector {
-            // Pass
+        catch let error as CryptoError {
+            XCTAssertEqual(error.code, .invalidParameters)
         }
         catch {
             XCTFail("Unknown error")

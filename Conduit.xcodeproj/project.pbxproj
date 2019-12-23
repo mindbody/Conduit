@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B00AB7723A4367A00E4DF3C /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B00AB7623A4367A00E4DF3C /* TestData.json */; };
+		1B00AB7823A4367A00E4DF3C /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B00AB7623A4367A00E4DF3C /* TestData.json */; };
+		1B00AB7923A4367A00E4DF3C /* TestData.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B00AB7623A4367A00E4DF3C /* TestData.json */; };
+		1B00AB7B23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */; };
+		1B00AB7C23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */; };
+		1B00AB7D23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */; };
+		1B00AB8023A43DBB00E4DF3C /* MockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7F23A43DBB00E4DF3C /* MockCipher.swift */; };
+		1B00AB8123A43DBB00E4DF3C /* MockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7F23A43DBB00E4DF3C /* MockCipher.swift */; };
+		1B00AB8223A43DBB00E4DF3C /* MockCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB7F23A43DBB00E4DF3C /* MockCipher.swift */; };
+		1B00AB8A23A4442000E4DF3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB8923A4442000E4DF3C /* AppDelegate.swift */; };
+		1B00AB8C23A4442000E4DF3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B00AB8B23A4442000E4DF3C /* ViewController.swift */; };
+		1B00AB8E23A4442200E4DF3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B00AB8D23A4442200E4DF3C /* Assets.xcassets */; };
+		1B00AB9123A4442200E4DF3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B00AB8F23A4442200E4DF3C /* Main.storyboard */; };
 		1B026F0220EFF66600BD991B /* BearerTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B026EFC20EFF65100BD991B /* BearerTokenTests.swift */; };
 		1B026F0320EFF66600BD991B /* BearerTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B026EFC20EFF65100BD991B /* BearerTokenTests.swift */; };
 		1B026F0420EFF66600BD991B /* BearerTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B026EFC20EFF65100BD991B /* BearerTokenTests.swift */; };
@@ -18,6 +31,49 @@
 		1B02EC971F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */; };
 		1B02EC981F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */; };
 		1B0BF31E1F182031003C77A5 /* AutoPurgingURLImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD555421F17DC81004B1172 /* AutoPurgingURLImageCacheTests.swift */; };
+		1B26BD5223A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */; };
+		1B26BD5323A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */; };
+		1B26BD5423A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */; };
+		1B26BD5523A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */; };
+		1B26BD5623A20EB100C884B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4A23A20EB100C884B9 /* CryptoError.swift */; };
+		1B26BD5723A20EB100C884B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4A23A20EB100C884B9 /* CryptoError.swift */; };
+		1B26BD5823A20EB100C884B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4A23A20EB100C884B9 /* CryptoError.swift */; };
+		1B26BD5923A20EB100C884B9 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4A23A20EB100C884B9 /* CryptoError.swift */; };
+		1B26BD5A23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */; };
+		1B26BD5B23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */; };
+		1B26BD5C23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */; };
+		1B26BD5D23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */; };
+		1B26BD5E23A20EB100C884B9 /* AsymmetricKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */; };
+		1B26BD5F23A20EB100C884B9 /* AsymmetricKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */; };
+		1B26BD6023A20EB200C884B9 /* AsymmetricKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */; };
+		1B26BD6123A20EB200C884B9 /* AsymmetricKeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */; };
+		1B26BD6223A20EB200C884B9 /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4D23A20EB100C884B9 /* Decryptor.swift */; };
+		1B26BD6323A20EB200C884B9 /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4D23A20EB100C884B9 /* Decryptor.swift */; };
+		1B26BD6423A20EB200C884B9 /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4D23A20EB100C884B9 /* Decryptor.swift */; };
+		1B26BD6523A20EB200C884B9 /* Decryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4D23A20EB100C884B9 /* Decryptor.swift */; };
+		1B26BD6623A20EB200C884B9 /* HybridCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */; };
+		1B26BD6723A20EB200C884B9 /* HybridCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */; };
+		1B26BD6823A20EB200C884B9 /* HybridCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */; };
+		1B26BD6923A20EB200C884B9 /* HybridCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */; };
+		1B26BD6A23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */; };
+		1B26BD6B23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */; };
+		1B26BD6C23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */; };
+		1B26BD6D23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */; };
+		1B26BD6E23A20EB200C884B9 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5023A20EB100C884B9 /* Encryptor.swift */; };
+		1B26BD6F23A20EB200C884B9 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5023A20EB100C884B9 /* Encryptor.swift */; };
+		1B26BD7023A20EB200C884B9 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5023A20EB100C884B9 /* Encryptor.swift */; };
+		1B26BD7123A20EB200C884B9 /* Encryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5023A20EB100C884B9 /* Encryptor.swift */; };
+		1B26BD7223A20EB200C884B9 /* HybridEncryptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */; };
+		1B26BD7323A20EB200C884B9 /* HybridEncryptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */; };
+		1B26BD7423A20EB200C884B9 /* HybridEncryptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */; };
+		1B26BD7523A20EB200C884B9 /* HybridEncryptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */; };
+		1B26BD7E23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */; };
+		1B26BD7F23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */; };
+		1B26BD8023A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */; };
+		1B26BD8123A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */; };
+		1B26BD8323A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */; };
+		1B26BD8423A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */; };
+		1B26BD8523A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */; };
 		1B279CBF1F19558100C0005E /* AuthTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CB21F19558100C0005E /* AuthTestUtilities.swift */; };
 		1B279CC01F19558100C0005E /* AuthTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CB21F19558100C0005E /* AuthTestUtilities.swift */; };
 		1B279CC11F19558100C0005E /* AuthTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CB21F19558100C0005E /* AuthTestUtilities.swift */; };
@@ -42,6 +98,10 @@
 		1B279CE01F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE11F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
 		1B279CE21F19558100C0005E /* OAuth2TokenStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */; };
+		1B39C38423A6002700B3CBE7 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39C38323A6002700B3CBE7 /* Cipher.swift */; };
+		1B39C38523A6002700B3CBE7 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39C38323A6002700B3CBE7 /* Cipher.swift */; };
+		1B39C38623A6002700B3CBE7 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39C38323A6002700B3CBE7 /* Cipher.swift */; };
+		1B39C38723A6002700B3CBE7 /* Cipher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B39C38323A6002700B3CBE7 /* Cipher.swift */; };
 		1B4946381F71AF7700754C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4946371F71AF6D00754C58 /* ViewController.swift */; };
 		1B4946391F71AF7B00754C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946341F71AF6D00754C58 /* Main.storyboard */; };
 		1B49463A1F71AF7D00754C58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B4946321F71AF6D00754C58 /* LaunchScreen.storyboard */; };
@@ -467,6 +527,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B00AB9823A444A200E4DF3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B00AB8623A4442000E4DF3C;
+			remoteInfo = "ConduitTestHost-macOS";
+		};
 		1B0A341B1F71AE3E001C0970 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BD8FFF31F167E6000481DC9 /* Project object */;
@@ -505,10 +572,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B00AB7623A4367A00E4DF3C /* TestData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestData.json; sourceTree = "<group>"; };
+		1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenCryptoCipherTests.swift; sourceTree = "<group>"; };
+		1B00AB7F23A43DBB00E4DF3C /* MockCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCipher.swift; sourceTree = "<group>"; };
+		1B00AB8723A4442000E4DF3C /* ConduitTestHost-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ConduitTestHost-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B00AB8923A4442000E4DF3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1B00AB8B23A4442000E4DF3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1B00AB8D23A4442200E4DF3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1B00AB9023A4442200E4DF3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1B00AB9223A4442200E4DF3C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B00AB9323A4442200E4DF3C /* ConduitTestHost_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ConduitTestHost_macOS.entitlements; sourceTree = "<group>"; };
 		1B026EFC20EFF65100BD991B /* BearerTokenTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BearerTokenTests.swift; sourceTree = "<group>"; };
 		1B02EC8C1F60BE4100A41B34 /* ConduitLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConduitLoggerTests.swift; sourceTree = "<group>"; };
 		1B02EC941F60C06400A41B34 /* URLSessionClientLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionClientLogging.swift; sourceTree = "<group>"; };
 		1B0A34091F71AE07001C0970 /* ConduitTestHost-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ConduitTestHost-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHybridKeyProvider.swift; path = ../Symmetric/KeychainHybridKeyProvider.swift; sourceTree = "<group>"; };
+		1B26BD4A23A20EB100C884B9 /* CryptoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
+		1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CryptorError+Codes.swift"; sourceTree = "<group>"; };
+		1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsymmetricKeyPair.swift; sourceTree = "<group>"; };
+		1B26BD4D23A20EB100C884B9 /* Decryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decryptor.swift; sourceTree = "<group>"; };
+		1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridCipher.swift; sourceTree = "<group>"; };
+		1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridKeyProvider.swift; sourceTree = "<group>"; };
+		1B26BD5023A20EB100C884B9 /* Encryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encryptor.swift; sourceTree = "<group>"; };
+		1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HybridEncryptionType.swift; sourceTree = "<group>"; };
+		1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenCryptoCipher.swift; sourceTree = "<group>"; };
+		1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHybridKeyProviderTests.swift; sourceTree = "<group>"; };
 		1B279CB21F19558100C0005E /* AuthTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthTestUtilities.swift; sourceTree = "<group>"; };
 		1B279CB81F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationCodeTokenGrantStrategyTests.swift; sourceTree = "<group>"; };
 		1B279CB91F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2ClientCredentialsTokenGrantTests.swift; sourceTree = "<group>"; };
@@ -518,6 +606,7 @@
 		1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenGrantManagerTests.swift; sourceTree = "<group>"; };
 		1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorageTests.swift; sourceTree = "<group>"; };
 		1B279CE31F19558900C0005E /* stop-test-webserver */ = {isa = PBXFileReference; lastKnownFileType = text; path = "stop-test-webserver"; sourceTree = "<group>"; };
+		1B39C38323A6002700B3CBE7 /* Cipher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cipher.swift; sourceTree = "<group>"; };
 		1B4946301F71AF6D00754C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B4946311F71AF6D00754C58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B4946331F71AF6D00754C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -668,6 +757,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1B00AB8423A4442000E4DF3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1B0A34061F71AE07001C0970 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -744,6 +840,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B00AB7E23A43D8D00E4DF3C /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1B00AB7F23A43DBB00E4DF3C /* MockCipher.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		1B00AB9723A4444D00E4DF3C /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				1B00AB8923A4442000E4DF3C /* AppDelegate.swift */,
+				1B00AB8B23A4442000E4DF3C /* ViewController.swift */,
+				1B00AB8D23A4442200E4DF3C /* Assets.xcassets */,
+				1B00AB8F23A4442200E4DF3C /* Main.storyboard */,
+				1B00AB9223A4442200E4DF3C /* Info.plist */,
+				1B00AB9323A4442200E4DF3C /* ConduitTestHost_macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		1B26BD4923A20EB100C884B9 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				1B26BD4A23A20EB100C884B9 /* CryptoError.swift */,
+				1B26BD4B23A20EB100C884B9 /* CryptorError+Codes.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		1B26BD7623A20F5700C884B9 /* Symmetric */ = {
+			isa = PBXGroup;
+			children = (
+				95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */,
+				95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */,
+			);
+			path = Symmetric;
+			sourceTree = "<group>";
+		};
+		1B26BD7723A20F6800C884B9 /* Hybrid */ = {
+			isa = PBXGroup;
+			children = (
+				1B26BD4C23A20EB100C884B9 /* AsymmetricKeyPair.swift */,
+				1B26BD4E23A20EB100C884B9 /* HybridCipher.swift */,
+				1B26BD5123A20EB100C884B9 /* HybridEncryptionType.swift */,
+				1B26BD4F23A20EB100C884B9 /* HybridKeyProvider.swift */,
+				1B26BD4823A20EB100C884B9 /* KeychainHybridKeyProvider.swift */,
+			);
+			path = Hybrid;
+			sourceTree = "<group>";
+		};
 		1B279CB11F19558100C0005E /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,6 +911,8 @@
 				1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */,
 				95F8069522244D32004BDC02 /* OAuth2TokenStoreTests.swift */,
 				95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */,
+				1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */,
+				1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -772,6 +921,7 @@
 			isa = PBXGroup;
 			children = (
 				1B49462F1F71AF6D00754C58 /* iOS */,
+				1B00AB9723A4444D00E4DF3C /* macOS */,
 				1B49464F1F71B02C00754C58 /* tvOS */,
 			);
 			path = TestHosts;
@@ -881,6 +1031,7 @@
 			children = (
 				1BA7C27D20D04D8C005AA024 /* Coordination */,
 				95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */,
+				1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */,
 				95C9C7952220BBC800C89DB2 /* OAuth2TokenCipher.swift */,
 				1B88B1F91F268C220022A69D /* OAuth2TokenDiskStore.swift */,
 				95C9C79A2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift */,
@@ -992,6 +1143,7 @@
 		1BD5553B1F17DC81004B1172 /* ConduitTests */ = {
 			isa = PBXGroup;
 			children = (
+				1B00AB7E23A43D8D00E4DF3C /* Mocks */,
 				1B279CB11F19558100C0005E /* Auth */,
 				1BE3774C20D1AFA9005F2CEB /* Core */,
 				95F806BE2225CE48004BDC02 /* Cryptography */,
@@ -1115,6 +1267,7 @@
 				1BD8006B1F16821D00481DC9 /* ConduitTests-macOS.xctest */,
 				1B0A34091F71AE07001C0970 /* ConduitTestHost-iOS.app */,
 				1B4946401F71B01400754C58 /* ConduitTestHost-tvOS.app */,
+				1B00AB8723A4442000E4DF3C /* ConduitTestHost-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1146,6 +1299,7 @@
 				95CC71C21F797B0C003B4E31 /* badcertificate.txt */,
 				95CC71C31F797B0C003B4E31 /* celltowers.txt */,
 				95CC71C41F797B0C003B4E31 /* evilspaceship.txt */,
+				1B00AB7623A4367A00E4DF3C /* TestData.json */,
 				95CC71C51F797B0D003B4E31 /* validcertificate1.txt */,
 				1B664BC11F9E8BAE009B99C2 /* validcertificate2.txt */,
 				95CC71C61F797B0D003B4E31 /* video.txt */,
@@ -1167,8 +1321,12 @@
 		95F806B82225C62E004BDC02 /* Cryptography */ = {
 			isa = PBXGroup;
 			children = (
-				95F806AF2224CE19004BDC02 /* AES256CBCCipher.swift */,
-				95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */,
+				1B26BD7723A20F6800C884B9 /* Hybrid */,
+				1B26BD7623A20F5700C884B9 /* Symmetric */,
+				1B39C38323A6002700B3CBE7 /* Cipher.swift */,
+				1B26BD4D23A20EB100C884B9 /* Decryptor.swift */,
+				1B26BD5023A20EB100C884B9 /* Encryptor.swift */,
+				1B26BD4923A20EB100C884B9 /* Errors */,
 			);
 			path = Cryptography;
 			sourceTree = "<group>";
@@ -1220,6 +1378,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1B00AB8623A4442000E4DF3C /* ConduitTestHost-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B00AB9423A4442200E4DF3C /* Build configuration list for PBXNativeTarget "ConduitTestHost-macOS" */;
+			buildPhases = (
+				1B00AB8323A4442000E4DF3C /* Sources */,
+				1B00AB8423A4442000E4DF3C /* Frameworks */,
+				1B00AB8523A4442000E4DF3C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ConduitTestHost-macOS";
+			productName = "ConduitTestHost-macOS";
+			productReference = 1B00AB8723A4442000E4DF3C /* ConduitTestHost-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		1B0A34081F71AE07001C0970 /* ConduitTestHost-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B0A341A1F71AE07001C0970 /* Build configuration list for PBXNativeTarget "ConduitTestHost-iOS" */;
@@ -1364,6 +1539,7 @@
 			);
 			dependencies = (
 				1BD800721F16821D00481DC9 /* PBXTargetDependency */,
+				1B00AB9923A444A200E4DF3C /* PBXTargetDependency */,
 			);
 			name = "ConduitTests-macOS";
 			productName = "ConduitTests-macOS";
@@ -1395,19 +1571,21 @@
 		1BD8FFF31F167E6000481DC9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1110;
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = MINDBODY;
 				TargetAttributes = {
+					1B00AB8623A4442000E4DF3C = {
+						CreatedOnToolsVersion = 11.1;
+						ProvisioningStyle = Manual;
+					};
 					1B0A34081F71AE07001C0970 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = WP7NQVPB66;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					1B49463F1F71B01400754C58 = {
 						CreatedOnToolsVersion = 9.0;
-						DevelopmentTeam = WP7NQVPB66;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					1BD8000B1F167E8200481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1417,27 +1595,28 @@
 					1BD800181F167E8B00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					1BD800251F167E9B00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					1BD8004C1F16820700481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 1B0A34081F71AE07001C0970;
 					};
 					1BD8005B1F16821400481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						TestTargetID = 1B49463F1F71B01400754C58;
 					};
 					1BD8006A1F16821D00481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						TestTargetID = 1B00AB8623A4442000E4DF3C;
 					};
 					1BD8FFFD1F167E7800481DC9 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1468,11 +1647,21 @@
 				1BD8006A1F16821D00481DC9 /* ConduitTests-macOS */,
 				1B0A34081F71AE07001C0970 /* ConduitTestHost-iOS */,
 				1B49463F1F71B01400754C58 /* ConduitTestHost-tvOS */,
+				1B00AB8623A4442000E4DF3C /* ConduitTestHost-macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1B00AB8523A4442000E4DF3C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B00AB8E23A4442200E4DF3C /* Assets.xcassets in Resources */,
+				1B00AB9123A4442200E4DF3C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1B0A34071F71AE07001C0970 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1516,6 +1705,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B664BC21F9E8BBB009B99C2 /* validcertificate2.txt in Resources */,
+				1B00AB7723A4367A00E4DF3C /* TestData.json in Resources */,
 				95CC71D31F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CD1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
 				95CC71D01F797B0D003B4E31 /* validcertificate1.txt in Resources */,
@@ -1529,6 +1719,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B664BC31F9E8BBB009B99C2 /* validcertificate2.txt in Resources */,
+				1B00AB7823A4367A00E4DF3C /* TestData.json in Resources */,
 				95CC71D41F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CE1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
 				95CC71D11F797B0D003B4E31 /* validcertificate1.txt in Resources */,
@@ -1542,6 +1733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B664BC41F9E8BBC009B99C2 /* validcertificate2.txt in Resources */,
+				1B00AB7923A4367A00E4DF3C /* TestData.json in Resources */,
 				95CC71D51F797B0D003B4E31 /* video.txt in Resources */,
 				95CC71CF1F797B0D003B4E31 /* evilspaceship.txt in Resources */,
 				95CC71D21F797B0D003B4E31 /* validcertificate1.txt in Resources */,
@@ -1661,6 +1853,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1B00AB8323A4442000E4DF3C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B00AB8C23A4442000E4DF3C /* ViewController.swift in Sources */,
+				1B00AB8A23A4442000E4DF3C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1B0A34051F71AE07001C0970 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1687,10 +1888,14 @@
 				1B88B2241F268C220022A69D /* Auth.swift in Sources */,
 				1BFD2F3420C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
 				1B88B2B81F268C220022A69D /* Result.swift in Sources */,
+				1B26BD5323A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */,
+				1B26BD5B23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */,
 				1B88B2A01F268C220022A69D /* ImageDownloader.swift in Sources */,
 				1B88B2F01F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
+				1B26BD5723A20EB100C884B9 /* CryptoError.swift in Sources */,
 				1B88B2801F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
 				1B88B2EC1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
+				1B26BD7F23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */,
 				1B88B2681F268C220022A69D /* OAuth2ExtensionTokenGrantStrategy.swift in Sources */,
 				1B88B2981F268C220022A69D /* HTTPRequestBuilder.swift in Sources */,
 				1BA7C28620D05B0B005AA024 /* DarwinNotificationCenter.swift in Sources */,
@@ -1703,7 +1908,9 @@
 				1B88B2401F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
 				1B88B2881F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2C01F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
+				1B39C38523A6002700B3CBE7 /* Cipher.swift in Sources */,
 				1B88B23C1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
+				1B26BD6323A20EB200C884B9 /* Decryptor.swift in Sources */,
 				95F8069F2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift in Sources */,
 				1B88B2481F268C220022A69D /* OAuth2Authorization.swift in Sources */,
 				1BA7C27520D0498D005AA024 /* OAuth2TokenUserDefaultsStore.swift in Sources */,
@@ -1714,6 +1921,7 @@
 				1B88B2F41F268C220022A69D /* SessionTaskProxy.swift in Sources */,
 				1B88B28C1F268C220022A69D /* Conduit.swift in Sources */,
 				95C9C79C2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift in Sources */,
+				1B26BD6723A20EB200C884B9 /* HybridCipher.swift in Sources */,
 				1B88B29C1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B41F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2441F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
@@ -1736,11 +1944,13 @@
 				1B88B2F81F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
 				1B88B25C1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B88B2501F268C220022A69D /* OAuth2Error.swift in Sources */,
+				1B26BD6B23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */,
 				95F806BB2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				95BF755D21408E25006212AC /* XMLSerialization.swift in Sources */,
 				1B88B2701F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B88B2541F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2841F268C220022A69D /* KeychainOptions.swift in Sources */,
+				1B26BD6F23A20EB200C884B9 /* Encryptor.swift in Sources */,
 				1B02EC961F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */,
 				1B88B24C1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
 				95E26BA91F29649600804900 /* XMLNode.swift in Sources */,
@@ -1749,7 +1959,9 @@
 				1BFD2F2F20C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B2BC1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
 				1B49CBF820D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
+				1B26BD5F23A20EB100C884B9 /* AsymmetricKeyPair.swift in Sources */,
 				1BA7C27A20D04AB0005AA024 /* OAuth2TokenFileStore.swift in Sources */,
+				1B26BD7323A20EB200C884B9 /* HybridEncryptionType.swift in Sources */,
 				1B88B2DC1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1778,6 +1990,7 @@
 				1B02EC971F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */,
 				1B88B2E91F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B2791F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
+				1B26BD7423A20EB200C884B9 /* HybridEncryptionType.swift in Sources */,
 				1BA7C28120D04DB0005AA024 /* OAuth2TokenRefreshCoordinator.swift in Sources */,
 				1B88B26D1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
 				95E26BAA1F29649600804900 /* XMLNode.swift in Sources */,
@@ -1786,13 +1999,17 @@
 				1B88B2411F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
 				1B88B2891F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2C11F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
+				1B26BD5423A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */,
 				95C9C79D2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift in Sources */,
 				95F806B22224CE19004BDC02 /* AES256CBCCipher.swift in Sources */,
 				1B88B23D1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
+				1B26BD6823A20EB200C884B9 /* HybridCipher.swift in Sources */,
 				1B88B2491F268C220022A69D /* OAuth2Authorization.swift in Sources */,
+				1B26BD6C23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */,
 				1B88B2591F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2D11F268C220022A69D /* QueryString.swift in Sources */,
 				1BFD2F3520C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
+				1B26BD6023A20EB200C884B9 /* AsymmetricKeyPair.swift in Sources */,
 				1B88B2FD1F268C220022A69D /* URL.swift in Sources */,
 				1BFD2F3020C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B3051F268C3F0022A69D /* NetworkReachability.swift in Sources */,
@@ -1801,9 +2018,11 @@
 				1B88B29D1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B51F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2451F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
+				1B26BD7023A20EB200C884B9 /* Encryptor.swift in Sources */,
 				1B88B2611F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1BE352F61F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B2D91F268C220022A69D /* ResponseDeserializer.swift in Sources */,
+				1B39C38623A6002700B3CBE7 /* Cipher.swift in Sources */,
 				1B88B2311F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2951F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2651F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
@@ -1815,6 +2034,7 @@
 				1B88B2911F268C220022A69D /* ConduitLogger.swift in Sources */,
 				1B88B2B11F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C51F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
+				1B26BD5823A20EB100C884B9 /* CryptoError.swift in Sources */,
 				95F806BC2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				1B88B2E11F268C220022A69D /* XML.swift in Sources */,
 				1B88B2F91F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
@@ -1827,8 +2047,11 @@
 				1B88B2351F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B49CBF920D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2CD1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
+				1B26BD5C23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */,
 				1B88B2BD1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
+				1B26BD6423A20EB200C884B9 /* Decryptor.swift in Sources */,
 				1B88B2DD1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
+				1B26BD8023A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1856,6 +2079,7 @@
 				1B02EC981F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */,
 				1B88B2EA1F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B27A1F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
+				1B26BD7523A20EB200C884B9 /* HybridEncryptionType.swift in Sources */,
 				1BA7C28220D04DB0005AA024 /* OAuth2TokenRefreshCoordinator.swift in Sources */,
 				1B88B26E1F268C220022A69D /* OAuth2PasswordTokenGrantStrategy.swift in Sources */,
 				95E26BAB1F29649600804900 /* XMLNode.swift in Sources */,
@@ -1864,13 +2088,17 @@
 				1B88B2421F268C220022A69D /* OAuth2ClientConfiguration.swift in Sources */,
 				1B88B28A1F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2C21F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
+				1B26BD5523A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */,
 				95C9C79E2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift in Sources */,
 				95F806B32224CE19004BDC02 /* AES256CBCCipher.swift in Sources */,
 				1B88B23E1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
+				1B26BD6923A20EB200C884B9 /* HybridCipher.swift in Sources */,
 				1B88B24A1F268C220022A69D /* OAuth2Authorization.swift in Sources */,
+				1B26BD6D23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */,
 				1B88B25A1F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2D21F268C220022A69D /* QueryString.swift in Sources */,
 				1BFD2F3620C85479005BB791 /* OAuth2RefreshStrategyFactory.swift in Sources */,
+				1B26BD6123A20EB200C884B9 /* AsymmetricKeyPair.swift in Sources */,
 				1B88B2FE1F268C220022A69D /* URL.swift in Sources */,
 				1BFD2F3120C850F8005BB791 /* OAuth2RefreshTokenGrantStrategy.swift in Sources */,
 				1B88B3061F268C3F0022A69D /* NetworkReachability.swift in Sources */,
@@ -1879,9 +2107,11 @@
 				1B88B29E1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B61F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2461F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
+				1B26BD7123A20EB200C884B9 /* Encryptor.swift in Sources */,
 				1B88B2621F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
 				1BE352F71F44F4FC008212BC /* OAuth2Token.swift in Sources */,
 				1B88B2DA1F268C220022A69D /* ResponseDeserializer.swift in Sources */,
+				1B39C38723A6002700B3CBE7 /* Cipher.swift in Sources */,
 				1B88B2321F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B88B2961F268C220022A69D /* CertificateBundle.swift in Sources */,
 				1B88B2661F268C220022A69D /* OAuth2ClientCredentialsTokenGrantStrategy.swift in Sources */,
@@ -1893,6 +2123,7 @@
 				1B88B2921F268C220022A69D /* ConduitLogger.swift in Sources */,
 				1B88B2B21F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C61F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
+				1B26BD5923A20EB100C884B9 /* CryptoError.swift in Sources */,
 				95F806BD2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
 				1B88B2E21F268C220022A69D /* XML.swift in Sources */,
 				1B88B2FA1F268C220022A69D /* SSLPinningServerAuthenticationPolicy.swift in Sources */,
@@ -1905,8 +2136,11 @@
 				1B88B2361F268C220022A69D /* OAuth2AuthorizationRequest.swift in Sources */,
 				1B49CBFA20D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2CE1F268C220022A69D /* MultipartFormRequestSerializer.swift in Sources */,
+				1B26BD5D23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */,
 				1B88B2BE1F268C220022A69D /* FormEncodedRequestSerializer.swift in Sources */,
+				1B26BD6523A20EB200C884B9 /* Decryptor.swift in Sources */,
 				1B88B2DE1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
+				1B26BD8123A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1923,6 +2157,7 @@
 				1B279CDA1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				95F806AC2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift in Sources */,
 				1B279CD41F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
+				1B00AB8023A43DBB00E4DF3C /* MockCipher.swift in Sources */,
 				95F8069A22245B59004BDC02 /* OAuth2TokenEncryptedStoreTests.swift in Sources */,
 				1BD5558E1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD11F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
@@ -1950,6 +2185,7 @@
 				95F8069222244BFF004BDC02 /* OAuth2ClientConfigurationTests.swift in Sources */,
 				D2418216213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */,
 				1B279CBF1F19558100C0005E /* AuthTestUtilities.swift in Sources */,
+				1B00AB7B23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */,
 				95F8068A22244995004BDC02 /* OAuth2AuthorizationTests.swift in Sources */,
 				1B279CD71F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
 				1B02EC911F60BE5200A41B34 /* ConduitLoggerTests.swift in Sources */,
@@ -1958,6 +2194,7 @@
 				1BD555881F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8068E22244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
 				956D7E481FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
+				1B26BD8323A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1975,6 +2212,7 @@
 				1B279CDB1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				95F806AD2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift in Sources */,
 				1B279CD51F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
+				1B00AB8123A43DBB00E4DF3C /* MockCipher.swift in Sources */,
 				95F8069B22245B59004BDC02 /* OAuth2TokenEncryptedStoreTests.swift in Sources */,
 				1BD5558F1F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD21F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
@@ -2002,6 +2240,7 @@
 				95F8069322244BFF004BDC02 /* OAuth2ClientConfigurationTests.swift in Sources */,
 				D2418217213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */,
 				1B279CC01F19558100C0005E /* AuthTestUtilities.swift in Sources */,
+				1B00AB7C23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */,
 				95F8068B22244995004BDC02 /* OAuth2AuthorizationTests.swift in Sources */,
 				1B279CD81F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
 				1B02EC921F60BE5200A41B34 /* ConduitLoggerTests.swift in Sources */,
@@ -2010,6 +2249,7 @@
 				1BD555891F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8068F22244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
 				956D7E491FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
+				1B26BD8423A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDE1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2027,6 +2267,7 @@
 				1B279CDC1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift in Sources */,
 				95F806AE2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift in Sources */,
 				1B279CD61F19558100C0005E /* OAuth2ExtensionTokenGrantTests.swift in Sources */,
+				1B00AB8223A43DBB00E4DF3C /* MockCipher.swift in Sources */,
 				95F8069C22245B59004BDC02 /* OAuth2TokenEncryptedStoreTests.swift in Sources */,
 				1BD555901F17DC81004B1172 /* JSONRequestSerializerTests.swift in Sources */,
 				1B279CD31F19558100C0005E /* OAuth2ClientCredentialsTokenGrantTests.swift in Sources */,
@@ -2054,6 +2295,7 @@
 				95F8069422244BFF004BDC02 /* OAuth2ClientConfigurationTests.swift in Sources */,
 				D2418218213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */,
 				1B279CC11F19558100C0005E /* AuthTestUtilities.swift in Sources */,
+				1B00AB7D23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift in Sources */,
 				95F8068C22244995004BDC02 /* OAuth2AuthorizationTests.swift in Sources */,
 				1B279CD91F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift in Sources */,
 				1B02EC931F60BE5200A41B34 /* ConduitLoggerTests.swift in Sources */,
@@ -2062,6 +2304,7 @@
 				1BD5558A1F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8069022244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
 				956D7E4A1FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
+				1B26BD8523A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDF1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2076,13 +2319,16 @@
 				1B88B29F1F268C220022A69D /* ImageDownloader.swift in Sources */,
 				1B02EC951F60C06400A41B34 /* URLSessionClientLogging.swift in Sources */,
 				1BA7C28520D05B0B005AA024 /* DarwinNotificationCenter.swift in Sources */,
+				1B26BD5E23A20EB100C884B9 /* AsymmetricKeyPair.swift in Sources */,
 				1B88B2EF1F268C220022A69D /* ServerAuthenticationPolicy.swift in Sources */,
+				1B26BD6A23A20EB200C884B9 /* HybridKeyProvider.swift in Sources */,
 				1BA7C27F20D04DB0005AA024 /* OAuth2TokenRefreshCoordinator.swift in Sources */,
 				1B88B27F1F268C220022A69D /* OAuth2TokenStore.swift in Sources */,
 				1B88B2EB1F268C220022A69D /* XMLResponseDeserializer.swift in Sources */,
 				1B88B2271F268C220022A69D /* OAuth2AuthorizationRedirectHandler.swift in Sources */,
 				1B88B2671F268C220022A69D /* OAuth2ExtensionTokenGrantStrategy.swift in Sources */,
 				1B88B2971F268C220022A69D /* HTTPRequestBuilder.swift in Sources */,
+				1B26BD6623A20EB200C884B9 /* HybridCipher.swift in Sources */,
 				1BA7C27920D04AB0005AA024 /* OAuth2TokenFileStore.swift in Sources */,
 				1B88B2E71F268C220022A69D /* XMLRequestSerializer.swift in Sources */,
 				1B88B2771F268C220022A69D /* OAuth2TokenKeychainStore.swift in Sources */,
@@ -2099,9 +2345,11 @@
 				1B88B2871F268C220022A69D /* KeychainWrapper.swift in Sources */,
 				1B88B2BF1F268C220022A69D /* HTTPRequestSerializer.swift in Sources */,
 				1B88B23B1F268C220022A69D /* OAuth2AuthorizationStrategy.swift in Sources */,
+				1B26BD5A23A20EB100C884B9 /* CryptorError+Codes.swift in Sources */,
 				95C9C7962220BBC800C89DB2 /* OAuth2TokenCipher.swift in Sources */,
 				1B88B2471F268C220022A69D /* OAuth2Authorization.swift in Sources */,
 				95F806BA2225C656004BDC02 /* PBKDF2Derivator.swift in Sources */,
+				1B26BD5623A20EB100C884B9 /* CryptoError.swift in Sources */,
 				1B88B2571F268C220022A69D /* OAuth2TokenGrantManager.swift in Sources */,
 				1B88B2CF1F268C220022A69D /* QueryString.swift in Sources */,
 				95F806B02224CE19004BDC02 /* AES256CBCCipher.swift in Sources */,
@@ -2112,9 +2360,12 @@
 				1B88B29B1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
 				1B88B2B31F268C220022A69D /* RequestPipelineMiddleware.swift in Sources */,
 				1B88B2431F268C220022A69D /* OAuth2ServerEnvironment.swift in Sources */,
+				1B26BD5223A20EB100C884B9 /* KeychainHybridKeyProvider.swift in Sources */,
 				1B88B25F1F268C220022A69D /* OAuth2AuthorizationCodeTokenGrantStrategy.swift in Sources */,
+				1B26BD6E23A20EB200C884B9 /* Encryptor.swift in Sources */,
 				1B88B2D71F268C220022A69D /* ResponseDeserializer.swift in Sources */,
 				1BE352F41F44F4FC008212BC /* OAuth2Token.swift in Sources */,
+				1B26BD7223A20EB200C884B9 /* HybridEncryptionType.swift in Sources */,
 				1B88B22F1F268C220022A69D /* OAuth2AuthorizationError.swift in Sources */,
 				1B49CBF720D9599200E02961 /* ResponsePipelineMiddleware.swift in Sources */,
 				1B88B2931F268C220022A69D /* CertificateBundle.swift in Sources */,
@@ -2134,6 +2385,8 @@
 				1B88B25B1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B88B24F1F268C220022A69D /* OAuth2Error.swift in Sources */,
 				1B88B26F1F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
+				1B26BD6223A20EB200C884B9 /* Decryptor.swift in Sources */,
+				1B39C38423A6002700B3CBE7 /* Cipher.swift in Sources */,
 				1B88B2531F268C220022A69D /* OAuth2RequestPipelineMiddleware.swift in Sources */,
 				1B88B2831F268C220022A69D /* KeychainOptions.swift in Sources */,
 				1B88B24B1F268C220022A69D /* OAuth2LegacyToken.swift in Sources */,
@@ -2143,12 +2396,18 @@
 				1B88B3091F268C440022A69D /* AwaitNetworkConnectivityRequestPipelineMiddleware.swift in Sources */,
 				1BA7C27420D0498D005AA024 /* OAuth2TokenUserDefaultsStore.swift in Sources */,
 				1B88B2DB1F268C220022A69D /* SOAPEnvelopeFactory.swift in Sources */,
+				1B26BD7E23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B00AB9923A444A200E4DF3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B00AB8623A4442000E4DF3C /* ConduitTestHost-macOS */;
+			targetProxy = 1B00AB9823A444A200E4DF3C /* PBXContainerItemProxy */;
+		};
 		1B0A341C1F71AE3E001C0970 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B0A34081F71AE07001C0970 /* ConduitTestHost-iOS */;
@@ -2177,6 +2436,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1B00AB8F23A4442200E4DF3C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B00AB9023A4442200E4DF3C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 		1B4946321F71AF6D00754C58 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2207,6 +2474,96 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1B00AB9523A4442200E4DF3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = TestHosts/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1B00AB9623A4442200E4DF3C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = TestHosts/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		1B0A34181F71AE07001C0970 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2223,10 +2580,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = WP7NQVPB66;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2243,6 +2600,7 @@
 				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2267,10 +2625,10 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WP7NQVPB66;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2282,6 +2640,7 @@
 				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -2306,10 +2665,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = WP7NQVPB66;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2325,6 +2684,7 @@
 				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2350,10 +2710,10 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = WP7NQVPB66;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -2364,6 +2724,7 @@
 				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=200 -Xfrontend -warn-long-expression-type-checking=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTestHost-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
@@ -2429,17 +2790,18 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2494,16 +2856,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2564,7 +2927,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2628,7 +2991,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2669,6 +3032,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2699,9 +3063,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2739,6 +3104,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2762,9 +3128,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2802,6 +3169,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2835,9 +3203,10 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -2873,6 +3242,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -2899,9 +3269,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindbodyonline.Conduit;
 				PRODUCT_NAME = Conduit;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -2937,6 +3308,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -2962,11 +3334,12 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
@@ -3000,6 +3373,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -3018,11 +3392,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
@@ -3054,6 +3429,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = "";
@@ -3078,7 +3455,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -3114,6 +3491,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -3131,7 +3510,7 @@
 				INFOPLIST_FILE = "Tests/ConduitTests/Info-Tests-tvOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -3168,6 +3547,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -3194,7 +3574,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -3202,6 +3582,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConduitTestHost-macOS.app/Contents/MacOS/ConduitTestHost-macOS";
 			};
 			name = Debug;
 		};
@@ -3229,6 +3610,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3248,13 +3630,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(FRAMEWORK_SEARCH_PATHS)";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = " -Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=500 -Xfrontend -warn-long-expression-type-checking=500 $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindbodyonline.ConduitTests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ConduitTestHost-macOS.app/Contents/MacOS/ConduitTestHost-macOS";
 			};
 			name = Release;
 		};
@@ -3281,6 +3664,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -3288,6 +3672,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -3314,12 +3700,15 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_SWIFT_FLAGS = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -3327,6 +3716,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1B00AB9423A4442200E4DF3C /* Build configuration list for PBXNativeTarget "ConduitTestHost-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B00AB9523A4442200E4DF3C /* Debug */,
+				1B00AB9623A4442200E4DF3C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1B0A341A1F71AE07001C0970 /* Build configuration list for PBXNativeTarget "ConduitTestHost-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
