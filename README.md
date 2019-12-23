@@ -56,7 +56,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 | 0.5 - 0.7.x      | 4.0           |
 | 0.8 - 0.13.x     | 4.1           |
 | 0.14.0 - 0.17.x  | 4.2           |
-| 0.18.0+          | 5.0           | 
+| 0.18.0+          | 5.0           |
 
 ## Installation
 
@@ -92,7 +92,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.18.0")
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.19.0")
     ]
 )
 ```

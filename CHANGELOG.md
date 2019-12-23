@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.19.0
+
+#### Breaking
 - `AES256CBCCipher.Error` has been completely removed in favor of `CryptoError`
 
 #### Enhancements
