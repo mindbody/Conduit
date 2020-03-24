@@ -18,7 +18,7 @@ public struct RequestPipelineBehaviorOptions: OptionSet {
     }
 
     /// No special behaviors defined
-    public static let none = RequestPipelineBehaviorOptions(rawValue: 0)
+    public static let none = RequestPipelineBehaviorOptions([])
 
     /// Notifies the client to complete all outgoing requests before proceeding
     public static let awaitsOutgoingCompletion = RequestPipelineBehaviorOptions(rawValue: 1 << 0)

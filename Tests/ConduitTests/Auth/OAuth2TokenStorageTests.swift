@@ -84,7 +84,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockToken)
         #if !os(macOS)
-        /// File protection options are unavailable on Mac
+        // File protection options are unavailable on Mac
         sut = OAuth2TokenFileStore(options: OAuth2TokenFileStoreOptions(storageDirectory: storageURL,
                                                                         coordinatesFileAccess: true,
                                                                         tokenWritingOptions: [.atomic, .completeFileProtection]))
@@ -110,7 +110,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         let storageURL = URL(fileURLWithPath: storagePath)
         sut = OAuth2TokenDiskStore(storageMethod: .url(storageURL.appendingPathComponent("oauth-token.bin")))
         try verifyTokenStorageOperations(sut: sut, with: mockToken)
-        /// Legacy file storage does not support refresh token locks
+        // Legacy file storage does not support refresh token locks
 
         try FileManager.default.removeItem(at: storageURL)
         XCTAssertFalse(FileManager.default.fileExists(atPath: storagePath))
@@ -143,7 +143,7 @@ class OAuth2TokenStorageTests: XCTestCase {
         try verifyTokenStorageOperations(sut: sut, with: mockLegacyToken)
         try verifyRefreshTokenLockOperations(sut: sut, with: mockLegacyToken)
         #if !os(macOS)
-        /// File protection options are unavailable on Mac
+        // File protection options are unavailable on Mac
         sut = OAuth2TokenFileStore(options: OAuth2TokenFileStoreOptions(storageDirectory: storageURL,
                                                                         coordinatesFileAccess: true,
                                                                         tokenWritingOptions: [.atomic, .completeFileProtection]))

@@ -19,7 +19,7 @@ class QueryStringTests: XCTestCase {
     func testHandlesExpectedSerializableTypesWithinFlatDictionary() throws {
         var queryString = try makeQueryString()
 
-        /// [String : String]
+        // [String : String]
         queryString.parameters = ["foo": "bar"]
         guard let encodedURL1 = try? queryString.encodeURL() else {
             XCTFail("Encoding failed")
@@ -27,7 +27,7 @@ class QueryStringTests: XCTestCase {
         }
         XCTAssert(encodedURL1.absoluteString.contains("foo=bar"))
 
-        /// [String : NSNull]
+        // [String : NSNull]
         queryString.parameters = ["foo": NSNull()]
         guard let encodedURL2 = try? queryString.encodeURL() else {
             XCTFail("Encoding failed")
@@ -35,7 +35,7 @@ class QueryStringTests: XCTestCase {
         }
         XCTAssert(encodedURL2.query == "foo")
 
-        /// [String : Int]
+        // [String : Int]
         queryString.parameters = ["foo": 1_234]
         guard let encodedURL3 = try? queryString.encodeURL() else {
             XCTFail("Encoding failed")
@@ -43,7 +43,7 @@ class QueryStringTests: XCTestCase {
         }
         XCTAssert(encodedURL3.absoluteString.contains("foo=1234"))
 
-        /// [String : Double]
+        // [String : Double]
         queryString.parameters = ["foo": 1.234]
         guard let encodedURL4 = try? queryString.encodeURL() else {
             XCTFail("Encoding failed")

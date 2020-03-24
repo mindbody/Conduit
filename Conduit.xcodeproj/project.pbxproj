@@ -521,6 +521,13 @@
 		95F806C02225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
 		95F806C12225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
 		95F806C22225CE65004BDC02 /* PBKDF2DerivatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */; };
+		9C7EC71A242AC571000C9BAC /* TokenMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC719242AC571000C9BAC /* TokenMigrator.swift */; };
+		9C7EC71B242AC571000C9BAC /* TokenMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC719242AC571000C9BAC /* TokenMigrator.swift */; };
+		9C7EC71C242AC571000C9BAC /* TokenMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC719242AC571000C9BAC /* TokenMigrator.swift */; };
+		9C7EC71D242AC571000C9BAC /* TokenMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC719242AC571000C9BAC /* TokenMigrator.swift */; };
+		9C7EC71F242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */; };
+		9C7EC720242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */; };
+		9C7EC721242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */; };
 		D2418216213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
 		D2418217213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
 		D2418218213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */; };
@@ -753,6 +760,8 @@
 		95F806B42224EA2A004BDC02 /* AES256CBCCipherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES256CBCCipherTests.swift; sourceTree = "<group>"; };
 		95F806B92225C656004BDC02 /* PBKDF2Derivator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBKDF2Derivator.swift; sourceTree = "<group>"; };
 		95F806BF2225CE65004BDC02 /* PBKDF2DerivatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBKDF2DerivatorTests.swift; sourceTree = "<group>"; };
+		9C7EC719242AC571000C9BAC /* TokenMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMigrator.swift; sourceTree = "<group>"; };
+		9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMigratorTests.swift; sourceTree = "<group>"; };
 		D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationStrategyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -897,6 +906,7 @@
 				1BF8E55C20CF103E002D8AF1 /* AuthMigratorTests.swift */,
 				1B279CB21F19558100C0005E /* AuthTestUtilities.swift */,
 				1B026EFC20EFF65100BD991B /* BearerTokenTests.swift */,
+				1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */,
 				1B279CB81F19558100C0005E /* OAuth2AuthorizationCodeTokenGrantStrategyTests.swift */,
 				D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */,
 				95F8068922244995004BDC02 /* OAuth2AuthorizationTests.swift */,
@@ -906,13 +916,13 @@
 				1B279CBB1F19558100C0005E /* OAuth2PasswordTokenGrantTests.swift */,
 				1B279CBC1F19558100C0005E /* OAuth2RequestPipelineMiddlewareTests.swift */,
 				95F8068D22244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift */,
+				95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */,
+				1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */,
 				95F8069922245B59004BDC02 /* OAuth2TokenEncryptedStoreTests.swift */,
 				1B279CBD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift */,
 				1B279CBE1F19558100C0005E /* OAuth2TokenStorageTests.swift */,
 				95F8069522244D32004BDC02 /* OAuth2TokenStoreTests.swift */,
-				95F806AB2224C623004BDC02 /* OAuth2TokenAES256CBCCipherTests.swift */,
-				1B00AB7A23A43C9C00E4DF3C /* OAuth2TokenCryptoCipherTests.swift */,
-				1B26BD8223A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift */,
+				9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1031,8 +1041,8 @@
 			children = (
 				1BA7C27D20D04D8C005AA024 /* Coordination */,
 				95F8069D2224B25D004BDC02 /* OAuth2TokenAES256CBCCipher.swift */,
-				1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */,
 				95C9C7952220BBC800C89DB2 /* OAuth2TokenCipher.swift */,
+				1B26BD7D23A2141100C884B9 /* OAuth2TokenCryptoCipher.swift */,
 				1B88B1F91F268C220022A69D /* OAuth2TokenDiskStore.swift */,
 				95C9C79A2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift */,
 				1BA7C27820D04AB0005AA024 /* OAuth2TokenFileStore.swift */,
@@ -1040,6 +1050,7 @@
 				1B88B1FB1F268C220022A69D /* OAuth2TokenMemoryStore.swift */,
 				1B88B1FC1F268C220022A69D /* OAuth2TokenStore.swift */,
 				1BA7C27320D0498D005AA024 /* OAuth2TokenUserDefaultsStore.swift */,
+				9C7EC719242AC571000C9BAC /* TokenMigrator.swift */,
 			);
 			path = TokenStorage;
 			sourceTree = "<group>";
@@ -1920,6 +1931,7 @@
 				1B88B2FC1F268C220022A69D /* URL.swift in Sources */,
 				1B88B2F41F268C220022A69D /* SessionTaskProxy.swift in Sources */,
 				1B88B28C1F268C220022A69D /* Conduit.swift in Sources */,
+				9C7EC71B242AC571000C9BAC /* TokenMigrator.swift in Sources */,
 				95C9C79C2220BF6900C89DB2 /* OAuth2TokenEncryptedStore.swift in Sources */,
 				1B26BD6723A20EB200C884B9 /* HybridCipher.swift in Sources */,
 				1B88B29C1F268C220022A69D /* AutoPurgingURLImageCache.swift in Sources */,
@@ -2032,6 +2044,7 @@
 				1B88B3011F268C220022A69D /* URLSessionClient.swift in Sources */,
 				1B88B2A51F268C220022A69D /* URLImageCache.swift in Sources */,
 				1B88B2911F268C220022A69D /* ConduitLogger.swift in Sources */,
+				9C7EC71C242AC571000C9BAC /* TokenMigrator.swift in Sources */,
 				1B88B2B11F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C51F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
 				1B26BD5823A20EB100C884B9 /* CryptoError.swift in Sources */,
@@ -2121,6 +2134,7 @@
 				1B88B3021F268C220022A69D /* URLSessionClient.swift in Sources */,
 				1B88B2A61F268C220022A69D /* URLImageCache.swift in Sources */,
 				1B88B2921F268C220022A69D /* ConduitLogger.swift in Sources */,
+				9C7EC71D242AC571000C9BAC /* TokenMigrator.swift in Sources */,
 				1B88B2B21F268C220022A69D /* NetworkStatus.swift in Sources */,
 				1B88B2C61F268C220022A69D /* JSONRequestSerializer.swift in Sources */,
 				1B26BD5923A20EB100C884B9 /* CryptoError.swift in Sources */,
@@ -2193,6 +2207,7 @@
 				95E26BB21F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555881F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8068E22244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
+				9C7EC71F242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */,
 				956D7E481FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B26BD8323A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDD1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
@@ -2248,6 +2263,7 @@
 				95E26BB31F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD555891F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8068F22244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
+				9C7EC720242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */,
 				956D7E491FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B26BD8423A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDE1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
@@ -2303,6 +2319,7 @@
 				95E26BB41F29A2FE00804900 /* XMLNodeTests.swift in Sources */,
 				1BD5558A1F17DC81004B1172 /* FormEncodedRequestSerializerTests.swift in Sources */,
 				95F8069022244B5C004BDC02 /* OAuth2ServerEnvironmentTests.swift in Sources */,
+				9C7EC721242AC59B000C9BAC /* TokenMigratorTests.swift in Sources */,
 				956D7E4A1FA13387002FB4D3 /* QueryStringDictionaryTests.swift in Sources */,
 				1B26BD8523A21A5100C884B9 /* KeychainHybridKeyProviderTests.swift in Sources */,
 				1B279CDF1F19558100C0005E /* OAuth2TokenGrantManagerTests.swift in Sources */,
@@ -2384,6 +2401,7 @@
 				1B88B3031F268C3D0022A69D /* NetworkReachability.swift in Sources */,
 				1B88B25B1F268C220022A69D /* OAuth2URLSessionClientFactory.swift in Sources */,
 				1B88B24F1F268C220022A69D /* OAuth2Error.swift in Sources */,
+				9C7EC71A242AC571000C9BAC /* TokenMigrator.swift in Sources */,
 				1B88B26F1F268C220022A69D /* OAuth2TokenGrantStrategy.swift in Sources */,
 				1B26BD6223A20EB200C884B9 /* Decryptor.swift in Sources */,
 				1B39C38423A6002700B3CBE7 /* Cipher.swift in Sources */,
