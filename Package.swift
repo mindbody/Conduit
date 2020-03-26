@@ -18,7 +18,7 @@ let package = Package(
         .watchOS(.v2),
     ],
     products: [
-        .library(name: "Conduit", targets: ["Conduit"]),
+        .library(name: "ConduitStatic", targets: ["Conduit"]),
         .library(name: "Conduit", type: .dynamic, targets: ["Conduit"]),
     ],
     dependencies : [],
