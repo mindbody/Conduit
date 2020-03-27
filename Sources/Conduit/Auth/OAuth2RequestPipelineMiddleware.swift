@@ -78,7 +78,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
-                    if case OAuth2Error.clientFailure(_) = error {
+                    if case OAuth2Error.clientFailure = error {
                         self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
                     completion(.error(error))
