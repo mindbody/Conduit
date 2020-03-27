@@ -13,6 +13,22 @@
 - None
 
 
+## 0.20.0
+
+#### Breaking
+- None
+
+#### Enhancements
+- Add `TokenMigrator` to perform migrations between token stores and client configurations.
+- Add `ConduitDynamic` dynamic library to Package description.
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
 ## 0.19.0
 
 #### Breaking
