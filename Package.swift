@@ -19,6 +19,7 @@ let package = Package(
     ],
     products: [
         .library(name: "Conduit", targets: ["Conduit"]),
+        .library(name: "ConduitDynamic", type: .dynamic, targets: ["Conduit"]),
     ],
     dependencies : [],
     targets: [
