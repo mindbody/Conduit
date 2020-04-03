@@ -10,10 +10,14 @@ import Foundation
 
 /// Encapsulate received data, HTTP response, error, and metrics, where available
 public struct TaskResponse {
-    var data: Data?
-    var response: HTTPURLResponse?
-    var expectedContentLength: Int64?
-    var error: Error?
+    public var data: Data?
+    public var response: HTTPURLResponse?
+    public var error: Error?
+
     @available(iOS 10, *)
-    lazy var metrics: URLSessionTaskMetrics? = nil
+    public lazy var metrics: URLSessionTaskMetrics? = nil
+
+    var expectedContentLength: Int64?
+
+    public init() {}
 }

@@ -1,6 +1,6 @@
 //
 //  URL.swift
-//  Conduit
+//  ConduitTests
 //
 //  Created by Eneko Alonso on 7/14/17.
 //  Copyright © 2017 MINDBODY. All rights reserved.

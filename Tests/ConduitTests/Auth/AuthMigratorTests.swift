@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Conduit
+import Conduit
 
 class AuthMigratorTests: XCTestCase {
 

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Conduit
+import Conduit
 
 enum TestError: Error {
     case invalidTest

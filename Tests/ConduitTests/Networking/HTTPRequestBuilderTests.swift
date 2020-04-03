@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Conduit
+import Conduit
 
 private enum MockSerializationError: Error {
     case testError
