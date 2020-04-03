@@ -16,10 +16,8 @@ public protocol ResponsePipelineMiddleware {
     ///
     /// - Parameters:
     ///   - request: The original request
-    ///   - response: The exchanged HTTP response
-    ///   - data: The exchanged response data
-    ///   - error: The exchanged error
+    ///   - taskResponse: The exchanged task response including HTTP response, response data, error, and request metrics
     ///   - completion: Must be called once the middleware has completed processing
-    func prepare(request: URLRequest, response: inout HTTPURLResponse?, data: inout Data?, error: inout Error?, completion: @escaping () -> Void)
+    func prepare(request: URLRequest, taskResponse: inout TaskResponse, completion: @escaping () -> Void)
 
 }
