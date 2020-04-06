@@ -39,7 +39,7 @@ extension URLSessionClient {
         var requestDurationString: String = ""
         var taskResponse = taskResponse
 
-        if #available(iOS 10, *) {
+        if #available(iOS 10, macOS 10.12, tvOS 10, watchOS 3, *) {
             if let interval = taskResponse.metrics?.taskInterval.duration {
                 requestDurationString = String(format: "(%0.2f sec)", interval)
             }
