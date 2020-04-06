@@ -13,6 +13,27 @@
 - None
 
 
+## 0.21.0
+
+#### Breaking
+- `ResponsePipelineMiddleware` protocol has been updated.
+
+#### Enhancements
+- Surface request metrics to response middleware
+  - `SessionDelegate` has been updated to capture request metrics in `TaskResponse`.
+  - `URLSessionClient` has been updated to pass `TaskResponse` to any response middleware.
+  - `ResponsePipelineMiddleware` has been refactored to pass a `TaskResponse` structure.
+
+#### Bug Fixes
+- None
+
+#### Other
+- Unit test updates
+  - Existing unit tests updated as needed, and new tests have been added.
+  - Private `URL` extension has been moved to test targets.
+  - `@testable` imports have been removed where possible.
+
+
 ## 0.20.0
 
 #### Breaking

@@ -155,6 +155,7 @@ class URLSessionClientTests: XCTestCase {
         XCTAssertEqual(text, "\(baseResponseText)abc")
     }
 
+    @available(iOS 10, macOS 10.12, tvOS 10, watchOS 3, *)
     func testRequestMetrics() throws {
         let expectation = self.expectation(description: "Middleware gets called")
         let responseMiddleware = TransformingResponseMiddleware { taskResponse in

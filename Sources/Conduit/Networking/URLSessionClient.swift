@@ -315,7 +315,7 @@ private class SessionDelegate: NSObject, URLSessionDataDelegate {
 
     /// Stores request metrics in task response, for later consumption.
     /// This delegate method is always called after `didReceive response`, and before `didCompleteWithError`.
-    @available(iOS 10.0, *)
+    @available(iOS 10, macOS 10.12, tvOS 10, watchOS 3, *)
     func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics) {
         var taskResponse = taskResponseFor(taskIdentifier: task.taskIdentifier)
         taskResponse.metrics = metrics
