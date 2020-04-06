@@ -18,7 +18,7 @@ extension URLSessionClient {
         }
 
         var verboseLogComponents: [String] = [
-            "\n>>>>>>>>>>>>>>> REQUEST #\(requestID) >>>>>>>>>>>>>>>>>>",
+            "\n>>>>>>>>>>>>>>> REQUEST 🛫 #\(requestID) >>>>>>>>>>>>>>>>>>",
             endpoint
         ]
         if let headers = prettyHeaders(headers: request.allHTTPHeaderFields) {
@@ -32,22 +32,33 @@ extension URLSessionClient {
         logger.verbose(output)
     }
 
-    func log(data: Data?, response: HTTPURLResponse?, request: URLRequest, requestID: Int64) {
+    func log(taskResponse: TaskResponse, request: URLRequest, requestID: Int64) {
         let endpoint = self.endpoint(from: request)
-        let statusDescription = makeStatusDescription(code: response?.statusCode)
+        let statusDescription = makeStatusDescription(code: taskResponse.response?.statusCode)
         let responseEndpointDescription = "\(endpoint) => \(statusDescription)"
+        var requestDurationString: String = ""
+        var taskResponse = taskResponse
+
+        if #available(iOS 10, *) {
+            if let interval = taskResponse.metrics?.taskInterval.duration {
+                requestDurationString = String(format: "(%0.2f sec)", interval)
+            }
+        }
 
         if logger.level < .verbose {
-            logger.debug("[🛬 #\(requestID)] \(responseEndpointDescription)")
+            logger.debug("[🛬 #\(requestID)] \(responseEndpointDescription) \(requestDurationString)")
             return
         }
 
-        var verboseLogComponents = ["\n<<<<<<<<<<<<<< RESPONSE #\(requestID) <<<<<<<<<<<<<<<<<<<<", responseEndpointDescription]
+        var verboseLogComponents = ["\n<<<<<<<<<<<<<< RESPONSE 🛬 #\(requestID) BEGIN <<<<<<<<<<<<<<<<<<<<", responseEndpointDescription]
 
-        if let headers = prettyHeaders(headers: response?.allHeaderFields as? [String: String]) {
+        if #available(iOS 10, *) {
+            verboseLogComponents.append("Request Duration: \(requestDurationString)")
+        }
+        if let headers = prettyHeaders(headers: taskResponse.response?.allHeaderFields as? [String: String]) {
             verboseLogComponents.append(headers)
         }
-        if let data = data {
+        if let data = taskResponse.data {
             let bodyString = String(data: data, encoding: .utf8) ?? "<Failed to Parse Response Data>"
             verboseLogComponents.append("\(bodyString)")
         }

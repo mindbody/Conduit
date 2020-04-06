@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Conduit
+import Conduit
 
 private class MonitoringURLSessionClient: URLSessionClientType {
     private let sessionClient = URLSessionClient()
