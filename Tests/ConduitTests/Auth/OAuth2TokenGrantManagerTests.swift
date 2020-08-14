@@ -33,9 +33,9 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
         }
 
         guard case .noResponse = errorNoResponse,
-            case .clientFailure(_, _) = error401,
-            case .clientFailure(_, _) = error400,
-            case .serverFailure(_, _) = error500 else {
+            case .clientFailure = error401,
+            case .clientFailure = error400,
+            case .serverFailure = error500 else {
                 XCTFail("Unexpected error type")
                 return
         }
