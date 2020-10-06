@@ -309,32 +309,6 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func testLegacyTokenMigration() throws {
-        let randomToken = BearerOAuth2Token(accessToken: randomTokenAccessToken, refreshToken: "notused", expiration: Date().addingTimeInterval(1_000_000))
-        let authorization = OAuth2Authorization(type: .bearer, level: .user)
-        let validClientConfiguration = try makeValidClientConfiguration()
-
-        let tokenStorage = OAuth2TokenMemoryStore()
-        tokenStorage.store(token: randomToken, for: validClientConfiguration, with: authorization)
-
-        let request = try makeDummyRequest()
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: validClientConfiguration, authorization: authorization, tokenStorage: tokenStorage)
-
-        let decorateRequestExpectation = expectation(description: "request immediately decorated")
-        sut.prepareForTransport(request: request) { result in
-            guard case .value(let request) = result else {
-                XCTFail("No value")
-                return
-            }
-            XCTAssert(request.allHTTPHeaderFields?["Authorization"] == randomToken.authorizationHeaderValue)
-            decorateRequestExpectation.fulfill()
-        }
-
-        XCTAssertNotNil(sut.token)
-
-        waitForExpectations(timeout: 0.1)
-    }
-
     func testCoordinatesRefreshesBetweenMultipleSessions() throws {
         /// Simulates multiple sessions (different processes) triggering token refreshes at once
 
