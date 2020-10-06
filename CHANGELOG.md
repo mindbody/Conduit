@@ -1,7 +1,7 @@
 ## master
 
 #### Breaking
-- None
+- Remove deprecated types: `BearerOAuth2Token`, `OAuth2TokenAES256CBCCipher`, and `OAuth2TokenDiskStore`
 
 #### Enhancements
 - None
