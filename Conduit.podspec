@@ -1,4 +1,4 @@
-$version = '0.21.0'
+$version = '0.22.0'
 
 Pod::Spec.new do |spec|
 	spec.name = 'Conduit'
