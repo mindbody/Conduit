@@ -28,11 +28,10 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     let tokenStorage: OAuth2TokenStore
 
     var token: BearerToken? {
-        if let token: BearerToken = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization) {
-            return token
+        guard let token: BearerToken = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization) else {
+            return nil
         }
-        let legacyToken: BearerOAuth2Token? = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization)
-        return legacyToken?.converted
+        return token
     }
 
     /// Creates a new OAuth2RequestPipelineMiddleware
