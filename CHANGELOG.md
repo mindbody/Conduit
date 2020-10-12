@@ -1,6 +1,21 @@
 ## master
 
 #### Breaking
+- None
+
+#### Enhancements
+- None
+
+#### Bug Fixes
+- None
+
+#### Other
+- None
+
+
+## 0.22.0
+
+#### Breaking
 - Remove deprecated types: `BearerOAuth2Token`, `OAuth2TokenAES256CBCCipher`, and `OAuth2TokenDiskStore`
 
 #### Enhancements
