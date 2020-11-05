@@ -47,7 +47,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 - [x] Interfaces for migrating from pre-existing networking layers
 
 ## Requirements
-- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 9.0+ / macOS 10.11+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
 
 | Conduit  Version | Swift Version |

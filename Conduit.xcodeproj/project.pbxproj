@@ -751,6 +751,7 @@
 		9C7EC719242AC571000C9BAC /* TokenMigrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMigrator.swift; sourceTree = "<group>"; };
 		9C7EC71E242AC59B000C9BAC /* TokenMigratorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenMigratorTests.swift; sourceTree = "<group>"; };
 		9CADCF302554849D00A167A0 /* Conduit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Conduit.podspec; sourceTree = "<group>"; };
+		9CADCF312554861600A167A0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9CBAD6A62437D4CD0099D32B /* URLSessionClientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionClientType.swift; sourceTree = "<group>"; };
 		9CBAD6AB2437D5220099D32B /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		D2418215213604A900D70220 /* OAuth2AuthorizationStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2AuthorizationStrategyTests.swift; sourceTree = "<group>"; };
@@ -1245,6 +1246,7 @@
 		1BD8FFF21F167E6000481DC9 = {
 			isa = PBXGroup;
 			children = (
+				9CADCF312554861600A167A0 /* README.md */,
 				9CADCF302554849D00A167A0 /* Conduit.podspec */,
 				95F04E761F7C3B21003E9700 /* CHANGELOG.md */,
 				1BD8FFFF1F167E7800481DC9 /* Products */,
