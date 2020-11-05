@@ -13,7 +13,7 @@ let package = Package(
     name: "Conduit",
     platforms: [
         .macOS(.v10_11),
-        .iOS(.v8),
+        .iOS(.v9),
         .tvOS(.v9),
         .watchOS(.v2),
     ],
