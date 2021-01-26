@@ -13,7 +13,7 @@ class URLSessionClientTests: XCTestCase {
 
     func testBlocking() throws {
         let client = URLSessionClient(delegateQueue: OperationQueue())
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/1"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/1"))
         let then = Date()
         let result = try client.begin(request: request)
         XCTAssertNotNil(result.data)
@@ -34,15 +34,15 @@ class URLSessionClientTests: XCTestCase {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 0.5
         let client = URLSessionClient(sessionConfiguration: configuration, delegateQueue: OperationQueue())
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/1"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/1"))
         XCTAssertThrowsError(try client.begin(request: request), "Request did not timeout") { error in
             XCTAssertEqual(error as? URLSessionClientError, .requestTimeout)
         }
     }
 
     func testTransformsRequestsThroughRequestMiddlewarePipeline() throws {
-        let originalURL = try URL(absoluteString: "http://localhost:3333/put")
-        let modifiedURL = try URL(absoluteString: "http://localhost:3333/get")
+        let originalURL = try URL(absoluteString: "https://httpbin.org/put")
+        let modifiedURL = try URL(absoluteString: "https://httpbin.org/get")
         let originalHTTPHeaders = ["Accept-Language": "en-US"]
         let modifiedHTTPHeaders = ["Accept-Language": "vulcan"]
 
@@ -72,7 +72,7 @@ class URLSessionClientTests: XCTestCase {
         let blockingMiddleware = BlockingRequestMiddleware()
         let client = URLSessionClient(requestMiddleware: [blockingMiddleware])
 
-        let delayedRequest = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
+        let delayedRequest = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/2"))
         let numDelayedRequests = 5
 
         var completedDelayedRequests = 0
@@ -83,7 +83,7 @@ class URLSessionClientTests: XCTestCase {
             }
         }
 
-        let immediateRequest = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
+        let immediateRequest = try URLRequest(url: URL(absoluteString: "https://httpbin.org/get"))
 
         let requestSentExpectation = expectation(description: "request sent")
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
@@ -100,7 +100,7 @@ class URLSessionClientTests: XCTestCase {
 
     func testCancelsRequestIfRequestMiddlewareFails() throws {
         let client = URLSessionClient(requestMiddleware: [BadRequestMiddleware()])
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/get"))
 
         let requestProcessedMiddleware = expectation(description: "request processed")
         client.begin(request: request) { _, _, error in
@@ -142,7 +142,7 @@ class URLSessionClientTests: XCTestCase {
             return taskResponse
         }
 
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/base64/\(base64EncodedResponseText)"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/base64/\(base64EncodedResponseText)"))
         let client = URLSessionClient(responseMiddleware: [transformerMiddleware1, transformerMiddleware2, transformerMiddleware3],
                                       delegateQueue: OperationQueue())
 
@@ -166,13 +166,13 @@ class URLSessionClientTests: XCTestCase {
         }
 
         let client = URLSessionClient(responseMiddleware: [responseMiddleware], delegateQueue: OperationQueue())
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/2"))
         try client.begin(request: request)
         waitForExpectations(timeout: 0, handler: nil)
     }
 
     func testSessionTaskProxyAllowsCancellingRequestsBeforeTransport() throws {
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/2"))
         let client: URLSessionClient = URLSessionClient()
 
         let requestProcessedMiddleware = expectation(description: "request processed")
@@ -186,7 +186,7 @@ class URLSessionClientTests: XCTestCase {
     }
 
     func testSessionTaskProxyAllowsSuspendingRequestsBeforeTransport() throws {
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/delay/2"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/delay/2"))
         let client: URLSessionClient = URLSessionClient()
 
         let dispatchExecutedExpectation = expectation(description: "passed response deadline")
@@ -209,7 +209,7 @@ class URLSessionClientTests: XCTestCase {
     }
 
     func testReportsDownloadProgressForLargerTasks() throws {
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/stream-bytes/1500000"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/stream-bytes/1500000"))
         let client: URLSessionClient = URLSessionClient()
 
         var progress: Progress?
@@ -234,7 +234,7 @@ class URLSessionClientTests: XCTestCase {
         let formPart = FormPart(name: "test-video", filename: "test-video.mov", content: .video(videoData, .mov))
         serializer.append(formPart: formPart)
 
-        let requestBuilder = HTTPRequestBuilder(url: try URL(absoluteString: "http://localhost:3333/post"))
+        let requestBuilder = HTTPRequestBuilder(url: try URL(absoluteString: "https://httpbin.org/post"))
         requestBuilder.serializer = serializer
         requestBuilder.method = .POST
         guard let request = try? requestBuilder.build() else {
@@ -254,7 +254,7 @@ class URLSessionClientTests: XCTestCase {
     }
 
     func testHandlesConcurrentRequests() throws {
-        let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/get"))
+        let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/get"))
 
         let client = URLSessionClient()
 
@@ -279,7 +279,7 @@ class URLSessionClientTests: XCTestCase {
         let client = URLSessionClient(delegateQueue: OperationQueue())
         let codes = [200, 304, 400, 403, 412, 500, 501]
         for code in codes {
-            let request = try URLRequest(url: URL(absoluteString: "http://localhost:3333/status/\(code)"))
+            let request = try URLRequest(url: URL(absoluteString: "https://httpbin.org/status/\(code)"))
             let result = try client.begin(request: request)
             XCTAssertEqual(result.response.statusCode, code)
         }

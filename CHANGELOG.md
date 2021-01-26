@@ -15,6 +15,10 @@
 
 ## 1.0.0
 
+#### Breaking
+- Remove Xcode project and worskpaces, dropping support for Carthage
+
+#### Other
 - Celebrating Conduit's maturity with our 1.0.0 release 🎉
 
 

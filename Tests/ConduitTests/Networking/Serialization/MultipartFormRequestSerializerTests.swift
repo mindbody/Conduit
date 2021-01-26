@@ -16,7 +16,7 @@ enum TestError: Error {
 class MultipartFormRequestSerializerTests: XCTestCase {
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         return request
@@ -25,8 +25,9 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     private func makeFormSerializer() throws -> MultipartFormRequestSerializer {
         let serializer = MultipartFormRequestSerializer()
 
-        guard let image1 = MockResource.cellTowersImage.image, let image2 = MockResource.evilSpaceshipImage.image,
-            let videoData = MockResource.sampleVideo.base64EncodedData else {
+        guard let image1 = MockResource.cellTowersImage.image,
+              let image2 = MockResource.evilSpaceshipImage.image,
+              let videoData = MockResource.sampleVideo.base64EncodedData else {
                 throw TestError.invalidTest
         }
 
@@ -55,7 +56,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     func testSerializesDataPerW3Spec() throws {
         let serializer = try makeFormSerializer()
 
-        var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
+        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbin.org/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
             XCTFail("Serialization failed")
@@ -96,7 +97,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         formPart.contentType = nil
         serializer.append(formPart: formPart)
 
-        var newRequest = URLRequest(url: try URL(absoluteString: "http://localhost:3333/post"))
+        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbin.org/post"))
         newRequest.httpMethod = "POST"
         let modifiedRequest = try serializer.serialize(request: newRequest, bodyParameters: nil)
 
