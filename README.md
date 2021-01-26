@@ -1,7 +1,6 @@
 # Conduit
 
 [![Release](https://img.shields.io/github/release/mindbody/conduit.svg)](https://github.com/mindbody/Conduit/releases)
-[![Build Status](https://travis-ci.org/mindbody/Conduit.svg?branch=master)](https://travis-ci.org/mindbody/Conduit)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Conduit.svg)](https://cocoapods.org/pods/Conduit)
 [![Platform](https://img.shields.io/cocoapods/p/Conduit.svg?style=flat)](http://cocoadocs.org/docsets/Conduit)
 
