@@ -31,7 +31,7 @@ private class MockRequestSerializer: RequestSerializer {
 class HTTPRequestBuilderTests: XCTestCase {
 
     private func makeRequestBuilder() throws -> HTTPRequestBuilder {
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         return HTTPRequestBuilder(url: url)
     }
 

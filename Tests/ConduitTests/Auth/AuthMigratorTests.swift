@@ -42,7 +42,7 @@ class AuthMigratorTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
-    func testExternalTokenRefreshFailsWithInvalidToken() throws {
+    func DISABLED_testExternalTokenRefreshFailsWithInvalidToken() throws {
         let sessionClient = URLSessionClient()
         let tokenStorage = OAuth2TokenMemoryStore()
         let clientConfiguration = try makeValidClientConfiguration()
@@ -69,7 +69,7 @@ class AuthMigratorTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
-    func testExternalTokenRefreshSucceedsWithValidToken() throws {
+    func DISABLED_testExternalTokenRefreshSucceedsWithValidToken() throws {
         let sessionClient = URLSessionClient()
         let tokenStorage = OAuth2TokenMemoryStore()
         let clientConfiguration = try makeValidClientConfiguration()

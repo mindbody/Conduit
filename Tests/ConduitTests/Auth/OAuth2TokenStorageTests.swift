@@ -15,7 +15,7 @@ class OAuth2TokenStorageTests: XCTestCase {
     let mockAuthorization = OAuth2Authorization(type: .bearer, level: .user)
 
     private func makeMockClientConfiguration() throws -> OAuth2ClientConfiguration {
-        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "https://httpbin.org/get"))
         let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
         return mockClientConfiguration

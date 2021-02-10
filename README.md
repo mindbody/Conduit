@@ -1,8 +1,6 @@
 # Conduit
 
 [![Release](https://img.shields.io/github/release/mindbody/conduit.svg)](https://github.com/mindbody/Conduit/releases)
-[![Build Status](https://travis-ci.org/mindbody/Conduit.svg?branch=master)](https://travis-ci.org/mindbody/Conduit)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Conduit.svg)](https://cocoapods.org/pods/Conduit)
 [![Platform](https://img.shields.io/cocoapods/p/Conduit.svg?style=flat)](http://cocoadocs.org/docsets/Conduit)
 
@@ -47,7 +45,7 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 - [x] Interfaces for migrating from pre-existing networking layers
 
 ## Requirements
-- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
+- iOS 9.0+ / macOS 10.11+ / tvOS 9.0+ / watchOS 2.0+
 - Xcode 8.1+
 
 | Conduit  Version | Swift Version |
@@ -60,12 +58,19 @@ Within each session, requests are sent through a serial [pipeline](https://en.wi
 
 ## Installation
 
-### Carthage
+### Swift Package Manager (recommended)
 
-Add `Conduit` to your `Cartfile`:
+Add `Conduit` to your `Package.swift`:
 
-```
-github "mindbody/Conduit"
+```swift
+// swift-tools-version:5.0
+import PackageDescription
+
+let package = Package(
+    dependencies: [
+        .package(url: "https://github.com/mindbody/Conduit.git", from: "1.0.0")
+    ]
+)
 ```
 
 ### Cocoapods
@@ -81,22 +86,6 @@ target 'MyApplicationTarget' do
     pod 'Conduit'
 end
 ```
-
-### Swift Package Manager
-
-Add `Conduit` to your `Package.swift`:
-
-```swift
-// swift-tools-version:4.1
-import PackageDescription
-
-let package = Package(
-    dependencies: [
-        .package(url: "https://github.com/mindbody/Conduit.git", from: "0.22.0")
-    ]
-)
-```
----
 
 ## Core Networking
 
