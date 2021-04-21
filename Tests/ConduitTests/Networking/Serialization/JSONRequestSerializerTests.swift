@@ -14,7 +14,7 @@ class JSONRequestSerializerTests: XCTestCase {
     let testJSONParameters = ["key1": "value1", "key2": 2, "key3": ["nested": true]] as [String: Any]
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         return request

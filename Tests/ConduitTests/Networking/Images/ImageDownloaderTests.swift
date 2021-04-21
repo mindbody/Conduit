@@ -32,7 +32,7 @@ class ImageDownloaderTests: XCTestCase {
     func testOnlyHitsNetworkOncePerRequest() throws {
         let monitoringSessionClient = MonitoringURLSessionClient()
         let sut = ImageDownloader(cache: AutoPurgingURLImageCache(), sessionClient: monitoringSessionClient)
-        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let url = try URL(absoluteString: "https://httpbin.org/image/jpeg")
         let imageRequest = URLRequest(url: url)
         for _ in 0..<100 {
             sut.downloadImage(for: imageRequest) { _ in }
@@ -44,7 +44,7 @@ class ImageDownloaderTests: XCTestCase {
         let attemptedAllImageRetrievalsExpectation = expectation(description: "attempted all image retrievals")
 
         let sut = ImageDownloader(cache: AutoPurgingURLImageCache())
-        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let url = try URL(absoluteString: "https://httpbin.org/image/jpeg")
         let imageRequest = URLRequest(url: url)
 
         sut.downloadImage(for: imageRequest) { response in
@@ -71,7 +71,7 @@ class ImageDownloaderTests: XCTestCase {
 
     func testHandlesSimultaneousRequestsForDifferentImages() {
         let imageURLs = (0..<10).compactMap {
-            URL(string: "http://localhost:3333/image/jpeg?id=\($0)")
+            URL(string: "https://httpbin.org/image/jpeg?id=\($0)")
         }
 
         let sut = ImageDownloader(cache: AutoPurgingURLImageCache())
@@ -98,7 +98,7 @@ class ImageDownloaderTests: XCTestCase {
     func testPersistsWhileOperationsAreRunning() throws {
         let imageDownloadedExpectation = expectation(description: "image downloaded")
         var sut: ImageDownloader? = ImageDownloader(cache: AutoPurgingURLImageCache())
-        let url = try URL(absoluteString: "http://localhost:3333/image/jpeg")
+        let url = try URL(absoluteString: "https://httpbin.org/image/jpeg")
         let imageRequest = URLRequest(url: url)
 
         weak var weakImageDownloader = sut

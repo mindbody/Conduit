@@ -33,7 +33,7 @@ class XMLRequestSerializerTests: XCTestCase {
         ])
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         return request

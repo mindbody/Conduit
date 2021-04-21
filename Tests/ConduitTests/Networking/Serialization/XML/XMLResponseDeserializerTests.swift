@@ -26,7 +26,7 @@ class XMLResponseDeserializerTests: XCTestCase {
             throw TestError.invalidTest
         }
 
-        guard let url = URL(string: "http://localhost:3333"),
+        guard let url = URL(string: "https://httpbin.org"),
             let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
                 throw TestError.invalidTest
         }

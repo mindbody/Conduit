@@ -23,7 +23,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         guard let validResponseData = json.data(using: .utf8) else {
             throw TestError.invalidTest
         }
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         guard let validResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: validResponseHeaders) else {
             throw TestError.invalidTest
         }
@@ -36,7 +36,7 @@ class JSONResponseDeserializerTests: XCTestCase {
         if let contentType = contentType {
             headerFields = ["Content-Type": contentType]
         }
-        let url = try URL(absoluteString: "http://localhost:3333")
+        let url = try URL(absoluteString: "https://httpbin.org")
         guard let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: "1.1", headerFields: headerFields) else {
             throw TestError.invalidTest
         }

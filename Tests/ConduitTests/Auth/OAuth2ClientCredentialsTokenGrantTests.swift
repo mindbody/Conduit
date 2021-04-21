@@ -15,7 +15,7 @@ class OAuth2ClientCredentialsTokenGrantTests: XCTestCase {
     let customParameters: [String: String] = ["some_id": "123abc"]
 
     private func makeStrategy() throws -> OAuth2ClientCredentialsTokenGrantStrategy {
-        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "http://localhost:3333/get"))
+        let mockServerEnvironment = OAuth2ServerEnvironment(tokenGrantURL: try URL(absoluteString: "https://httpbin.org/get"))
         let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp",
                                                                 environment: mockServerEnvironment, guestUsername: "clientuser", guestPassword: "abc123")
         var strategy = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: mockClientConfiguration)

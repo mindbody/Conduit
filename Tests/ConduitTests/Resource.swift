@@ -24,34 +24,26 @@ struct MockResource {
     static let json = Resource(name: "TestData", type: "json")
 }
 
-class Resource {
-    static var resourcePath = "./Tests/ConduitTests/Resources"
-
+struct Resource {
     let name: String
     let type: String
 
-    init(name: String, type: String) {
-        self.name = name
-        self.type = type
-    }
-
-    var path: String {
-        guard let path: String = Bundle(for: Swift.type(of: self)).path(forResource: name, ofType: type) else {
-            let filename: String = type.isEmpty ? name : "\(name).\(type)"
-            return "\(Resource.resourcePath)/\(filename)"
-        }
-        return path
+    var path: URL {
+        let filename: String = type.isEmpty ? name : "\(name).\(type)"
+        return URL(fileURLWithPath: #file)
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .appendingPathComponent(filename)
     }
 }
 
 extension Resource {
     var content: String? {
-        return try? String(contentsOfFile: path).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return try? String(contentsOf: path).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 
     var data: Data? {
-        let url = URL(fileURLWithPath: path)
-        return try? Data(contentsOf: url)
+        return try? Data(contentsOf: path)
     }
 
     var base64EncodedData: Data? {
