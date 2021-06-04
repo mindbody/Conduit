@@ -7,10 +7,10 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS)
-    import UIKit
-#elseif os(watchOS)
-    import WatchKit
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(WatchKit)
+import WatchKit
 #endif
 
 private struct HTTPHeader {

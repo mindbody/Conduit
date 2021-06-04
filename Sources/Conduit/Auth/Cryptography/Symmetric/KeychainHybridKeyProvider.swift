@@ -7,7 +7,7 @@
 
 import Foundation
 import Security
-#if os(iOS) || os(macOS)
+#if canImport(LocalAuthentication)
 import LocalAuthentication
 #endif
 
