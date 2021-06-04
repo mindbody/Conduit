@@ -6,16 +6,10 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
-#if os(OSX)
-    import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-    import UIKit
-#endif
-
-#if os(OSX)
-    internal typealias Image = NSImage
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-    internal typealias Image = UIImage
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
 #endif
 
 /// Represents an error that occured within an ImageDownloader
@@ -30,7 +24,7 @@ public final class ImageDownloader {
 
     /// Represents a network or cached image response
     public struct Response {
-        #if os(OSX)
+        #if canImport(AppKit)
         /// The resulting image
         public let image: NSImage?
         #elseif os(iOS) || os(tvOS) || os(watchOS)

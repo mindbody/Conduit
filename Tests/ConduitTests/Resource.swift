@@ -7,11 +7,6 @@
 //
 
 import Foundation
-#if os(OSX)
-    import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-    import UIKit
-#endif
 @testable import Conduit
 
 struct MockResource {

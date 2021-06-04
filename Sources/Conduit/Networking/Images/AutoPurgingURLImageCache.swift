@@ -6,10 +6,10 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
-#if os(OSX)
-    import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-    import UIKit
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
 #endif
 
 /// A concrete URLImageCache that automatically purges objects
@@ -33,7 +33,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         cache.totalCostLimit = memoryCapacity
     }
 
-    #if os(OSX)
+    #if canImport(AppKit)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -42,9 +42,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func image(for request: URLRequest) -> NSImage? {
         return _image(for: request)
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif canImport(UIKit)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -77,7 +75,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         return request.url?.absoluteString
     }
 
-    #if os(OSX)
+    #if canImport(AppKit)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
@@ -86,9 +84,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     public func cache(image: NSImage, for request: URLRequest) {
         _cache(image: image, for: request)
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif canImport(UIKit)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
@@ -132,13 +128,11 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         }
     }
 
-    #if os(OSX)
+    #if canImport(AppKit)
     private func numberOfBytes(in image: Image) -> Int {
         return image.tiffRepresentation?.count ?? 0
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif canImport(UIKit)
     private func numberOfBytes(in image: Image) -> Int {
         let size = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
         let bytesPerPixel = 4

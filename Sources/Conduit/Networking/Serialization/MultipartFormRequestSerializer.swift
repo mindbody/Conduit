@@ -7,12 +7,12 @@
 //
 
 import Foundation
-#if os(iOS) || os(tvOS)
-    import UIKit
-#elseif os(watchOS)
-    import WatchKit
-#elseif os(OSX)
-    import AppKit
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(WatchKit)
+import WatchKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
 
 /// An HTTPRequestSerializer used for constructing multipart/form-data requests
@@ -190,7 +190,7 @@ public struct FormPart {
         }
     }
 
-    #if os(OSX)
+    #if canImport(AppKit)
     private func dataFrom(image: NSImage, type: ImageFormat) -> Data? {
         if let imageRepresentation = image.representations[0] as? NSBitmapImageRep {
             if case .jpeg(let compressionQuality) = type {
@@ -201,9 +201,7 @@ public struct FormPart {
         }
         return nil
     }
-    #endif
-
-    #if os(iOS) || os(tvOS) || os(watchOS)
+    #elseif canImport(UIKit)
     private func dataFrom(image: UIImage, type: ImageFormat) -> Data? {
         if case .jpeg(let compressionQuality) = type {
             return image.jpegData(compressionQuality: compressionQuality)
@@ -251,10 +249,10 @@ public struct FormPart {
 
         /// Reasoning for SwiftLint exception (false-positive): https://github.com/realm/SwiftLint/issues/2782
         // swiftlint:disable duplicate_enum_cases
-        #if os(macOS)
+        #if canImport(AppKit)
         /// An image with an associated compression format
         case image(NSImage, ImageFormat)
-        #elseif os(iOS) || os(tvOS) || os(watchOS)
+        #elseif canImport(UIKit)
         /// An image with an associated compression format
         case image(UIImage, ImageFormat)
         #endif

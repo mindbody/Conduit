@@ -6,23 +6,23 @@
 //  Copyright © 2017 MINDBODY. All rights reserved.
 //
 
-#if os(OSX)
-    import AppKit
-#elseif os(iOS) || os(tvOS) || os(watchOS)
-    import UIKit
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
+import UIKit
 #endif
 
 /// Caches images keyed off of URLRequests
 public protocol URLImageCache {
 
-    #if os(OSX)
+    #if canImport(AppKit)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
     ///     - request: The request for the image
     /// - Returns: The cached image or nil of none exists
     func image(for request: URLRequest) -> NSImage?
-    #elseif os(iOS) || os(tvOS) || os(watchOS)
+    #elseif canImport(UIKit)
     /// Attempts to retrieve a cached image for the given request
     ///
     /// - Parameters:
@@ -38,7 +38,7 @@ public protocol URLImageCache {
     /// - Returns: An identifier for the cached image
     func cacheIdentifier(for request: URLRequest) -> String?
 
-    #if os(OSX)
+    #if canImport(AppKit)
     /// Attempts to cache an image for a given request
     ///
     /// - Parameters:
