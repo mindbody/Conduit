@@ -18,9 +18,13 @@ public enum ImageDownloaderError: Error {
     case invalidRequest
 }
 
+public protocol ImageDownloading {
+    func downloadImage(for request: URLRequest, completion: @escaping (ImageDownloader.Response) -> Void) -> SessionTaskProxyType?
+}
+
 /// Utilizes Conduit to download and safely cache/retrieve
 /// images across multiple threads
-public final class ImageDownloader {
+public final class ImageDownloader: ImageDownloading {
 
     /// Represents a network or cached image response
     public struct Response {
