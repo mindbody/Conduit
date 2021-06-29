@@ -18,9 +18,13 @@ public enum ImageDownloaderError: Error {
     case invalidRequest
 }
 
+public protocol ImageDownloaderType {
+    func downloadImage(for request: URLRequest, completion: @escaping (ImageDownloader.Response) -> Void) -> SessionTaskProxyType?
+}
+
 /// Utilizes Conduit to download and safely cache/retrieve
 /// images across multiple threads
-public final class ImageDownloader {
+public final class ImageDownloader: ImageDownloaderType {
 
     /// Represents a network or cached image response
     public struct Response {
@@ -37,6 +41,22 @@ public final class ImageDownloader {
         public let urlResponse: HTTPURLResponse?
         /// Signifies if the image was retrieved directly from the cache
         public let isFromCache: Bool
+
+        #if canImport(AppKit)
+        public init(image: NSImage?, error: Error?, urlResponse: HTTPURLResponse?, isFromCache: Bool) {
+            self.image = image
+            self.error = error
+            self.urlResponse = urlResponse
+            self.isFromCache = isFromCache
+        }
+        #elseif os(iOS) || os(tvOS) || os(watchOS)
+        public init(image: UIImage?, error: Error?, urlResponse: HTTPURLResponse?, isFromCache: Bool) {
+            self.image = image
+            self.error = error
+            self.urlResponse = urlResponse
+            self.isFromCache = isFromCache
+        }
+        #endif
     }
 
     /// A closure that fires upon image fetch success/failure
