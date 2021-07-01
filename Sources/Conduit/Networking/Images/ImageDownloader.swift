@@ -66,6 +66,7 @@ public final class ImageDownloader: ImageDownloaderType {
     private let sessionClient: URLSessionClientType
     private var sessionProxyMap: [String: SessionTaskProxyType] = [:]
     private var completionHandlerMap: [String: [CompletionHandler]] = [:]
+    private let completionQueue: OperationQueue?
     private let serialQueue = DispatchQueue(
         label: "com.mindbodyonline.Conduit.ImageDownloader-\(UUID().uuidString)"
     )
@@ -74,9 +75,12 @@ public final class ImageDownloader: ImageDownloaderType {
     /// - Parameters:
     ///     - cache: The image cache in which to store downloaded images
     ///     - sessionClient: The URLSessionClient to be used to download images
-    public init(cache: URLImageCache, sessionClient: URLSessionClientType = URLSessionClient()) {
+    public init(cache: URLImageCache,
+                sessionClient: URLSessionClientType = URLSessionClient(),
+                completionQueue: OperationQueue? = nil) {
         self.cache = cache
         self.sessionClient = sessionClient
+        self.completionQueue = completionQueue
     }
 
     /// Downloads an image or retrieves it from the cache if previously downloaded.
@@ -116,6 +120,7 @@ public final class ImageDownloader: ImageDownloaderType {
 
             // Strongly capture self within the completion handler to ensure
             // ImageDownloader is persisted long enough to respond
+            let strongSelf = self
             proxy = self.sessionClient.begin(request: request) { data, response, error in
                 var image: Image?
                 if let data = data {
@@ -123,11 +128,11 @@ public final class ImageDownloader: ImageDownloaderType {
                 }
 
                 if let image = image {
-                    self.cache.cache(image: image, for: request)
+                    strongSelf.cache.cache(image: image, for: request)
                 }
 
                 let response = Response(image: image, error: error, urlResponse: response, isFromCache: false)
-                let queue = OperationQueue.current ?? OperationQueue.main
+                let queue = strongSelf.completionQueue ?? .current ?? .main
 
                 func execute(handler: @escaping CompletionHandler) {
                     queue.addOperation {
@@ -136,10 +141,10 @@ public final class ImageDownloader: ImageDownloaderType {
                 }
 
                 // Intentional retain cycle that releases immediately after execution
-                self.serialQueue.async {
-                    self.sessionProxyMap[cacheIdentifier] = nil
-                    self.completionHandlerMap[cacheIdentifier]?.forEach(execute)
-                    self.completionHandlerMap[cacheIdentifier] = nil
+                strongSelf.serialQueue.async {
+                    strongSelf.sessionProxyMap[cacheIdentifier] = nil
+                    strongSelf.completionHandlerMap[cacheIdentifier]?.forEach(execute)
+                    strongSelf.completionHandlerMap[cacheIdentifier] = nil
                 }
             }
 

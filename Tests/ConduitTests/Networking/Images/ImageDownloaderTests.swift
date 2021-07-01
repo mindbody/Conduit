@@ -114,4 +114,24 @@ class ImageDownloaderTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
 
+    func testCustomOperationQueue() throws {
+        // GIVEN a custom operation queue
+        let customQueue = OperationQueue()
+
+        // AND a configured Image Downloader instance
+        let imageDownloadedExpectation = expectation(description: "image downloaded")
+        let sut = ImageDownloader(cache: AutoPurgingURLImageCache(), completionQueue: customQueue)
+        let url = try URL(absoluteString: "https://httpbin.org/image/jpeg")
+        let imageRequest = URLRequest(url: url)
+
+        // WHEN downloading an image
+        sut.downloadImage(for: imageRequest) { _ in
+            // THEN the completion handler is called in our custom queue
+            XCTAssertEqual(OperationQueue.current, customQueue)
+            imageDownloadedExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5)
+    }
+
 }
