@@ -73,8 +73,9 @@ public final class ImageDownloader: ImageDownloaderType {
 
     /// Initializes a new ImageDownloader
     /// - Parameters:
-    ///     - cache: The image cache in which to store downloaded images
-    ///     - sessionClient: The URLSessionClient to be used to download images
+    ///   - cache: The image cache in which to store downloaded images
+    ///   - sessionClient: The URLSessionClient to be used to download images
+    ///   - completionQueue: An optional operation queue for completion callback
     public init(cache: URLImageCache,
                 sessionClient: URLSessionClientType = URLSessionClient(),
                 completionQueue: OperationQueue? = nil) {
