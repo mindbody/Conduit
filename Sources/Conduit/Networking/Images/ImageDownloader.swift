@@ -91,6 +91,7 @@ public final class ImageDownloader: ImageDownloaderType {
     @discardableResult
     public func downloadImage(for request: URLRequest, completion: @escaping CompletionHandler) -> SessionTaskProxyType? {
         var proxy: SessionTaskProxyType?
+        let completionQueue = self.completionQueue ?? .current ?? .main
 
         serialQueue.sync { [weak self] in
             guard let `self` = self else {
@@ -133,10 +134,9 @@ public final class ImageDownloader: ImageDownloaderType {
                 }
 
                 let response = Response(image: image, error: error, urlResponse: response, isFromCache: false)
-                let queue = strongSelf.completionQueue ?? .current ?? .main
 
                 func execute(handler: @escaping CompletionHandler) {
-                    queue.addOperation {
+                    completionQueue.addOperation {
                         handler(response)
                     }
                 }
