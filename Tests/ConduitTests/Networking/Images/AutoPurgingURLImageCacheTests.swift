@@ -26,7 +26,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
         }
         sut.cache(image: copy, for: mockImageRequest)
         let image = sut.image(for: mockImageRequest)
-        XCTAssert(image == copy)
+        XCTAssertTrue(copy.pngData() == image?.pngData())
     }
 
     func testGeneratesCacheIdentifiers() {
