@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AutoPurgingURLDataCache: URLDataCache {
+public struct AutoPurgingURLDataCache: URLDataCache {
 
     private let cache: NSCache<NSString, NSData>
     private let serialQueue = DispatchQueue(
