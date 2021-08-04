@@ -153,7 +153,7 @@ class ImageDownloaderTests: XCTestCase {
             }
         }
 
-        waitForExpectations(timeout: 5)
+        waitForExpectations(timeout: 10)
     }
 
     func testCustomOperationQueue() throws {
