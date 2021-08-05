@@ -30,12 +30,12 @@ public protocol URLDataCache {
     /// - Parameters:
     ///     - data: The data to be cached
     ///     - request: The original request for the data
-    mutating func cache(data: NSData, for request: URLRequest)
+    mutating func cache(data: NSData, for request: URLRequest) -> Bool
 
     /// Attempts to remove data from the cache for a given request
     /// - Parameters:
     ///     - request: The original request for the data
-    mutating func removeData(for request: URLRequest)
+    mutating func removeData(for request: URLRequest) -> Bool
 
     /// Purges all data from the cache
     mutating func purge()

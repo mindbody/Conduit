@@ -42,6 +42,7 @@ class DataDownloaderTests: XCTestCase {
 
     func testMarksDatasAsCachedAfterDownloaded() throws {
         let attemptedAllDataRetrievalsExpectation = expectation(description: "attempted all data retrievals")
+        attemptedAllDataRetrievalsExpectation.expectedFulfillmentCount = 100
 
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
         let url = try URL(absoluteString: "https://httpbin.org/image/svg")
@@ -50,19 +51,11 @@ class DataDownloaderTests: XCTestCase {
         sut.downloadData(for: dataRequest) { response in
             XCTAssert(response.isFromCache == false)
 
-            let dispatchGroup = DispatchGroup()
-
             for _ in 0..<100 {
-                dispatchGroup.enter()
-                DispatchQueue.global().async {
-                    sut.downloadData(for: dataRequest) { response in
-                        XCTAssert(response.isFromCache == true)
-                        dispatchGroup.leave()
-                    }
+                sut.downloadData(for: dataRequest) { response in
+                    XCTAssert(response.isFromCache == true)
+                    attemptedAllDataRetrievalsExpectation.fulfill()
                 }
-            }
-            dispatchGroup.notify(queue: DispatchQueue.main) {
-                attemptedAllDataRetrievalsExpectation.fulfill()
             }
         }
 
@@ -76,22 +69,16 @@ class DataDownloaderTests: XCTestCase {
 
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
         let fetchedAllDatasExpectation = expectation(description: "fetched all data")
-        let dispatchGroup = DispatchGroup()
+        fetchedAllDatasExpectation.expectedFulfillmentCount = 10
         for url in dataURLs {
-            dispatchGroup.enter()
             sut.downloadData(for: URLRequest(url: url)) { response in
                 XCTAssertNotNil(response.data)
                 XCTAssertNil(response.error)
                 XCTAssertFalse(response.isFromCache)
                 XCTAssertEqual(response.urlResponse?.statusCode, 200)
-                dispatchGroup.leave()
+                fetchedAllDatasExpectation.fulfill()
             }
         }
-
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            fetchedAllDatasExpectation.fulfill()
-        }
-
         waitForExpectations(timeout: 5)
     }
 

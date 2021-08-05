@@ -32,16 +32,11 @@ public struct AutoPurgingURLDataCache: URLDataCache {
     ///     - request: The request for the data
     /// - Returns: The cached data or nil of none exists
     public func data(for request: URLRequest) -> NSData? {
-        return _data(for: request)
-    }
-
-    private func _data(for request: URLRequest) -> NSData? {
         guard let identifier = cacheIdentifier(for: request) else {
             return nil
         }
 
         var data: NSData?
-        let cache = self.cache
         serialQueue.sync {
             data = cache.object(forKey: identifier as NSString)
         }
@@ -62,34 +57,34 @@ public struct AutoPurgingURLDataCache: URLDataCache {
     /// - Parameters:
     ///     - data: The data to be cached
     ///     - request: The original request for the data
-    public func cache(data: NSData, for request: URLRequest) {
-        _cache(data: data, for: request)
-    }
-
-    private func _cache(data: NSData, for request: URLRequest) {
+    /// - Returns: Boolean describing if the operation was successful
+    @discardableResult
+    public func cache(data: NSData, for request: URLRequest) -> Bool {
         guard let identifier = cacheIdentifier(for: request) else {
-            return
+            return false
         }
 
-        let cache = self.cache
         let totalBytes = numberOfBytes(in: data)
         serialQueue.sync {
             cache.setObject(data, forKey: identifier as NSString, cost: totalBytes)
         }
+        return true
     }
 
     /// Attempts to remove an data from the cache for a given request
     /// - Parameters:
-    ///     - request: The original request for the data
-    public func removeData(for request: URLRequest) {
+    ///     - request: The original request for the
+    /// - Returns: Boolean describing if the operation was successful
+    @discardableResult
+    public func removeData(for request: URLRequest) -> Bool {
         guard let identifier = cacheIdentifier(for: request) else {
-            return
+            return false
         }
 
-        let cache = self.cache
         serialQueue.sync {
             cache.removeObject(forKey: identifier as NSString)
         }
+        return true
     }
 
     /// Purges all data from the cache
