@@ -24,7 +24,8 @@ class OAuth2TokenStorageTests: XCTestCase {
     private func verifyTokenStorageOperations<Token: OAuth2Token & DataConvertible>(sut: OAuth2TokenStore, with token: Token) throws {
         let mockClientConfiguration = try makeMockClientConfiguration()
         sut.removeAllTokensFor(client: mockClientConfiguration)
-        XCTAssert(sut.store(token: token, for: mockClientConfiguration, with: mockAuthorization))
+        let result = sut.store(token: token, for: mockClientConfiguration, with: mockAuthorization)
+        XCTAssert(result)
         var storedToken: Token? = sut.tokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
         XCTAssertNotNil(storedToken)
         sut.removeTokenFor(client: mockClientConfiguration, authorization: mockAuthorization)
