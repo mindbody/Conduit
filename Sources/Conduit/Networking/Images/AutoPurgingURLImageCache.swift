@@ -41,7 +41,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
         guard let data = dataCache.data(for: request) as Data? else {
             return nil
         }
-        return NSImage(data)
+        return NSImage(data: data)
     }
     #elseif canImport(UIKit)
     /// Attempts to retrieve a cached image for the given request
@@ -73,8 +73,9 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     ///     - image: The image to be cached
     ///     - request: The original request for the image
     public func cache(image: NSImage, for request: URLRequest) {
-        let data = Data(image)
-        dataCache.cache(data: data, for: request)
+        if let data = image.tiffRepresentation as NSData? {
+            _ = dataCache.cache(data: data, for: request)
+        }
     }
     #elseif canImport(UIKit)
     /// Attempts to cache an image for a given request
@@ -84,7 +85,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     ///     - request: The original request for the image
     public func cache(image: UIImage, for request: URLRequest) {
         if let data = image.pngData() {
-            dataCache.cache(data: data as NSData, for: request)
+            _ = dataCache.cache(data: data as NSData, for: request)
         }
     }
     #endif
@@ -93,7 +94,7 @@ public final class AutoPurgingURLImageCache: URLImageCache {
     /// - Parameters:
     ///     - request: The original request for the image
     public func removeImage(for request: URLRequest) {
-        dataCache.removeData(for: request)
+        _ = dataCache.removeData(for: request)
     }
 
     /// Purges all images from the cache

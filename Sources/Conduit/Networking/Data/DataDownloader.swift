@@ -102,12 +102,9 @@ public final class DataDownloader: DataDownloaderType {
                 return
             }
 
-            // Strongly capture self within the completion handler to ensure
-            // DataDownloader is persisted long enough to respond
-            let strongSelf = self
             proxy = self.sessionClient.begin(request: request) { data, response, error in
                 if let data = data {
-                    strongSelf.cache.cache(data: data as NSData, for: request)
+                    _ = self.cache.cache(data: data as NSData, for: request)
                 }
 
                 let response = Response(data: data as NSData?, error: error, urlResponse: response, isFromCache: false)
@@ -118,11 +115,10 @@ public final class DataDownloader: DataDownloaderType {
                     }
                 }
 
-                // Intentional retain cycle that releases immediately after execution
-                strongSelf.serialQueue.async {
-                    strongSelf.sessionProxyMap[cacheIdentifier] = nil
-                    strongSelf.completionHandlerMap[cacheIdentifier]?.forEach(execute)
-                    strongSelf.completionHandlerMap[cacheIdentifier] = nil
+                self.serialQueue.async {
+                    self.sessionProxyMap[cacheIdentifier] = nil
+                    self.completionHandlerMap[cacheIdentifier]?.forEach(execute)
+                    self.completionHandlerMap[cacheIdentifier] = nil
                 }
             }
 

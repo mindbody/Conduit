@@ -27,7 +27,7 @@ class AutoPurgingURLDataCacheTests: XCTestCase {
 
         // WHEN the image is cached with a request
         let sut = AutoPurgingURLDataCache()
-        sut.cache(data: copy as NSData, for: mockDataRequest)
+        _ = sut.cache(data: copy as NSData, for: mockDataRequest)
 
         // THEN the image can be retrieved with the same request
         let data = sut.data(for: mockDataRequest) as Data?
@@ -49,7 +49,7 @@ class AutoPurgingURLDataCacheTests: XCTestCase {
         }
 
         let sut = AutoPurgingURLDataCache()
-        sut.cache(data: data as NSData, for: mockDataRequest)
+        _ = sut.cache(data: data as NSData, for: mockDataRequest)
 
         XCTAssertNotNil(sut.data(for: mockDataRequest))
 
@@ -72,7 +72,7 @@ class AutoPurgingURLDataCacheTests: XCTestCase {
 
         let sut = AutoPurgingURLDataCache()
         for request in dataRequests {
-            sut.cache(data: data as NSData, for: request)
+            _ = sut.cache(data: data as NSData, for: request)
         }
 
         for request in dataRequests {
@@ -98,7 +98,7 @@ class AutoPurgingURLDataCacheTests: XCTestCase {
         let sutB = AutoPurgingURLDataCache()
 
         // AND one has a cached image
-        sutA.cache(data: data as NSData, for: mockDataRequest)
+        _ = sutA.cache(data: data as NSData, for: mockDataRequest)
 
         // THEN the other should not contain the cached image
         XCTAssertNil(sutB.data(for: mockDataRequest))
