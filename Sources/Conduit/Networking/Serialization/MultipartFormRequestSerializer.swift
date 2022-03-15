@@ -55,10 +55,14 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         }
 
         let httpBody = try makeHTTPBody()
-        let inlineContentBoundaryLength = encodedDataFrom(string: "\(inlineContentBoundary)\(MultipartFormRequestSerializer.CRLF)")?.count ?? 0
-        let finalContentBoundaryLength = encodedDataFrom(string: "\(finalContentBoundary)\(MultipartFormRequestSerializer.CRLF)")?.count ?? 0
 
-        mutableRequest.setValue(String(httpBody.count - inlineContentBoundaryLength - finalContentBoundaryLength), forHTTPHeaderField: "Content-Length")
+        // Calculate proper body length
+        var mutableBody = Data()
+        for formData in formData {
+            try mutableBody.append(inlineContentPartDataFrom(formPart: formData))
+        }
+
+        mutableRequest.setValue(String(mutableBody.count), forHTTPHeaderField: "Content-Length")
         mutableRequest.httpBody = httpBody
 
         return mutableRequest
