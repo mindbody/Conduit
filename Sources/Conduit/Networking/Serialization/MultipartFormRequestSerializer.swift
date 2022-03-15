@@ -72,7 +72,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
             return String(characters)
         }
 
-        return "--\(randomCharacters.joined())"
+        return randomCharacters.joined()
     }
 
     private func encodedDataFrom(string: String) -> Data? {
