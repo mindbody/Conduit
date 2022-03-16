@@ -56,20 +56,14 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
         let httpBody = try makeHTTPBody()
 
-        // Calculate proper body length
-        var mutableBody = Data()
-        for formData in formData {
-            try mutableBody.append(inlineContentPartDataFrom(formPart: formData))
-        }
-
-        mutableRequest.setValue(String(mutableBody.count), forHTTPHeaderField: "Content-Length")
+        mutableRequest.setValue(String(httpBody.count), forHTTPHeaderField: "Content-Length")
         mutableRequest.httpBody = httpBody
 
         return mutableRequest
     }
 
     private static func randomContentBoundary() -> String {
-        let letters = "0123456789"
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let lettersLength = UInt32(letters.count)
 
         let randomCharacters = (0..<12).map { _ -> String in
