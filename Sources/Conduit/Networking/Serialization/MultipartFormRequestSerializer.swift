@@ -27,7 +27,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
 
     private var formData: [FormPart] = []
 
-    lazy var contentBoundary: String {
+    lazy var contentBoundary: String = {
         let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let lettersLength = UInt32(letters.count)
 
@@ -38,7 +38,7 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         }
 
         return randomCharacters.joined()
-    }
+    }()
 
     private lazy var inlineContentBoundary: String = {
         return "--\(contentBoundary)"
