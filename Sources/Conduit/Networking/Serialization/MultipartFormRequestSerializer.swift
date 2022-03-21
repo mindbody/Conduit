@@ -26,7 +26,19 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
     static private let CRLF = "\r\n"
 
     private var formData: [FormPart] = []
-    private let contentBoundary = MultipartFormRequestSerializer.randomContentBoundary()
+
+    lazy var contentBoundary: String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let lettersLength = UInt32(letters.count)
+
+        let randomCharacters = (0..<12).map { _ -> String in
+            let offset = Int(arc4random_uniform(lettersLength))
+            let characters = letters[letters.index(letters.startIndex, offsetBy: offset)]
+            return String(characters)
+        }
+
+        return randomCharacters.joined()
+    }
 
     private lazy var inlineContentBoundary: String = {
         return "--\(contentBoundary)"
@@ -60,19 +72,6 @@ public final class MultipartFormRequestSerializer: HTTPRequestSerializer {
         mutableRequest.httpBody = httpBody
 
         return mutableRequest
-    }
-
-    private static func randomContentBoundary() -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let lettersLength = UInt32(letters.count)
-
-        let randomCharacters = (0..<12).map { _ -> String in
-            let offset = Int(arc4random_uniform(lettersLength))
-            let characters = letters[letters.index(letters.startIndex, offsetBy: offset)]
-            return String(characters)
-        }
-
-        return randomCharacters.joined()
     }
 
     private func encodedDataFrom(string: String) -> Data? {
