@@ -17,6 +17,7 @@ private typealias SessionCompletionHandler = (URLSession.AuthChallengeDispositio
 public enum URLSessionClientError: Error {
     case noResponse
     case requestTimeout
+    case missingURL
 }
 
 /// Pipes requests through provided middleware and queues them into a single NSURLSession
@@ -131,6 +132,11 @@ public struct URLSessionClient: URLSessionClientType {
             }
 
             logger.verbose("Finished processing request through middleware pipeline ✓")
+
+            guard modifiedRequest.url != nil else {
+                completion(nil, nil, URLSessionClientError.missingURL)
+                return
+            }
 
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
