@@ -17,7 +17,7 @@ private typealias SessionCompletionHandler = (URLSession.AuthChallengeDispositio
 public enum URLSessionClientError: Error {
     case noResponse
     case requestTimeout
-    case missingURL
+    case missingURLInMiddlewareRequest
 }
 
 /// Pipes requests through provided middleware and queues them into a single NSURLSession
@@ -137,7 +137,7 @@ public struct URLSessionClient: URLSessionClientType {
             // as nil. Since the request URL is nil, the data task is not initialized and we do not get the call back.
             // To fix this we have added a nil check. If the URL is nil, we are returning a call back with missingURL error.
             guard modifiedRequest.url != nil else {
-                completion(nil, nil, URLSessionClientError.missingURL)
+                completion(nil, nil, URLSessionClientError.missingURLInMiddlewareRequest)
                 return
             }
 
