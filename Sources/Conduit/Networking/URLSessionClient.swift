@@ -17,6 +17,7 @@ private typealias SessionCompletionHandler = (URLSession.AuthChallengeDispositio
 public enum URLSessionClientError: Error {
     case noResponse
     case requestTimeout
+    case missingURLInMiddlewareRequest
 }
 
 /// Pipes requests through provided middleware and queues them into a single NSURLSession
@@ -131,6 +132,14 @@ public struct URLSessionClient: URLSessionClientType {
             }
 
             logger.verbose("Finished processing request through middleware pipeline ✓")
+
+            // This is an edge case. In `refreshBearerTokenWithin` method of Auth class we are delibertely making the request URL
+            // as nil. Since the request URL is nil, the data task is not initialized and we do not get the call back.
+            // To fix this we have added a nil check. If the URL is nil, we are returning a call back with missingURL error.
+            guard modifiedRequest.url != nil else {
+                completion(nil, nil, URLSessionClientError.missingURLInMiddlewareRequest)
+                return
+            }
 
             // Finally, send the request
             // Once tasks are created, the operation moves to the connection queue,
