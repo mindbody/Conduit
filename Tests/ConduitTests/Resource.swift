@@ -25,7 +25,7 @@ struct Resource {
 
     var path: URL {
         let filename: String = type.isEmpty ? name : "\(name).\(type)"
-        return URL(fileURLWithPath: #file)
+        return URL(fileURLWithPath: #fileID)
             .deletingLastPathComponent()
             .appendingPathComponent("Resources")
             .appendingPathComponent(filename)

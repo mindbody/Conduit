@@ -65,23 +65,23 @@ public protocol ConduitLoggerType {
 }
 
 extension ConduitLoggerType {
-    func verbose(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
+    func verbose(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #fileID, line: Int = #line) {
         log(block(), level: .verbose, function: function, filePath: filePath, line: line)
     }
 
-    func debug(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
+    func debug(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #fileID, line: Int = #line) {
         log(block(), level: .debug, function: function, filePath: filePath, line: line)
     }
 
-    func info(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
+    func info(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #fileID, line: Int = #line) {
         log(block(), level: .info, function: function, filePath: filePath, line: line)
     }
 
-    func warn(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
+    func warn(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #fileID, line: Int = #line) {
         log(block(), level: .warn, function: function, filePath: filePath, line: line)
     }
 
-    func error(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #file, line: Int = #line) {
+    func error(_ block: @autoclosure () -> Any, function: String = #function, filePath: String = #fileID, line: Int = #line) {
         log(block(), level: .error, function: function, filePath: filePath, line: line)
     }
 
