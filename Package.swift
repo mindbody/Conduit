@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.4
 //
 //  Package.swift
 //  Conduit
@@ -23,6 +23,6 @@ let package = Package(
     dependencies : [],
     targets: [
         .target(name: "Conduit", dependencies: []),
-        .testTarget(name: "ConduitTests", dependencies: ["Conduit"]),
+        .testTarget(name: "ConduitTests", dependencies: ["Conduit"], resources: [.process("Resources")]),
     ]
 )
