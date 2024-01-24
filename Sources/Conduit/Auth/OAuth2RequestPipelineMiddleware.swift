@@ -72,22 +72,26 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             tokenStorage.lockRefreshToken(timeout: tokenRefreshLockRelinquishInterval, client: clientConfiguration, authorization: authorization)
             logger.info("Token is expired, proceeding to refresh token")
             OAuth2TokenRefreshCoordinator.shared.beginTokenRefresh()
+            
             refresh(token: token) { result in
-                self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
                     if case OAuth2Error.clientFailure = error {
                         self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
+                    self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     completion(.error(error))
+                    OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
+                    return
                 case .value(let newToken):
                     logger.info("Successfully refreshed token")
                     logger.debug("New token issued: \(newToken)")
                     self.tokenStorage.store(token: newToken, for: self.clientConfiguration, with: self.authorization)
+                    self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
+                    OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
                 }
-                OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
             }
         }
         else if authorization.level == .client {
