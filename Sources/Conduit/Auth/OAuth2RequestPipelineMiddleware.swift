@@ -80,18 +80,18 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                     if case OAuth2Error.clientFailure = error {
                         self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
-                    self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
+                    tokenStorage.unlockRefreshTokenFor(client: clientConfiguration, authorization: authorization)
                     completion(.error(error))
-                    OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
-                    return
                 case .value(let newToken):
                     logger.info("Successfully refreshed token")
                     logger.debug("New token issued: \(newToken)")
                     self.tokenStorage.store(token: newToken, for: self.clientConfiguration, with: self.authorization)
-                    self.tokenStorage.unlockRefreshTokenFor(client: self.clientConfiguration, authorization: self.authorization)
+                    tokenStorage.unlockRefreshTokenFor(client: clientConfiguration, authorization: authorization)
+
+                    /// Resume original request using freshly obtained bearer token
                     self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
-                    OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
                 }
+                OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
             }
         }
         else if authorization.level == .client {
