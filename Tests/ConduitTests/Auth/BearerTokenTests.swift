@@ -13,6 +13,7 @@ class BearerTokenTests: XCTestCase {
 
     let accessToken = "abc123"
     let refreshToken = "hunter2"
+    let idToken = "fisher2"
     let expiresIn: TimeInterval = 7_200
 
     lazy var tokenJSON: String = {
@@ -25,6 +26,18 @@ class BearerTokenTests: XCTestCase {
         }
         """.replacingOccurrences(of: "\n", with: "")
     }()
+    
+    lazy var tokenJSONWithIdToken: String = {
+        """
+        {
+          "access_token": "\(accessToken)",
+          "refresh_token": "\(refreshToken)",
+          "expires_in": \(expiresIn),
+          "token_type": "bearer",
+          "id_token": "\(idToken)"
+        }
+        """.replacingOccurrences(of: "\n", with: "")
+    }()
 
     private func validate(token: BearerToken) {
         let expectedExpiration = Date().timeIntervalSince1970 + expiresIn
@@ -32,6 +45,7 @@ class BearerTokenTests: XCTestCase {
 
         XCTAssertEqual(token.accessToken, accessToken)
         XCTAssertEqual(token.refreshToken, refreshToken)
+        XCTAssertEqual(token.idToken, idToken)
         XCTAssert(abs(tokenExpiration - expectedExpiration) < 5)
     }
 
@@ -45,9 +59,39 @@ class BearerTokenTests: XCTestCase {
 
         validate(token: decodedToken)
     }
+    
+    func testEncodesTokenWithIdToken() throws {
+        let token = BearerToken(accessToken: accessToken, refreshToken: refreshToken, idToken: idToken, expiration: Date().addingTimeInterval(expiresIn))
+        let encoder = JSONEncoder()
+        let data = try encoder.encode(token)
+
+        let decoder = JSONDecoder()
+        let decodedToken = try decoder.decode(BearerToken.self, from: data)
+
+        validate(token: decodedToken)
+    }
 
     func testMapsFromJSON() throws {
         guard let tokenData = tokenJSON.data(using: .utf8) else {
+            XCTFail("Token JSON corrupted")
+            return
+        }
+
+        guard let json = try JSONSerialization.jsonObject(with: tokenData, options: []) as? [String: Any] else {
+            XCTFail("Token JSON corrupted")
+            return
+        }
+
+        guard let token = BearerToken.mapFrom(JSON: json) else {
+            XCTFail("Failed to map token")
+            return
+        }
+
+        validate(token: token)
+    }
+    
+    func testMapsFromJSONWithIdToken() throws {
+        guard let tokenData = tokenJSONWithIdToken.data(using: .utf8) else {
             XCTFail("Token JSON corrupted")
             return
         }
@@ -119,6 +163,12 @@ class BearerTokenTests: XCTestCase {
     func testInequalityForExpirationDate() {
         let tokenA = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date().addingTimeInterval(1))
         let tokenB = BearerToken(accessToken: "foo", refreshToken: "bar", expiration: Date().addingTimeInterval(2))
+        XCTAssertNotEqual(tokenA, tokenB)
+    }
+    
+    func testInequalityForIdToken() {
+        let tokenA = BearerToken(accessToken: "foo", idToken: "bar1", expiration: Date.distantFuture)
+        let tokenB = BearerToken(accessToken: "foo", idToken: "bar2", expiration: Date.distantFuture)
         XCTAssertNotEqual(tokenA, tokenB)
     }
 }

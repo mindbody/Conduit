@@ -23,6 +23,9 @@ public struct BearerToken: OAuth2Token, DataConvertible, Codable, Equatable {
 
     /// The refresh token used to retrieve a new token
     public let refreshToken: String?
+    
+    /// The id token if available
+    public let idToken: String?
 
     /// The time at which the token expires
     public let expiration: Date
@@ -42,8 +45,9 @@ public struct BearerToken: OAuth2Token, DataConvertible, Codable, Equatable {
     ///   - accessToken: The access_token
     ///   - refreshToken: (Optional) The refresh_token
     ///   - expiration: The access_token expiration date
-    public init(accessToken: String, refreshToken: String? = nil, expiration: Date) {
+    public init(accessToken: String, refreshToken: String? = nil, idToken: String? = nil, expiration: Date) {
         self.accessToken = accessToken
+        self.idToken = idToken
         self.refreshToken = refreshToken
         self.expiration = expiration
     }
@@ -82,6 +86,7 @@ extension BearerToken {
         static let tokenType = "token_type"
         static let expiresIn = "expires_in"
         static let refreshToken = "refresh_token"
+        static let idToken = "id_token"
     }
 
     static func mapFrom(JSON: [String: Any]) -> BearerToken? {
@@ -98,6 +103,7 @@ extension BearerToken {
         }
 
         let refreshToken = JSON[JSONKeys.refreshToken] as? String
+        let idToken = JSON[JSONKeys.idToken] as? String
 
         // RFC6749 5.1: The value of token_type is case-insensitive
         if tokenType.lowercased() != "bearer" {
@@ -106,6 +112,7 @@ extension BearerToken {
 
         return BearerToken(accessToken: accessToken,
                            refreshToken: refreshToken,
+                           idToken: idToken,
                            expiration: expiration)
     }
 }
