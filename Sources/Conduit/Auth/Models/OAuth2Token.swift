@@ -28,7 +28,7 @@ public struct BearerToken: OAuth2Token, DataConvertible, Codable, Equatable {
     public let expiration: Date
 
     public var isValid: Bool {
-        let minimumExpirationTime: TimeInterval = 300 // 5 minutes
+        let minimumExpirationTime: TimeInterval = 360 // 6 minutes
         let minimumExpirationDate = Date().addingTimeInterval(minimumExpirationTime)
         return self.expiration > minimumExpirationDate
     }
