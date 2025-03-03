@@ -57,10 +57,7 @@ public final class KeychainHybridKeyProvider: HybridKeyProvider {
             guard let errorCode = error.flatMap({ LAError.Code(rawValue: $0.code) }) else {
                 return false
             }
-            if #available(OSX 10.13, iOS 11, *) {
-                return errorCode != .biometryNotAvailable
-            }
-            return errorCode != .touchIDNotAvailable
+            return errorCode != .biometryNotAvailable
         }
         #endif
         return false
