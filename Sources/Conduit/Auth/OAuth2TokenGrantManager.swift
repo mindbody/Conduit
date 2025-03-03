@@ -15,7 +15,7 @@ struct OAuth2TokenGrantManager {
         let sessionClient = OAuth2URLSessionClientFactory.makeClient()
 
         sessionClient.begin(request: authorizedRequest) { data, response, error in
-            if let error = self.errorFrom(data: data, response: response) {
+            if let error = self.errorFrom(data: data, response: response, error: error) {
                 completion(.error(error))
                 return
             }
@@ -55,7 +55,12 @@ struct OAuth2TokenGrantManager {
         return newToken
     }
 
-    static func errorFrom(data: Data?, response: HTTPURLResponse?) -> Error? {
+    static func errorFrom(data: Data?, response: HTTPURLResponse?, error: Error? = nil) -> Error? {
+        if let error = error as? NSError,
+              error.code < 0 {
+            return OAuth2Error.networkFailure
+        }
+
         guard let response = response else {
             return OAuth2Error.noResponse
         }
