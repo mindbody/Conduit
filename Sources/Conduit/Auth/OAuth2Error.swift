@@ -23,4 +23,6 @@ public enum OAuth2Error: Error {
     /// The server application responded with an unexpected failure
     case serverFailure(Data?, HTTPURLResponse)
 
+    /// The network failure has occurred
+    case networkFailure
 }
