@@ -56,8 +56,7 @@ struct OAuth2TokenGrantManager {
     }
 
     static func errorFrom(data: Data?, response: HTTPURLResponse?, error: Error? = nil) -> Error? {
-        if let error = error as? NSError,
-              error.code < 0 {
+        if (error as? NSError)?.domain == NSURLErrorDomain {
             return OAuth2Error.networkFailure
         }
 
