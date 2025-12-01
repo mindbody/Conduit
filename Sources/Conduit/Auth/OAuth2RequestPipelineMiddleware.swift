@@ -77,6 +77,19 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                 switch result {
                 case .error(let error):
                     logger.warn("There was an error refreshing the token")
+
+                    // Check if the token was refreshed by another process while we were failing
+                    if case OAuth2Error.clientFailure = error,
+                        let currentToken = self.token,
+                        currentToken.isValid,
+                        currentToken.accessToken != token.accessToken {
+                        logger.info("Token refresh failed, but a valid new token was found. Recovering from race condition.")
+                        tokenStorage.unlockRefreshTokenFor(client: clientConfiguration, authorization: authorization)
+                        self.makeRequestByApplyingAuthorizationHeader(to: request, with: currentToken, completion: completion)
+                        OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
+                        return
+                    }
+
                     if case OAuth2Error.clientFailure = error {
                         self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
                     }
