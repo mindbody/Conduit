@@ -17,3 +17,8 @@ This pull request includes (pick all that apply):
 
 ### Test Plan
 <!-- Include list of tests added, along with steps on how to manually test -->
+
+## Security Impact
+- [ ] No security impact
+- [ ] I have linked to a document that considers security impact or described the security impact below. 
+<!--Describe Security Impact or link to an org-wide gate document that considers the security impact-->
