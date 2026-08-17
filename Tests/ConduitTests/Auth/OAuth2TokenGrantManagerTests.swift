@@ -13,7 +13,7 @@ class OAuth2TokenGrantManagerTests: XCTestCase {
 
     typealias BadResponse = (response: HTTPURLResponse?, expectedError: OAuth2Error)
 
-    let dummyURL = URL(string: "https://httpbin.org/get")
+    let dummyURL = URL(string: "https://httpbingo.org/get")
 
     func testErrorsGeneratedAsExpected() {
         guard let url = dummyURL else {

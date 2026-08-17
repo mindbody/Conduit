@@ -32,7 +32,7 @@ class DataDownloaderTests: XCTestCase {
     func testOnlyHitsNetworkOncePerRequest() throws {
         let monitoringSessionClient = MonitoringURLSessionClient()
         let sut = DataDownloader(cache: AutoPurgingURLDataCache(), sessionClient: monitoringSessionClient)
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
         for _ in 0..<100 {
             sut.downloadData(for: dataRequest) { _ in }
@@ -45,7 +45,7 @@ class DataDownloaderTests: XCTestCase {
         attemptedAllDataRetrievalsExpectation.expectedFulfillmentCount = 100
 
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
 
         sut.downloadData(for: dataRequest) { response in
@@ -64,7 +64,7 @@ class DataDownloaderTests: XCTestCase {
 
     func testHandlesSimultaneousRequestsForDifferentDatas() {
         let dataURLs = (0..<10).compactMap {
-            URL(string: "https://httpbin.org/image/svg?id=\($0)")
+            URL(string: "https://httpbingo.org/image/svg?id=\($0)")
         }
 
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
@@ -85,7 +85,7 @@ class DataDownloaderTests: XCTestCase {
     func testPersistsWhileOperationsAreRunning() throws {
         let dataDownloadedExpectation = expectation(description: "data downloaded")
         var sut: DataDownloader? = DataDownloader(cache: AutoPurgingURLDataCache())
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
 
         weak var weakDataDownloader = sut
@@ -108,7 +108,7 @@ class DataDownloaderTests: XCTestCase {
         // AND a configured Data Downloader instance
         let dataDownloadedExpectation = expectation(description: "data downloaded")
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
 
         // WHEN downloading an data
@@ -128,7 +128,7 @@ class DataDownloaderTests: XCTestCase {
         // AND a configured Data Downloader instance
         let dataDownloadedExpectation = expectation(description: "data downloaded")
         let sut = DataDownloader(cache: AutoPurgingURLDataCache())
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
 
         // WHEN downloading an data from our background queue
@@ -150,7 +150,7 @@ class DataDownloaderTests: XCTestCase {
         // AND a configured Data Downloader instance with our custom completion queue
         let dataDownloadedExpectation = expectation(description: "data downloaded")
         let sut = DataDownloader(cache: AutoPurgingURLDataCache(), completionQueue: customQueue)
-        let url = try URL(absoluteString: "https://httpbin.org/image/svg")
+        let url = try URL(absoluteString: "https://httpbingo.org/image/svg")
         let dataRequest = URLRequest(url: url)
 
         // WHEN downloading an data
