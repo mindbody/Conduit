@@ -12,7 +12,7 @@ import Conduit
 class AutoPurgingURLDataCacheTests: XCTestCase {
 
     var mockDataRequest: URLRequest {
-        guard let url = URL(string: "https://httpbin.org/data/jpeg") else {
+        guard let url = URL(string: "https://httpbingo.org/data/jpeg") else {
             XCTFail("Invalid url")
             preconditionFailure("Invalid url")
         }
@@ -63,7 +63,7 @@ class AutoPurgingURLDataCacheTests: XCTestCase {
     func testRemovesAllCachedDatasWhenPurged() throws {
         // GIVEN a list of cached images
         let dataRequests = try (0..<10).map {
-            URLRequest(url: try URL(absoluteString: "https://httpbin.org/data/jpeg?id=\($0)"))
+            URLRequest(url: try URL(absoluteString: "https://httpbingo.org/data/jpeg?id=\($0)"))
         }
 
         guard let data = MockResource.evilSpaceshipImage.data else {

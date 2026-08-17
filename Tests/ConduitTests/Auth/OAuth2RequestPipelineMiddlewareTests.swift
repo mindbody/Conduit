@@ -42,7 +42,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     let randomTokenAccessToken = "abc123!!"
 
     private func makeMockClientConfiguration() throws -> OAuth2ClientConfiguration {
-        let mockServerEnvironment = OAuth2ServerEnvironment(scope: "urn:everything", tokenGrantURL: try URL(absoluteString: "https://httpbin.org/get"))
+        let mockServerEnvironment = OAuth2ServerEnvironment(scope: "urn:everything", tokenGrantURL: try URL(absoluteString: "https://httpbingo.org/get"))
         let mockClientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "herp", clientSecret: "derp", environment: mockServerEnvironment,
                                                                 guestUsername: "clientuser", guestPassword: "abc123")
         return mockClientConfiguration
@@ -57,7 +57,7 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
     }
 
     private func makeDummyRequest() throws -> URLRequest {
-        let requestBuilder = HTTPRequestBuilder(url: try URL(absoluteString: "https://httpbin.org/post"))
+        let requestBuilder = HTTPRequestBuilder(url: try URL(absoluteString: "https://httpbingo.org/post"))
         requestBuilder.bodyParameters = ["key": "value"]
         requestBuilder.method = .POST
         requestBuilder.serializer = JSONRequestSerializer()

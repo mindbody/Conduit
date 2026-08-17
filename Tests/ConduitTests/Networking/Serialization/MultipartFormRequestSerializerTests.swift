@@ -16,7 +16,7 @@ enum TestError: Error {
 class MultipartFormRequestSerializerTests: XCTestCase {
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "https://httpbin.org")
+        let url = try URL(absoluteString: "https://httpbingo.org")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         return request
@@ -56,7 +56,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
     func testSerializesDataPerW3Spec() throws {
         let serializer = try makeFormSerializer()
 
-        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbin.org/post"))
+        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbingo.org/post"))
         newRequest.httpMethod = "POST"
         guard let modifiedRequest = try? serializer.serialize(request: newRequest, bodyParameters: nil) else {
             XCTFail("Serialization failed")
@@ -71,8 +71,8 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         client.begin(request: modifiedRequest) { data, response, _ in
             do {
                 let json = try deserializer.deserialize(response: response, data: data) as? [String: Any]
-                let files = json?["files"] as? [String: String]
-                let forms = json?["form"] as? [String: String]
+                let files = json?["files"] as? [String: [String]]
+                let forms = json?["form"] as? [String: [String]]
 
                 XCTAssertEqual(files?.keys.count, 5)
                 XCTAssertEqual(forms?.keys.count, 1)
@@ -97,7 +97,7 @@ class MultipartFormRequestSerializerTests: XCTestCase {
         formPart.contentType = nil
         serializer.append(formPart: formPart)
 
-        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbin.org/post"))
+        var newRequest = URLRequest(url: try URL(absoluteString: "https://httpbingo.org/post"))
         newRequest.httpMethod = "POST"
         let modifiedRequest = try serializer.serialize(request: newRequest, bodyParameters: nil)
 

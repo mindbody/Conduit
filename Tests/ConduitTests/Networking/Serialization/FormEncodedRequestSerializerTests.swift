@@ -12,7 +12,7 @@ import Conduit
 class FormEncodedRequestSerializerTests: XCTestCase {
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "https://httpbin.org")
+        let url = try URL(absoluteString: "https://httpbingo.org")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         return request

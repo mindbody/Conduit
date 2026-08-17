@@ -12,7 +12,7 @@ import Conduit
 class AutoPurgingURLImageCacheTests: XCTestCase {
 
     var mockImageRequest: URLRequest {
-        guard let url = URL(string: "https://httpbin.org/image/jpeg") else {
+        guard let url = URL(string: "https://httpbingo.org/image/jpeg") else {
             XCTFail("Invalid url")
             preconditionFailure("Invalid url")
         }
@@ -53,7 +53,7 @@ class AutoPurgingURLImageCacheTests: XCTestCase {
         let sut = AutoPurgingURLImageCache()
 
         let imageRequests = try (0..<10).map {
-            URLRequest(url: try URL(absoluteString: "https://httpbin.org/image/jpeg?id=\($0)"))
+            URLRequest(url: try URL(absoluteString: "https://httpbingo.org/image/jpeg?id=\($0)"))
         }
 
         guard let image = MockResource.evilSpaceshipImage.image else {

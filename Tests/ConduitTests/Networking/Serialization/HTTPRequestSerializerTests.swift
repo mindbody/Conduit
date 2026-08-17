@@ -12,7 +12,7 @@ import XCTest
 class HTTPRequestSerializerTests: XCTestCase {
 
     private func makeRequest() throws -> URLRequest {
-        let url = try URL(absoluteString: "https://httpbin.org")
+        let url = try URL(absoluteString: "https://httpbingo.org")
         let request = URLRequest(url: url)
         return request
     }
