@@ -29,8 +29,7 @@ class URLSessionClientTests: XCTestCase {
         XCTAssertThrowsError(try client.begin(request: request))
     }
 
-    /// Verify sesson client throws error for timeout; a stalled protocol makes the timeout
-    /// deterministic instead of racing a live server against the interval.
+    /// Verify sesson client throws error for timeout
     func testBlockingTimeout() throws {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 0.5
@@ -361,7 +360,7 @@ private class TransformingResponseMiddleware: ResponsePipelineMiddleware {
 
 }
 
-/// Accepts every request and never completes it, so the blocking-begin semaphore timeout always wins.
+/// Never completes a request, forcing the timeout path deterministically.
 private class StalledURLProtocol: URLProtocol {
     override class func canInit(with request: URLRequest) -> Bool { true }
     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }

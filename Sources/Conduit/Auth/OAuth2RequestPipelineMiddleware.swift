@@ -319,7 +319,7 @@ private var storedRefreshClaimCoordinationEnabled = true
 
 extension OAuth2RequestPipelineMiddleware {
     /// Kill switch for atomic in-process refresh serialization; static because instances are per-client value copies. Defaults to true.
-    /// Lock-backed: hosts may flip it at runtime (e.g. from a remote-flag callback) while request pipelines read it.
+    /// Lock-backed so it can be toggled at runtime while request pipelines read it.
     public static var refreshClaimCoordinationEnabled: Bool {
         get {
             refreshClaimCoordinationFlagLock.lock()
