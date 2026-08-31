@@ -87,6 +87,10 @@ public struct URLSessionClient: URLSessionClientType {
             throw URLSessionClientError.requestTimeout
         }
         if let error = result.error {
+            // The session's own request timeout races the semaphore above; report both as requestTimeout.
+            if (error as? URLError)?.code == .timedOut {
+                throw URLSessionClientError.requestTimeout
+            }
             throw error
         }
         guard let response = result.response else {
