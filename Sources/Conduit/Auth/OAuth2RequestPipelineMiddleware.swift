@@ -23,6 +23,8 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     /// against lengthy session locks when terminating mid-flight. This will allow the host process to quickly pick
     /// up where the other process left off, if it needs to. Defaults to 30 seconds.
     public var tokenRefreshLockRelinquishInterval: TimeInterval = 30
+    /// Kill switch for atomic in-process refresh serialization; static because instances are per-client value copies. Defaults to true.
+    public static var refreshClaimCoordinationEnabled = true
     let clientConfiguration: OAuth2ClientConfiguration
     let authorization: OAuth2Authorization
     let tokenStorage: OAuth2TokenStore
@@ -32,6 +34,11 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             return nil
         }
         return token
+    }
+
+    /// One refresh claim per client + authorization, keyed by the store's canonical token identifier.
+    private var refreshClaimKey: String {
+        tokenStorage.tokenIdentifierFor(clientConfiguration: clientConfiguration, authorization: authorization) + ".refresh-claim"
     }
 
     /// Creates a new OAuth2RequestPipelineMiddleware
@@ -47,6 +54,8 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         self.tokenStorage = tokenStorage
     }
 
+    // Over the body-length limit only while the pre-coordination path stays inline; remove with it.
+    // swiftlint:disable:next function_body_length
     public func prepareForTransport(request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
         let url = request.url?.absoluteString ?? "(Unknown URL)"
         let method = request.httpMethod ?? "(Unknown Method)"
@@ -58,6 +67,10 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         else if let token = token,
             token.refreshToken != nil,
             refreshStrategyFactory != nil {
+            if OAuth2RequestPipelineMiddleware.refreshClaimCoordinationEnabled {
+                refreshTokenAndResume(request: request, completion: completion)
+                return
+            }
             if tokenStorage.isRefreshTokenLockedFor(client: clientConfiguration, authorization: authorization),
                 let tokenLockExpiration = tokenStorage.refreshTokenLockExpirationFor(client: clientConfiguration, authorization: authorization) {
                 logger.info("Token refresh is active in an alternate session; retrying once lock is relinquished")
@@ -72,7 +85,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             tokenStorage.lockRefreshToken(timeout: tokenRefreshLockRelinquishInterval, client: clientConfiguration, authorization: authorization)
             logger.info("Token is expired, proceeding to refresh token")
             OAuth2TokenRefreshCoordinator.shared.beginTokenRefresh()
-            
+
             refresh(token: token) { result in
                 switch result {
                 case .error(let error):
@@ -100,6 +113,105 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         else {
             logger.warn("Invalid or empty token supplied for user authorization")
             completion(.error(OAuth2Error.clientFailure(nil, nil)))
+        }
+    }
+
+    /// Refreshes the expired token and resumes the request; cross-process coordination via the storage lock, in-process via the claim registry.
+    private func refreshTokenAndResume(request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
+        if tokenStorage.isRefreshTokenLockedFor(client: clientConfiguration, authorization: authorization),
+            let tokenLockExpiration = tokenStorage.refreshTokenLockExpirationFor(client: clientConfiguration, authorization: authorization) {
+            logger.info("Token refresh is active in an alternate session; retrying once lock is relinquished")
+            // Cap the wait: re-entry re-checks all state, so a missed unbuffered wake costs one short poll, not the lock lifetime.
+            let timeout = min(0.5, max(0, tokenLockExpiration.timeIntervalSinceNow))
+            waitForRefreshThenResumeOnce(timeout: timeout, request: request, completion: completion)
+            return
+        }
+        let claimKey = refreshClaimKey
+        guard let claimGeneration = OAuth2RefreshClaimRegistry.shared.tryClaim(key: claimKey,
+                                                                               staleAfter: tokenRefreshLockRelinquishInterval) else {
+            // A refresh is already in flight in this process; a second grant would double-spend the one-time token.
+            if let storedToken: BearerToken = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization),
+                storedToken.isValid {
+                // The in-flight refresh already persisted its result (store precedes release).
+                makeRequestByApplyingAuthorizationHeader(to: request, with: storedToken, completion: completion)
+                return
+            }
+            logger.info("Token refresh already in flight in this process; waiting to reuse its result")
+            // The completion notification is unbuffered; a missed wake costs one short interval, not the full lock timeout.
+            waitForRefreshThenResumeOnce(timeout: min(0.5, tokenRefreshLockRelinquishInterval),
+                                         request: request, completion: completion)
+            return
+        }
+        // Re-read after acquiring the claim: refresh the current stored token, never a pre-claim snapshot.
+        guard let currentToken: BearerToken = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization) else {
+            logger.warn("Token disappeared while acquiring the refresh claim (e.g. logout); failing request")
+            OAuth2RefreshClaimRegistry.shared.release(key: claimKey, generation: claimGeneration)
+            completion(.error(OAuth2Error.internalFailure))
+            return
+        }
+        if currentToken.isValid {
+            logger.info("Another refresh completed while acquiring the claim; reusing its token")
+            OAuth2RefreshClaimRegistry.shared.release(key: claimKey, generation: claimGeneration)
+            makeRequestByApplyingAuthorizationHeader(to: request, with: currentToken, completion: completion)
+            return
+        }
+        performRefresh(of: currentToken, claimKey: claimKey, claimGeneration: claimGeneration,
+                       request: request, completion: completion)
+    }
+
+    /// waitForRefresh can invoke its handler from both the timeout and the completion notification when
+    /// they race; collapse to a single re-entry so the request completion can never fire twice.
+    private func waitForRefreshThenResumeOnce(timeout: TimeInterval, request: URLRequest,
+                                              completion: @escaping (Result<URLRequest>) -> Void) {
+        let resumeLock = NSLock()
+        var resumed = false
+        OAuth2TokenRefreshCoordinator.shared.waitForRefresh(timeout: timeout) {
+            resumeLock.lock()
+            let alreadyResumed = resumed
+            resumed = true
+            resumeLock.unlock()
+            if alreadyResumed {
+                return
+            }
+            self.prepareForTransport(request: request, completion: completion)
+        }
+    }
+
+    /// Issues the refresh grant and resumes the request: persist, unlock, release claim, then wake waiters — in that order.
+    private func performRefresh(of token: BearerToken, claimKey: String, claimGeneration: UInt64,
+                                request: URLRequest, completion: @escaping (Result<URLRequest>) -> Void) {
+        tokenStorage.lockRefreshToken(timeout: tokenRefreshLockRelinquishInterval, client: clientConfiguration, authorization: authorization)
+        logger.info("Token is expired, proceeding to refresh token")
+        OAuth2TokenRefreshCoordinator.shared.beginTokenRefresh()
+
+        refresh(token: token) { result in
+            switch result {
+            case .error(let error):
+                logger.warn("There was an error refreshing the token")
+                // A superseded holder must not delete the successor's token or unlock its lock.
+                if OAuth2RefreshClaimRegistry.shared.owns(key: claimKey, generation: claimGeneration) {
+                    if case OAuth2Error.clientFailure = error {
+                        self.tokenStorage.removeTokenFor(client: self.clientConfiguration, authorization: self.authorization)
+                    }
+                    tokenStorage.unlockRefreshTokenFor(client: clientConfiguration, authorization: authorization)
+                }
+                OAuth2RefreshClaimRegistry.shared.release(key: claimKey, generation: claimGeneration)
+                completion(.error(error))
+            case .value(let newToken):
+                logger.info("Successfully refreshed token")
+                logger.debug("New token issued: \(newToken)")
+                // Persist before releasing the claim or waking waiters; a superseded holder must not
+                // overwrite the successor's newer token or unlock its lock.
+                if OAuth2RefreshClaimRegistry.shared.owns(key: claimKey, generation: claimGeneration) {
+                    self.tokenStorage.store(token: newToken, for: self.clientConfiguration, with: self.authorization)
+                    tokenStorage.unlockRefreshTokenFor(client: clientConfiguration, authorization: authorization)
+                }
+                OAuth2RefreshClaimRegistry.shared.release(key: claimKey, generation: claimGeneration)
+
+                /// Resume original request using freshly obtained bearer token
+                self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
+            }
+            OAuth2TokenRefreshCoordinator.shared.endTokenRefresh()
         }
     }
 
