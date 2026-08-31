@@ -134,6 +134,62 @@ final class OAuth2MiddlewareConcurrentRefreshTests: XCTestCase {
                        "both coalesced callers must carry the single grant's rotated access token")
     }
 
+    func testClientFailureDeletesTokenBeforeWaiterResumesWithoutRetryingGrant() throws {
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let serverEnvironment = OAuth2ServerEnvironment(scope: "urn:everything",
+                                                        tokenGrantURL: try URL(absoluteString: "https://example.com/oauth2/token"))
+        let clientConfiguration = OAuth2ClientConfiguration(clientIdentifier: "client_failure_test_client",
+                                                            clientSecret: "test_secret",
+                                                            environment: serverEnvironment)
+        let tokenStorage = OAuth2TokenMemoryStore()
+        tokenStorage.store(token: BearerToken(accessToken: "EXPIRED_ACCESS", refreshToken: "RT_OLD", expiration: Date()),
+                           for: clientConfiguration, with: authorization)
+
+        let gatedFailure = GatedFailureStrategyFactory()
+        addTeardownBlock { gatedFailure.proceed.signal() }
+        var winner = OAuth2RequestPipelineMiddleware(clientConfiguration: clientConfiguration,
+                                                     authorization: authorization,
+                                                     tokenStorage: tokenStorage)
+        winner.refreshStrategyFactory = gatedFailure
+        var waiter = OAuth2RequestPipelineMiddleware(clientConfiguration: clientConfiguration,
+                                                     authorization: authorization,
+                                                     tokenStorage: tokenStorage)
+        waiter.refreshStrategyFactory = gatedFailure
+
+        let requestBuilder = HTTPRequestBuilder(url: try URL(absoluteString: "https://example.com/api/resource"))
+        requestBuilder.method = .GET
+        let request = try requestBuilder.build()
+        let bothRequestsFailed = expectation(description: "the winner and waiter both fail")
+        bothRequestsFailed.expectedFulfillmentCount = 2
+
+        winner.prepareForTransport(request: request) { result in
+            guard let error = result.error, case OAuth2Error.clientFailure = error else {
+                XCTFail("the refresh winner must receive clientFailure")
+                return
+            }
+            bothRequestsFailed.fulfill()
+        }
+        XCTAssertEqual(gatedFailure.issuedGrantRefreshTokens, ["RT_OLD"],
+                       "the first request must hold the only in-flight grant")
+
+        // prepareForTransport returns after the waiter has registered for the winner's completion.
+        waiter.prepareForTransport(request: request) { result in
+            guard let error = result.error, case OAuth2Error.clientFailure = error else {
+                XCTFail("the waiter must fail fast after the token is deleted")
+                return
+            }
+            bothRequestsFailed.fulfill()
+        }
+
+        gatedFailure.proceed.signal()
+        waitForExpectations(timeout: 5)
+
+        let storedToken: BearerToken? = tokenStorage.tokenFor(client: clientConfiguration, authorization: authorization)
+        XCTAssertNil(storedToken, "clientFailure must delete the token before waking the waiter")
+        XCTAssertEqual(gatedFailure.issuedGrantRefreshTokens, ["RT_OLD"],
+                       "a waiter must not retry a refresh token rejected with clientFailure")
+    }
+
     func testDisabledCoordinationPreservesLegacyDoubleSpendHazard() throws {
         OAuth2RequestPipelineMiddleware.refreshClaimCoordinationEnabled = false
         defer { OAuth2RequestPipelineMiddleware.refreshClaimCoordinationEnabled = true }

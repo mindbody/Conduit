@@ -58,9 +58,20 @@ struct GatedFailureStrategy: OAuth2TokenGrantStrategy {
 
 final class GatedFailureStrategyFactory: OAuth2RefreshStrategyFactory {
     let proceed = DispatchSemaphore(value: 0)
+    private let recordLock = NSLock()
+    private var recordedRefreshTokens: [String] = []
+
+    var issuedGrantRefreshTokens: [String] {
+        recordLock.lock()
+        defer { recordLock.unlock() }
+        return recordedRefreshTokens
+    }
 
     func make(refreshToken: String, clientConfiguration: OAuth2ClientConfiguration) -> OAuth2TokenGrantStrategy {
-        GatedFailureStrategy(proceed: proceed)
+        recordLock.lock()
+        recordedRefreshTokens.append(refreshToken)
+        recordLock.unlock()
+        return GatedFailureStrategy(proceed: proceed)
     }
 }
 
