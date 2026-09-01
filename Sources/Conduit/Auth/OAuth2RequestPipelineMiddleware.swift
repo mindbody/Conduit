@@ -23,8 +23,6 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
     /// against lengthy session locks when terminating mid-flight. This will allow the host process to quickly pick
     /// up where the other process left off, if it needs to. Defaults to 30 seconds.
     public var tokenRefreshLockRelinquishInterval: TimeInterval = 30
-    /// Kill switch for atomic in-process refresh serialization; static because instances are per-client value copies. Defaults to true.
-    public static var refreshClaimCoordinationEnabled = true
     let clientConfiguration: OAuth2ClientConfiguration
     let authorization: OAuth2Authorization
     let tokenStorage: OAuth2TokenStore
@@ -314,4 +312,24 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
         }
     }
 
+}
+
+private let refreshClaimCoordinationFlagLock = NSLock()
+private var storedRefreshClaimCoordinationEnabled = true
+
+extension OAuth2RequestPipelineMiddleware {
+    /// Kill switch for atomic in-process refresh serialization; static because instances are per-client value copies. Defaults to true.
+    /// Lock-backed so it can be toggled at runtime while request pipelines read it.
+    public static var refreshClaimCoordinationEnabled: Bool {
+        get {
+            refreshClaimCoordinationFlagLock.lock()
+            defer { refreshClaimCoordinationFlagLock.unlock() }
+            return storedRefreshClaimCoordinationEnabled
+        }
+        set {
+            refreshClaimCoordinationFlagLock.lock()
+            defer { refreshClaimCoordinationFlagLock.unlock() }
+            storedRefreshClaimCoordinationEnabled = newValue
+        }
+    }
 }

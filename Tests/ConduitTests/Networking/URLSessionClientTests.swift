@@ -31,10 +31,11 @@ class URLSessionClientTests: XCTestCase {
 
     /// Verify sesson client throws error for timeout
     func testBlockingTimeout() throws {
-        let configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 0.5
+        configuration.protocolClasses = [StalledURLProtocol.self]
         let client = URLSessionClient(sessionConfiguration: configuration, delegateQueue: OperationQueue())
-        let request = try URLRequest(url: URL(absoluteString: "https://httpbingo.org/delay/1"))
+        let request = try URLRequest(url: URL(absoluteString: "https://stalled.invalid/delay"))
         XCTAssertThrowsError(try client.begin(request: request), "Request did not timeout") { error in
             XCTAssertEqual(error as? URLSessionClientError, .requestTimeout)
         }
@@ -357,4 +358,12 @@ private class TransformingResponseMiddleware: ResponsePipelineMiddleware {
         }
     }
 
+}
+
+/// Never completes a request, forcing the timeout path deterministically.
+private class StalledURLProtocol: URLProtocol {
+    override class func canInit(with request: URLRequest) -> Bool { true }
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
+    override func startLoading() {}
+    override func stopLoading() {}
 }
