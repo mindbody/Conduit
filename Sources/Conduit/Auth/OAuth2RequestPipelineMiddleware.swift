@@ -239,10 +239,12 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             }
         }
         else {
-            // Apply basic header
             logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
-            let basicToken = BasicToken(username: clientConfiguration.clientIdentifier,
-                                        password: clientConfiguration.clientSecret)
+            guard let basicToken = clientConfiguration.basicToken else {
+                logger.warn("Client-level basic authorization was requested for a public client, which has no secret")
+                completion(.error(OAuth2Error.clientFailure(nil, nil)))
+                return
+            }
             makeRequestByApplyingAuthorizationHeader(to: request,
                                                      with: basicToken,
                                                      completion: completion)

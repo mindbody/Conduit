@@ -4,7 +4,11 @@
 - None
 
 #### Enhancements
-- None
+- Support public OAuth2 clients that hold no client secret. `OAuth2ClientConfiguration` gains a
+  secret-less initializer (`init(publicClientIdentifier:environment:guestUsername:guestPassword:)`)
+  and an `isPublicClient` flag. A public client sends its `client_id` in the token grant body and
+  omits the `Authorization: Basic` header across every grant type; a confidential client is
+  unchanged.
 
 #### Bug Fixes
 - None

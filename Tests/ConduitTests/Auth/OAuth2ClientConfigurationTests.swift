@@ -13,6 +13,20 @@ class OAuth2ClientConfigurationTests: XCTestCase {
 
     let environment = OAuth2ServerEnvironment(scope: "baz", tokenGrantURL: URL(fileURLWithPath: "baz.com"))
 
+    func testConfidentialClientByDefault() {
+        let configuration = OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "bar",
+                                                      environment: environment)
+        XCTAssertFalse(configuration.isPublicClient)
+        XCTAssertEqual(configuration.clientSecret, "bar")
+    }
+
+    func testPublicClientHasNoSecret() {
+        let configuration = OAuth2ClientConfiguration(publicClientIdentifier: "foo", environment: environment)
+        XCTAssertTrue(configuration.isPublicClient)
+        XCTAssertEqual(configuration.clientIdentifier, "foo")
+        XCTAssertTrue(configuration.clientSecret.isEmpty)
+    }
+
     func testEquality() {
         XCTAssertEqual(OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "bar",
                                                  environment: environment),

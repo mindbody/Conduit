@@ -41,6 +41,26 @@ class OAuth2TokenStoreTests: XCTestCase {
         XCTAssertNil(storedToken)
     }
 
+    /// The token identifier must not depend on the client secret or on whether the client is public,
+    /// so switching a client to public resolves the same stored token and does not log the user out.
+    func testTokenIdentifierIgnoresSecretAndPublicFlag() {
+        let environment = OAuth2ServerEnvironment(scope: "foos", tokenGrantURL: URL(fileURLWithPath: "yay"))
+        let authorization = OAuth2Authorization(type: .bearer, level: .user)
+        let store = OAuth2TokenMemoryStore()
+
+        let confidential = OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "bar",
+                                                     environment: environment)
+        let differentSecret = OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "changed",
+                                                        environment: environment)
+        let publicClient = OAuth2ClientConfiguration(publicClientIdentifier: "foo", environment: environment)
+
+        let confidentialIdentifier = store.tokenIdentifierFor(clientConfiguration: confidential, authorization: authorization)
+        XCTAssertEqual(store.tokenIdentifierFor(clientConfiguration: differentSecret, authorization: authorization),
+                       confidentialIdentifier)
+        XCTAssertEqual(store.tokenIdentifierFor(clientConfiguration: publicClient, authorization: authorization),
+                       confidentialIdentifier)
+    }
+
     private class CustomStore: OAuth2TokenStore {
         var tokenMap: [String: OAuth2Token] = [:]
         var tokenLocks: [String: Date] = [:]
