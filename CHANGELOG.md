@@ -6,9 +6,14 @@
 #### Enhancements
 - Support public OAuth2 clients that hold no client secret. `OAuth2ClientConfiguration` gains a
   secret-less initializer (`init(publicClientIdentifier:environment:guestUsername:guestPassword:)`)
-  and an `isPublicClient` flag. A public client sends its `client_id` in the token grant body and
-  omits the `Authorization: Basic` header across every grant type; a confidential client is
-  unchanged.
+  and an `isPublicClient` flag. A public client identifies itself with `client_id` in the token grant
+  body and omits the `Authorization: Basic` header across every grant type; a confidential client is
+  unchanged. Client-level authorization for a public client needs guest credentials: client-level
+  basic and the `client_credentials` grant both need a secret and fail with
+  `OAuth2Error.internalFailure` (RFC 6749 §4.4). A public client using `authorization_code` has no
+  code-to-client binding, so the authorization server must enforce PKCE (RFC 8252 §6); pass
+  `code_challenge` via `OAuth2AuthorizationRequest.additionalParameters` and `code_verifier` via
+  `tokenGrantRequestAdditionalBodyParameters`.
 
 #### Bug Fixes
 - None

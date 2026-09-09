@@ -42,7 +42,8 @@ class OAuth2TokenStoreTests: XCTestCase {
     }
 
     /// The token identifier must not depend on the client secret or on whether the client is public,
-    /// so switching a client to public resolves the same stored token and does not log the user out.
+    /// so switching a client to public resolves the same stored token. Whether the server still accepts
+    /// that token is the server's policy, not the store's.
     func testTokenIdentifierIgnoresSecretAndPublicFlag() {
         let environment = OAuth2ServerEnvironment(scope: "foos", tokenGrantURL: URL(fileURLWithPath: "yay"))
         let authorization = OAuth2Authorization(type: .bearer, level: .user)

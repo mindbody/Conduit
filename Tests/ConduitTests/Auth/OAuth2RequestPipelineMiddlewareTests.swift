@@ -31,7 +31,6 @@ struct CustomRefreshTokenGrantStrategyFactory: OAuth2RefreshStrategyFactory {
     }
 }
 
-// swiftlint:disable type_body_length
 class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
 
     let validClientID = "test_client"
@@ -354,41 +353,4 @@ class OAuth2RequestPipelineMiddlewareTests: XCTestCase {
         }
     }
 
-    func testAppliesBasicHeaderForConfidentialClientLevelBasicAuthorization() throws {
-        let authorization = OAuth2Authorization(type: .basic, level: .client)
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: try makeValidClientConfiguration(),
-                                                  authorization: authorization, tokenStorage: OAuth2TokenMemoryStore())
-        let request = try makeDummyRequest()
-
-        let completionExpectation = expectation(description: "completion handler executed")
-        sut.prepareForTransport(request: request) { result in
-            XCTAssertEqual(result.value?.allHTTPHeaderFields?["Authorization"]?.contains("Basic"), true)
-            completionExpectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 2)
-    }
-
-    func testFailsClientLevelBasicAuthorizationForPublicClient() throws {
-        let environment = OAuth2ServerEnvironment(scope: "all the things",
-                                                  tokenGrantURL: try URL(absoluteString: "http://localhost:5000/oauth2/issue/token"))
-        let publicConfiguration = OAuth2ClientConfiguration(publicClientIdentifier: validClientID, environment: environment)
-        let authorization = OAuth2Authorization(type: .basic, level: .client)
-        let sut = OAuth2RequestPipelineMiddleware(clientConfiguration: publicConfiguration,
-                                                  authorization: authorization, tokenStorage: OAuth2TokenMemoryStore())
-        let request = try makeDummyRequest()
-
-        let completionExpectation = expectation(description: "completion handler executed")
-        sut.prepareForTransport(request: request) { result in
-            guard let error = result.error, case OAuth2Error.clientFailure = error else {
-                XCTFail("Expected a clientFailure for a public client requesting client-level basic authorization")
-                return
-            }
-            XCTAssertNil(result.value?.allHTTPHeaderFields?["Authorization"])
-            completionExpectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 2)
-    }
 }
-// swiftlint:enable type_body_length

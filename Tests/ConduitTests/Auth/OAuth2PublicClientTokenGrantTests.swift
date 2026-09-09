@@ -127,4 +127,24 @@ class OAuth2PublicClientTokenGrantTests: XCTestCase {
         try assertConfidentialShape(try sut.buildTokenGrantRequest())
     }
 
+    // MARK: - Invariants
+
+    func testPublicClientNeverSendsBasicHeaderEvenWithAnAssignedSecret() throws {
+        var configuration = try publicConfiguration()
+        configuration.clientSecret = "leaked-from-somewhere"
+        XCTAssertNil(configuration.basicToken)
+
+        let sut = OAuth2ClientCredentialsTokenGrantStrategy(clientConfiguration: configuration)
+        try assertPublicShape(try sut.buildTokenGrantRequest())
+    }
+
+    func testGrantSuppliedClientIdentifierWinsForPublicClient() throws {
+        var sut = OAuth2ExtensionTokenGrantStrategy(grantType: "delegation", clientConfiguration: try publicConfiguration())
+        sut.tokenGrantRequestAdditionalBodyParameters = ["client_id": "grant-supplied"]
+
+        let (bodyParameters, headers) = try bodyAndHeaders(of: try sut.buildTokenGrantRequest())
+        XCTAssertEqual(bodyParameters["client_id"], "grant-supplied")
+        XCTAssertNil(headers["Authorization"])
+    }
+
 }

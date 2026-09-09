@@ -229,9 +229,7 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
                     self.tokenStorage.store(token: newToken,
                                             for: self.clientConfiguration,
                                             with: self.authorization)
-                    self.makeRequestByApplyingAuthorizationHeader(to: request,
-                                                                  with: newToken,
-                                                                  completion: completion)
+                    self.makeRequestByApplyingAuthorizationHeader(to: request, with: newToken, completion: completion)
                 }
                 Auth.Migrator.notifyTokenPostFetchHooksWith(client: self.clientConfiguration,
                                                             authorizationLevel: self.authorization.level,
@@ -242,12 +240,10 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             logger.verbose("Client doesn't require a bearer token. Proceeding with a basic token...")
             guard let basicToken = clientConfiguration.basicToken else {
                 logger.warn("Client-level basic authorization was requested for a public client, which has no secret")
-                completion(.error(OAuth2Error.clientFailure(nil, nil)))
+                completion(.error(OAuth2Error.internalFailure))
                 return
             }
-            makeRequestByApplyingAuthorizationHeader(to: request,
-                                                     with: basicToken,
-                                                     completion: completion)
+            makeRequestByApplyingAuthorizationHeader(to: request, with: basicToken, completion: completion)
         }
     }
 
@@ -261,6 +257,12 @@ public struct OAuth2RequestPipelineMiddleware: RequestPipelineMiddleware {
             let password = clientConfiguration.guestPassword {
             logger.verbose("Guest user credentials exist. Attempting password grant...")
             authenticationStrategy = OAuth2PasswordTokenGrantStrategy(username: username, password: password, clientConfiguration: clientConfiguration)
+        }
+        else if clientConfiguration.isPublicClient {
+            // The client_credentials grant is reserved for confidential clients (RFC 6749 §4.4).
+            logger.warn("Client-level bearer authorization was requested for a public client without guest credentials")
+            completion(.error(OAuth2Error.internalFailure))
+            return
         }
         else {
             logger.verbose("Guest user credentials do not exist. Attempting client_credentials grant...")

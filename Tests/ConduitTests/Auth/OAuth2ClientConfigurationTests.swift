@@ -27,6 +27,19 @@ class OAuth2ClientConfigurationTests: XCTestCase {
         XCTAssertTrue(configuration.clientSecret.isEmpty)
     }
 
+    func testPublicClientCarriesGuestCredentials() {
+        let configuration = OAuth2ClientConfiguration(publicClientIdentifier: "foo", environment: environment,
+                                                      guestUsername: "u", guestPassword: "p")
+        XCTAssertEqual(configuration.guestUsername, "u")
+        XCTAssertEqual(configuration.guestPassword, "p")
+    }
+
+    func testPublicAndConfidentialClientsWithSameIdentifierAreNotEqual() {
+        XCTAssertNotEqual(OAuth2ClientConfiguration(publicClientIdentifier: "foo", environment: environment),
+                          OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "",
+                                                    environment: environment))
+    }
+
     func testEquality() {
         XCTAssertEqual(OAuth2ClientConfiguration(clientIdentifier: "foo", clientSecret: "bar",
                                                  environment: environment),
