@@ -20,10 +20,10 @@ public struct OAuth2ClientConfiguration: Equatable {
 
     /// Whether the client is public, i.e. it holds no client secret. A public client identifies itself
     /// with `client_id` in the token request body and omits the `Authorization: Basic` header across
-    /// every grant type. Client-level authorization needs guest credentials (password grant); client-level
-    /// basic and the `client_credentials` grant both need a secret and fail with
-    /// `OAuth2Error.internalFailure`. A confidential client (the default) is unchanged. Set only through
-    /// the public-client initializer.
+    /// every grant type. Client-level authorization through `OAuth2RequestPipelineMiddleware` needs guest
+    /// credentials (password grant): client-level basic, and client-level bearer without guest credentials,
+    /// fail with `OAuth2Error.internalFailure`. A confidential client (the default) is unchanged. Set only
+    /// through the public-client initializer.
     public private(set) var isPublicClient: Bool = false
 
     /// The guest user's username, if one exists or is needed for client-level authorization
@@ -63,14 +63,16 @@ public struct OAuth2ClientConfiguration: Equatable {
     /// `OAuth2AuthorizationRequest.additionalParameters` and `code_verifier` through
     /// `OAuth2AuthorizationCodeTokenGrantStrategy.tokenGrantRequestAdditionalBodyParameters`.
     ///
-    /// Client-level authorization requires guest credentials: without them the `client_credentials`
-    /// grant would be sent with no credential at all, which RFC 6749 §4.4 reserves for confidential
-    /// clients, so the request fails with `OAuth2Error.internalFailure` instead.
+    /// Client-level authorization through `OAuth2RequestPipelineMiddleware` requires guest credentials:
+    /// without them the middleware would have to send a `client_credentials` grant with no credential,
+    /// which RFC 6749 §4.4 reserves for confidential clients, so it fails with
+    /// `OAuth2Error.internalFailure` instead. Constructing `OAuth2ClientCredentialsTokenGrantStrategy`
+    /// directly is not guarded.
     /// - Parameters:
     ///   - publicClientIdentifier: The OAuth2 client identifier
     ///   - environment: The OAuth2 server application environment that the client communicates with
-    ///   - guestUsername: The guest user's username, required for client-level authorization
-    ///   - guestPassword: The guest user's password, required for client-level authorization
+    ///   - guestUsername: The guest user's username; `nil` unless client-level authorization is used, which requires it
+    ///   - guestPassword: The guest user's password; `nil` unless client-level authorization is used, which requires it
     public init(publicClientIdentifier: String,
                 environment: OAuth2ServerEnvironment,
                 guestUsername: String? = nil,
