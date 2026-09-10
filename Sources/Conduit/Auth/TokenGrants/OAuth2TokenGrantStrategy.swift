@@ -31,8 +31,6 @@ extension OAuth2TokenGrantStrategy {
                                         grantType: String,
                                         additionalGrantParameters: [String: Any],
                                         requestSerializer: RequestSerializer = JSONRequestSerializer()) throws -> URLRequest {
-        let basicToken = BasicToken(username: clientConfiguration.clientIdentifier, password: clientConfiguration.clientSecret)
-
         let requestBuilder = HTTPRequestBuilder(url: clientConfiguration.environment.tokenGrantURL)
         var parameters: [String: Any] = [
             "grant_type": grantType
@@ -40,6 +38,11 @@ extension OAuth2TokenGrantStrategy {
 
         if let scope = clientConfiguration.environment.scope {
             parameters["scope"] = scope
+        }
+
+        // Set before merging additionalGrantParameters so a grant-supplied client_id still wins.
+        if clientConfiguration.isPublicClient {
+            parameters["client_id"] = clientConfiguration.clientIdentifier
         }
 
         for additionalParameter in additionalGrantParameters {
@@ -51,7 +54,9 @@ extension OAuth2TokenGrantStrategy {
         requestBuilder.serializer = requestSerializer
         do {
             var request = try requestBuilder.build()
-            request.setValue(basicToken.authorizationHeaderValue, forHTTPHeaderField: "Authorization")
+            if let basicToken = clientConfiguration.basicToken {
+                request.setValue(basicToken.authorizationHeaderValue, forHTTPHeaderField: "Authorization")
+            }
             return request
         }
         catch let error {

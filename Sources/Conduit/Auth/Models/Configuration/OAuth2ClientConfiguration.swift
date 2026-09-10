@@ -14,8 +14,17 @@ public struct OAuth2ClientConfiguration: Equatable {
     /// The OAuth2 client identifier
     public var clientIdentifier: String
 
-    /// The OAuth2 client secret
+    /// The OAuth2 client secret. Empty for a public client (see `isPublicClient`); do not assign a
+    /// non-empty secret to a public client, as it will not be sent.
     public var clientSecret: String
+
+    /// Whether the client is public, i.e. it holds no client secret. A public client identifies itself
+    /// with `client_id` in the token request body and omits the `Authorization: Basic` header across
+    /// every grant type. Client-level authorization through `OAuth2RequestPipelineMiddleware` needs guest
+    /// credentials (password grant): client-level basic, and client-level bearer without guest credentials,
+    /// fail with `OAuth2Error.internalFailure`. A confidential client (the default) is unchanged. Set only
+    /// through the public-client initializer.
+    public private(set) var isPublicClient: Bool = false
 
     /// The guest user's username, if one exists or is needed for client-level authorization
     public var guestUsername: String?
@@ -43,5 +52,46 @@ public struct OAuth2ClientConfiguration: Equatable {
         self.guestUsername = guestUsername
         self.guestPassword = guestPassword
         self.environment = environment
+    }
+
+    /// Creates a new OAuth2ClientConfiguration for a public client, i.e. one that holds no client secret.
+    /// The client identifies itself with `client_id` in the token request body and omits the
+    /// `Authorization: Basic` header; `client_id` is identification, not authentication (RFC 6749 §3.2.1).
+    ///
+    /// A public client using the `authorization_code` grant has no code-to-client binding, so the
+    /// authorization server must enforce PKCE (RFC 8252 §6): send `code_challenge` through
+    /// `OAuth2AuthorizationRequest.additionalParameters` and `code_verifier` through
+    /// `OAuth2AuthorizationCodeTokenGrantStrategy.tokenGrantRequestAdditionalBodyParameters`.
+    ///
+    /// Client-level authorization through `OAuth2RequestPipelineMiddleware` requires guest credentials:
+    /// without them the middleware would have to send a `client_credentials` grant with no credential,
+    /// which RFC 6749 §4.4 reserves for confidential clients, so it fails with
+    /// `OAuth2Error.internalFailure` instead. Constructing `OAuth2ClientCredentialsTokenGrantStrategy`
+    /// directly is not guarded.
+    /// - Parameters:
+    ///   - publicClientIdentifier: The OAuth2 client identifier
+    ///   - environment: The OAuth2 server application environment that the client communicates with
+    ///   - guestUsername: The guest user's username; `nil` unless client-level authorization is used, which requires it
+    ///   - guestPassword: The guest user's password; `nil` unless client-level authorization is used, which requires it
+    public init(publicClientIdentifier: String,
+                environment: OAuth2ServerEnvironment,
+                guestUsername: String? = nil,
+                guestPassword: String? = nil) {
+        self.init(clientIdentifier: publicClientIdentifier,
+                  clientSecret: "",
+                  environment: environment,
+                  guestUsername: guestUsername,
+                  guestPassword: guestPassword)
+        self.isPublicClient = true
+    }
+
+    /// The `BasicToken` for client authentication, or `nil` for a public client, which identifies itself
+    /// with `client_id` in the request body instead. Reading through `isPublicClient` keeps a public
+    /// client from ever emitting a Basic header, even if a secret was mistakenly assigned.
+    var basicToken: BasicToken? {
+        guard !isPublicClient else {
+            return nil
+        }
+        return BasicToken(username: clientIdentifier, password: clientSecret)
     }
 }
