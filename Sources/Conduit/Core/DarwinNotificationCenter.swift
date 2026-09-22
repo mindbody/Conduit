@@ -92,14 +92,18 @@ class DarwinNotificationCenter {
             }
 
             observers.remove(at: index)
-            self.observerMap[observer.notificationName] = observers
 
             if observers.isEmpty {
+                // Remove the key entirely so a subsequent registerObserver call re-registers the CF callback
+                self.observerMap.removeValue(forKey: observer.notificationName)
                 let center = CFNotificationCenterGetDarwinNotifyCenter()
                 CFNotificationCenterRemoveObserver(center,
                                                    nil,
                                                    CFNotificationName(observer.notificationName as CFString),
                                                    nil)
+            }
+            else {
+                self.observerMap[observer.notificationName] = observers
             }
         }
     }

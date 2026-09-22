@@ -32,6 +32,30 @@ class DarwinNotificationCenterTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
 
+    func testReregistrationAfterAllObserversUnregister() throws {
+        // Reproduces the bug described in issue #177 item 1:
+        // register → post → handler fires → unregister (all observers gone) → register → post → handler must fire.
+        let notification = DarwinNotificationCenter.Notification(#function)
+        let center = DarwinNotificationCenter()
+
+        let firstExpectation = expectation(description: "first post delivered")
+        let observer = center.registerObserver(notification: notification) { _ in
+            firstExpectation.fulfill()
+        }
+        center.post(notification: notification)
+        wait(for: [firstExpectation], timeout: 1)
+        center.unregister(observer: observer)
+
+        // After unregistering the last observer, the key must be removed so a new registerObserver
+        // call re-adds the CF callback. Without the fix the second post is never delivered.
+        let secondExpectation = expectation(description: "second post delivered after re-registration")
+        center.registerObserver(notification: notification) { _ in
+            secondExpectation.fulfill()
+        }
+        center.post(notification: notification)
+        wait(for: [secondExpectation], timeout: 1)
+    }
+
     func testDoesntNotifyUnregisteredObservers() throws {
         let notification = DarwinNotificationCenter.Notification(#function)
 
